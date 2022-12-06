@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.11.27)  27 NOV 2022 19:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.11.27)  6 DEC 2022 19:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -898,8 +898,8 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.175 {Mes, A\~no}
-                  		  	%  escribir aquí a Data de presentación, na forma: ...
+l.176 {Febrero, 2022}
+                     		  	%  escribir aquí a Data de presentación, na form...
 [1
 
 ]
@@ -907,24 +907,24 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.II}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.183 \chapter
+l.184 \chapter
               *{Trabajo propuesto} [2
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 189
+LaTeX Font Info:    Trying to load font information for U+msa on input line 190
 .
 
 (C:\Users\didac.blanco\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 189
+LaTeX Font Info:    Trying to load font information for U+msb on input line 190
 .
 
 (C:\Users\didac.blanco\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 18
-9.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 19
+0.
  (C:\Users\didac.blanco\AppData\Local\Programs\MiKTeX\tex/latex/base\ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 ) [3
@@ -948,8 +948,8 @@ LaTeX Info: Redefining \% on input line 1.
 
 
 ] [9]
-LaTeX Info: Redefining \. on input line 273.
-LaTeX Info: Redefining \% on input line 273.
+LaTeX Info: Redefining \. on input line 274.
+LaTeX Info: Redefining \% on input line 274.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -966,8 +966,8 @@ Cap\'{\i }tulo 1.
 [1
 
 ]
-LaTeX Info: Redefining \. on input line 285.
-LaTeX Info: Redefining \% on input line 285.
+LaTeX Info: Redefining \. on input line 286.
+LaTeX Info: Redefining \% on input line 286.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -982,8 +982,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ]
 Cap\'{\i }tulo 2.
 [3]
-LaTeX Info: Redefining \. on input line 290.
-LaTeX Info: Redefining \% on input line 290.
+LaTeX Info: Redefining \. on input line 291.
+LaTeX Info: Redefining \% on input line 291.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -998,8 +998,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ]
 Cap\'{\i }tulo 3.
 [5]
-LaTeX Info: Redefining \. on input line 298.
-LaTeX Info: Redefining \% on input line 298.
+LaTeX Info: Redefining \. on input line 299.
+LaTeX Info: Redefining \% on input line 299.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1014,8 +1014,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ]
 Anexo I.
 [7]
-LaTeX Info: Redefining \. on input line 301.
-LaTeX Info: Redefining \% on input line 301.
+LaTeX Info: Redefining \. on input line 302.
+LaTeX Info: Redefining \% on input line 302.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1030,8 +1030,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ]
 Anexo II.
 [9]
-LaTeX Info: Redefining \. on input line 303.
-LaTeX Info: Redefining \% on input line 303.
+LaTeX Info: Redefining \. on input line 304.
+LaTeX Info: Redefining \% on input line 304.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1053,10 +1053,10 @@ Package rerunfilecheck Info: File `TFG_esp_v3.out' has not changed.
 (rerunfilecheck)             Checksum: A83763C5F538932B8551615F18B5D71A;1180.
  ) 
 Here is how much of TeX's memory you used:
- 22639 strings out of 475385
- 422469 string characters out of 2773602
- 739793 words of memory out of 3000000
- 43578 multiletter control sequences out of 15000+600000
+ 22638 strings out of 475385
+ 422449 string characters out of 2773602
+ 739797 words of memory out of 3000000
+ 43576 multiletter control sequences out of 15000+600000
  483240 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,34n,80p,414b,702s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -1072,9 +1072,9 @@ idac.blanco\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk
 ppen/ec/dpi600\ecrm1440.pk> <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/p
 k/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\didac.blanco\AppData\Local\M
 iKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk>
-Output written on TFG_esp_v3.pdf (23 pages, 170870 bytes).
+Output written on TFG_esp_v3.pdf (23 pages, 166244 bytes).
 PDF statistics:
- 479 PDF objects out of 1000 (max. 8388607)
+ 468 PDF objects out of 1000 (max. 8388607)
  39 named destinations out of 1000 (max. 500000)
  90 words of extra memory for PDF output out of 10000 (max. 10000000)
 
