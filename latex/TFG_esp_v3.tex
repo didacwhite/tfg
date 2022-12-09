@@ -273,13 +273,41 @@ Aplicaciones a la estimación de parámetros de modelos matemáticos.}		%  escri
 
 \mainmatter
 
-%%%%%%%%     Póñense os Capítulos    %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%				S
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%				 T
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%				  A
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%				   R
+%%%%%%%%     Póñense os Capítulos    %%%%%%%%%%%%%%%				    T
 
 \chapter{Título del Capítulo 1}
 
 
 
-\section{Sección}
+\section{Fundamentos de la optimización sin restricciones}
+
+El problema de los mínimos cuadrados es un caso particular de optimización sin restricciones, y es por ello que comenzaremos introduciendo sus fundamentos. Ya que el problema de mínimos cuadrados es usado en multitud de campos para estimar parámetros, este es de los más utilizados dentro de los problemas de optimización sin restricciones.
+
+Un problema de optimización sin restricciones tiene la forma 
+\begin{equation}
+	\min_{x}f\left(x\right)
+	\label{eq:minf}
+\end{equation}
+donde $x\in\mathbb{R}^{n}$ y $f : \mathbb{R}^{n} \rightarrow \mathbb{R}$ es continuamente diferenciable, la llamamos \textbf{función objetivo}. La dificultad de un problema como este viene de no conocer el comportamiento global de $f$, normalmente solo disponemos de la evaluación de f en algunos puntos, y a lo mejor de algunas de sus derivadas. El trabajo de los algoritmos de optimización es identificar la solución sin usar demasiado tiempo ni almacenamiento computacional.
+
+Notar que podemos usar la formulación (\ref{eq:minf}) para referirnos a tanto a los problemas de minimización como de maximización, basta sustituir $f$ por $-f$. 
+
+% W. Sun es más formal en este caso para definir ambos mínimos 
+Tenemos dos tipos de mínimos.
+Un punto $x^{*}$ se dice \textbf{mínimo global} si $f(x^{*})\leq f(x)$ para todo $x\in\mathbb{R}^{n}$. Como no se suele tener un conocimiento a gran escala de $f$ debido a su coste, la mayoría de algoritmos solo encuentran mínimos locales, lo cual es suficiente para muchos casos prácticos. Un punto $x^{*}$ se dice \textbf{mínimo local} si existe una vecinidad $\mathcal{V}$ de $x^{*}$ tal que $f(x^{*})\leq f(x)$ para todo $x\in\mathcal{V}$.
+
+Aún así, los algoritmos para encontrar mínimos globales se suelen construír a partir de una secuencia de otros algoritmos de optimización local. También podemos aprovechar características fáciles de detectar en la función objetivo, como la convexidad, que nos asegura que un mínimo local será también global.
+
+%% REPASO DE ALGORITMOS
+
+\section{Sobre los algoritmos}
+
+%% histórico??
+Todo algoritmo de optimización sin restricciones comienza con un punto de partida, denotado normalmente como $x_{0}$. Aunque generalmente el usuario introduce una estimación razonable, el punto puede ser elegido por el algoritmo, tanto de forma sistemática como aleatoria. El algoritmo itera sobre $x_{0}$, creando una sucesión $\left\{x_k\right\}_{k=0}^n$ la cual termina cuando se cumpla cierto criterio.
 
 
 
