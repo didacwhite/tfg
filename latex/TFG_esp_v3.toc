@@ -3,7 +3,9 @@
 \contentsline {chapter}{Introducci\'on}{\es@scroman {ix}}{chapter*.8}%
 \contentsline {chapter}{\numberline {1}Título del Capítulo 1}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Fundamentos de la optimización sin restricciones}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Sobre los algoritmos}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.2}Generalidades de los algoritmos}{2}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Búsqueda de línea}{2}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Región de confianza}{2}{subsection.1.2.2}%
 \contentsline {chapter}{\numberline {2}Título del Capítulo 2}{3}{chapter.2}%
 \contentsline {chapter}{\numberline {3}Título del Capítulo 3}{5}{chapter.3}%
 \contentsline {chapter}{\numberline {I}Título del Anexo I}{7}{appendix.Alph1}%
