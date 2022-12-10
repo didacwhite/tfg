@@ -6,8 +6,6 @@
 \contentsline {section}{\numberline {1.2}Generalidades de los algoritmos}{2}{section.1.2}%
 \contentsline {subsection}{\numberline {1.2.1}Búsqueda de línea}{2}{subsection.1.2.1}%
 \contentsline {subsection}{\numberline {1.2.2}Región de confianza}{2}{subsection.1.2.2}%
-\contentsline {chapter}{\numberline {2}Título del Capítulo 2}{3}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Título del Capítulo 3}{5}{chapter.3}%
-\contentsline {chapter}{\numberline {I}Título del Anexo I}{7}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {II}Título del Anexo II}{9}{appendix.Alph2}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{11}{appendix*.9}%
+\contentsline {chapter}{\numberline {I}Título del Anexo I}{5}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {II}Título del Anexo II}{7}{appendix.Alph2}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{9}{appendix*.9}%

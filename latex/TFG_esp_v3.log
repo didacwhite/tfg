@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.12.1)  10 DEC 2022 13:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.12.1)  10 DEC 2022 20:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -818,7 +818,7 @@ Package hyperref Info: Link coloring OFF on input line 153.
 \@outlinefile=\write5
 \openout5 = `TFG_esp_v3.out'.
 
-<logomath.pdf, id=54, 284.52798pt x 56.9056pt>
+<logomath.pdf, id=46, 284.52798pt x 56.9056pt>
 File: logomath.pdf Graphic file (type pdf)
 <use logomath.pdf>
 Package pdftex.def Info: logomath.pdf  used on input line 162.
@@ -910,8 +910,8 @@ Cap\'{\i }tulo 1.
 [1
 
 ]
-LaTeX Info: Redefining \. on input line 330.
-LaTeX Info: Redefining \% on input line 330.
+LaTeX Info: Redefining \. on input line 339.
+LaTeX Info: Redefining \% on input line 339.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -922,12 +922,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [2]
-Cap\'{\i }tulo 2.
-[3
+LaTeX Info: Redefining \. on input line 358.
+LaTeX Info: Redefining \% on input line 358.
 
-]
-LaTeX Info: Redefining \. on input line 335.
-LaTeX Info: Redefining \% on input line 335.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[3]
+LaTeX Info: Redefining \. on input line 358.
+LaTeX Info: Redefining \% on input line 358.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -940,10 +948,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [4
 
 ]
-Cap\'{\i }tulo 3.
+Anexo I.
 [5]
-LaTeX Info: Redefining \. on input line 343.
-LaTeX Info: Redefining \% on input line 343.
+LaTeX Info: Redefining \. on input line 361.
+LaTeX Info: Redefining \% on input line 361.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -956,10 +964,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [6
 
 ]
-Anexo I.
+Anexo II.
 [7]
-LaTeX Info: Redefining \. on input line 346.
-LaTeX Info: Redefining \% on input line 346.
+LaTeX Info: Redefining \. on input line 363.
+LaTeX Info: Redefining \% on input line 363.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -971,39 +979,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [8
 
-]
-Anexo II.
-[9]
-LaTeX Info: Redefining \. on input line 348.
-LaTeX Info: Redefining \% on input line 348.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[10
-
-] [11
+] [9
 
 ] (TFG_esp_v3.aux
 LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
 )
 Package rerunfilecheck Info: File `TFG_esp_v3.out' has not changed.
-(rerunfilecheck)             Checksum: 8EADF5ADF13380E479FFD2DFD029D8FC;1944.
+(rerunfilecheck)             Checksum: 290C188C7D13A2250E5E348A49BC7835;1616.
  ) 
 Here is how much of TeX's memory you used:
- 22660 strings out of 475385
- 420455 string characters out of 2776907
- 744879 words of memory out of 3000000
- 43590 multiletter control sequences out of 15000+600000
- 484780 words of font info for 63 fonts, out of 8000000 for 9000
+ 22666 strings out of 475385
+ 420553 string characters out of 2776907
+ 746879 words of memory out of 3000000
+ 43595 multiletter control sequences out of 15000+600000
+ 486310 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,34n,80p,880b,702s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 84i,34n,80p,883b,708s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx
 1200.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\ecti1095.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
@@ -1025,9 +1017,9 @@ amsfonts/cm/cmr10.pfb><C:/Users/didac/AppData/Local/Programs/MiKTeX/fonts/type1
 s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/didac/AppData/Local/Programs/Mi
 KTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/didac/AppData/Local/Pro
 grams/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on TFG_esp_v3.pdf (23 pages, 260828 bytes).
+Output written on TFG_esp_v3.pdf (21 pages, 263020 bytes).
 PDF statistics:
- 574 PDF objects out of 1000 (max. 8388607)
- 45 named destinations out of 1000 (max. 500000)
- 114 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 557 PDF objects out of 1000 (max. 8388607)
+ 44 named destinations out of 1000 (max. 500000)
+ 98 words of extra memory for PDF output out of 10000 (max. 10000000)
 

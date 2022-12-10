@@ -308,7 +308,7 @@ Aún así, los algoritmos para encontrar mínimos globales se suelen construír 
 
 %% histórico??
 % referencia 	NOCEDAL 2.2
-Todo algoritmo de optimización sin restricciones comienza con un punto de partida, denotado normalmente como $x_{0}$. Aunque generalmente el usuario introduce una estimación razonable, el punto puede ser elegido por el algoritmo, tanto de forma sistemática como aleatoria. El algoritmo itera sobre $x_{0}$, creando una sucesión $\left\{x_k\right\}_{k=0}^n$ la cual termina cuando no pueda continuar o cuando ya se haya acercado razonablemente a la solución. Para decidir como se avanza de un $x_k$ al siguiente, los algoritmos utilizan información sobre $f(x_k)$ o incluso en los puntos anteriores $x_0$, $x_1$, ... , $x_{k-1}$ con el objetivo de que $f(x_{k+1})<f(x_{k})$. Hablaremos de las dos estrategias fundamentales que se utilizan para avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
+Todo algoritmo de optimización sin restricciones comienza con un punto de partida, denotado normalmente como $x_{0}$. Aunque generalmente el usuario introduce una estimación razonable, el punto puede ser elegido por el algoritmo, tanto de forma sistemática como aleatoria. El algoritmo itera sobre $x_{0}$, creando una sucesión $\left\{x_k\right\}_{k=0}^n$ la cual termina cuando no pueda continuar o cuando ya se haya acercado razonablemente a la solución. Para decidir como se avanza de un $x_k$ al siguiente, los algoritmos utilizan información sobre $f(x_k)$ o incluso en los puntos anteriores $x_0,\, x_1,\, \ldots,\,x_{k-1}$ con el objetivo de que $f(x_{k+1})<f(x_{k})$. Hablaremos de las dos estrategias fundamentales que se utilizan para avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
 
 \subsection{Búsqueda de línea}
 
@@ -318,23 +318,38 @@ En este caso el algoritmo tiene dos tareas a partir de cada iteración, primero 
 \end{equation}
 para un $d_k$ elegido previamente, y un \textit{paso} $\alpha_k$ obtenido solucionando otro problema de minimización más simple por ser unidimensional:
 \begin{equation}
-	\min_{\alpha_k>0}f\left(x_k+\alpha_kd_k\right)
+	\min_{\alpha_k>0}f\left(x_k+\alpha_kd_k\right).
 \end{equation}
-el cual se resuelve de dos maneras, si se toma el $\alpha_k$ óptimo se le llama búsqueda de línea \textit{exacta} u \textit{óptima}. Para evitar el gran coste computacional que puede llegar a tomar, lo más común es tomar un $\alpha_k$ que aporte un descenso aceptable, en cuyo caso se le llama búsqueda de línea \textit{inexacta} o \textit{aproximada}. Desde el nuevo punto se busca otra dirección y paso para repetir el proceso.
+
+Si se toma el $\alpha_k$ óptimo se le llama búsqueda de línea \textit{exacta} u \textit{óptima}. Para evitar el gran coste computacional que puede llegar a tomar, lo más común es tomar un $\alpha_k$ que aporte un descenso aceptable, en cuyo caso se le llama búsqueda de línea \textit{inexacta} o \textit{aproximada}. Desde el nuevo punto se busca otra dirección y paso para repetir el proceso.
 
 
 
 \subsection{Región de confianza}
 
+Esta estrategia enfoca el problema de otro modo, primero se fija una distancia máxima $\Delta_k$ para definir la región, que generalmente es de la forma
+\begin{equation}
+	\Omega_k = \left\{x : \Vert x-x_k \Vert \leq \Delta_k \right\}
+\end{equation}
+y luego ya se busca la dirección y paso.
+A partir de la información conocida de $f$, para cada $x_k$ se modela una función $m_k$ que se comporte de manera similar a $f$ cerca de este punto.
+Generalmente se utiliza el modelo cuadrático de la forma
+\begin{equation}
+	m_k := q^{(k)}(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TG_kp,
+\end{equation}
+donde $g_k = \nabla f(x_k)$ y $G_k = \nabla^2f(x_k)$.
+Este modelo cuadrático es utilizado en los llamados métodos de Newton para elegir la dirección (son del tipo búsqueda de línea).
+Los métodos de región de confianza aprovechan la eficacia de usar este modelo, pero evitando algunas limitaciones y obteniendo la convergencia global.
+En cada iteración, una vez elegido $\Delta_k$ se resuelve el siguiente problema:
+\begin{equation}
+\begin{aligned}
+	\min_{p} \quad & q^{(k)}(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TB_kp \\
+	\text{s.a.} \quad & \Vert p \Vert \leq \Delta_k. \\
+\end{aligned}
+\end{equation}
+Como vemos, en el modelo se escribe $B_k$ en lugar de $G_k$, pues no siempre se usa esta última. Debido al coste computacional, a veces se prefiere aproximar de alguna manera más o menos eficiente, e incluso puede ser aceptable tomar la matriz $0$.
 
-\chapter{Título del Capítulo 2}
-
-
-
-
-\chapter{Título del Capítulo 3}
-
-
+También se puede variar qué norma define la región de confianza, cambiando así la forma de esta y ofreciendo distintos resultados, aunque generalmente se utiliza la bola definida por $\Vert p \Vert_2 \leq \Delta$.
 
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
