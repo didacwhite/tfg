@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.11.27)  11 DEC 2022 18:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.11.27)  11 DEC 2022 21:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1003,11 +1003,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [4]
 Cap\'{\i }tulo 2.
-[5
+
+Underfull \vbox (badness 7832) has occurred while \output is active []
+
+ [5
 
 ]
-LaTeX Info: Redefining \. on input line 385.
-LaTeX Info: Redefining \% on input line 385.
+LaTeX Info: Redefining \. on input line 413.
+LaTeX Info: Redefining \% on input line 413.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1017,13 +1020,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[6
+[6]
+Anexo I.
+[7
 
 ]
-Anexo I.
-[7]
-LaTeX Info: Redefining \. on input line 388.
-LaTeX Info: Redefining \% on input line 388.
+LaTeX Info: Redefining \. on input line 416.
+LaTeX Info: Redefining \% on input line 416.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1038,8 +1041,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ]
 Anexo II.
 [9]
-LaTeX Info: Redefining \. on input line 390.
-LaTeX Info: Redefining \% on input line 390.
+LaTeX Info: Redefining \. on input line 418.
+LaTeX Info: Redefining \% on input line 418.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1061,10 +1064,10 @@ Package rerunfilecheck Info: File `TFG_esp_v3.out' has not changed.
 (rerunfilecheck)             Checksum: C457708F798E75D743D6A1372C2325E7;1343.
  ) 
 Here is how much of TeX's memory you used:
- 22666 strings out of 475385
- 422815 string characters out of 2773602
- 747925 words of memory out of 3000000
- 43594 multiletter control sequences out of 15000+600000
+ 22674 strings out of 475385
+ 422915 string characters out of 2773602
+ 748069 words of memory out of 3000000
+ 43598 multiletter control sequences out of 15000+600000
  484770 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,34n,80p,883b,702s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -1091,9 +1094,9 @@ c.blanco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pf
 b><C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
 nts/cm/cmsy8.pfb><C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/typ
 e1/public/amsfonts/symbols/msbm10.pfb>
-Output written on TFG_esp_v3.pdf (23 pages, 278078 bytes).
+Output written on TFG_esp_v3.pdf (23 pages, 280533 bytes).
 PDF statistics:
- 561 PDF objects out of 1000 (max. 8388607)
- 47 named destinations out of 1000 (max. 500000)
+ 568 PDF objects out of 1000 (max. 8388607)
+ 51 named destinations out of 1000 (max. 500000)
  90 words of extra memory for PDF output out of 10000 (max. 10000000)
 
