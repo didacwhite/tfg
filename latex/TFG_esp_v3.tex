@@ -279,12 +279,9 @@ Aplicaciones a la estimación de parámetros de modelos matemáticos.}		%  escri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%				   R
 %%%%%%%%     Póñense os Capítulos    %%%%%%%%%%%%%%%				    T
 
-\chapter{Título del Capítulo 1}
 
 
-
-\section{Fundamentos de la optimización sin restricciones}
-
+\chapter{Fundamentos de la optimización sin restricciones}
 El problema de los mínimos cuadrados es un caso particular de optimización sin restricciones, y es por ello que comenzaremos introduciendo sus fundamentos. Ya que el problema de mínimos cuadrados es usado en multitud de campos para estimar parámetros, este es de los más utilizados dentro de los problemas de optimización sin restricciones.
 
 Un problema de optimización sin restricciones tiene la forma 
@@ -304,13 +301,13 @@ Aún así, los algoritmos para encontrar mínimos globales se suelen construír 
 
 %% REPASO DE ALGORITMOS
 
-\section{Generalidades de los algoritmos}
+%% \section{Generalidades de los algoritmos}
 
 %% histórico??
 % referencia 	NOCEDAL 2.2
 Todo algoritmo de optimización sin restricciones comienza con un punto de partida, denotado normalmente como $x_{0}$. Aunque generalmente el usuario introduce una estimación razonable, el punto puede ser elegido por el algoritmo, tanto de forma sistemática como aleatoria. El algoritmo itera sobre $x_{0}$, creando una sucesión $\left\{x_k\right\}_{k=0}^n$ la cual termina cuando no pueda continuar o cuando ya se haya acercado razonablemente a la solución. Para decidir como se avanza de un $x_k$ al siguiente, los algoritmos utilizan información sobre $f(x_k)$ o incluso en los puntos anteriores $x_0,\, x_1,\, \ldots,\,x_{k-1}$ con el objetivo de que $f(x_{k+1})<f(x_{k})$. Hablaremos de las dos estrategias fundamentales que se utilizan para avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
 
-\subsection{Búsqueda de línea}
+\section{Búsqueda de línea}
 
 En este caso el algoritmo tiene dos tareas a partir de cada iteración, primero elige una \textit{dirección} $d_k$ y tomando el punto de partida busca en esa dirección el nuevo valor. Es decir, dado $x_k$
 \begin{equation}
@@ -340,7 +337,7 @@ Esta elección se hace en dos fases, primero un proceso elige un intervalo conte
 
 
 
-\subsection{Región de confianza}
+\section{Región de confianza}
 
 Esta estrategia enfoca el problema de otro modo, primero se fija una distancia máxima $\Delta_k$ para definir la región, que generalmente es de la forma
 \begin{equation}
@@ -365,9 +362,11 @@ En cada iteración, una vez elegido $\Delta_k$ se resuelve el siguiente problema
 Notamos que en el modelo se escribe $B_k$ en lugar de $G_k$, pues no siempre se usa esta última.
 Debido al coste computacional, como vimos en la elección de la dirección de búsqueda, a veces se prefiere aproximar de alguna manera más o menos eficiente, e incluso puede ser aceptable tomar la matriz $0$.
 
-También se puede variar qué norma define la región de confianza, cambiando así la forma de esta y ofreciendo distintos resultados, aunque generalmente se utiliza la bola definida por $\Vert p \Vert_2 \leq \Delta$.
+También se puede elegir qué norma define la región de confianza, cambiando así la forma de esta y ofreciendo distintos resultados, aunque generalmente se utiliza la bola definida por $\Vert p \Vert_2 \leq \Delta_k$.
 
-El tamaño de la región es crítica para que una iteración sea efectiva y cuanto lo sea
+La efectividad de cada iteración depende de la elección del radio $\Delta_k$, es por ello que puede que la primera elección de este no sea la definitiva. Es decir, se toma un radio a raíz de la información que se tenga, esta puede incluír la de pasos anteriores, y luego se decide si este radio nos da un resultado aceptable. Un radio demasiado pequeño nos puede hacer perder la oportunidad de ser mucho más rápidos, pero un paso demasiado grande, el mínimo de la función modelo $m_k$ puede estar lejos del mínimo de la función objetivo. Este último caso es el que se comprueba y se decide si reducir la región de confianza.
+
+Una vez tomado el radio, encontrar el mínimo es directo en el caso de que $B_k$ sea definida positiva, basta tomar $p_k^B = -B_k^{-1}g_k$. En caso contrario tampoco supone una tarea muy costosa ya que sólo se necesita una solución aproximada para garantizar la convergencia.
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix

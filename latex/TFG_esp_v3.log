@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.11.27)  11 DEC 2022 11:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.11.27)  11 DEC 2022 12:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -876,7 +876,7 @@ Package hyperref Info: Link coloring OFF on input line 153.
 \@outlinefile=\write5
 \openout5 = `TFG_esp_v3.out'.
 
-<logomath.pdf, id=46, 284.52798pt x 56.9056pt>
+<logomath.pdf, id=38, 284.52798pt x 56.9056pt>
 File: logomath.pdf Graphic file (type pdf)
 <use logomath.pdf>
 Package pdftex.def Info: logomath.pdf  used on input line 162.
@@ -966,8 +966,8 @@ Cap\'{\i }tulo 1.
 [1
 
 ]
-LaTeX Info: Redefining \. on input line 335.
-LaTeX Info: Redefining \% on input line 335.
+LaTeX Info: Redefining \. on input line 337.
+LaTeX Info: Redefining \% on input line 337.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -978,11 +978,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [2]
+LaTeX Info: Redefining \. on input line 368.
+LaTeX Info: Redefining \% on input line 368.
 
-LaTeX Warning: Reference `min:alphak' on page 3 undefined on input line 336.
-
-LaTeX Info: Redefining \. on input line 375.
-LaTeX Info: Redefining \% on input line 375.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -992,8 +990,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [3]
-LaTeX Info: Redefining \. on input line 375.
-LaTeX Info: Redefining \% on input line 375.
+LaTeX Info: Redefining \. on input line 374.
+LaTeX Info: Redefining \% on input line 374.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1008,8 +1006,8 @@ Anexo I.
 [5
 
 ]
-LaTeX Info: Redefining \. on input line 378.
-LaTeX Info: Redefining \% on input line 378.
+LaTeX Info: Redefining \. on input line 377.
+LaTeX Info: Redefining \% on input line 377.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1024,8 +1022,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ]
 Anexo II.
 [7]
-LaTeX Info: Redefining \. on input line 380.
-LaTeX Info: Redefining \% on input line 380.
+LaTeX Info: Redefining \. on input line 379.
+LaTeX Info: Redefining \% on input line 379.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1043,49 +1041,42 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
 )
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `TFG_esp_v3.out' has not changed.
-(rerunfilecheck)             Checksum: 290C188C7D13A2250E5E348A49BC7835;1616.
+(rerunfilecheck)             Checksum: 09A0509985B0C0BFF8712BFB0ABDEC5C;1209.
  ) 
 Here is how much of TeX's memory you used:
- 22669 strings out of 475385
- 422878 string characters out of 2773602
- 747879 words of memory out of 3000000
- 43597 multiletter control sequences out of 15000+600000
- 486310 words of font info for 65 fonts, out of 8000000 for 9000
+ 22661 strings out of 475385
+ 422767 string characters out of 2773602
+ 747925 words of memory out of 3000000
+ 43593 multiletter control sequences out of 15000+600000
+ 484770 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,34n,80p,883b,702s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi6
-00\ecbx1200.pk> <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/pk/ljfour/jkn
-appen/ec/dpi600\ecti1095.pk> <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/
-pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk> <C:\Users\didac.blanco\AppData\Local\
-MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\didac.blanco\A
-ppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1095.pk> <C:\Users\d
-idac.blanco\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1095.pk
+00\ecti1095.pk> <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/pk/ljfour/jkn
+appen/ec/dpi600\ecbx2074.pk> <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/
+pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\didac.blanco\AppData\Local\
+MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1095.pk> <C:\Users\didac.blanco\A
+ppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1095.pk> <C:\Users\d
+idac.blanco\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk
 > <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\ecbx1095.pk> <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/pk/ljfour/jkna
-ppen/ec/dpi600\ecss1440.pk> <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/p
-k/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\didac.blanco\AppData\Local\M
-iKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\didac.blanco\Ap
-pData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk><C:/Users/did
-ac.blanco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb><C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
-onts/cm/cmmi6.pfb><C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/amsfonts/cm/cmmi8.pfb><C:/Users/didac.blanco/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/didac.blanco/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/didac.b
-lanco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
-C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmsy8.pfb><C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/symbols/msbm10.pfb>
-Output written on TFG_esp_v3.pdf (21 pages, 268872 bytes).
+0\ecss1440.pk> <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/pk/ljfour/jkna
+ppen/ec/dpi600\ecrm1440.pk> <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/p
+k/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\didac.blanco\AppData\Local\M
+iKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk><C:/Users/didac.blanco/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/
+didac.blanco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6
+.pfb><C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmmi8.pfb><C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmr10.pfb><C:/Users/didac.blanco/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/didac.blanco/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/dida
+c.blanco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb
+><C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/symbols/msbm10.pfb>
+Output written on TFG_esp_v3.pdf (21 pages, 261756 bytes).
 PDF statistics:
- 568 PDF objects out of 1000 (max. 8388607)
- 45 named destinations out of 1000 (max. 500000)
- 98 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 537 PDF objects out of 1000 (max. 8388607)
+ 43 named destinations out of 1000 (max. 500000)
+ 82 words of extra memory for PDF output out of 10000 (max. 10000000)
 
