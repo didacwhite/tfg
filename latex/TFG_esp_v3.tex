@@ -368,6 +368,17 @@ La efectividad de cada iteración depende de la elección del radio $\Delta_k$, 
 
 Una vez tomado el radio, encontrar el mínimo es directo en el caso de que $B_k$ sea definida positiva, basta tomar $p_k^B = -B_k^{-1}g_k$. En caso contrario tampoco supone una tarea muy costosa ya que sólo se necesita una solución aproximada para garantizar la convergencia.
 
+\chapter{Mínimos Cuadrados}
+
+El problema de mínimos cuadrados se utiliza para distintas aplicaciones, entre ellas el ajuste de datos, la estimación de parámetros y aproximación de funciones. Por ejemplo, suponemos que tenemos los datos $(t_1, y_1), (t_2, y_2), \ldots, (t_m, y_m)$ y queremos ajustar la función $\phi(t,x)$. En este caso los vectores $t_i$ conforman las variable explicativas, es decir los datos que fijamos de la muestra, el vector $y = (y_1, \ldots, y_m)$ la variable respuesta, es decir los datos que obtenemos para cada variable explicativa. El vector $x$ serán los parámetros que ajustaremos minimizando la función objetivo del problema de mínimos cuadrados, que es de la forma
+la función objetivo es de la forma
+\begin{equation}
+	f(x) = \frac{1}{2}\sum_{i=1}^{m}r_i^2(x),
+\end{equation}
+donde $r_i : \mathbb{R}^{n} \rightarrow \mathbb{R}$ son funciones continuamente diferenciables y se conocen como residuos.
+Estos se definen como las diferencias de las observaciones realizadas con el valor que nos da la función que se quiere ajustar
+Se asume que $m \geq n$ para este problema, de hecho en la práctica lo más común es que $m \gg n$. 
+
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
 \renewcommand{\thechapter}{\Roman{chapter}}
