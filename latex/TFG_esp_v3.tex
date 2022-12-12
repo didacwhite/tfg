@@ -282,7 +282,7 @@ Aplicaciones a la estimación de parámetros de modelos matemáticos.}		%  escri
 
 
 \chapter{Fundamentos de la optimización sin restricciones}
-El problema de los mínimos cuadrados es un caso particular de optimización sin restricciones, y es por ello que comenzaremos introduciendo sus fundamentos. Ya que el problema de mínimos cuadrados es usado en multitud de campos para estimar parámetros, este es de los más utilizados dentro de los problemas de optimización sin restricciones.
+% El problema de los mínimos cuadrados es un caso particular de optimización sin restricciones, y es por ello que comenzaremos introduciendo sus fundamentos. Ya que el problema de mínimos cuadrados es usado en multitud de campos para estimar parámetros, este es de los más utilizados dentro de los problemas de optimización sin restricciones.
 
 Un problema de optimización sin restricciones tiene la forma 
 \begin{equation}
@@ -373,19 +373,14 @@ Una vez tomado el radio, encontrar el mínimo es directo en el caso de que $B_k$
 
 En el problema de mínimos cuadrados la función objetivo es de la forma
 \begin{equation}
-	f(x) = \frac{1}{2}\sum_{i=1}^{m}r_i^2(x),
+	f(x) = \frac{1}{2} r(x)^Tr(x) = \frac{1}{2}\sum_{i=1}^{m}r_i^2(x),
 	\label{eq:lsp}
 \end{equation}
-donde $r_i : \mathbb{R}^{n} \rightarrow \mathbb{R}$ son funciones continuamente diferenciables, conocidas como residuos.
+donde $r(x) = (r_1(x), r_2(x), \ldots, r_m(x))^T$, con $r_i : \mathbb{R}^{n} \rightarrow \mathbb{R}$ funciones continuamente diferenciables, llamado \textit{residuo}.
 Se asume que $m \geq n$ para este problema, de hecho en la práctica lo más común es que $m \gg n$. 
 
-Veamos las propiedades de este modelo concreto de optimización sin restricciones y cómo se pueden aprovechar para formular algoritmos eficientes y robustos. Para ello, primero formamos un vector residuo con los 
-$r : \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ con los distintos componentes $r_i$, es decir
-\begin{equation}
-	r(x) = (r_1(x), r_2(x), \ldots, r_m(x))^T.
-\end{equation}
-Con esta notación, (\ref{eq:lsp}) se puede reformular como
-$f(x) = \frac{1}{2} \Vert r(x) \Vert_2^2$. Las derivadas de $f$ se pueden reescribir en forma matricial, como la matriz Jacobiana $J(x)$, que será la matriz de las derivadas parciales de los residuos,
+Veamos las propiedades de este modelo concreto de optimización sin restricciones y cómo se pueden aprovechar para formular algoritmos eficientes y robustos.
+Sea $J(x)$ la matriz Jacobiana de $r(x)$, 
 \begin{equation}
 	J(x) = 
 	\begin{bmatrix}
@@ -393,18 +388,46 @@ $f(x) = \frac{1}{2} \Vert r(x) \Vert_2^2$. Las derivadas de $f$ se pueden reescr
 		\nabla r_2(x)^T \\
 		\vdots \\
 		\nabla r_m(x)^T
-	\end{bmatrix},
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		\frac{\partial r_1}{\partial x_1}(x) &
+		\frac{\partial r_1}{\partial x_2}(x) &
+		\cdots &
+		\frac{\partial r_1}{\partial x_n}(x) \\
+		
+		\frac{\partial r_2}{\partial x_1}(x) &
+		\frac{\partial r_2}{\partial x_2}(x) &
+		\cdots &
+		\frac{\partial r_2}{\partial x_n}(x) \\
+		
+		\cdots &
+		\cdots &
+		\cdots &
+		\cdots & \\
+		
+		\frac{\partial r_m}{\partial x_1}(x) &
+		\frac{\partial r_m}{\partial x_2}(x) &
+		\cdots &
+		\frac{\partial r_m}{\partial x_n}(x) 
+	\end{bmatrix}.
 \end{equation}
-y por tanto el gradiente y la Hessiana de f se expresan como sigue:
-
+El gradiente y la Hessiana de f se pueden expresar como sigue:
 \begin{align}
-	\nabla f(x) &= \sum_{i=1}^m r_i(x) \nabla r_i(x) = J(x)^Tr(x) \label{eq:grad}\\
-	\nabla^2 f(x) &= \sum_{i=1}^m \nabla r_i(x) \nabla r_i(x)^T + \sum_{i=1}^m r_i(x)\nabla^2r_i(x) \nonumber \\
-	&= J(x)^TJ(x)+\sum_{i=1}^m r_i(x)\nabla^2r_i(x). \label{eq:hess}
+	g(x) = \nabla f(x) &= \sum_{i=1}^m r_i(x) \nabla r_i(x) = J(x)^Tr(x) \label{eq:grad}\\
+	G(x) = \nabla^2 f(x) &= \sum_{i=1}^m \nabla r_i(x) \nabla r_i(x)^T + \sum_{i=1}^m r_i(x)\nabla^2r_i(x) \nonumber \\
+	&= J(x)^TJ(x)+S(x). \label{eq:hess}
 \end{align}
 
-Si nos fijamos, el primer término de la matriz Hessiana se obtiene casi directamente del cálculo del gradiente (\ref{eq:grad}), así que el coste se reduce al segundo término $\sum_{i=1}^m r_i(x)\nabla^2r_i(x)$.
-
+Si nos fijamos en la formulación de la matriz Hessiana, el cálculo del primer termino es directo gracias a que ya obtenemos $J(x)$ para calcular el gradiente (\ref{eq:grad}), así que el coste se reduce al segundo término, que hemos denotado $S(x)$.
+Veamos la expresión del modelo cuadrático de $f(x)$ utilizando (\ref{eq:lsp}), (\ref{eq:grad}) y (\ref{eq:hess}):
+\begin{equation}
+\begin{split}
+	q^{(k)}(x) &= f(x_k) + g^T_k(x-x_k) + \frac{1}{2}(x-x_k)^TG_k(x-x_k) \\
+	&= \frac{1}{2}r(x_k)^Tr(x_k) + (J(x_k)^Tr(x))^T(x-x_k) +
+	
+\end{split}
+\end{equation}
 
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
