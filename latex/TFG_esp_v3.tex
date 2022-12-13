@@ -371,13 +371,15 @@ Una vez tomado el radio, encontrar el mínimo es directo en el caso de que $B_k$
 \chapter{Mínimos Cuadrados}
 %campos en los que se utiliza??? 
 
-En el problema de mínimos cuadrados la función objetivo es de la forma
+El problema de mínimos cuadrados surge de la necesidad de ajustar modelos que nos permitan predecir ciertos comportamientos en una amplia variedad de campos. Dados unos datos $(t_1,y_1),(t_2,y_2),\cdots,(t_m,y_m)$, queremos ajustar una función
+$\phi(t,x)$ de forma que se minimicen los residuos $r_i(x) = \phi(t_i,x) - y_i$ para $i=1,\cdots,m$
 \begin{equation}
-	f(x) = \frac{1}{2} r(x)^Tr(x) = \frac{1}{2}\sum_{i=1}^{m}r_i^2(x),
+	\min_{x\in \mathbb{R}^{n}}f(x) = \frac{1}{2} r(x)^Tr(x) = \frac{1}{2}\sum_{i=1}^{m}r_i^2(x), \quad m\geq n,
 	\label{eq:lsp}
 \end{equation}
-donde $r(x) = (r_1(x), r_2(x), \ldots, r_m(x))^T$, con $r_i : \mathbb{R}^{n} \rightarrow \mathbb{R}$ funciones continuamente diferenciables, llamado \textit{residuo}.
-Se asume que $m \geq n$ para este problema, de hecho en la práctica lo más común es que $m \gg n$. 
+donde $r(x) = (r_1(x), r_2(x), \ldots, r_m(x))^T$, con $r_i : \mathbb{R}^{n} \rightarrow \mathbb{R}$ funciones continuamente diferenciables. 
+
+%Se asume que $m \geq n$ para este problema, de hecho en la práctica lo más común es que $m \gg n$. 
 
 Veamos las propiedades de este modelo concreto de optimización sin restricciones y cómo se pueden aprovechar para formular algoritmos eficientes y robustos.
 Sea $J(x)$ la matriz Jacobiana de $r(x)$, 
@@ -424,11 +426,14 @@ Veamos la expresión del modelo cuadrático de $f(x)$ utilizando (\ref{eq:lsp}),
 \begin{equation}
 \begin{split}
 	q^{(k)}(x) &= f(x_k) + g^T_k(x-x_k) + \frac{1}{2}(x-x_k)^TG_k(x-x_k) \\
-	&= \frac{1}{2}r(x_k)^Tr(x_k) + (J(x_k)^Tr(x))^T(x-x_k) +
-	
+	&= \frac{1}{2}r(x_k)^Tr(x_k) + (J(x_k)^Tr(x))^T(x-x_k) + 	
 \end{split}
 \end{equation}
 
+
+\section{Problema Lineal}
+
+Existen muchos casos en los que tiene sentido modelar $\phi (x):$
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
