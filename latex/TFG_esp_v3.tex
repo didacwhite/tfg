@@ -425,7 +425,7 @@ Si nos fijamos en la formulación de la matriz Hessiana, el cálculo del primer 
 Veamos la expresión del modelo cuadrático de $f(x)$ utilizando (\ref{eq:lsp}), (\ref{eq:grad}) y (\ref{eq:hess}):
 \begin{equation}
 \begin{split}
-	q^{(k)}(x) &= f(x_k) + g^T_k(x-x_k) + \frac{1}{2}(x-x_k)^TG_k(x-x_k) \\
+	q^{(k)}(x) &= f(x_k) + g^T_k(x-x_k) + \frac{1}{2}(x-x_k)^TG_k(x-x_k), \\
 	&= \frac{1}{2}r(x_k)^Tr(x_k) + (J(x_k)^Tr(x))^T(x-x_k) + 	
 \end{split}
 \end{equation}
@@ -433,8 +433,40 @@ Veamos la expresión del modelo cuadrático de $f(x)$ utilizando (\ref{eq:lsp}),
 
 \section{Problema Lineal}
 
-Existen muchos casos en los que tiene sentido modelar $\phi (x):$
+El primer caso más sencillo es si $\phi (t, x)$ es una función lineal, en cuyo caso los residuos
+$r_i(x)$ también serán lineales.
+Por ser $\phi$ lineal, se puede representar como $Jx$, con $J$ una matriz
+$m\times n$.
+Realizaremos un estudio del caso lineal para tener un conocimiento de como se enfocan estos problemas, que nos servirá para entender mejor el caso no lineal.
+Si escribimos el vector residuo como $r(x) = Jx-y$, la función objetivo nos queda de la forma
+\begin{equation}
+	f(x) = \frac{1}{2} \Vert Jx-y \Vert^2.
+	\label{eq:flin}
+\end{equation}
+En consecuencia, tomando como referencia (\ref{eq:grad}) y (\ref{eq:hess}) y teniendo en cuenta que en este caso particular $\nabla^2r_i=0$, nos queda
+\begin{equation}
+	\nabla f(x) = J^T(Jx-y), \qquad \nabla^2 f(x) =  J^TJ.
+\end{equation}
 
+Por ser $f$ convexa en este caso (\ref{eq:flin}) (y por los resultados previos), dado un punto $x^*$ tal que $\nabla f(x^*) = 0$, este será mínimo global. Por tanto, $x^*$ satisface el siguiente sistema lineal:
+\begin{equation}
+	J^TJx^* = J^Ty.
+\end{equation}
+
+Veamos cómo se enfoca este sistema de ecuaciones, conocidas como \textit{ecuaciones normales} de (\ref{eq:flin}). El primer algoritmo que se plantea es a partir de la \textbf{factorización de Cholesky}, comenzando por computar la matriz de coeficientes $J^TJ$ y el lado derecho $J^Ty$. Después se computa la factorización de Cholesky
+\begin{equation}
+	J^TJ = \bar R^T\bar R.
+\end{equation}
+Para que esta exista, necesitamos que $m \geq n$ y que $J$ sea de rango $n$,
+lo que permite que $J^TJ$ sea simétrica y definida positiva.
+Se termina realizando las dos sustituciones triangulares con los factores de Cholesky para encontrar $x^*$.
+La principal desventaja de este método es que el condicionamiento de $J^TJ$ es el cuadrado del condicionamiento de $J$, y esto puede llevar a errores de aproximación.
+Además, si $J$ está mal condicionada, ni quiera se puede llevar a cabo la factorización.
+
+Como segunda posibilidad, tenemos la \textbf{factorización QR}, que evita el problema de depender del cuadrado del condicionamiento de $J$.
+
+
+%conocido como \textit{ecuaciones normales} de (\ref{eq:flin}).
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
 \renewcommand{\thechapter}{\Roman{chapter}}
