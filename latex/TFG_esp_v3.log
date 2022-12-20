@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.11.27)  14 DEC 2022 19:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.11.27)  20 DEC 2022 18:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1006,8 +1006,8 @@ Cap\'{\i }tulo 2.
 [5
 
 ]
-LaTeX Info: Redefining \. on input line 473.
-LaTeX Info: Redefining \% on input line 473.
+LaTeX Info: Redefining \. on input line 469.
+LaTeX Info: Redefining \% on input line 469.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1018,12 +1018,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [6]
-Anexo I.
-[7
+LaTeX Info: Redefining \. on input line 496.
+LaTeX Info: Redefining \% on input line 496.
 
-]
-LaTeX Info: Redefining \. on input line 476.
-LaTeX Info: Redefining \% on input line 476.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[7]
+LaTeX Info: Redefining \. on input line 496.
+LaTeX Info: Redefining \% on input line 496.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1036,10 +1044,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [8
 
 ]
-Anexo II.
+Anexo I.
 [9]
-LaTeX Info: Redefining \. on input line 478.
-LaTeX Info: Redefining \% on input line 478.
+LaTeX Info: Redefining \. on input line 499.
+LaTeX Info: Redefining \% on input line 499.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1051,7 +1059,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [10
 
-] [11
+]
+Anexo II.
+[11]
+LaTeX Info: Redefining \. on input line 501.
+LaTeX Info: Redefining \% on input line 501.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[12
+
+] [13
 
 ] (TFG_esp_v3.aux
 LaTeX Info: Redefining \. on input line 22.
@@ -1061,13 +1085,13 @@ Package rerunfilecheck Info: File `TFG_esp_v3.out' has not changed.
 (rerunfilecheck)             Checksum: 7C067240F8BF5F11D25F25F0EB275336;1476.
  ) 
 Here is how much of TeX's memory you used:
- 22681 strings out of 475385
- 423004 string characters out of 2773602
+ 22687 strings out of 475385
+ 423078 string characters out of 2773602
  753117 words of memory out of 3000000
  43600 multiletter control sequences out of 15000+600000
  484770 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,34n,80p,883b,702s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 84i,34n,80p,883b,714s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi6
 00\ecti1095.pk> <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/pk/ljfour/jkn
 appen/ec/dpi600\ecbx2074.pk> <C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts/
@@ -1092,9 +1116,9 @@ c.blanco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb>
 s/cm/cmsy10.pfb><C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/type
 1/public/amsfonts/cm/cmsy8.pfb><C:/Users/didac.blanco/AppData/Local/Programs/Mi
 KTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on TFG_esp_v3.pdf (23 pages, 299841 bytes).
+Output written on TFG_esp_v3.pdf (25 pages, 309718 bytes).
 PDF statistics:
- 597 PDF objects out of 1000 (max. 8388607)
- 56 named destinations out of 1000 (max. 500000)
+ 620 PDF objects out of 1000 (max. 8388607)
+ 62 named destinations out of 1000 (max. 500000)
  98 words of extra memory for PDF output out of 10000 (max. 10000000)
 

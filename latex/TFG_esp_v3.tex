@@ -453,7 +453,9 @@ Por ser $f$ convexa en este caso (\ref{eq:flin}) (y por los resultados previos),
 	J^TJx^* = J^Ty.
 \end{equation}
 
-Veamos cómo se enfoca este sistema de ecuaciones, conocidas como \textit{ecuaciones normales} de (\ref{eq:flin}). El primer algoritmo que se plantea es a partir de la \textbf{factorización de Cholesky}, comenzando por computar la matriz de coeficientes $J^TJ$ y el lado derecho $J^Ty$. Después se computa la factorización de Cholesky
+Veamos cómo se enfoca elementalmente este sistema de ecuaciones, conocidas como \textit{ecuaciones normales} de (\ref{eq:flin}).
+Lo más común en este caso para resolver numéricamente es usar distintos tipos de factorización sobre la matriz $J^TJ$ o sobre $J$, para luego resolver con sustituciones triangulares.
+El primer algoritmo que se plantea es a partir de la \textbf{factorización de Cholesky}, comenzando por computar la matriz de coeficientes $J^TJ$ y el lado derecho $J^Ty$. Después se computa la factorización de Cholesky
 \begin{equation}
 	J^TJ = \bar R^T\bar R.
 \end{equation}
@@ -463,10 +465,31 @@ Se termina realizando las dos sustituciones triangulares con los factores de Cho
 La principal desventaja de este método es que el condicionamiento de $J^TJ$ es el cuadrado del condicionamiento de $J$, y esto puede llevar a errores de aproximación.
 Además, si $J$ está mal condicionada, ni quiera se puede llevar a cabo la factorización.
 
-Como segunda posibilidad, tenemos la \textbf{factorización QR}, que evita el problema de depender del cuadrado del condicionamiento de $J$.
+Una segunda posibilidad es basarse en la \textbf{factorización QR}, que evita el problema de depender del cuadrado del condicionamiento de $J$, ya que aplicaremos la factorización directamente a $J$. Se aprovecha que la norma Euclídea no se ve afectada por trasformaciones ortogonales para partir de la igualdad
+\begin{equation}
+	\Vert Jx- y \Vert = \Vert Q^T(Jx-y) \Vert, 
+\end{equation}
+siendo $Q$ una matriz ortogonal $m \times m$. Factorizando con una matriz pivote $\Pi$, la solución es
+\begin{equation}
+	x^* = \Pi R^{-1}Q_1^Ty.
+\end{equation}
+Donde $R$ es una matriz $n \times n$ triangular superior con elementos positivos en la diagonal y $Q_1$ son las primeras $n$ columnas de $Q$, ambos producto de la factorización QR.
 
+En este caso, el error relativo es proporcional al condicionamiento de $J$ y no de su cuadrado como antes. Aún así, hay situaciones en las que necesitamos asegurar que la obtención sea de algún modo más robusta, incluso necesitamos más información acerca de la sensibilidad de la solución a perturbaciones en $J$ o en $y$. Para este caso particular nos basaremos en la \textbf{descomposición de valores singulares (DVS)}.
 
-%conocido como \textit{ecuaciones normales} de (\ref{eq:flin}).
+En este caso la resolución se enfoca de forma similar a la anterior. Partimos de la descomposición $J = USV^T$, con $U$ matriz $m \times m$, $V$ matriz $n \times n$, ambas ortogonales y $S$ matriz $n \times n$ de elementos diagonales $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n > 0$. Aprovechamos estas propiedades para obtener
+\begin{equation}
+	x^* = VS^{-1}U_1^Ty.
+\end{equation}
+Denotando por $u_i \in \mathbb{R}^m$ y $v_i \in \mathbb{R}^n$ las columnas de $U$ y $V$ respectivamente, escribimos
+\begin{equation}
+	x^* = \sum_{i=1}^n \frac{i_i^Ty}{\sigma_i}v_i.
+\end{equation}
+Fórmula de donde obtenemos información útil como la sensibilidad al aproximar $x^*$.
+
+Las 3 opciones son buenas según las condiciones en las que nos encontremos. La resolución basada en Cholesky es útil cuando $m\gg n$ y es práctico trabajar almacenando $J^TJ$ en lugar de $J$, siempre y cuando $J$ sea de rango completo y bien condicionada. Si esto último no se cumple, la factorización QR es un enfoque más equilibrado, mientras que DVS es el más costoso a cambio de ser el más fiable.
+
+Por último, mencionar que existen métodos para problemas muy grandes, en los que se usan técnicas iterativas como el método de gradientes conjugados para resolver el sistema.
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
 \renewcommand{\thechapter}{\Roman{chapter}}
