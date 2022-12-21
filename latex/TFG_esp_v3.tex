@@ -190,16 +190,16 @@ Aplicaciones a la estimación de parámetros de modelos matemáticos.}		%  escri
 \begin{tabular}{|l|}
 	\hline
 	
-	{\bf \'Area de Co\~necemento:  \/ }\\ \hline
+	{\bf \'Area de Co\~necemento:  \/ Matemática Aplicada}\\ \hline
 	\begin{minipage}{11.5cm}
 		{\vspace*{.2cm}
-			\bf T\'{\i}tulo:   \/ \bf
+			\bf T\'{\i}tulo:   \/ \bf Resolución numérica do problema non linear de mínimos cadrados. Aplicacións á estimación de parámetros de modelos matemáticos.
 			\vspace{.2cm}}
 	\end{minipage}\\ \hline
 	\bf Breve descrici\'on do contido\\ \hline
 	\begin{minipage}{11.5cm}
 		{\vspace*{.2cm}
-
+O problema non linear de mínimos cadrados zurde en moutas aplicacións da ciencia e da enxeñería: no axuste dun conxunto de datos a un modelo matemático, na estimación de parámetros, na aproximación de funcións, etc. O obxectivo do traballo fin de grao é o estudo de métodos numéricos para abordar o problema de minimización resultante. centrándose especialmente no algoritmo de Levenberg-Marquardt. O estudante estudará o método, no marco dos métodos de optimización con rexión de confianza e familiarizarase co seu uso mediante o comando Isqnonlin de Matlab. As metodoloxías estudadas aplicaranse a exemplos académicos e á estimación de parámetros de distintos modelos matemáticos a partir de datos experimentais.
 		
 		\vspace{.2cm}}
 	\end{minipage}\\ \hline
@@ -297,10 +297,12 @@ La dificultad de un problema como este viene de no conocer el comportamiento glo
 % W. Sun es más formal en este caso para definir ambos mínimos 
 \begin{definition}
 	Un punto $x^*$ se dice \textit{mínimo local} si existe $\delta > 0$ tal que $f(x^*) \leq f(x)$ para todo $x \in \mathbb{R}^n$ que satisface $\Vert x - x^* \Vert < \delta$.
+	Un punto $x^*$ se dice \textit{mínimo local estricto} si existe $\delta > 0$ tal que $f(x^*) < f(x)$ para todo $x \in \mathbb{R}^n$ que satisface $\Vert x - x^* \Vert < \delta$ con $x \neq x^*$.
 \end{definition}
 
 \begin{definition}
 	Un punto $x^*$ se dice \textit{mínimo global} si $f(x^*) \leq f(x)$ para todo $x \in \mathbb{R}^n$.
+	Un punto $x^*$ se dice \textit{mínimo global estricto} si $f(x^*) < f(x)$ para todo $x \in \mathbb{R}^n$ con $x \neq x^*$.
 \end{definition}
 
 Como no se suele tener un conocimiento a gran escala de $f$ debido a su coste, la mayoría de algoritmos solo encuentran mínimos locales, lo cual es suficiente para muchos casos prácticos.
@@ -319,31 +321,78 @@ Aún así, los algoritmos para encontrar mínimos globales se suelen construír 
 $x \in \mathbb{R}^n$ tal que $\langle \nabla f(x), d \rangle < 0$, entonces a $d$ se le llama \textit{dirección descendente} de $f$ en $x$.
 \end{definition}
 
-\begin{theorem} %% COMPATIBILIZAR CON RESULTADO ANTERIOR
-	(Teorema de Taylor).
+\begin{theorem}[Teorema de Taylor] %% COMPATIBILIZAR CON RESULTADO ANTERIOR
 	
 	Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}$ continuamente diferenciable y sea $p \in \mathbb{R}^n$, tenemos que 
 	\begin{equation}
 		f(x+p) = f(x) + \nabla f(x+tp)^Tp, \quad t\in (0,1).
 	\end{equation}
-%	Si además, $f$ es dos veces continuamente diferenciable
-%	\begin{equation}
-%		\nabla f(x+p) = \nabla f(x)
-%		+ \int_0^1 \nabla^2 f(x+tp)p\:dt,
-%	\end{equation}
-%	y
-%	\begin{equation}
-%		f(x+p) = f(x) + \nabla f(x)^Tp
-%		+ \frac{1}{2}p^T \nabla^2 f(x+tp)p, \quad t\in (0,1).
-%	\end{equation}
+	Si además, $f$ es dos veces continuamente diferenciable
+	\begin{equation}
+		\nabla f(x+p) = \nabla f(x)
+		+ \int_0^1 \nabla^2 f(x+tp)p\:dt,
+	\end{equation}
+	y
+	\begin{equation}
+		f(x+p) = f(x) + \nabla f(x)^Tp
+		+ \frac{1}{2}p^T \nabla^2 f(x+tp)p, \; t\in (0,1).
+		\label{eq:thty}
+	\end{equation}
 \end{theorem}
 
-Si tenemos en cuenta la expresión de la serie de Taylor
+
+\begin{proposition}
+Partiendo de la reformulación de (\ref{eq:thty}) y teniendo en cuenta que el último término es el error de aproximación $o(t)$
 \begin{equation}
 	f(x_k + td) = f(x_k) + t \nabla f(x_k)^Td + o(t),
 \end{equation}
-tenemos que existe un $\delta > 0$ tal que $f(x_k + td) < f(x_k)$ para todo
-$t \in (0, \delta)$ si y solo si $d$ es una dirección descendiente de $f$ en $x_k$.
+se cumple que
+\begin{equation}
+	\exists \delta > 0 \text{ tal que } f(x_k + td) < f(x_k)
+	\quad \forall t \in (0, \delta)
+\end{equation}
+si y solo si $d$ es una dirección descendiente de $f$ en $x_k$.
+
+\end{proposition}
+
+Tratemos ahora las condiciones de optimalidad.
+
+\begin{theorem}[Condición Necesaria de Primer Orden]
+	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ continuamente diferenciable en un conjunto abierto $D$. Si $x^*$ es un mínimo local de (\ref{eq:minf}), entonces $\nabla f(x^*) = 0$.
+\end{theorem}
+
+\begin{theorem}
+	(Condición Necesaria de Segundo Orden)
+	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable en un conjunto abierto $D$. Si $x^*$ es un mínimo local de (\ref{eq:minf}), entonces $\nabla f(x^*) = 0$ y $\nabla^2 f(x^*)$ es definida positiva.
+\end{theorem}
+
+\begin{theorem}[Condición Suficiente de Segundo Orden]
+	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable en un conjunto abierto $D$. Si $\nabla f(x^*) = 0$ y $\nabla^2 f(x^*)$ es definida positiva, entonces $x^* \in D$ es un mínimo local.
+\end{theorem}
+
+Para poder dar un último resultado para soluciones óptimas en minimización, veamos unas últimas definiciones.
+
+\begin{definition}
+	Sea $S\subset \mathbb{R}^n$ y sean $x_1, x_2 \in S$ cualesquiera. Si
+	$\alpha x_1 + (1 - \alpha)x_2 \in S$ para todo $\alpha \in [0,1]$, entonces se dice que D es un \textit{conjunto convexo}.
+\end{definition}
+\begin{definition}
+	Sea $S \subset \mathbb{R}^n$ un conjunto convexo no vacío. Sea $f: S \subset \mathbb{R}^n \rightarrow R$. Si para cualquiera $x_1, x_2 \in S$ y
+	$\alpha \in (0,1)$, se cumple que
+	\begin{equation}
+		f(\alpha x_1 + (1-\alpha)x_2) \leq \alpha f(x_1) + (1-\alpha)f(x_2),
+	\end{equation}
+	se dice que $f$ es una función convexa en $S$.
+\end{definition}
+
+\begin{theorem}
+	Sea $S \subset \mathbb{R}^n$ un conjunto convexo no vacío y
+	$f:S \subset \mathbb{R}^n \rightarrow \mathbb{R}$ una función convexa. Si $x^*$ es mínimo local de (\ref{eq:minf}), entonces también es mínimo global.
+\end{theorem}
+
+\begin{theorem} \label{th:convx}
+	Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}$ convexa y diferenciable, entonces $x^*$ es un mínimo global si y solo si $\nabla f(x^*) = 0$.
+\end{theorem}
 
 Todo algoritmo de optimización sin restricciones comienza con un punto de partida, denotado normalmente como $x_{0}$. Aunque generalmente el usuario introduce una estimación razonable, el punto puede ser elegido por el algoritmo, tanto de forma sistemática como aleatoria. El algoritmo itera sobre $x_{0}$, creando una sucesión $\left\{x_k\right\}_{k=0}^n$ la cual termina cuando no pueda continuar o cuando ya se haya acercado razonablemente a la solución. Para decidir como se avanza de un $x_k$ al siguiente, los algoritmos utilizan información sobre $f(x_k)$ o incluso en los puntos anteriores $x_0,\, x_1,\, \ldots,\,x_{k-1}$ con el objetivo de que $f(x_{k+1})<f(x_{k})$. Hablaremos de las dos estrategias fundamentales que se utilizan para avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
 
@@ -375,22 +424,52 @@ Debido a ese coste, se suelen utilizar búsquedas inexactas probando una serie d
 Estas condiciones son por ejemplo las condiciones \textit{Wolfe} o las condiciones \textit{Goldstein}.
 Esta elección se hace en dos fases, primero un proceso elige un intervalo conteniendo los pasos deseables y una segunda fase donde se va reduciendo el intervalo por técnicas de interpolación o bisección. % el mejor?
 
+\subsection{Método de Newton}
+Veamos brevemente las ideas detrás del método de Newton, influyentes en los demás planteamientos. La idea principal es usar la aproximación cuadrática $q^{(k)}$ de la función objetivo,
+\begin{equation}
+	q^{(k)}(p) = f(x_k)+\nabla f(x_k)^Tp + \frac{1}{2}p^T \nabla^2 f(x_k)p,
+	\label{eq:NewtonQ}
+\end{equation}
+si $f:\mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable, $x_k \in \mathbb{R}^n$ y la Hessiana $\nabla^2f(x_k)$ es definida positiva. En tal caso aproximamos $f(x_k + p) \approx q^{(k)}(p)$.
 
+Minimizando $q^{(k)}(p)$ obtenemos la fórmula de Newton, denotando $G_k=\nabla^2f(x_k)$ y $g_k = \nabla f(x_k)$:
+\begin{equation}
+	x_{k+1} = x_k - G_k^{-1} g_k.
+	\label{eq:NewtonIter}
+\end{equation}
+
+\begin{theorem}[Teorema de Convergencia del Método de Newton]
+	Sea
+	$f \in \mathcal{C}^2$ y $x_k$ lo suficientemente cerca a
+	la solución $x^*$ del problema de minimización con
+	$g(x^*)=0$. Si la Hessiana $G(x^*)$ es definida positiva y
+	$G(x)$ satisface la condición de Lipschitz
+	\begin{equation}
+		\vert G_{ij}(x) - G_{ij}(y) \vert \leq 
+		\beta \Vert x-y \Vert,
+		\text{ para algún } \beta,
+		\text{ y para todo } i,j,
+	\end{equation}
+	siendo $G_{ij}(x)$ el elemento en la posición $(i,j)$ de la matriz
+	$G(x)$, entonces para todo $k$, la iteración (\ref{eq:NewtonIter})
+	está bien definida y la sucesión $\left\{ x_k \right\}$
+	generada converge a $x^*$ de forma cuadrática.
+\end{theorem}
 
 \section{Región de confianza}
 
-Esta estrategia enfoca el problema de otro modo, primero se fija una distancia máxima $\Delta_k$ para definir la región, que generalmente es de la forma
+Esta estrategia enfoca el problema de otro modo, primero se fija una distancia máxima $\Delta_k$ para definir una región, generalmente de la forma
 \begin{equation}
 	\Omega_k = \left\{x : \Vert x-x_k \Vert \leq \Delta_k \right\}
 \end{equation}
 y luego ya se busca la dirección y paso.
 A partir de la información conocida de $f$, para cada $x_k$ se modela una función $m_k$ que se comporte de manera similar a $f$ cerca de este punto.
-Generalmente se utiliza el modelo cuadrático de la forma
+Se suele utilizar el modelo cuadrático $q^{(k)}$ visto anteriormente (\ref{eq:NewtonQ}), aprovechando la notación usada en el apartado anterior:
 \begin{equation}
-	m_k := q^{(k)}(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TG_kp,
+	m_k := q^{(k)}(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TG_kp.
 \end{equation}
-donde $g_k = \nabla f(x_k)$ y $G_k = \nabla^2f(x_k)$.
-Este modelo cuadrático es el utilizado en los métodos de búsqueda de línea para determinar la dirección de búsqueda, mientras que en este caso lo usamos para tener una representación adecuada de la función objetivo y así elegir el mínimo dentro de esta región.
+
+Como hemos visto, este modelo se utiliza en los métodos de búsqueda de línea para determinar la dirección de búsqueda, mientras que en este caso lo usamos para tener una representación adecuada de la función objetivo y así elegir el mínimo dentro de esta región.
 Este método nos evita el problema de que la Hessiana no sea definida positiva.
 En cada iteración, una vez elegido $\Delta_k$ se resuelve el siguiente problema:
 \begin{equation}
@@ -407,6 +486,7 @@ También se puede elegir qué norma define la región de confianza, cambiando as
 La efectividad de cada iteración depende de la elección del radio $\Delta_k$, es por ello que puede que la primera elección de este no sea la definitiva. Es decir, se toma un radio a raíz de la información que se tenga, esta puede incluír la de pasos anteriores, y luego se decide si este radio nos da un resultado aceptable. Un radio demasiado pequeño nos puede hacer perder la oportunidad de ser mucho más rápidos, pero un paso demasiado grande, el mínimo de la función modelo $m_k$ puede estar lejos del mínimo de la función objetivo. Este último caso es el que se comprueba y se decide si reducir la región de confianza.
 
 Una vez tomado el radio, encontrar el mínimo es directo en el caso de que $B_k$ sea definida positiva, basta tomar $p_k^B = -B_k^{-1}g_k$. En caso contrario tampoco supone una tarea muy costosa ya que sólo se necesita una solución aproximada para garantizar la convergencia.
+
 
 \chapter{Mínimos Cuadrados}
 %campos en los que se utiliza??? 
@@ -454,7 +534,7 @@ Sea $J(x)$ la matriz Jacobiana de $r(x)$,
 		\frac{\partial r_m}{\partial x_n}(x) 
 	\end{bmatrix}.
 \end{equation}
-El gradiente y la Hessiana de f se pueden expresar como sigue:
+El gradiente y la Hessiana de $f$ se pueden expresar como sigue:
 \begin{align}
 	g(x) = \nabla f(x) &= \sum_{i=1}^m r_i(x) \nabla r_i(x) = J(x)^Tr(x) \label{eq:grad}\\
 	G(x) = \nabla^2 f(x) &= \sum_{i=1}^m \nabla r_i(x) \nabla r_i(x)^T + \sum_{i=1}^m r_i(x)\nabla^2r_i(x) \nonumber \\
@@ -462,14 +542,15 @@ El gradiente y la Hessiana de f se pueden expresar como sigue:
 \end{align}
 
 Si nos fijamos en la formulación de la matriz Hessiana, el cálculo del primer termino es directo gracias a que ya obtenemos $J(x)$ para calcular el gradiente (\ref{eq:grad}), así que el coste se reduce al segundo término, que hemos denotado $S(x)$.
-Veamos la expresión del modelo cuadrático de $f(x)$ utilizando (\ref{eq:lsp}), (\ref{eq:grad}) y (\ref{eq:hess}):
+Teniendo en cuenta el siguiente modelo cuadrático
+%Veamos la expresión del modelo cuadrático de $f(x)$ utilizando (\ref{eq:lsp}), (\ref{eq:grad}) y (\ref{eq:hess}):
 \begin{equation}
-\begin{split}
-	q^{(k)}(x) &= f(x_k) + g^T_k(x-x_k) + \frac{1}{2}(x-x_k)^TG_k(x-x_k), \\
-	&= \frac{1}{2}r(x_k)^Tr(x_k) + (J(x_k)^Tr(x))^T(x-x_k) + 	
-\end{split}
+	q^{(k)}(x) = f(x_k) + g^T_k(x-x_k) + \frac{1}{2}(x-x_k)^TG_k(x-x_k),
 \end{equation}
-
+y sustituyendo según (\ref{eq:lsp}), (\ref{eq:grad}) y (\ref{eq:hess}), obtenemos el método de Newton para el problema inicial,
+\begin{equation}
+	x_{k+1} = x_k-(J(x_k)^TJ(x_k)+S(x_k))^{-1}J(x_k)^Tr(x_k).
+\end{equation}
 
 \section{Problema Lineal}
 
@@ -488,12 +569,12 @@ En consecuencia, tomando como referencia (\ref{eq:grad}) y (\ref{eq:hess}) y ten
 	\nabla f(x) = J^T(Jx-y), \qquad \nabla^2 f(x) =  J^TJ.
 \end{equation}
 
-Por ser $f$ convexa en este caso (\ref{eq:flin}) (y por los resultados previos), dado un punto $x^*$ tal que $\nabla f(x^*) = 0$, este será mínimo global. Por tanto, $x^*$ satisface el siguiente sistema lineal:
+Como $f$ es convexa, dado un punto $x^*$ tal que $\nabla f(x^*) = 0$, este será mínimo global (\ref{th:convx}). Por tanto, $x^*$ satisface el siguiente sistema lineal:
 \begin{equation}
 	J^TJx^* = J^Ty.
 \end{equation}
 
-Veamos cómo se enfoca elementalmente este sistema de ecuaciones, conocidas como \textit{ecuaciones normales} de (\ref{eq:flin}).
+Veamos cómo enfocar este sistema de ecuaciones, conocidas como \textit{ecuaciones normales} de (\ref{eq:flin}).
 Lo más común en este caso para resolver numéricamente es usar distintos tipos de factorización sobre la matriz $J^TJ$ o sobre $J$, para luego resolver con sustituciones triangulares.
 El primer algoritmo que se plantea es a partir de la \textbf{factorización de Cholesky}, comenzando por computar la matriz de coeficientes $J^TJ$ y el lado derecho $J^Ty$. Después se computa la factorización de Cholesky
 \begin{equation}
@@ -515,9 +596,9 @@ siendo $Q$ una matriz ortogonal $m \times m$. Factorizando con una matriz pivote
 \end{equation}
 Donde $R$ es una matriz $n \times n$ triangular superior con elementos positivos en la diagonal y $Q_1$ son las primeras $n$ columnas de $Q$, ambos producto de la factorización QR.
 
-En este caso, el error relativo es proporcional al condicionamiento de $J$ y no de su cuadrado como antes. Aún así, hay situaciones en las que necesitamos asegurar que la obtención sea de algún modo más robusta, incluso necesitamos más información acerca de la sensibilidad de la solución a perturbaciones en $J$ o en $y$. Para este caso particular nos basaremos en la \textbf{descomposición de valores singulares (DVS)}.
+En este caso, el error relativo es proporcional al condicionamiento de $J$ y no de su cuadrado. Aún así, hay situaciones en las que necesitamos asegurar que la obtención sea de algún modo más robusta o en las que queremos más información acerca de la sensibilidad de la solución a perturbaciones en $J$ o en $y$. Esto es, queremos asegurarnos que pequeños cambios en $J$ o $y$ no afecten significativamente a la solución obtenida, lo cual pondría en duda nuestro método ya que estas perturbaciones se pueden dar durante la computación.
 
-En este caso la resolución se enfoca de forma similar a la anterior. Partimos de la descomposición $J = USV^T$, con $U$ matriz $m \times m$, $V$ matriz $n \times n$, ambas ortogonales y $S$ matriz $n \times n$ de elementos diagonales $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n > 0$. Aprovechamos estas propiedades para obtener
+Nos basaremos ahora en la \textbf{descomposición de valores singulares (DVS)}, cuya resolución una vez realizada la descomposición se enfoca de forma similar a la anterior. Primero se realiza el algoritmo (DVS) para obtener $J = USV^T$, con $U$ matriz $m \times m$, $V$ matriz $n \times n$, ambas ortogonales y $S$ matriz $n \times n$ de elementos diagonales $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n > 0$. Aprovechamos estas propiedades para obtener
 \begin{equation}
 	x^* = VS^{-1}U_1^Ty.
 \end{equation}
