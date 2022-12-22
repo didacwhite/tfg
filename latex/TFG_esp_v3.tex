@@ -147,7 +147,7 @@
 }
 %%%%%%%%%%%%%%%%%%   Fin do Preámbulo   %%%%%%%%%%%%%%%%
 
-
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
 
 \begin{document}
@@ -295,6 +295,22 @@ Notar que podemos usar esta formulación para referirnos tanto a los problemas d
 La dificultad de un problema como este viene de no conocer el comportamiento global de $f$, normalmente solo disponemos de la evaluación de f en algunos puntos, y a lo mejor de algunas de sus derivadas. El trabajo de los algoritmos de optimización es identificar la solución sin usar demasiado tiempo ni almacenamiento computacional.
 
 % W. Sun es más formal en este caso para definir ambos mínimos 
+\begin{definition}
+	A una aplicación $\Vert \cdot \Vert$ se le llama \textit{norma} si y sólo si cumple:
+	\vspace{-0.4cm}
+	\begin{enumerate}
+		\item $\norm{x} \geq 0, \: \forall \mathbb{R}^n$ y $\norm{x}=0$ si y solo si $x=0$.
+		\item $\norm{\alpha x} = \vert \alpha \vert \norm{x},\: \forall \alpha \in \mathbb{R},\: x\in \mathbb{R}^n.$
+		\item $\norm{x+y} \leq \norm{x} + \norm{y}, \forall x,y \in \mathbb{R}^n$.
+	\end{enumerate}
+\end{definition}
+
+Un ejemplo muy común es la
+\textit{norma} $l_2$, a la cual nos referiremos cuando no se especifique lo contrario, se define
+\begin{equation}
+		\norm{x}_2 = \left( \sum_{i=1}^n \vert x_i \vert^2 \right)^{\frac{1}{2}}.
+\end{equation}
+
 \begin{definition}
 	Un punto $x^*$ se dice \textit{mínimo local} si existe $\delta > 0$ tal que $f(x^*) \leq f(x)$ para todo $x \in \mathbb{R}^n$ que satisface $\Vert x - x^* \Vert < \delta$.
 	Un punto $x^*$ se dice \textit{mínimo local estricto} si existe $\delta > 0$ tal que $f(x^*) < f(x)$ para todo $x \in \mathbb{R}^n$ que satisface $\Vert x - x^* \Vert < \delta$ con $x \neq x^*$.
