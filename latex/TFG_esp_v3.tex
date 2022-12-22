@@ -24,8 +24,9 @@
 
 
 
-
-
+\usepackage{enumitem}
+\newlist{steps}{enumerate}{1}
+\setlist[steps, 1]{label = Paso \arabic*., leftmargin=2.6cm, topsep=0pt}
 
 
 
@@ -145,6 +146,8 @@
 	\renewcommand\appendixname{Anexo}
 	\renewcommand\appendixpagename{Anexos}
 }
+
+
 %%%%%%%%%%%%%%%%%%   Fin do Preámbulo   %%%%%%%%%%%%%%%%
 
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
@@ -306,7 +309,7 @@ La dificultad de un problema como este viene de no conocer el comportamiento glo
 \end{definition}
 
 Un ejemplo muy común es la
-\textit{norma} $l_2$, a la cual nos referiremos cuando no se especifique lo contrario, se define
+\textit{norma} $l_2$, también llamada \textit{norma euclídea}, a la cual nos referiremos cuando no se especifique lo contrario, se define
 \begin{equation}
 		\norm{x}_2 = \left( \sum_{i=1}^n \vert x_i \vert^2 \right)^{\frac{1}{2}}.
 \end{equation}
@@ -552,23 +555,25 @@ Sea $J(x)$ la matriz Jacobiana de $r(x)$,
 \end{equation}
 El gradiente y la Hessiana de $f$ se pueden expresar como sigue:
 \begin{align}
-	g(x) = \nabla f(x) &= \sum_{i=1}^m r_i(x) \nabla r_i(x) = J(x)^Tr(x) \label{eq:grad}\\
+	g(x) = \nabla f(x) &= \sum_{i=1}^m r_i(x) \nabla r_i(x) = J(x)^Tr(x), \label{eq:grad}\\
 	G(x) = \nabla^2 f(x) &= \sum_{i=1}^m \nabla r_i(x) \nabla r_i(x)^T + \sum_{i=1}^m r_i(x)\nabla^2r_i(x) \nonumber \\
 	&= J(x)^TJ(x)+S(x). \label{eq:hess}
 \end{align}
 
 Si nos fijamos en la formulación de la matriz Hessiana, el cálculo del primer termino es directo gracias a que ya obtenemos $J(x)$ para calcular el gradiente (\ref{eq:grad}), así que el coste se reduce al segundo término, que hemos denotado $S(x)$.
-Teniendo en cuenta el siguiente modelo cuadrático
+Adaptando el modelo cuadrático (\ref{eq:NewtonQ})
 %Veamos la expresión del modelo cuadrático de $f(x)$ utilizando (\ref{eq:lsp}), (\ref{eq:grad}) y (\ref{eq:hess}):
 \begin{equation}
 	q^{(k)}(x) = f(x_k) + g^T_k(x-x_k) + \frac{1}{2}(x-x_k)^TG_k(x-x_k),
+	\label{eq:q}
 \end{equation}
-y sustituyendo según (\ref{eq:lsp}), (\ref{eq:grad}) y (\ref{eq:hess}), obtenemos el método de Newton para el problema inicial,
+y sustituyendo según (\ref{eq:lsp}), (\ref{eq:grad}) y (\ref{eq:hess}), obtenemos el método de Newton para (\ref{eq:lsp}),
 \begin{equation}
 	x_{k+1} = x_k-(J(x_k)^TJ(x_k)+S(x_k))^{-1}J(x_k)^Tr(x_k).
+	\label{eq:newtoniter}
 \end{equation}
 
-\section{Problema Lineal}
+\section{El Problema Lineal}
 
 El primer caso más sencillo es si $\phi (t, x)$ es una función lineal, en cuyo caso los residuos
 $r_i(x)$ también serán lineales.
@@ -590,7 +595,12 @@ Como $f$ es convexa, dado un punto $x^*$ tal que $\nabla f(x^*) = 0$, este será
 	J^TJx^* = J^Ty.
 \end{equation}
 
-Veamos cómo enfocar este sistema de ecuaciones, conocidas como \textit{ecuaciones normales} de (\ref{eq:flin}).
+Antes de ver como se resuelve numéricamente este sistema de ecuaciones, conocidas como \textit{ecuaciones normales} de (\ref{eq:flin}), veamos los conceptos previos necesarios.
+
+\begin{definition}
+	condicionamiento??
+\end{definition}
+
 Lo más común en este caso para resolver numéricamente es usar distintos tipos de factorización sobre la matriz $J^TJ$ o sobre $J$, para luego resolver con sustituciones triangulares.
 El primer algoritmo que se plantea es a partir de la \textbf{factorización de Cholesky}, comenzando por computar la matriz de coeficientes $J^TJ$ y el lado derecho $J^Ty$. Después se computa la factorización de Cholesky
 \begin{equation}
@@ -600,7 +610,7 @@ Para que esta exista, necesitamos que $m \geq n$ y que $J$ sea de rango $n$,
 lo que permite que $J^TJ$ sea simétrica y definida positiva.
 Se termina realizando las dos sustituciones triangulares con los factores de Cholesky para encontrar $x^*$.
 La principal desventaja de este método es que el condicionamiento de $J^TJ$ es el cuadrado del condicionamiento de $J$, y esto puede llevar a errores de aproximación.
-Además, si $J$ está mal condicionada, ni quiera se puede llevar a cabo la factorización.
+Además, si $J$ está mal condicionada, ni si quiera se puede llevar a cabo la factorización.
 
 Una segunda posibilidad es basarse en la \textbf{factorización QR}, que evita el problema de depender del cuadrado del condicionamiento de $J$, ya que aplicaremos la factorización directamente a $J$. Se aprovecha que la norma Euclídea no se ve afectada por trasformaciones ortogonales para partir de la igualdad
 \begin{equation}
@@ -627,6 +637,34 @@ Fórmula de donde obtenemos información útil como la sensibilidad al aproximar
 Las 3 opciones son buenas según las condiciones en las que nos encontremos. La resolución basada en Cholesky es útil cuando $m\gg n$ y es práctico trabajar almacenando $J^TJ$ en lugar de $J$, siempre y cuando $J$ sea de rango completo y bien condicionada. Si esto último no se cumple, la factorización QR es un enfoque más equilibrado, mientras que DVS es el más costoso a cambio de ser el más fiable.
 
 Por último, mencionar que existen métodos para problemas muy grandes, en los que se usan técnicas iterativas como el método de gradientes conjugados para resolver el sistema.
+
+\section{El método de Gauss-Newton}
+
+Comenzamos los métodos de minimización del problema no lineal (\ref{eq:lsp}) con el método de Gauss-Newton. La forma más sencilla de abordar el término de segundo orden $S(x)$ de $G_k$ en el modelo cuadrático (\ref{eq:q}) es obviarlo. Así, resulta
+\begin{equation}
+\begin{split}
+\bar q^{(k)}(x) =& \frac{1}{2}r(x_k)^Tr(x_k)+(J(x_k)^Tr(x_k))^T(x-x_k)+ \\
+	& +\frac{1}{2}(x-x_k)^T(J(x_k)^TJ(x_k))(x-x_k),
+\end{split}
+\end{equation}
+y por tanto,
+\begin{equation}
+	x_{k+1} = x_k + p_k = x_k -(J(x_k)^TJ(x_k))^{-1}J(x_k)^Tr(x_k).
+\end{equation}
+Para que esté bien definido, la matriz Jacobiana $J(x)$ tiene que ser de rango completo. Veamos el algoritmo
+
+\begin{algorithm}[Método de Gauss-Newton] \leavevmode
+\begin{steps}
+	\item $x_0$ y $\epsilon > 0$ dados, $k:=0$
+	\item Si $\norm{g_k} \leq \epsilon$, STOP.
+	\item Obtener el paso $p_k$ resolviendo
+		\begin{equation}
+			J(x_k)^TJ(x_k)p_k = -J(x_k)^Tr(x_k)
+		\end{equation}
+	\item Definimos $x_{k+1} = x_k + p_k$ y actualizamos $k=k+1$. Ir a Paso 2. \quad \qedsymbol
+\end{steps}
+\end{algorithm}
+
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix

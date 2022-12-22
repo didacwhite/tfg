@@ -6,7 +6,8 @@
 \contentsline {subsection}{\numberline {1.1.1}Método de Newton}{4}{subsection.1.1.1}%
 \contentsline {section}{\numberline {1.2}Región de confianza}{5}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Mínimos Cuadrados}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Problema Lineal}{8}{section.2.1}%
+\contentsline {section}{\numberline {2.1}El Problema Lineal}{8}{section.2.1}%
+\contentsline {section}{\numberline {2.2}El método de Gauss-Newton}{10}{section.2.2}%
 \contentsline {chapter}{\numberline {I}Título del Anexo I}{11}{appendix.Alph1}%
 \contentsline {chapter}{\numberline {II}Título del Anexo II}{13}{appendix.Alph2}%
 \contentsline {chapter}{Bibliograf\'{\i }a}{15}{appendix*.9}%
