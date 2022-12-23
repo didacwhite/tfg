@@ -151,6 +151,8 @@
 %%%%%%%%%%%%%%%%%%   Fin do Preámbulo   %%%%%%%%%%%%%%%%
 
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\sucesionxk}{\left\{x_k\right\}}
+\newcommand{\sucesion}[2]{\left\{#1_#2\right\}}
 
 
 \begin{document}
@@ -413,7 +415,7 @@ Para poder dar un último resultado para soluciones óptimas en minimización, v
 	Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}$ convexa y diferenciable, entonces $x^*$ es un mínimo global si y solo si $\nabla f(x^*) = 0$.
 \end{theorem}
 
-Todo algoritmo de optimización sin restricciones comienza con un punto de partida, denotado normalmente como $x_{0}$. Aunque generalmente el usuario introduce una estimación razonable, el punto puede ser elegido por el algoritmo, tanto de forma sistemática como aleatoria. El algoritmo itera sobre $x_{0}$, creando una sucesión $\left\{x_k\right\}_{k=0}^n$ la cual termina cuando no pueda continuar o cuando ya se haya acercado razonablemente a la solución. Para decidir como se avanza de un $x_k$ al siguiente, los algoritmos utilizan información sobre $f(x_k)$ o incluso en los puntos anteriores $x_0,\, x_1,\, \ldots,\,x_{k-1}$ con el objetivo de que $f(x_{k+1})<f(x_{k})$. Hablaremos de las dos estrategias fundamentales que se utilizan para avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
+Todo algoritmo de optimización sin restricciones comienza con un punto de partida, denotado normalmente como $x_{0}$. Aunque generalmente el usuario introduce una estimación razonable, el punto puede ser elegido por el algoritmo, tanto de forma sistemática como aleatoria. El algoritmo itera sobre $x_{0}$, creando una sucesión $\sucesionxk_{k=0}^n$ la cual termina cuando no pueda continuar o cuando ya se haya acercado razonablemente a la solución. Para decidir como se avanza de un $x_k$ al siguiente, los algoritmos utilizan información sobre $f(x_k)$ o incluso en los puntos anteriores $x_0,\, x_1,\, \ldots,\,x_{k-1}$ con el objetivo de que $f(x_{k+1})<f(x_{k})$. Hablaremos de las dos estrategias fundamentales que se utilizan para avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
 
 \section{Búsqueda de línea}
 
@@ -651,12 +653,14 @@ y por tanto,
 \begin{equation}
 	x_{k+1} = x_k + p_k = x_k -(J(x_k)^TJ(x_k))^{-1}J(x_k)^Tr(x_k).
 \end{equation}
-Para que esté bien definido, la matriz Jacobiana $J(x)$ tiene que ser de rango completo. Veamos el algoritmo
+
+Notar que para que esté bien definido, la matriz Jacobiana $J(x)$ tiene que ser de rango completo. Gracias a la aproximación $\nabla^2 f(x_k) \approx J(x_k)^TJ(x_k)$, hacemos que la única dificultad del algoritmo sea resolver un sistema lineal, ya que evitamos computar $\nabla^2 r_j,\,j=1,2,\ldots ,m$. En algunas situaciones, cuando nos vamos acercando a la solución $x^*$, esta aproximación suele ser más precisa, ya sea porque los residuos $r_i$ o $\norm{\nabla^2 r_i}$ es cercano a cero. La eficacia del método dependerá por tanto de lo buena que sea esta aproximación.
 
 \begin{algorithm}[Método de Gauss-Newton] \leavevmode
+\label{al:g-n}
 \begin{steps}
 	\item $x_0$ y $\epsilon > 0$ dados, $k:=0$
-	\item Si $\norm{g_k} \leq \epsilon$, STOP.
+	\item Si $\norm{g_k} \leq \epsilon$, STOP.   
 	\item Obtener el paso $p_k$ resolviendo
 		\begin{equation}
 			J(x_k)^TJ(x_k)p_k = -J(x_k)^Tr(x_k)
@@ -665,6 +669,30 @@ Para que esté bien definido, la matriz Jacobiana $J(x)$ tiene que ser de rango 
 \end{steps}
 \end{algorithm}
 
+Siempre y cuando $J$ tenga rango completo y el gradiente $\nabla f_k = J(x_k)^Tr(x_k)$ sea no nulo, la dirección $p_k$ es una dirección descendente.
+Como vemos en el \textit{Paso 3} resolvemos un caso análogo al problema lineal. Debido a esto, $p_k$ es también la solución de
+\begin{equation}
+	\min_{p_k} \frac{1}{2} \norm{J(x_k)p_k + r_k}^2,
+\end{equation}
+y por eso decimos que el método de Gauss-Newton es en realidad una linealización del problema no lineal de mínimos cuadrados y, como el método de Newton, resultará localmente convergente de manera cuadrática bajo las condiciones de este.
+
+\begin{theorem}
+	Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}$ y $f \in \mathcal{C}^2$. Asumimos que $x^*$ es mínimo local del problema (\ref{eq:lsp}), $J(x^*)^TJ(x^*)$ es definida positiva y la sucesión $\sucesionxk$ generada por el algoritmo (\ref{al:g-n}) converge a $x^*$. Si $G(x)$ y $(J(x)^TJ(x))^{-1}$ son lipschitzianas en una vecinidad de $x^*$, entonces
+\begin{equation}
+	\norm{x_{k+1}-x^*} \leq \Vert (J(x^*)^TJ(x^*))^{-1} \Vert \norm{S(x^*)} \norm{x_k-x^*}
+	+ O(\norm{x_k-x^*}).
+\end{equation}
+\end{theorem}
+
+Este teorema nos dice esencialmente que la convergencia del método depende de $S(x^*)$. Cuando $S(x^*)=0$ este converge de forma cuadrática y, según aumente, la convergencia es menor.
+
+\begin{theorem}
+	Sea $f:D \subset \mathbb{R}^n \rightarrow \mathbb{R}$ y $f \in \mathcal{C}^2(D)$, con $D$ conjunto abierto convexo. Sea $J(x)$ lipschitziana en $D$ y $\norm{J(x)} \leq \alpha, \, \forall x \in D$. Asumimos que existe $x^* \in D$ y $\lambda, \sigma \geq 0$ tal que $J(x^*)^Tr(x^*)=0$,
+$\lambda$ es el autovalor más pequeño de $J(x^*)^TJ(x^*)$, y
+	\begin{equation}
+		\norm{(J(x)-J(x^*))^Tr(x^*)} \leq \sigma \norm{x-x_k},\,\forall x \in D
+	\end{equation}
+\end{theorem}
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
