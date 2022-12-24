@@ -421,6 +421,7 @@ Todo algoritmo de optimización sin restricciones comienza con un punto de parti
 
 En este caso el algoritmo tiene dos tareas a partir de cada iteración, primero elige una \textit{dirección} $d_k$ y tomando el punto de partida busca en esa dirección el nuevo valor. Es decir, dado $x_k$
 \begin{equation}
+	\label{eq:linesearch}
 	x_{k+1} = x_k + \alpha_kd_k
 \end{equation}
 para un $d_k$ elegido previamente, y un \textit{paso} $\alpha_k$ obtenido solucionando otro problema de minimización más simple por ser unidimensional:
@@ -675,9 +676,11 @@ Como vemos en el \textit{Paso 3} resolvemos un caso análogo al problema lineal.
 	\min_{p_k} \frac{1}{2} \norm{J(x_k)p_k + r_k}^2,
 \end{equation}
 y por eso decimos que el método de Gauss-Newton es en realidad una linealización del problema no lineal de mínimos cuadrados y, como el método de Newton, resultará localmente convergente de manera cuadrática bajo las condiciones de este.
+Por tanto, el error de aproximación de la solución dependerá también de como resolvamos el problema lineal, y aplican los casos vistos en el apartado anterior.
 
 \begin{theorem}
-	Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}$ y $f \in \mathcal{C}^2$. Asumimos que $x^*$ es mínimo local del problema (\ref{eq:lsp}), $J(x^*)^TJ(x^*)$ es definida positiva y la sucesión $\sucesionxk$ generada por el algoritmo (\ref{al:g-n}) converge a $x^*$. Si $G(x)$ y $(J(x)^TJ(x))^{-1}$ son lipschitzianas en una vecinidad de $x^*$, entonces
+	\label{th:gn1}
+	Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}$ y $f \in \mathcal{C}^2$. Supongamos que $x^*$ es mínimo local del problema (\ref{eq:lsp}), $J(x^*)^TJ(x^*)$ es definida positiva y la sucesión $\sucesionxk$ generada por el algoritmo (\ref{al:g-n}) converge a $x^*$. Si $G(x)$ y $(J(x)^TJ(x))^{-1}$ son lipschitzianas en una vecinidad de $x^*$, entonces
 \begin{equation}
 	\norm{x_{k+1}-x^*} \leq \Vert (J(x^*)^TJ(x^*))^{-1} \Vert \norm{S(x^*)} \norm{x_k-x^*}
 	+ O(\norm{x_k-x^*}).
@@ -687,12 +690,31 @@ y por eso decimos que el método de Gauss-Newton es en realidad una linealizaci�
 Este teorema nos dice esencialmente que la convergencia del método depende de $S(x^*)$. Cuando $S(x^*)=0$ este converge de forma cuadrática y, según aumente, la convergencia es menor.
 
 \begin{theorem}
-	Sea $f:D \subset \mathbb{R}^n \rightarrow \mathbb{R}$ y $f \in \mathcal{C}^2(D)$, con $D$ conjunto abierto convexo. Sea $J(x)$ lipschitziana en $D$ y $\norm{J(x)} \leq \alpha, \, \forall x \in D$. Asumimos que existe $x^* \in D$ y $\lambda, \sigma \geq 0$ tal que $J(x^*)^Tr(x^*)=0$,
+	\label{th:gn2}
+	Sea $f:D \subset \mathbb{R}^n \rightarrow \mathbb{R}$ y $f \in \mathcal{C}^2(D)$, con $D$ conjunto abierto convexo. Sea $J(x)$ lipschitziana en $D$ y $\norm{J(x)} \leq \alpha, \, \forall x \in D$. Supongamos que existe $x^* \in D$ y $\lambda, \sigma \geq 0$ tal que $J(x^*)^Tr(x^*)=0$,
 $\lambda$ es el autovalor más pequeño de $J(x^*)^TJ(x^*)$, y
 	\begin{equation}
-		\norm{(J(x)-J(x^*))^Tr(x^*)} \leq \sigma \norm{x-x_k},\,\forall x \in D
+		\norm{(J(x)-J(x^*))^Tr(x^*)} \leq \sigma \norm{x-x_k},\,\forall x \in D.
+	\end{equation}
+	Si $\sigma < \lambda$, para cualquier $c\in (1,\lambda / \sigma)$, existe $\epsilon > 0$ tal que para todo $x_0 \in N(x^*, \epsilon)$, la sucesión resultante $\sucesionxk$ del algoritmo \ref{al:g-n} está bien definida, converge a $x^*$ y satisface
+	\begin{equation}
+	\norm{x_{k+1}-x^*} \leq \frac{c\sigma}{\lambda} \norm{x_k-x^*}+\frac{c\alpha\sigma}{2\lambda}\norm{x_k-x^*}^2
+	\end{equation}
+	y
+	\begin{equation}
+	\norm{x_{k+1}-x^*} \leq \frac{c\alpha+\lambda}{2\lambda}\norm{x_k-x^*} < \norm{x_k-x^*}.
 	\end{equation}
 \end{theorem}
+
+\begin{theorem}
+	Manteniendo las suposiciones de los dos teoremas \ref{th:gn1} y \ref{th:gn2}, si $r(X^*)=0$, entonces existe $\epsilon>0$ tal que para cualquier $x_0 \in N(x^*,\epsilon)$, la sucesión $\sucesionxk$ obtenida del método de Gauss-Newton converge a $x^*$ con orden cuadrático.
+\end{theorem}
+
+Para concluir observamos que el método encaja dentro de los métodos de búsqueda de línea, tomando $d_k=p_k$ en  (\ref{eq:linesearch}) y calculando una longitud de paso $\alpha_k$,
+\begin{equation}
+	x_{k+1} = x_k-\alpha_k(J(x_k)^TJ(x_k))^{-1}J(x_k)^Tr(x_k).
+\end{equation}
+
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
