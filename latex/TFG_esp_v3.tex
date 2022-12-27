@@ -24,6 +24,7 @@
 
 
 
+\usepackage{algpseudocode}
 \usepackage{enumitem}
 \newlist{steps}{enumerate}{1}
 \setlist[steps, 1]{label = Paso \arabic*., leftmargin=2.6cm, topsep=0pt}
@@ -488,15 +489,16 @@ y luego ya se busca la dirección y paso.
 A partir de la información conocida de $f$, para cada $x_k$ se modela una función $m_k$ que se comporte de manera similar a $f$ cerca de este punto.
 Se suele utilizar el modelo cuadrático $q^{(k)}$ visto anteriormente (\ref{eq:NewtonQ}), aprovechando la notación usada en el apartado anterior:
 \begin{equation}
-	m_k := q^{(k)}(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TG_kp.
+	m_k(p) := q^{(k)}(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TG_kp.
 \end{equation}
 
 Como hemos visto, este modelo se utiliza en los métodos de búsqueda de línea para determinar la dirección de búsqueda, mientras que en este caso lo usamos para tener una representación adecuada de la función objetivo y así elegir el mínimo dentro de esta región.
 Este método nos evita el problema de que la Hessiana no sea definida positiva.
 En cada iteración, una vez elegido $\Delta_k$ se resuelve el siguiente problema:
 \begin{equation}
+\label{min:tr}
 \begin{aligned}
-	\min_{p} \quad & q^{(k)}(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TB_kp \\
+	\min_{p} m_k(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TB_kp \\
 	\text{s.a.} \quad & \Vert p \Vert \leq \Delta_k. \\
 \end{aligned}
 \end{equation}
@@ -507,7 +509,67 @@ También se puede elegir qué norma define la región de confianza, cambiando as
 
 La efectividad de cada iteración depende de la elección del radio $\Delta_k$, es por ello que puede que la primera elección de este no sea la definitiva. Es decir, se toma un radio a raíz de la información que se tenga, esta puede incluír la de pasos anteriores, y luego se decide si este radio nos da un resultado aceptable. Un radio demasiado pequeño nos puede hacer perder la oportunidad de ser mucho más rápidos, pero un paso demasiado grande, el mínimo de la función modelo $m_k$ puede estar lejos del mínimo de la función objetivo. Este último caso es el que se comprueba y se decide si reducir la región de confianza.
 
-Una vez tomado el radio, encontrar el mínimo es directo en el caso de que $B_k$ sea definida positiva, basta tomar $p_k^B = -B_k^{-1}g_k$. En caso contrario tampoco supone una tarea muy costosa ya que sólo se necesita una solución aproximada para garantizar la convergencia.
+Una vez tomado el radio, encontrar el mínimo es directo en el caso de que $B_k$ sea definida positiva, basta tomar $p_k^B = -B_k^{-1}g_k$, conocido como \textit{paso completo}. En caso contrario tampoco supone una tarea muy costosa ya que sólo se necesita una solución aproximada para garantizar la convergencia.
+
+Veamos ahora de forma detallada como se elige el radio $\Delta_k$ en cada iteración. Esta elección se toma según el parecido entre la función $f$ y el modelo $m_k$ tomado en las iteraciones previas. Dado $p_k$, definimos el ratio
+\begin{equation}
+\label{eq:rho_k}
+	\rho_k = \frac{f(x_k)-f(x_k+p_k)}{m_k(0)-m_k(p_k)},
+\end{equation}
+donde el numerador es la \textit{reducción real}, mientras que el denominador es la \textit{reducción prevista}.
+La reducción prevista será positiva por definición, pues $p_k$ es elegido para tener el menor valor posible y el $0$ es una posibilidad.
+Por tanto, si $\rho_k$ es negativo, el nuevo valor $f(x_k+p_k)$ no es menor que $f(x_k)$ y este paso ha de ser rechazado.
+Por otro lado, si $\rho_k$ es cercano a $1$, esto quiere decir que $f$ y $m_k$ se comportan de manera similar en la región tomada en la iteración actual, por tanto podemos agrandar el radio con seguridad.
+En resumen, nos quedamos con el radio elegido si $\rho_k$ no tiene un valor muy cercano a $0$ o a $1$.
+El proceso se describe en el siguiente algoritmo.
+\begin{algorithm}[Región de confianza]\leavevmode
+\begin{algorithmic}[1]
+\State Dado $\hat{\Delta} > 0,\Delta_0 \in (0,\hat{\Delta}),$ y $\eta \in [0,\frac{1}{4})$
+\For{$k \gets 0,1,2,\ldots$}
+    \State Obtener $p_k$ (\ref{min:tr}).
+    \State Calcular $\rho_k$ (\ref{eq:rho_k}).
+    \If{$\rho_k < \frac{1}{4}$}
+        \State $\Delta_{k+1} \gets \frac{1}{4}\Delta_k$
+    \Else
+        \If{$\rho_k > \frac{3}{4}$ y $\norm{p_k} = \Delta_k$}
+            \State $\Delta_{k+1} \gets \min(2\Delta_k,\hat{\Delta})$
+        \Else
+            \State $\Delta_{k+1} \gets \Delta_k$
+        \EndIf
+    \EndIf
+    \If{$\rho_k > \eta$}
+        \State $x_{k+1} \gets x_k + p_k$
+    \Else
+        \State $x_{k+1} \gets x_k$
+    \EndIf
+\EndFor.
+\end{algorithmic}
+\end{algorithm}
+Aquí $\hat \Delta$ es el máximo radio de la región de cada iteración.
+Notar que únicamente se aumenta el radio en el caso de que $\norm{p_k} = \Delta_k$, ya en caso contrario, se entiende que el $\Delta_k$ elegido no influye en la elección de forma negativa.
+
+Para que este algoritmo sea práctico, nos centramos en la resolución del subproblema (\ref{min:tr}). Tomemos una notación más limpia,
+\begin{equation}
+\label{min:tr_nk}
+\begin{aligned}
+	\min_{p} \quad & m(p) = f + g^Tp + \frac{1}{2}p^TBp, \\
+	\text{s.a.} \quad & \Vert p \Vert \leq \Delta. \\
+\end{aligned}
+\end{equation}
+
+\begin{theorem}
+	El vector $p^*$ es una solución global de (\ref{min:tr_nk}) si y solo si $p^*$ cumple las condiciones y existe un escalar $\lambda \geq 0$ tal que se cumplen las siguientes condiciones:
+\begin{enumerate}
+%\vspace{-0.3cm}
+	\item $(B+\lambda I)p^*=-g,$
+	\item $\lambda (\Delta - \norm{p^*}) = 0,$
+	\item $(B+\lambda I)$ es semidefinida positiva.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+mimpágina 90 Nocedal.
+\end{proof}
+
 
 
 \chapter{Mínimos Cuadrados}
@@ -740,11 +802,14 @@ Para concluir observamos que el método encaja dentro de los métodos de búsque
 
 \chapter{El método de Levenberg-Marquardt}
 
-La linealización usada en el método de Gauss-Newton no es efectiva para todo $p=(x-x_k)$, el método de Levenberg-Marquardt aprovecha esta aproximación de la Hessiana restringiendo la búsqueda de $p$. Es decir, sustituye el enfoque de búsqueda de línea por el de región de confianza, de hecho, es a veces considerado el precursor de este tipo de métodos. Además, con este enfoque se soluciona la necesidad de que $J$ sea de rango completo
+El problema principal del anterior método es su necesidad de que $J$ sea de rango completo, el método de Levenberg-Marquardt soluciona este problema cambiando el enfoque de búsqueda de línea al de región de confianza, pero mantentiendo la linealización de Gauss-Newton debida a la aproximación $\nabla^2 f(x_k) \approx J(x_k)^TJ(x_k)$. Este cambio de enfoque surge de que la linealización pierde efectividad según nos alejamos del punto inicial, por lo que conviene restringir el tamaño de $p=(x-x_k)$, y consideramos el modelo de región de confianza:
 \begin{align}
 	\min_{p} \quad &\frac{1}{2} \norm{J_kp+r_k}^2, \\
-	\text{s.a.} \quad & \Vert p \Vert \leq \Delta_k.
+	\text{s.a.} \quad & \Vert p \Vert \leq \Delta_k,
 \end{align}
+Donde $\Delta_k>0$ es el radio de la región de confianza. Este método es considerado el primero en realizar un enfoque de región de confianza para un problema de optimización sin restricciones.
+
+
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix

@@ -5,10 +5,10 @@
 \contentsline {section}{\numberline {1.1}Búsqueda de línea}{3}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Método de Newton}{4}{subsection.1.1.1}%
 \contentsline {section}{\numberline {1.2}Región de confianza}{5}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Mínimos Cuadrados}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}El Problema Lineal}{8}{section.2.1}%
-\contentsline {section}{\numberline {2.2}El método de Gauss-Newton}{10}{section.2.2}%
-\contentsline {chapter}{\numberline {3}El método de Levenberg-Marquardt}{13}{chapter.3}%
-\contentsline {chapter}{\numberline {I}Título del Anexo I}{15}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {II}Título del Anexo II}{17}{appendix.Alph2}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{19}{appendix*.9}%
+\contentsline {chapter}{\numberline {2}Mínimos Cuadrados}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}El Problema Lineal}{10}{section.2.1}%
+\contentsline {section}{\numberline {2.2}El método de Gauss-Newton}{12}{section.2.2}%
+\contentsline {chapter}{\numberline {3}El método de Levenberg-Marquardt}{15}{chapter.3}%
+\contentsline {chapter}{\numberline {I}Título del Anexo I}{17}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {II}Título del Anexo II}{19}{appendix.Alph2}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{21}{appendix*.9}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.12.1)  26 DEC 2022 14:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.12.1)  27 DEC 2022 17:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -691,37 +691,59 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip55
 )
-(C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
+(C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/algorithmicx\algpseudoc
+ode.sty
+Package: algpseudocode 
+ (C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+)
+(C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/algorithmicx\algorithmi
+cx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count313
+\c@ALG@rem=\count314
+\c@ALG@nested=\count315
+\ALG@tlm=\skip56
+\ALG@thistlm=\skip57
+\c@ALG@Lnr=\count316
+\c@ALG@blocknr=\count317
+\c@ALG@storecount=\count318
+\c@ALG@tmpcounter=\count319
+\ALG@tmplength=\skip58
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2019/06/20 v3.9 Customized lists
-\labelindent=\skip56
+\labelindent=\skip59
 \enit@outerparindent=\dimen271
 \enit@toks=\toks44
 \enit@inbox=\box64
-\enit@count@id=\count313
-\enitdp@description=\count314
+\enit@count@id=\count320
+\enitdp@description=\count321
 )
-\c@stepsi=\count315
-\enitdp@steps=\count316
-
-(C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
+\c@stepsi=\count322
+\enitdp@steps=\count323
+ (C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
 Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 
-\f@nch@headwidth=\skip57
-\f@nch@O@elh=\skip58
-\f@nch@O@erh=\skip59
-\f@nch@O@olh=\skip60
-\f@nch@O@orh=\skip61
-\f@nch@O@elf=\skip62
-\f@nch@O@erf=\skip63
-\f@nch@O@olf=\skip64
-\f@nch@O@orf=\skip65
+\f@nch@headwidth=\skip60
+\f@nch@O@elh=\skip61
+\f@nch@O@erh=\skip62
+\f@nch@O@olh=\skip63
+\f@nch@O@orh=\skip64
+\f@nch@O@elf=\skip65
+\f@nch@O@erf=\skip66
+\f@nch@O@olf=\skip67
+\f@nch@O@orf=\skip68
 )
-\c@theorem=\count317
+\c@theorem=\count324
 
 (C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2022-09-28 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count318
+\l__color_backend_stack_int=\count325
 \l__pdf_internal_box=\box65
 ) (TFG_esp_v3.aux
 LaTeX Info: Redefining \. on input line 22.
@@ -729,24 +751,24 @@ LaTeX Info: Redefining \% on input line 22.
 )
 \openout1 = `TFG_esp_v3.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -786,8 +808,8 @@ Configuring pdfsync
 \PDFSYNC@ut=\write4
 \openout4 = `TFG_esp_v3.pdfsync'.
 
-\PDFSYNCf@li@=\count319
-\PDFSYNC@rder=\count320
+\PDFSYNCf@li@=\count326
+\PDFSYNC@rder=\count327
 **** pdfsync.sty: Synchronizing at \everypar
 \PDFSYNCeveryp@r=\toks45
 **** pdfsync.sty: Synchronizing at \everymath
@@ -801,16 +823,16 @@ Configuring pdfsync
 (C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count321
+\scratchcounter=\count328
 \scratchdimen=\dimen272
 \scratchbox=\box66
-\nofMPsegments=\count322
-\nofMParguments=\count323
+\nofMPsegments=\count329
+\nofMParguments=\count330
 \everyMPshowfont=\toks49
-\MPscratchCnt=\count324
+\MPscratchCnt=\count331
 \MPscratchDim=\dimen273
-\MPnumerator=\count325
-\makeMPintoPDFobject=\count326
+\MPnumerator=\count332
+\makeMPintoPDFobject=\count333
 \everyMPtoPDFconversion=\toks50
 )
 (C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
@@ -823,9 +845,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-LaTeX Info: Redefining \. on input line 158.
-LaTeX Info: Redefining \% on input line 158.
-Package hyperref Info: Link coloring OFF on input line 158.
+LaTeX Info: Redefining \. on input line 159.
+LaTeX Info: Redefining \% on input line 159.
+Package hyperref Info: Link coloring OFF on input line 159.
  (TFG_esp_v3.out) (TFG_esp_v3.out)
 \@outlinefile=\write5
 \openout5 = `TFG_esp_v3.out'.
@@ -833,10 +855,10 @@ Package hyperref Info: Link coloring OFF on input line 158.
 <logomath.pdf, id=58, 284.52798pt x 56.9056pt>
 File: logomath.pdf Graphic file (type pdf)
 <use logomath.pdf>
-Package pdftex.def Info: logomath.pdf  used on input line 167.
+Package pdftex.def Info: logomath.pdf  used on input line 168.
 (pdftex.def)             Requested size: 369.88582pt x 73.98419pt.
 LaTeX Font Info:    Trying to load font information for T1+cmss on input line 1
-67.
+68.
 
 (C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmss.fd
 File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
@@ -852,7 +874,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.181 {Febrero, 2022}
+l.182 {Febrero, 2022}
                      		  	%  escribir aquí a Data de presentación, na form...
 [1
 
@@ -861,24 +883,24 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.II}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.189 \chapter
+l.190 \chapter
               *{Trabajo propuesto} [2
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 195
+LaTeX Font Info:    Trying to load font information for U+msa on input line 196
 .
 
 (C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 195
+LaTeX Font Info:    Trying to load font information for U+msb on input line 196
 .
 
 (C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+lasy on input line 19
-5.
+6.
 
 (C:\Users\didac\AppData\Local\Programs\MiKTeX\tex/latex/base\ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
@@ -918,8 +940,8 @@ LaTeX Info: Redefining \% on input line 1.
 
 
 ] [9]
-LaTeX Info: Redefining \. on input line 279.
-LaTeX Info: Redefining \% on input line 279.
+LaTeX Info: Redefining \. on input line 280.
+LaTeX Info: Redefining \% on input line 280.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -936,8 +958,8 @@ Cap\'{\i }tulo 1.
 [1
 
 ]
-LaTeX Info: Redefining \. on input line 392.
-LaTeX Info: Redefining \% on input line 392.
+LaTeX Info: Redefining \. on input line 393.
+LaTeX Info: Redefining \% on input line 393.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -948,8 +970,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [2]
-LaTeX Info: Redefining \. on input line 431.
-LaTeX Info: Redefining \% on input line 431.
+LaTeX Info: Redefining \. on input line 432.
+LaTeX Info: Redefining \% on input line 432.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -960,8 +982,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [3]
-LaTeX Info: Redefining \. on input line 461.
-LaTeX Info: Redefining \% on input line 461.
+LaTeX Info: Redefining \. on input line 462.
+LaTeX Info: Redefining \% on input line 462.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -972,8 +994,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [4]
-LaTeX Info: Redefining \. on input line 509.
-LaTeX Info: Redefining \% on input line 509.
+LaTeX Info: Redefining \. on input line 511.
+LaTeX Info: Redefining \% on input line 511.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -984,8 +1006,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [5]
-LaTeX Info: Redefining \. on input line 513.
-LaTeX Info: Redefining \% on input line 513.
+LaTeX Info: Redefining \. on input line 538.
+LaTeX Info: Redefining \% on input line 538.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -996,36 +1018,36 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [6]
-Cap\'{\i }tulo 2.
-[7
+LaTeX Info: Redefining \. on input line 575.
+LaTeX Info: Redefining \% on input line 575.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[7]
+LaTeX Info: Redefining \. on input line 575.
+LaTeX Info: Redefining \% on input line 575.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[8
 
 ]
-LaTeX Info: Redefining \. on input line 628.
-LaTeX Info: Redefining \% on input line 628.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[8]
-LaTeX Info: Redefining \. on input line 654.
-LaTeX Info: Redefining \% on input line 654.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
+Cap\'{\i }tulo 2.
 [9]
-LaTeX Info: Redefining \. on input line 687.
-LaTeX Info: Redefining \% on input line 687.
+LaTeX Info: Redefining \. on input line 690.
+LaTeX Info: Redefining \% on input line 690.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1036,8 +1058,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [10]
-LaTeX Info: Redefining \. on input line 734.
-LaTeX Info: Redefining \% on input line 734.
+LaTeX Info: Redefining \. on input line 716.
+LaTeX Info: Redefining \% on input line 716.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1048,8 +1070,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [11]
-LaTeX Info: Redefining \. on input line 741.
-LaTeX Info: Redefining \% on input line 741.
+LaTeX Info: Redefining \. on input line 749.
+LaTeX Info: Redefining \% on input line 749.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1060,12 +1082,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [12]
-Cap\'{\i }tulo 3.
-[13
-
-]
-LaTeX Info: Redefining \. on input line 752.
-LaTeX Info: Redefining \% on input line 752.
+LaTeX Info: Redefining \. on input line 796.
+LaTeX Info: Redefining \% on input line 796.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1075,13 +1093,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[14
+[13]
+LaTeX Info: Redefining \. on input line 803.
+LaTeX Info: Redefining \% on input line 803.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[14]
+Cap\'{\i }tulo 3.
+[15
 
 ]
-Anexo I.
-[15]
-LaTeX Info: Redefining \. on input line 755.
-LaTeX Info: Redefining \% on input line 755.
+LaTeX Info: Redefining \. on input line 817.
+LaTeX Info: Redefining \% on input line 817.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1094,10 +1124,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [16
 
 ]
-Anexo II.
+Anexo I.
 [17]
-LaTeX Info: Redefining \. on input line 757.
-LaTeX Info: Redefining \% on input line 757.
+LaTeX Info: Redefining \. on input line 820.
+LaTeX Info: Redefining \% on input line 820.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1109,7 +1139,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [18
 
-] [19
+]
+Anexo II.
+[19]
+LaTeX Info: Redefining \. on input line 822.
+LaTeX Info: Redefining \% on input line 822.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[20
+
+] [21
 
 ] (TFG_esp_v3.aux
 LaTeX Info: Redefining \. on input line 22.
@@ -1119,39 +1165,42 @@ Package rerunfilecheck Info: File `TFG_esp_v3.out' has not changed.
 (rerunfilecheck)             Checksum: 141EBA4A0738A4DA18C075733BA41351;2053.
  ) 
 Here is how much of TeX's memory you used:
- 23126 strings out of 475385
- 427882 string characters out of 2776907
- 762390 words of memory out of 3000000
- 43968 multiletter control sequences out of 15000+600000
- 487683 words of font info for 67 fonts, out of 8000000 for 9000
+ 23723 strings out of 475385
+ 437381 string characters out of 2776907
+ 770933 words of memory out of 3000000
+ 44544 multiletter control sequences out of 15000+600000
+ 489070 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,34n,80p,876b,934s stack positions out of 10000i,1000n,20000p,200000b,80000s
- <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx
-1200.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\ecti1095.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
-/dpi600\ecbx2074.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
-pen/ec/dpi600\ecrm1095.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour
-/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/
-ljfour/jknappen/ec/dpi600\ecxc1095.pk> <C:\Users\didac\AppData\Local\MiKTeX\fon
-ts/pk/ljfour/jknappen/ec/dpi600\eccc1095.pk> <C:\Users\didac\AppData\Local\MiKT
-eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1440.pk> <C:\Users\didac\AppData\Loca
-l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\didac\AppDat
-a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\didac\
-AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk><C:/Users/d
-idac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C
-:/Users/didac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi
-10.pfb><C:/Users/didac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
-s/cm/cmmi6.pfb><C:/Users/didac/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/amsfonts/cm/cmmi8.pfb><C:/Users/didac/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmr10.pfb><C:/Users/didac/AppData/Local/Programs/MiKTeX/fo
-nts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/didac/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/didac/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/didac/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/didac/A
-ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on TFG_esp_v3.pdf (31 pages, 370256 bytes).
+ 84i,34n,80p,876b,968s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi
+1095.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
+0\ecti0900.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
+/dpi600\ecbx1200.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\ecti1095.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour
+/jknappen/ec/dpi600\ecbx2074.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/
+ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\didac\AppData\Local\MiKTeX\fon
+ts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\didac\AppData\Local\MiKT
+eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1095.pk> <C:\Users\didac\AppData\Loca
+l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1095.pk> <C:\Users\didac\AppDat
+a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1440.pk> <C:\Users\didac\
+AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\
+didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\
+Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk
+><C:/Users/didac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
+mex10.pfb><C:/Users/didac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmmi10.pfb><C:/Users/didac/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmmi6.pfb><C:/Users/didac/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/didac/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/didac/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/didac/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/didac/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/did
+ac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/U
+sers/didac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/ms
+bm10.pfb>
+Output written on TFG_esp_v3.pdf (33 pages, 387596 bytes).
 PDF statistics:
- 803 PDF objects out of 1000 (max. 8388607)
- 125 named destinations out of 1000 (max. 500000)
+ 856 PDF objects out of 1000 (max. 8388607)
+ 134 named destinations out of 1000 (max. 500000)
  122 words of extra memory for PDF output out of 10000 (max. 10000000)
 
