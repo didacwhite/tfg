@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.12.1)  24 DEC 2022 18:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.12.1)  26 DEC 2022 14:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -830,7 +830,7 @@ Package hyperref Info: Link coloring OFF on input line 158.
 \@outlinefile=\write5
 \openout5 = `TFG_esp_v3.out'.
 
-<logomath.pdf, id=54, 284.52798pt x 56.9056pt>
+<logomath.pdf, id=58, 284.52798pt x 56.9056pt>
 File: logomath.pdf Graphic file (type pdf)
 <use logomath.pdf>
 Package pdftex.def Info: logomath.pdf  used on input line 167.
@@ -1000,8 +1000,8 @@ Cap\'{\i }tulo 2.
 [7
 
 ]
-LaTeX Info: Redefining \. on input line 617.
-LaTeX Info: Redefining \% on input line 617.
+LaTeX Info: Redefining \. on input line 628.
+LaTeX Info: Redefining \% on input line 628.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1012,8 +1012,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [8]
-LaTeX Info: Redefining \. on input line 643.
-LaTeX Info: Redefining \% on input line 643.
+LaTeX Info: Redefining \. on input line 654.
+LaTeX Info: Redefining \% on input line 654.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1024,8 +1024,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [9]
-LaTeX Info: Redefining \. on input line 682.
-LaTeX Info: Redefining \% on input line 682.
+LaTeX Info: Redefining \. on input line 687.
+LaTeX Info: Redefining \% on input line 687.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1036,8 +1036,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [10]
-LaTeX Info: Redefining \. on input line 722.
-LaTeX Info: Redefining \% on input line 722.
+LaTeX Info: Redefining \. on input line 734.
+LaTeX Info: Redefining \% on input line 734.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1048,8 +1048,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [11]
-LaTeX Info: Redefining \. on input line 722.
-LaTeX Info: Redefining \% on input line 722.
+LaTeX Info: Redefining \. on input line 741.
+LaTeX Info: Redefining \% on input line 741.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1059,13 +1059,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[12
+[12]
+Cap\'{\i }tulo 3.
+[13
 
 ]
-Anexo I.
-[13]
-LaTeX Info: Redefining \. on input line 725.
-LaTeX Info: Redefining \% on input line 725.
+LaTeX Info: Redefining \. on input line 752.
+LaTeX Info: Redefining \% on input line 752.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1078,10 +1078,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [14
 
 ]
-Anexo II.
+Anexo I.
 [15]
-LaTeX Info: Redefining \. on input line 727.
-LaTeX Info: Redefining \% on input line 727.
+LaTeX Info: Redefining \. on input line 755.
+LaTeX Info: Redefining \% on input line 755.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1093,23 +1093,39 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [16
 
-] [17
+]
+Anexo II.
+[17]
+LaTeX Info: Redefining \. on input line 757.
+LaTeX Info: Redefining \% on input line 757.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[18
+
+] [19
 
 ] (TFG_esp_v3.aux
 LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
 )
 Package rerunfilecheck Info: File `TFG_esp_v3.out' has not changed.
-(rerunfilecheck)             Checksum: 3398CCFBAC97CC3BE9EC49A5C9599C4E;1837.
+(rerunfilecheck)             Checksum: 141EBA4A0738A4DA18C075733BA41351;2053.
  ) 
 Here is how much of TeX's memory you used:
- 23112 strings out of 475385
- 427706 string characters out of 2776907
- 760393 words of memory out of 3000000
- 43965 multiletter control sequences out of 15000+600000
+ 23126 strings out of 475385
+ 427882 string characters out of 2776907
+ 762390 words of memory out of 3000000
+ 43968 multiletter control sequences out of 15000+600000
  487683 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,34n,80p,876b,802s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 84i,34n,80p,876b,934s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx
 1200.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\ecti1095.pk> <C:\Users\didac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
@@ -1133,9 +1149,9 @@ KTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/didac/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/didac/AppData/L
 ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/didac/A
 ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on TFG_esp_v3.pdf (29 pages, 360815 bytes).
+Output written on TFG_esp_v3.pdf (31 pages, 370256 bytes).
 PDF statistics:
- 771 PDF objects out of 1000 (max. 8388607)
- 114 named destinations out of 1000 (max. 500000)
- 114 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 803 PDF objects out of 1000 (max. 8388607)
+ 125 named destinations out of 1000 (max. 500000)
+ 122 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,4 +1,4 @@
-%%%%%%%%%%     PREÁMBULO      %%%%%%%%%%%%%%%
+ %%%%%%%%%%     PREÁMBULO      %%%%%%%%%%%%%%%
 
 %%%%%%%%%   Non modificar este preámbulo, salvo que se sepa ben o que se está a facer   %%%%%%%%%
 
@@ -16,7 +16,7 @@
 \usepackage{latexsym,pdfsync,xcolor,graphicx}
 \usepackage[nottoc]{tocbibind}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}					
+\usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}			
 \usepackage{tikz}
 \usepackage{appendix}
@@ -152,7 +152,7 @@
 
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\sucesionxk}{\left\{x_k\right\}}
-\newcommand{\sucesion}[2]{\left\{#1_#2\right\}}
+\newcommand{\sucesion}[1]{\left\{#1\right\}}
 
 
 \begin{document}
@@ -601,7 +601,30 @@ Como $f$ es convexa, dado un punto $x^*$ tal que $\nabla f(x^*) = 0$, este será
 Antes de ver como se resuelve numéricamente este sistema de ecuaciones, conocidas como \textit{ecuaciones normales} de (\ref{eq:flin}), veamos los conceptos previos necesarios.
 
 \begin{definition}
-	condicionamiento??
+	Un problema numérico se dice \textit{bien condicionado} si su solución no se ve afectada por pequeñas perturbaciones a cualquiera de los datos que definen el problema.
+\end{definition}
+
+\begin{definition}
+	Una matriz cuadrada $A$ se dice \textit{definida positiva} si existe un $\alpha \in \mathbb{R}^+$ tal que
+	\begin{equation}
+		x^TAx \geq \alpha x^T x, \quad \text{para todo } x \in \mathbb{R}^n.
+	\end{equation}
+	Esta es \textit{semidefinida postiva} si
+	\begin{equation}
+		x^TAx \geq 0, \quad \text{para todo } x \in \mathbb{R}^n.
+	\end{equation}
+\end{definition}
+
+\begin{definition}
+	Una matriz $n \times n$ cuadrada A se dice \textit{no singular} si para cada $b \in \mathbb{R}^n$, existe $x\in\mathbb{R}^n$ tal que $Ax=b$.
+\end{definition}
+
+\begin{definition}
+	Una matriz cuadrada $Q$ se dice \textit{ortogonal} si cumple $QQ^T=Q^TQ=I$
+\end{definition}
+
+\begin{definition}
+	Si tomamos los sistemas de vectores de una una matriz $A_{m \times n}$, $\sucesion{u_i}_{i=1}^n$ y $\sucesion{v_i}_{i=1}^m$, al número máximo de vectores linealmente independientes se le llama \textit{rango}, tanto de los sistemas de vectores como de la matriz $A$. Si $n<m$, se dice que $A$ es de \textit{rango completo} si su rango es $n$, que es el máximo posible.
 \end{definition}
 
 Lo más común en este caso para resolver numéricamente es usar distintos tipos de factorización sobre la matriz $J^TJ$ o sobre $J$, para luego resolver con sustituciones triangulares.
@@ -615,7 +638,7 @@ Se termina realizando las dos sustituciones triangulares con los factores de Cho
 La principal desventaja de este método es que el condicionamiento de $J^TJ$ es el cuadrado del condicionamiento de $J$, y esto puede llevar a errores de aproximación.
 Además, si $J$ está mal condicionada, ni si quiera se puede llevar a cabo la factorización.
 
-Una segunda posibilidad es basarse en la \textbf{factorización QR}, que evita el problema de depender del cuadrado del condicionamiento de $J$, ya que aplicaremos la factorización directamente a $J$. Se aprovecha que la norma Euclídea no se ve afectada por trasformaciones ortogonales para partir de la igualdad
+Una segunda posibilidad es basarse en la \textbf{factorización QR}, que evita el problema de depender del cuadrado del condicionamiento de $J$, ya que aplicaremos la factorización directamente a $J$. Se aprovecha que la norma euclídea no se ve afectada por trasformaciones ortogonales para partir de la igualdad
 \begin{equation}
 	\Vert Jx- y \Vert = \Vert Q^T(Jx-y) \Vert, 
 \end{equation}
@@ -707,7 +730,7 @@ $\lambda$ es el autovalor más pequeño de $J(x^*)^TJ(x^*)$, y
 \end{theorem}
 
 \begin{theorem}
-	Manteniendo las suposiciones de los dos teoremas \ref{th:gn1} y \ref{th:gn2}, si $r(X^*)=0$, entonces existe $\epsilon>0$ tal que para cualquier $x_0 \in N(x^*,\epsilon)$, la sucesión $\sucesionxk$ obtenida del método de Gauss-Newton converge a $x^*$ con orden cuadrático.
+	Manteniendo las suposiciones de los dos teoremas \ref{th:gn1} y \ref{th:gn2}, si $r(x^*)=0$, entonces existe $\epsilon>0$ tal que para cualquier $x_0 \in N(x^*,\epsilon)$, la sucesión $\sucesionxk$ obtenida del método de Gauss-Newton converge a $x^*$ con orden cuadrático.
 \end{theorem}
 
 Para concluir observamos que el método encaja dentro de los métodos de búsqueda de línea, tomando $d_k=p_k$ en  (\ref{eq:linesearch}) y calculando una longitud de paso $\alpha_k$,
@@ -715,6 +738,13 @@ Para concluir observamos que el método encaja dentro de los métodos de búsque
 	x_{k+1} = x_k-\alpha_k(J(x_k)^TJ(x_k))^{-1}J(x_k)^Tr(x_k).
 \end{equation}
 
+\chapter{El método de Levenberg-Marquardt}
+
+La linealización usada en el método de Gauss-Newton no es efectiva para todo $p=(x-x_k)$, el método de Levenberg-Marquardt aprovecha esta aproximación de la Hessiana restringiendo la búsqueda de $p$. Es decir, sustituye el enfoque de búsqueda de línea por el de región de confianza, de hecho, es a veces considerado el precursor de este tipo de métodos. Además, con este enfoque se soluciona la necesidad de que $J$ sea de rango completo
+\begin{align}
+	\min_{p} \quad &\frac{1}{2} \norm{J_kp+r_k}^2, \\
+	\text{s.a.} \quad & \Vert p \Vert \leq \Delta_k.
+\end{align}
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
