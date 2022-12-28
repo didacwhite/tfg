@@ -498,7 +498,7 @@ En cada iteración, una vez elegido $\Delta_k$ se resuelve el siguiente problema
 \begin{equation}
 \label{min:tr}
 \begin{aligned}
-	\min_{p} m_k(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TB_kp \\
+	\min_{p} \quad & m_k(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TB_kp \\
 	\text{s.a.} \quad & \Vert p \Vert \leq \Delta_k. \\
 \end{aligned}
 \end{equation}
@@ -557,7 +557,7 @@ Para que este algoritmo sea práctico, nos centramos en la resolución del subpr
 \end{aligned}
 \end{equation}
 
-\begin{theorem}
+\begin{theorem} \label{th:trustregion}
 	El vector $p^*$ es una solución global de (\ref{min:tr_nk}) si y solo si $p^*$ cumple las condiciones y existe un escalar $\lambda \geq 0$ tal que se cumplen las siguientes condiciones:
 \begin{enumerate}
 %\vspace{-0.3cm}
@@ -567,10 +567,12 @@ Para que este algoritmo sea práctico, nos centramos en la resolución del subpr
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-mimpágina 90 Nocedal.
+página 90 Nocedal.
 \end{proof}
 
-
+Este teorema caracteriza la solución según el primer punto. El segundo punto es una condición complementaria que nos dice que al menos uno de los dos factores es 0.
+Esto es, si $\norm{p}<0$, $\lambda$ tendrá que ser 0 y $Bp^*=-g$ con $B$ definida positiva (puntos 1 y 3).
+En el caso de que $\norm{p}$ se maximice, lo cual da a entender que la solución óptima no se encuentra dentro de la región de confianza, $\lambda$ podrá tomar valores positivos.
 
 \chapter{Mínimos Cuadrados}
 %campos en los que se utiliza??? 
@@ -804,12 +806,29 @@ Para concluir observamos que el método encaja dentro de los métodos de búsque
 
 El problema principal del anterior método es su necesidad de que $J$ sea de rango completo, el método de Levenberg-Marquardt soluciona este problema cambiando el enfoque de búsqueda de línea al de región de confianza, pero mantentiendo la linealización de Gauss-Newton debida a la aproximación $\nabla^2 f(x_k) \approx J(x_k)^TJ(x_k)$. Este cambio de enfoque surge de que la linealización pierde efectividad según nos alejamos del punto inicial, por lo que conviene restringir el tamaño de $p=(x-x_k)$, y consideramos el modelo de región de confianza:
 \begin{align}
-	\min_{p} \quad &\frac{1}{2} \norm{J_kp+r_k}^2, \\
-	\text{s.a.} \quad & \Vert p \Vert \leq \Delta_k,
+\label{min:sublev}
+	\min_{p} \quad \frac{1}{2} \norm{J_kp+r_k}^2,\quad \text{s.a.} \norm{p} \leq \Delta_k,
 \end{align}
-Donde $\Delta_k>0$ es el radio de la región de confianza. Este método es considerado el primero en realizar un enfoque de región de confianza para un problema de optimización sin restricciones.
+Donde $\Delta_k>0$ es el radio de la región de confianza.
+Este método es considerado el primero en realizar un enfoque de región de confianza para un problema de optimización sin restricciones.
+La función modelo que elegimos tiene la forma
+\begin{equation}
+	m_k(p)=\frac{1}{2}\norm{r_k}^2 + p^TJ_k^Tr_k + \frac{1}{2}p^TJ_k^TJ_kp.
+\end{equation}
+Apoyándonos en el Teorema \ref{th:trustregion}, cuando la solución $p^{GN}$ obtenida de las ecuaciones de Gauss-Newton cae estrictamente dentro de la región de confianza, esta también soluciona el subproblema (\ref{min:sublev}). En otro caso, existe un $\lambda>0$ tal que la solución $p=p^{LM}$ satisface que $\norm{p}=\Delta$ y
+\begin{equation}
+	(J^TJ+\lambda I)p = -J^Tr.
+\end{equation}
 
+Verifiquemos esto con el siguiente lema, consecuencia del Teorema \ref{th:trustregion} como hemos dicho.
 
+\begin{lemma}
+El vector $p^{LM}$ es solución del subproblema (\ref{min:sublev}) si y solo si $p^{LM}$ se ajusta y existe un $\lambda \geq 0$ tal que
+\begin{align}
+	(J^TJ+\lambda I)p^{LM}&=-J^Tr, \\
+	\lambda (\Delta-\norm{p^{LM}})&=0.
+\end{align}
+\end{lemma}
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix

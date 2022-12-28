@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.12.1)  27 DEC 2022 17:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.12.1)  27 DEC 2022 21:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1018,8 +1018,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [6]
-LaTeX Info: Redefining \. on input line 575.
-LaTeX Info: Redefining \% on input line 575.
+LaTeX Info: Redefining \. on input line 577.
+LaTeX Info: Redefining \% on input line 577.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1030,8 +1030,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [7]
-LaTeX Info: Redefining \. on input line 575.
-LaTeX Info: Redefining \% on input line 575.
+LaTeX Info: Redefining \. on input line 577.
+LaTeX Info: Redefining \% on input line 577.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1046,8 +1046,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ]
 Cap\'{\i }tulo 2.
 [9]
-LaTeX Info: Redefining \. on input line 690.
-LaTeX Info: Redefining \% on input line 690.
+LaTeX Info: Redefining \. on input line 692.
+LaTeX Info: Redefining \% on input line 692.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1058,8 +1058,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [10]
-LaTeX Info: Redefining \. on input line 716.
-LaTeX Info: Redefining \% on input line 716.
+LaTeX Info: Redefining \. on input line 718.
+LaTeX Info: Redefining \% on input line 718.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1070,8 +1070,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [11]
-LaTeX Info: Redefining \. on input line 749.
-LaTeX Info: Redefining \% on input line 749.
+LaTeX Info: Redefining \. on input line 751.
+LaTeX Info: Redefining \% on input line 751.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1082,8 +1082,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [12]
-LaTeX Info: Redefining \. on input line 796.
-LaTeX Info: Redefining \% on input line 796.
+LaTeX Info: Redefining \. on input line 798.
+LaTeX Info: Redefining \% on input line 798.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1094,8 +1094,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [13]
-LaTeX Info: Redefining \. on input line 803.
-LaTeX Info: Redefining \% on input line 803.
+LaTeX Info: Redefining \. on input line 805.
+LaTeX Info: Redefining \% on input line 805.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1110,8 +1110,8 @@ Cap\'{\i }tulo 3.
 [15
 
 ]
-LaTeX Info: Redefining \. on input line 817.
-LaTeX Info: Redefining \% on input line 817.
+LaTeX Info: Redefining \. on input line 836.
+LaTeX Info: Redefining \% on input line 836.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1126,8 +1126,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ]
 Anexo I.
 [17]
-LaTeX Info: Redefining \. on input line 820.
-LaTeX Info: Redefining \% on input line 820.
+LaTeX Info: Redefining \. on input line 839.
+LaTeX Info: Redefining \% on input line 839.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1142,8 +1142,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ]
 Anexo II.
 [19]
-LaTeX Info: Redefining \. on input line 822.
-LaTeX Info: Redefining \% on input line 822.
+LaTeX Info: Redefining \. on input line 841.
+LaTeX Info: Redefining \% on input line 841.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1165,10 +1165,10 @@ Package rerunfilecheck Info: File `TFG_esp_v3.out' has not changed.
 (rerunfilecheck)             Checksum: 141EBA4A0738A4DA18C075733BA41351;2053.
  ) 
 Here is how much of TeX's memory you used:
- 23723 strings out of 475385
- 437381 string characters out of 2776907
- 770933 words of memory out of 3000000
- 44544 multiletter control sequences out of 15000+600000
+ 23730 strings out of 475385
+ 437487 string characters out of 2776907
+ 771026 words of memory out of 3000000
+ 44547 multiletter control sequences out of 15000+600000
  489070 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,34n,80p,876b,968s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -1198,9 +1198,9 @@ a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/did
 ac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/U
 sers/didac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/ms
 bm10.pfb>
-Output written on TFG_esp_v3.pdf (33 pages, 387596 bytes).
+Output written on TFG_esp_v3.pdf (33 pages, 391382 bytes).
 PDF statistics:
- 856 PDF objects out of 1000 (max. 8388607)
- 134 named destinations out of 1000 (max. 500000)
+ 864 PDF objects out of 1000 (max. 8388607)
+ 138 named destinations out of 1000 (max. 500000)
  122 words of extra memory for PDF output out of 10000 (max. 10000000)
 
