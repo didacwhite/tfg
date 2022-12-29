@@ -804,31 +804,85 @@ Para concluir observamos que el método encaja dentro de los métodos de búsque
 
 \chapter{El método de Levenberg-Marquardt}
 
-El problema principal del anterior método es su necesidad de que $J$ sea de rango completo, el método de Levenberg-Marquardt soluciona este problema cambiando el enfoque de búsqueda de línea al de región de confianza, pero mantentiendo la linealización de Gauss-Newton debida a la aproximación $\nabla^2 f(x_k) \approx J(x_k)^TJ(x_k)$. Este cambio de enfoque surge de que la linealización pierde efectividad según nos alejamos del punto inicial, por lo que conviene restringir el tamaño de $p=(x-x_k)$, y consideramos el modelo de región de confianza:
-\begin{align}
+El método de Levenberg-Marquardt soluciona la necesidad de que $J$ sea de rano completo cambiando el enfoque de búsqueda de línea por el de región de confianza.
+Lo hace manteniendo la raíz del método de Gauss-Newton, la linealización del problema obviando el término cuadrático, esto es, usando la aproximación $\nabla^2 f(x_k) \approx J(x_k)^TJ(x_k)$.
+Este cambio de enfoque surge de que la linealización pierde efectividad según nos alejamos de $x_k$, por lo que conviene restringir el tamaño de $p=(x-x_k)$. Consideramos el problema:
+\begin{equation}
 \label{min:sublev}
 	\min_{p} \quad \frac{1}{2} \norm{J_kp+r_k}^2,\quad \text{s.a.} \norm{p} \leq \Delta_k,
-\end{align}
+\end{equation}
 Donde $\Delta_k>0$ es el radio de la región de confianza.
-Este método es considerado el primero en realizar un enfoque de región de confianza para un problema de optimización sin restricciones.
-La función modelo que elegimos tiene la forma
+De hecho, se cree que esta solución característica de los métodos de región de confianza nace con este método en concreto. Otra forma de escribir el modelo es
 \begin{equation}
-	m_k(p)=\frac{1}{2}\norm{r_k}^2 + p^TJ_k^Tr_k + \frac{1}{2}p^TJ_k^TJ_kp.
+	m_k(p)=\frac{1}{2}\norm{r_k}^2 + p^TJ_k^Tr_k + \frac{1}{2}p^TJ_k^TJ_kp,
+	\quad \text{s.a.} \norm{p} \leq \Delta_k.
 \end{equation}
-Apoyándonos en el Teorema \ref{th:trustregion}, cuando la solución $p^{GN}$ obtenida de las ecuaciones de Gauss-Newton cae estrictamente dentro de la región de confianza, esta también soluciona el subproblema (\ref{min:sublev}). En otro caso, existe un $\lambda>0$ tal que la solución $p=p^{LM}$ satisface que $\norm{p}=\Delta$ y
+La solución de este subproblema queda caracterizada por el sistema
 \begin{equation}
-	(J^TJ+\lambda I)p = -J^Tr.
+	\label{eq:lmlp}
+	(J^TJ+\lambda I)p=-J^Tr.
 \end{equation}
-
-Verifiquemos esto con el siguiente lema, consecuencia del Teorema \ref{th:trustregion} como hemos dicho.
-
+%El siguiente lema nos da otra caracterización del problema.
 \begin{lemma}
-El vector $p^{LM}$ es solución del subproblema (\ref{min:sublev}) si y solo si $p^{LM}$ se ajusta y existe un $\lambda \geq 0$ tal que
+El vector $p$ es solución del subproblema (\ref{min:sublev}) si y solo si $p$ es factible y existe un $\lambda \geq 0$ tal que
 \begin{align}
-	(J^TJ+\lambda I)p^{LM}&=-J^Tr, \\
-	\lambda (\Delta-\norm{p^{LM}})&=0.
+	(J^TJ+\lambda I)p&=-J^Tr, \\
+	\lambda (\Delta-\norm{p})&=0.
 \end{align}
 \end{lemma}
+\begin{proof}
+Es consecuencia del teorema \ref{th:trustregion}. Solo hay que ver que se cumplen las 3 condiciones, las dos primeras se siguen del propio lema. La tercera pide que $(J^TJ+\lambda I)$ sea semidefinida positiva, y lo es por serlo $J^TJ$ y por ser $\lambda>0$
+\end{proof}
+
+En concreto, como $(J^TJ+\lambda I)$ es definida positiva, la solución de (\ref{eq:lmlp}) es una dirección descendente. Lo que nos quiere decir este lema es que si la solución obtenida por el método de Gauss-Newton cae estrictamente dentro de la región de confianza, esta solucionará también el subproblema (\ref{min:sublev}).
+En otro caso, existe un $\lambda>0$ que permite encontrar una solución a
+\begin{equation}
+\label{eq:lmsol}
+	(J^TJ+\lambda I)p = -J^Tr,
+\end{equation}
+con $\norm{p}=\Delta$. Si $\lambda=0$, la solución del problema es la de Gauss-Newton, y según aumenta $\lambda$, la solución se acerca a la del método de máximo descenso.
+Veamos una serie de propiedades del método de Levenberg-Marquardt y de $p$ en función de $\lambda$. 
+
+\begin{theorem}
+	Si $\lambda$ aumenta desde cero monótonamente, $\norm{p(\lambda)}$ decrece de forma estrictamente monótona.
+\end{theorem}
+\begin{proof}
+	Por un lado,
+	\begin{equation}
+		\label{eq:dem1}
+		\frac{\mathrm{d}}{\mathrm{d}\lambda}\norm{p}=
+		\frac{\mathrm{d}}{\mathrm{d}\lambda}(p^Tp)^{\frac{1}{2}}+
+		\frac{p^T\frac{\mathrm{d}p}{\mathrm{d}\lambda}}{\norm{p}}.
+	\end{equation}
+	Derivando (\ref{eq:lmsol}) respecto a $\lambda$, obtenemos
+	\begin{equation}
+		\label{eq:dem2}
+		p + (J^TJ+\lambda I)\frac{\mathrm{d}p}{\mathrm{d}\lambda} = 0,
+	\end{equation}
+	de esta y (\ref{eq:lmsol}) resulta
+	\begin{equation}
+		\label{eq:dem3}
+		\frac{\mathrm{d}p}{\mathrm{d}\lambda}=(J^TJ+\lambda I)^{-2}g,
+	\end{equation}
+	con $g=J^Tr$. Sustituyendo en (\ref{eq:dem1}) y usando (\ref{eq:lmsol}), nos queda
+	\begin{equation}
+		\frac{\mathrm{d}}{\mathrm{d}\lambda}\norm{p}=
+		-\frac{g^T(J^TJ+\lambda I)^{-3}g}{\norm{p}}.
+	\end{equation}
+	Cuando $\lambda \geq 0,\, J^TJ+\lambda I$ es definida positiva. Por tanto $\norm{p(\lambda)}$ de forma estrictamente monótona.
+\end{proof}
+
+\begin{theorem}
+	Sea $\lambda_k>0$, si $p_k$ es solución de (\ref{eq:lmlp}), entonces $p_k$ es solución global de el subproblema
+\begin{equation}
+\min_{p} \quad \frac{1}{2} \norm{J_kp+r_k}^2,\quad \text{s.a.} \norm{p} \leq \norm{p_k},
+\end{equation}
+\end{theorem}
+\begin{proof}
+	.
+\end{proof}
+
+
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
