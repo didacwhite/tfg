@@ -558,7 +558,7 @@ Para que este algoritmo sea práctico, nos centramos en la resolución del subpr
 \end{equation}
 
 \begin{theorem} \label{th:trustregion}
-	El vector $p^*$ es una solución global de (\ref{min:tr_nk}) si y solo si $p^*$ cumple las condiciones y existe un escalar $\lambda \geq 0$ tal que se cumplen las siguientes condiciones:
+	El vector $p^*$ es una solución global de (\ref{min:tr_nk}) si y solo si $p^*$ es factible y existe un escalar $\lambda \geq 0$ tal que se cumplen las siguientes condiciones:
 \begin{enumerate}
 %\vspace{-0.3cm}
 	\item $(B+\lambda I)p^*=-g,$
@@ -567,7 +567,7 @@ Para que este algoritmo sea práctico, nos centramos en la resolución del subpr
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-página 90 Nocedal.
+(página 90 Nocedal).
 \end{proof}
 
 Este teorema caracteriza la solución según el primer punto. El segundo punto es una condición complementaria que nos dice que al menos uno de los dos factores es 0.
@@ -871,6 +871,7 @@ Veamos una serie de propiedades del método de Levenberg-Marquardt y de $p$ en f
 \begin{theorem}
 	Sea $\lambda_k>0$, si $p_k$ es solución de (\ref{eq:lmsol}), entonces $p_k$ es solución global de el subproblema
 \begin{equation}
+\label{eq:theoremlm}
 \min_{p} \quad m_k(p)=\frac{1}{2} \norm{J_kp+r_k}^2,\quad \text{s.a.} \norm{p} \leq \norm{p_k},
 \end{equation}
 \end{theorem}
@@ -879,27 +880,41 @@ Veamos una serie de propiedades del método de Levenberg-Marquardt y de $p$ en f
 \begin{equation}
 \begin{split}
 	m_k(p_k)\enspace
-	=&\quad \frac{1}{2}r_k^Tr_k+r_k^TJ_ks_k+\frac{1}{2}s_k^TJ_k^TJ_ks_k \\
-	=&\quad \frac{1}{2}r_k^Tr_k-s_k^T(J_k^TJ_k+\lambda_kI)s_k+
-										\frac{1}{2}s_k^TJ_k^TJ_ks_k \\
-	=&\quad \frac{1}{2}r_k^Tr_k-\lambda_ks_k^Ts_k-
-										\frac{1}{2}s_k^TJ_k^TJ_ks_k.
+	=&\quad \frac{1}{2}r_k^Tr_k+r_k^TJ_kp_k+\frac{1}{2}p_k^TJ_k^TJ_kp_k \\
+	=&\quad \frac{1}{2}r_k^Tr_k-p_k^T(J_k^TJ_k+\lambda_kI)p_k+
+										\frac{1}{2}p_k^TJ_k^TJ_kp_k \\
+	=&\quad \frac{1}{2}r_k^Tr_k-\lambda_kp_k^Tp_k-
+										\frac{1}{2}p_k^TJ_k^TJ_kp_k.
 \end{split}
 \end{equation}
 Por otro lado, para un $p$ cualquiera, tenemos
 \begin{equation}
 \begin{split}
 	m_k(p)\enspace
-	=&\quad \frac{1}{2}r_k^Tr_k+r_k^TJ_ks_k+\frac{1}{2}s_k^TJ_k^TJ_ks_k \\
-	=&\quad \frac{1}{2}r_k^Tr_k-s_k^T(J_k^TJ_k+\lambda_kI)s_k+
-										\frac{1}{2}s_k^TJ_k^TJ_ks_k \\
-	=&\quad \frac{1}{2}r_k^Tr_k-\lambda_ks_k^Ts_k-
-										\frac{1}{2}s_k^TJ_k^TJ_ks_k.
+	=&\quad \frac{1}{2}r_k^Tr_k+p^TJ_k^Tr_k+\frac{1}{2}p^TJ_k^TJ_kp \\
+	=&\quad \frac{1}{2}r_k^Tr_k-p^T(J_k^TJ_k+\lambda_kI)p_k+
+										\frac{1}{2}p^TJ_k^TJ_kp \\
+	=&\quad \frac{1}{2}r_k^Tr_k-\lambda_kp^Tp_k
+				-p^TJ_k^TJ_kp_k
+										+\frac{1}{2}p_k^TJ_k^TJ_kp_k.
 \end{split}
 \end{equation}
+Por tanto, para cualquier $p$ tal que $\norm{p} \leq \norm{p_k}$, se cumple
+\begin{equation}
+\begin{split}
+	m_k(p) - m_k(p_k) \enspace
+	=&\quad\frac{1}{2}(p_k-p)^TJ_k^TJ_k(p_k-p) + \lambda_k(p_k^Tp_k-p^Tp_k) \\
+	\geq&\quad \frac{1}{2}(p_k-p)^TJ_k^TJ_k(p_k-p)+
+									\lambda_k\norm{p_k}(\norm{p_k}-\norm{p}) \\
+	\geq&\quad 0,
+\end{split}
+\end{equation}
+por lo que $p_k$ es una solución global óptima del problema (\ref{eq:theoremlm}).
 \end{proof}
 
-
+\begin{theorem}
+El vector 
+\end{theorem}
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
