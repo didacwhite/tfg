@@ -834,11 +834,18 @@ El vector $p$ es solución del subproblema (\ref{min:sublev}) si y solo si $p$ e
 Es consecuencia del teorema \ref{th:trustregion}. Solo hay que ver que se cumplen las 3 condiciones, las dos primeras se siguen del propio lema. La tercera pide que $(J^TJ+\lambda I)$ sea semidefinida positiva, y lo es por serlo $J^TJ$ y por ser $\lambda>0$
 \end{proof}
 
-En concreto, como $(J^TJ+\lambda I)$ es definida positiva, la solución de (\ref{eq:lmlp}) es una dirección descendente. Lo que nos quiere decir este lema es que si la solución obtenida por el método de Gauss-Newton cae estrictamente dentro de la región de confianza, esta solucionará también el subproblema (\ref{min:sublev}).
+En concreto, como $(J^TJ+\lambda I)$ es definida positiva, la solución de (\ref{eq:lmsol}) es una dirección descendente. Lo que nos quiere decir este lema es que si la solución obtenida por el método de Gauss-Newton cae estrictamente dentro de la región de confianza, esta solucionará también el subproblema (\ref{min:sublev}).
 En otro caso, existe un $\lambda>0$ que permite encontrar una solución a (\ref{eq:lmsol})
 con $\norm{p}=\Delta$. Si $\lambda=0$, la solución del problema es la de Gauss-Newton, y según aumenta $\lambda$, la solución se acerca a la del método de máximo descenso.
+
+Además, podemos intercambiar la matriz identidad $I$ por una matriz diagonal $D_k$ definida positiva, lo que nos dejaría el problema (\ref{eq:lmsol}) en
+\begin{equation}
+	(J_k^TJ_k+\lambda D_k)p = -J_k^Tr_k.
+\end{equation}
+Lo que resulta en una dirección $p$ combinación del método Gauss-Newton y la dirección de máximo descenso respecto a la métrica definida por la matriz $D_k$.
 Veamos una serie de propiedades del método de Levenberg-Marquardt y de $p$ en función de $\lambda$. 
 
+\section{Propiedades del método de Levenberg-Marquardt}
 \begin{theorem}
 	Si $\lambda$ aumenta desde cero monótonamente, $\norm{p(\lambda)}$ decrece de forma estrictamente monótona.
 \end{theorem}
@@ -912,9 +919,103 @@ Por tanto, para cualquier $p$ tal que $\norm{p} \leq \norm{p_k}$, se cumple
 por lo que $p_k$ es una solución global óptima del problema (\ref{eq:theoremlm}).
 \end{proof}
 
+Como hemos dicho, podemos intercambiar la matriz identidad $I$ por una matriz diagonal definida positiva $D$, por lo tanto una caracterización más general del método de Levenberg-Marquardt es la dada por la ecuación
+\begin{equation}
+\label{eq:problemaDk}
+(J_k^TJ_k+\lambda D_k)p = -J_k^Tr_k,
+\end{equation}
+donde, como siempre, $J_k=j(x_k)$, $r_k = r(x_k)$ y se introduce $D_k = D(x_k)$, matriz diagonal definida positiva. El factor $\alpha_k$ satisface \textit{la regla de Armijo}:
+\begin{equation}
+	f(x_k+\alpha_ks_k) \leq f(x_k) + \sigma \alpha_kg_k^Tp_k,\quad \sigma \in \left( 0,\frac{1}{2} \right)
+\end{equation}
+
 \begin{theorem}
-El vector 
+	En el problema (\ref{eq:problemaDk}), el condicionamiento de $J^TJ+\lambda D$ es una función decreciente de $\lambda$.
 \end{theorem}
+\begin{proof}
+	Sean $\beta_1$ y $\beta_n$ el mayor y el menor autovalor respectivamente de la matriz $D$. Sean $\mu_1$ y $\mu_n$ el mayor y menor autovalor respectivamente de $J^TJ+\lambda D$. Si $\lambda_1 \geq \lambda_2 \geq 0$, \textsc{el rango de una matriz normal es la envoltura convexa de su espectro, tenemos que}
+\begin{equation}
+\begin{split}
+\frac{\mu_1(\lambda_1)}{\mu_n(\lambda_1)}\enspace
+	&\leq\enspace \frac{\mu_1(\lambda_2)+(\lambda_1-\lambda_2)\beta_1} 					{\mu_n(\lambda_2)+(\lambda_1-\lambda_2)\beta_n} \\
+	&\leq\enspace \frac{\mu_1(\lambda_2)+
+				(\lambda_1-\lambda_2)(1+\lambda_2)^{-1}\mu_1(\lambda_2)} 					{\mu_n(\lambda_2)+
+				(\lambda_1-\lambda_2)(1+\lambda_2)^{-1}\mu_n(\lambda_2)} \\
+	&=\enspace \frac{\mu_1(\lambda_2)}{\mu_n(\lambda_2)},
+\end{split}
+\end{equation}
+y obtenemos el resultado.
+\end{proof}
+Esta última propiedad nos indica que el condicionamiento de las ecuaciones iniciales a resolver se mejora con el método de Levenberg-Marquardt.
+
+\section{Convergencia}
+Estudiemos ahora la convergencia del método de Levenberg-Marquardt.
+\begin{theorem}\label{th:subsucLM}
+Sea $\sucesionxk$ la sucesión generada por el método de Levenberg-Marquardt. Supongamos que la longitud de paso $\alpha_k$ es la determinada por la regla de Armijo. Si existe una subsucesion $\sucesion{x_{k_i}}$ convergente a $x^*$, y la subsucesión correspondiente $\{J_{k_i}^TJ_{k_i}+\lambda_{k_i}D_{k_i}\}$ converge a una matriz definida positiva $P$, donde mantenemos la notación $J_{k_i}=J(x_{k_i})$ y $D_{k_i}=D(x_{k_i})$ matriz diagonal definida positiva, entonces $g(x^*)=0$.
+\end{theorem}
+\begin{proof}
+Por reducción al absurdo o contradicción, supongamos que $g(x^*)\neq 0$. Sea
+\begin{align}
+p_{k_i} = 
+-(J^T_{k_i}J_{k_i}+\lambda D_{k_i})^{-1}J^T_{k_i}r_{k_i}, \\
+p^* := \lim p_{k_i} = -P^{-1}J(x^*)^Tr(x^*),
+\end{align}
+con $r_{k_i} = r(x_{k_i})$. Notemos que $g(x^*)^Tp^*<0$. Sean $\beta \in (0,1),\,\sigma \in (0,\frac{1}{2})$ y $m^*$ el mínimo entero no negativo $m$ tal que
+\begin{equation}
+f(x^*+\beta^mp^*)<f(x^*)+\sigma\beta^mg(x^*)^Tp(x^*).
+\end{equation}
+Por continuidad, para $k$ suficientemente grande, tenemos que
+\begin{equation}
+f(x_{k_i}+\beta^{m^*}p_{k_i}) \leq 
+f(x_{k_i})+\sigma\beta^{m^*}g(x_{k_i})^Tp_{k_i}.
+\end{equation}
+Por tanto
+\begin{equation}
+f(x_{k_i+1})=f(x_{k_i}+\beta^{m_{k_i}}p_{k_i})
+\leq f(x_{k_i})+\sigma \beta^{m^*}g(x_{k_i})^Tp_{k_i}.
+\end{equation}
+Tomando límites a ambos lados, teniendo en cuenta la monotonía del método tenemos que $\lim f(x_{k_i+1}) = \lim f(x_{k_i}) = f(x^*)$, tenemos que
+\begin{equation}
+f(x^*) \leq f(x^*) + \sigma \beta^{m^*}g(x^*)^Tp^*<0.
+\end{equation}
+Lo cual no es posible puesto que $\sigma \beta^{m^*}g(x^*)^Tp^*<0$, por lo que tenemos una contradicción, lo que concluye la demostración.
+\end{proof}
+Esta teorema afirma la convergencia de una subsucesión. Veamos la convergencia de la sucesión completa.
+
+\begin{theorem}
+	Supongamos que se cumplen las siguientes afirmaciones:
+	\begin{enumerate}
+		\item\label{item1}
+		El conjunto de nivel
+		\begin{equation*}
+			L(\bar x) = \{x\,|\,f(x)\leq f(\bar x)\}
+		\end{equation*}
+		es cerrado y acotado para cualquier $\bar x \in \mathbb{R}^n$.
+		\item\label{item2}
+		El número de puntos estacionarios para los que sus valores de $f$
+		iguales es finito.
+		\item\label{item3}
+		$J^TJ$ es definida positiva para todo $x$.
+		\item\label{item4}
+		$\lambda_k \leq M \leq \infty, \, \forall k$, esto es,
+		$M$ es cota superior de $\lambda_k$.
+	\end{enumerate}
+	Entonces para cualquier punto inicial $x_0$, la sucesion $\sucesionxk$ obtenida del método converge a un punto estacionario de $f$.
+\end{theorem}
+\begin{proof}
+De (\ref{item1}) y por la monotonía, sabemos que la sucesión $\sucesionxk$ se encuentra en un conjunto compacto $L(\bar x)$ y, por tanto, tendrá puntos de acumulación. Basta comprobar que estos son únicos para concluír la demostración.
+
+Por (\ref{item3}) y (\ref{item4}) y por el teorema \ref{th:subsucLM}, cada punto de acumulación de $\sucesionxk$ es único. Como $\sucesion{f(x)}$ es una sucesión monótona decreciente, $f(x)$ tiene el mismo valor en los puntos de acumulación de $\sucesionxk$. Además, por (\ref{item2}) hay solo un número finito de puntos de acumulación.
+
+Para una subsucesión $\sucesion{x_{k_i}}$, se tiene que $x_{k_i} \rightarrow \hat x_k$ y $\lim_{k\rightarrow\infty}g(x_{k_i})=g(\hat x_k)=0$. Además,
+\begin{equation}
+	p(\lambda_{k_i})=
+	-(J(x_{k_i})^TJ(x_{k_i}) + \lambda_{k_i}D(x_{k_i}))^{-1}g(x_{k_i}).
+\end{equation}
+Se sigue entonces de (\ref{item3}) y (\ref{item4}) que $p(\lambda_{k_i})\rightarrow 0$, y por lo tanto para la sucesión $\sucesion{p(\lambda_k)}$, se cumple que $p(\lambda_k)\rightarrow 0$.
+
+Supongamos que $\sucesionxk$ tiene más de un punto de acumulación. Sea $\epsilon^*$ la menor distancia entre dos puntos de acumulación, como $\sucesionxk$ es un conjunto compacto
+\end{proof}
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
