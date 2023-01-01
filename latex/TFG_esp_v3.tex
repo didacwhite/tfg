@@ -819,7 +819,7 @@ De hecho, se cree que esta solución característica de los métodos de región 
 \end{equation}
 La solución de este subproblema queda caracterizada por el sistema
 \begin{equation}
-	\label{eq:lmlp}
+	\label{eq:lmsol}
 	(J^TJ+\lambda I)p=-J^Tr.
 \end{equation}
 %El siguiente lema nos da otra caracterización del problema.
@@ -835,11 +835,7 @@ Es consecuencia del teorema \ref{th:trustregion}. Solo hay que ver que se cumple
 \end{proof}
 
 En concreto, como $(J^TJ+\lambda I)$ es definida positiva, la solución de (\ref{eq:lmlp}) es una dirección descendente. Lo que nos quiere decir este lema es que si la solución obtenida por el método de Gauss-Newton cae estrictamente dentro de la región de confianza, esta solucionará también el subproblema (\ref{min:sublev}).
-En otro caso, existe un $\lambda>0$ que permite encontrar una solución a
-\begin{equation}
-\label{eq:lmsol}
-	(J^TJ+\lambda I)p = -J^Tr,
-\end{equation}
+En otro caso, existe un $\lambda>0$ que permite encontrar una solución a (\ref{eq:lmsol})
 con $\norm{p}=\Delta$. Si $\lambda=0$, la solución del problema es la de Gauss-Newton, y según aumenta $\lambda$, la solución se acerca a la del método de máximo descenso.
 Veamos una serie de propiedades del método de Levenberg-Marquardt y de $p$ en función de $\lambda$. 
 
@@ -873,13 +869,34 @@ Veamos una serie de propiedades del método de Levenberg-Marquardt y de $p$ en f
 \end{proof}
 
 \begin{theorem}
-	Sea $\lambda_k>0$, si $p_k$ es solución de (\ref{eq:lmlp}), entonces $p_k$ es solución global de el subproblema
+	Sea $\lambda_k>0$, si $p_k$ es solución de (\ref{eq:lmsol}), entonces $p_k$ es solución global de el subproblema
 \begin{equation}
-\min_{p} \quad \frac{1}{2} \norm{J_kp+r_k}^2,\quad \text{s.a.} \norm{p} \leq \norm{p_k},
+\min_{p} \quad m_k(p)=\frac{1}{2} \norm{J_kp+r_k}^2,\quad \text{s.a.} \norm{p} \leq \norm{p_k},
 \end{equation}
 \end{theorem}
 \begin{proof}
-	.
+	Como $p_k$ es solución de (\ref{eq:lmsol}), entonces
+\begin{equation}
+\begin{split}
+	m_k(p_k)\enspace
+	=&\quad \frac{1}{2}r_k^Tr_k+r_k^TJ_ks_k+\frac{1}{2}s_k^TJ_k^TJ_ks_k \\
+	=&\quad \frac{1}{2}r_k^Tr_k-s_k^T(J_k^TJ_k+\lambda_kI)s_k+
+										\frac{1}{2}s_k^TJ_k^TJ_ks_k \\
+	=&\quad \frac{1}{2}r_k^Tr_k-\lambda_ks_k^Ts_k-
+										\frac{1}{2}s_k^TJ_k^TJ_ks_k.
+\end{split}
+\end{equation}
+Por otro lado, para un $p$ cualquiera, tenemos
+\begin{equation}
+\begin{split}
+	m_k(p)\enspace
+	=&\quad \frac{1}{2}r_k^Tr_k+r_k^TJ_ks_k+\frac{1}{2}s_k^TJ_k^TJ_ks_k \\
+	=&\quad \frac{1}{2}r_k^Tr_k-s_k^T(J_k^TJ_k+\lambda_kI)s_k+
+										\frac{1}{2}s_k^TJ_k^TJ_ks_k \\
+	=&\quad \frac{1}{2}r_k^Tr_k-\lambda_ks_k^Ts_k-
+										\frac{1}{2}s_k^TJ_k^TJ_ks_k.
+\end{split}
+\end{equation}
 \end{proof}
 
 
