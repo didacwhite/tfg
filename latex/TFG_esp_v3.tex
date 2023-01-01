@@ -1014,7 +1014,13 @@ Para una subsucesión $\sucesion{x_{k_i}}$, se tiene que $x_{k_i} \rightarrow \h
 \end{equation}
 Se sigue entonces de (\ref{item3}) y (\ref{item4}) que $p(\lambda_{k_i})\rightarrow 0$, y por lo tanto para la sucesión $\sucesion{p(\lambda_k)}$, se cumple que $p(\lambda_k)\rightarrow 0$.
 
-Supongamos que $\sucesionxk$ tiene más de un punto de acumulación. Sea $\epsilon^*$ la menor distancia entre dos puntos de acumulación, como $\sucesionxk$ es un conjunto compacto
+Supongamos que $\sucesionxk$ tiene más de un punto de acumulación. Sea $\epsilon^*$ la menor distancia entre dos puntos de acumulación, como $\sucesionxk$ es un conjunto compacto, existe un entero positivo $N$ tal que para todo $k \geq N$, $x_k$ está contenido en una bola cerrada con centro algún punto de acumulación y radio $\epsilon^*/4$.
+
+Por otro lado, existe un entero $N'\geq N$ tal que
+\begin{equation}
+	\norm{p(\lambda_k)}<\frac{\epsilon^*}{4},\,\forall k\geq N'.
+\end{equation}
+Por tanto, cuando $k\geq N'$, todo $x_k$ está en la bola cerrada descrita. Por tanto tenemos una contradicción.
 \end{proof}
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
