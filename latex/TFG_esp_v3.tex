@@ -924,13 +924,14 @@ Como hemos dicho, podemos intercambiar la matriz identidad $I$ por una matriz di
 \label{eq:problemaDk}
 (J_k^TJ_k+\lambda D_k)p = -J_k^Tr_k,
 \end{equation}
-donde, como siempre, $J_k=j(x_k)$, $r_k = r(x_k)$ y se introduce $D_k = D(x_k)$, matriz diagonal definida positiva. El factor $\alpha_k$ satisface \textit{la regla de Armijo}:
+donde, como siempre, $J_k=J(x_k)$, $r_k = r(x_k)$ y se introduce $D_k = D(x_k)$, matriz diagonal definida positiva. El factor $\alpha_k$ satisface \textit{la regla de Armijo}:
 \begin{equation}
-	f(x_k+\alpha_ks_k) \leq f(x_k) + \sigma \alpha_kg_k^Tp_k,\quad \sigma \in \left( 0,\frac{1}{2} \right)
+\label{eq:Armijo}
+	f(x_k+\alpha_kp_k) \leq f(x_k) + \sigma \alpha_kg_k^Tp_k,\quad \sigma \in \left( 0,\frac{1}{2} \right),
 \end{equation}
-
+con $g_k= J^Tr$.
 \begin{theorem}
-	En el problema (\ref{eq:problemaDk}), el condicionamiento de $J^TJ+\lambda D$ es una función decreciente de $\lambda$.
+	En (\ref{eq:problemaDk}), el condicionamiento de $J^TJ+\lambda D$ decrece en función de $\lambda$.
 \end{theorem}
 \begin{proof}
 	Sean $\beta_1$ y $\beta_n$ el mayor y el menor autovalor respectivamente de la matriz $D$. Sean $\mu_1$ y $\mu_n$ el mayor y menor autovalor respectivamente de $J^TJ+\lambda D$. Si $\lambda_1 \geq \lambda_2 \geq 0$, \textsc{el rango de una matriz normal es la envoltura convexa de su espectro, tenemos que}
@@ -951,10 +952,10 @@ Esta última propiedad nos indica que el condicionamiento de las ecuaciones inic
 \section{Convergencia}
 Estudiemos ahora la convergencia del método de Levenberg-Marquardt.
 \begin{theorem}\label{th:subsucLM}
-Sea $\sucesionxk$ la sucesión generada por el método de Levenberg-Marquardt. Supongamos que la longitud de paso $\alpha_k$ es la determinada por la regla de Armijo. Si existe una subsucesion $\sucesion{x_{k_i}}$ convergente a $x^*$, y la subsucesión correspondiente $\{J_{k_i}^TJ_{k_i}+\lambda_{k_i}D_{k_i}\}$ converge a una matriz definida positiva $P$, donde mantenemos la notación $J_{k_i}=J(x_{k_i})$ y $D_{k_i}=D(x_{k_i})$ matriz diagonal definida positiva, entonces $g(x^*)=0$.
+Sea $\sucesionxk$ la sucesión generada por el método de Levenberg-Marquardt. Supongamos que la longitud de paso $\alpha_k$ es la determinada por la regla de Armijo (\ref{eq:Armijo}). Si existe una subsucesion $\sucesion{x_{k_i}}$ convergente a $x^*$, y la subsucesión correspondiente $\{J_{k_i}^TJ_{k_i}+\lambda_{k_i}D_{k_i}\}$ converge a una matriz definida positiva $P$, donde mantenemos la notación $J_{k_i}=J(x_{k_i})$ y $D_{k_i}=D(x_{k_i})$ matriz diagonal definida positiva, entonces $g(x^*)=0$.
 \end{theorem}
 \begin{proof}
-Por reducción al absurdo o contradicción, supongamos que $g(x^*)\neq 0$. Sea
+Por reducción al absurdo. Supongamos que $g(x^*)\neq 0$. Sea
 \begin{align}
 p_{k_i} = 
 -(J^T_{k_i}J_{k_i}+\lambda D_{k_i})^{-1}J^T_{k_i}r_{k_i}, \\
@@ -980,7 +981,7 @@ f(x^*) \leq f(x^*) + \sigma \beta^{m^*}g(x^*)^Tp^*<0.
 \end{equation}
 Lo cual no es posible puesto que $\sigma \beta^{m^*}g(x^*)^Tp^*<0$, por lo que tenemos una contradicción, lo que concluye la demostración.
 \end{proof}
-Esta teorema afirma la convergencia de una subsucesión. Veamos la convergencia de la sucesión completa.
+Esta teorema afirma la convergencia de una subsucesión, la cual usaremos para demostrar la convergencia global del método a continuación y después veremos su orden de convergencia.
 
 \begin{theorem}
 	Supongamos que se cumplen las siguientes afirmaciones:
@@ -1000,7 +1001,7 @@ Esta teorema afirma la convergencia de una subsucesión. Veamos la convergencia 
 		$\lambda_k \leq M \leq \infty, \, \forall k$, esto es,
 		$M$ es cota superior de $\lambda_k$.
 	\end{enumerate}
-	Entonces para cualquier punto inicial $x_0$, la sucesion $\sucesionxk$ obtenida del método converge a un punto estacionario de $f$.
+	Entonces el método de Levenberg-Marquardt es globalmente convergente, es decir, para cualquier punto inicial la sucesión obtenida converge a un punto estacionario de $f$.
 \end{theorem}
 \begin{proof}
 De (\ref{item1}) y por la monotonía, sabemos que la sucesión $\sucesionxk$ se encuentra en un conjunto compacto $L(\bar x)$ y, por tanto, tendrá puntos de acumulación. Basta comprobar que estos son únicos para concluír la demostración.
@@ -1022,6 +1023,29 @@ Por otro lado, existe un entero $N'\geq N$ tal que
 \end{equation}
 Por tanto, cuando $k\geq N'$, todo $x_k$ está en la bola cerrada descrita. Por tanto tenemos una contradicción.
 \end{proof}
+
+\begin{theorem}
+Supongamos la sucesión $\sucesionxk$ generada por el método de Levenberg-Marquardt convergente a $x^*$ punto estacionario. Sean $l$ el menor autovalor de $J(x^*)^TJ(x^*)$, $M$ el máximo en valor absoluto de los autovalores de $S(x^*)=\sum_{i=1}^m r_i(x^*)\nabla^2r_i(x^*)$. Si se cumple
+\begin{equation*}
+\tau = \frac{M}{l} < 1,
+\end{equation*}
+\begin{equation*}
+0<\beta<\frac{1-\tau}{2} \text{ y}
+\end{equation*}
+\begin{equation*}
+\lambda_k \rightarrow 0,
+\end{equation*}
+entonces, para $k$ suficientemente grande, la longitud de paso es $\alpha_k=1$,
+\begin{equation}
+\limsup \frac{\norm{x_{k+1}-x^*}}{\norm{x_k-x^*}} \leq \tau
+\end{equation}
+y $x^*$ es mínimo local de $f$.
+\end{theorem}
+\begin{proof}
+Probemos primero que $\alpha_k=1$ para $k$ suficientemente grande. 
+\end{proof}
+
+
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
