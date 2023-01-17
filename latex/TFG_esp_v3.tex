@@ -522,31 +522,35 @@ Por tanto, si $\rho_k$ es negativo, el nuevo valor $f(x_k+p_k)$ no es menor que 
 Por otro lado, si $\rho_k$ es cercano a $1$, esto quiere decir que $f$ y $m_k$ se comportan de manera similar en la región tomada en la iteración actual, por tanto podemos agrandar el radio con seguridad.
 En resumen, nos quedamos con el radio elegido si $\rho_k$ no tiene un valor muy cercano a $0$ o a $1$.
 El proceso se describe en el siguiente algoritmo.
-\begin{algorithm}[Región de confianza]\leavevmode
-\begin{algorithmic}[1]
-\State Dado $\hat{\Delta} > 0,\Delta_0 \in (0,\hat{\Delta}),$ y $\eta \in [0,\frac{1}{4})$
-\For{$k \gets 0,1,2,\ldots$}
-    \State Obtener $p_k$ (\ref{min:tr}).
-    \State Calcular $\rho_k$ (\ref{eq:rho_k}).
-    \If{$\rho_k < \frac{1}{4}$}
-        \State $\Delta_{k+1} \gets \frac{1}{4}\Delta_k$
-    \Else
-        \If{$\rho_k > \frac{3}{4}$ y $\norm{p_k} = \Delta_k$}
-            \State $\Delta_{k+1} \gets \min(2\Delta_k,\hat{\Delta})$
-        \Else
-            \State $\Delta_{k+1} \gets \Delta_k$
-        \EndIf
-    \EndIf
-    \If{$\rho_k > \eta$}
-        \State $x_{k+1} \gets x_k + p_k$
-    \Else
-        \State $x_{k+1} \gets x_k$
-    \EndIf
-\EndFor.
-\end{algorithmic}
+\begin{algorithm}[Región de confianza] \leavevmode
+	\label{al:tr-lm}
+	\begin{steps}
+		\item Dados $x_0, \bar{\Delta}, \Delta_0 \in (0, \bar{\Delta}), \epsilon \geq
+			0, 0<\eta_1\leq\eta_2<1$ y $0<\gamma_1<1<\gamma_2, k:=0$.
+		\item Si $\norm{g_k} \leq \epsilon$ terminar.
+		\item Aproximar $p_k$ resolviendo (\ref{min:tr}).
+		\item Calcular $f(x_k+p_k)$ y $\rho_k$. Definir
+			\begin{equation*}
+				x_{k+1} = \begin{cases}
+					x_k + p_k, & \text{si } \rho_k \geq \eta_1, \\
+					x_k, & \text{en otro caso.}
+				\end{cases}
+			\end{equation*}
+		\item Si $\rho_k < \eta_1$ entonces $\Delta_{k+1} \in (0,\gamma_1 \Delta_k]$. \\
+			Si $\rho_k \in [\eta_1, \eta_2)$ entonces $\Delta_{k+1} \in [\gamma_1 \Delta_k,\Delta_k]$. \\
+			Si $\rho_k \geq \eta_2$ y $\norm{p_k}=\Delta_k$ entonces
+			$\Delta_{k+1} \in [\Delta_k, \min \{\gamma_2 \Delta_k,\bar{\Delta}\}]$.
+		\item Calcular $B_{k+1}$, actualizar $m^{(k)}$ y $k:=k+1$. Ir al Paso 2.
+	\end{steps}
 \end{algorithm}
-Aquí $\hat \Delta$ es el máximo radio de la región de cada iteración.
-Notar que únicamente se aumenta el radio en el caso de que $\norm{p_k} = \Delta_k$, ya en caso contrario, se entiende que el $\Delta_k$ elegido no influye en la elección de forma negativa.
+Aquí $\bar \Delta$ es el máximo radio de la región para toda iteración.
+Notar que únicamente se aumenta el radio en el caso de que $\norm{p_k} = \Delta_k$,
+ya en caso contrario, se entiende que el $\Delta_k$ elegido no influye en la elección
+de forma negativa. % NOTA: paso 5, unsuccessful step primer caso, successfull step segundo caso y very successful step tercer caso.
+
+Normalmente se elige $\eta_1 = 0.25$ y $\eta_2 = 0.75$, mientras que $\gamma_1 = 0.25$ y $\gamma_2 = 2$.
+Además, la elección de $\Delta^{k+1}$ se puede obtener por interpolación polinómica dentro del intervalo,
+aunque es usual tomar el valor mayor del intervalo.
 
 Para que este algoritmo sea práctico, nos centramos en la resolución del subproblema (\ref{min:tr}). Tomemos una notación más limpia,
 \begin{equation}
@@ -571,7 +575,7 @@ Para que este algoritmo sea práctico, nos centramos en la resolución del subpr
 \end{proof}
 
 Este teorema caracteriza la solución según el primer punto. El segundo punto es una condición complementaria que nos dice que al menos uno de los dos factores es 0.
-Esto es, si $\norm{p}<0$, $\lambda$ tendrá que ser 0 y $Bp^*=-g$ con $B$ definida positiva (puntos 1 y 3).
+Esto es, si $\norm{p}<\Delta$, $\lambda$ tendrá que ser 0 y $Bp^*=-g$ con $B$ definida positiva (puntos 1 y 3).
 En el caso de que $\norm{p}$ se maximice, lo cual da a entender que la solución óptima no se encuentra dentro de la región de confianza, $\lambda$ podrá tomar valores positivos.
 
 \chapter{Mínimos Cuadrados}
@@ -1044,6 +1048,36 @@ y $x^*$ es mínimo local de $f$.
 \begin{proof}
 Probemos primero que $\alpha_k=1$ para $k$ suficientemente grande. 
 \end{proof}
+
+\begin{algorithm}[Levenberg-Marquardt (Región de confianza)] \leavevmode
+	\label{al:tr-lm}
+	\begin{steps}
+		\item Fijamos $x_0$, $\bar{\Delta}$, $\Delta_0 \in (0, \bar{\Delta})$,
+			$\epsilon \geq 0$, $0<\eta_1 \leq \eta_2<1$ y $0<\gamma_1<1<\gamma_2$, $k:=0$. 
+		\item Si $\norm{g_k} = \norm{J_k^Tr_k} \leq \epsilon$, terminamos.
+		\item Resolvemos de forma aproximada el problema linealizado
+			con restricciones (\ref{min:sublev}) para obtener $p_k$.
+		\item Calcular
+			\begin{equation*}
+				\rho_k = \frac{f(x_k)-f(x_k+p_k)}{f(x_k)-m_k(p_k)}. STEPBOUND\;US
+			\end{equation*}
+		\item Si $\rho_k < \eta_1$, $\Delta_{k} = \gamma_1\Delta_k$ e ir a Paso 3.
+		\item Definimos $x_{k+1} = x_k + p_k$,
+			\begin{equation*}
+				\Delta_{k+1} = 
+				\begin{cases}
+					\min \{ \gamma_2\Delta_k, \bar{\Delta}\},& \text{si } \rho_k \geq \eta_2 \text{ y } \norm{p_k}=\Delta_k,\\
+					\Delta_k, & \text{en otro caso.}
+				\end{cases}
+			\end{equation*}
+		\item $k:=k+1$ e ir a Paso 2.$\quad \Box$
+	\end{steps}
+\end{algorithm}
+
+
+\section{Implementación}
+
+
 
 
 
