@@ -523,7 +523,7 @@ Por otro lado, si $\rho_k$ es cercano a $1$, esto quiere decir que $f$ y $m_k$ s
 En resumen, nos quedamos con el radio elegido si $\rho_k$ no tiene un valor muy cercano a $0$ o a $1$.
 El proceso se describe en el siguiente algoritmo.
 \begin{algorithm}[Región de confianza] \leavevmode
-	\label{al:tr-lm}
+	\label{alg:tr}
 	\begin{steps}
 		\item Dados $x_0, \bar{\Delta}, \Delta_0 \in (0, \bar{\Delta}), \epsilon \geq
 			0, 0<\eta_1\leq\eta_2<1$ y $0<\gamma_1<1<\gamma_2, k:=0$.
@@ -543,11 +543,12 @@ El proceso se describe en el siguiente algoritmo.
 		\item Calcular $B_{k+1}$, actualizar $m^{(k)}$ y $k:=k+1$. Ir al Paso 2.
 	\end{steps}
 \end{algorithm}
-Aquí $\bar \Delta$ es el máximo radio de la región para toda iteración.
-Notar que únicamente se aumenta el radio en el caso de que $\norm{p_k} = \Delta_k$,
+En el paso 5, el primer caso se dice que resulta en una iteración no exitosa, mientras que el segundo caso marcará
+una iteración exitosa y el tercero una muy exitosa.
+Añadir que $\bar \Delta$ es el máximo radio de la región para toda iteración y que únicamente se aumenta el radio
+en el caso de que $\norm{p_k} = \Delta_k$,
 ya en caso contrario, se entiende que el $\Delta_k$ elegido no influye en la elección
-de forma negativa. % NOTA: paso 5, unsuccessful step primer caso, successfull step segundo caso y very successful step tercer caso.
-
+de forma negativa.
 Normalmente se elige $\eta_1 = 0.25$ y $\eta_2 = 0.75$, mientras que $\gamma_1 = 0.25$ y $\gamma_2 = 2$.
 Además, la elección de $\Delta^{k+1}$ se puede obtener por interpolación polinómica dentro del intervalo,
 aunque es usual tomar el valor mayor del intervalo.
@@ -578,6 +579,25 @@ Este teorema caracteriza la solución según el primer punto. El segundo punto e
 Esto es, si $\norm{p}<\Delta$, $\lambda$ tendrá que ser 0 y $Bp^*=-g$ con $B$ definida positiva (puntos 1 y 3).
 En el caso de que $\norm{p}$ se maximice, lo cual da a entender que la solución óptima no se encuentra dentro de la región de confianza, $\lambda$ podrá tomar valores positivos.
 
+Respecto a la convergencia de este algoritmo, veremos únicamente un resultado relevante para el estudio realizado en el
+tercer capítulo. Para ello, veamos primero una serie de condiciones que se suponen ciertas para los resultados
+relativos a este algoritmo.
+
+Suponemos que $\norm{B_k}$ es uniformemente acotada para cada $k$
+y que el conjunto de nivel $\{x\,|\,f(x)\leq f(x_0)\}$ es acotado, con $f: \mathbb{R}^n \to \mathbb{R}$ continuamente
+diferenciable. Además, para generalizar el subproblema (\ref{min:tr_nk}) y calcular cada $\norm{p_k}$, permitimos
+un exceso sobre la cota con un pequeño margen, esto es
+\begin{equation}
+	\norm{p_k} \leq \tilde{eta} \Delta_k,
+\end{equation}
+siendo $\tilde{\eta}$ constante positiva.
+\begin{theorem} \label{th:conv-tr}
+Bajo estas condiciones comunes, si el algoritmo (\ref{alg:tr}) tiene las suficientes iteraciones exitosas,
+entonces la sucesión que genera cumplirá
+\begin{equation}
+	\liminf_{k\to \infty} \norm{g_k} = 0.
+\end{equation}
+\end{theorem}
 \chapter{Mínimos Cuadrados}
 %campos en los que se utiliza??? 
 
@@ -1074,6 +1094,21 @@ Probemos primero que $\alpha_k=1$ para $k$ suficientemente grande.
 	\end{steps}
 \end{algorithm}
 
+Como consecuencia del Teorema \ref{th:conv-tr} enunciamos el siguiente resultado.
+
+\begin{theorem}
+	Supongamos que la función $f(x) = \frac{1}{2}\sum_{i=1}^{m}\left[r_i(x)\right]^2$ es dos veces
+	continuamente diferenciable y que $\mathcal{L}(x_0)=\{x\,|\,f(x)\leq f(x_0)\}$ es un conjunto
+	de nivel acotado. Si existen $M_1, M_2>0$ tales que
+	\begin{align*}
+		\norm{\nabla^2f(x)} \leq M_1, \quad \forall x\in\mathcal{L}(x_0),\\
+		\norm{J(x)^TJ(x)} \leq M_2, \quad \forall x\in\mathcal{L}(x_0).
+	\end{align*}
+	Entonces,
+	\begin{equation}
+		\lim_{k\rightarrow \infty} \nabla f(x_k) = \lim_{k\rightarrow \infty} J_k^Tr_k = 0.
+	\end{equation}
+\end{theorem}
 
 \section{Implementación}
 
