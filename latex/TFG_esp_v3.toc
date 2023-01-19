@@ -1,6 +1,6 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {chapter}{Resumen}{\es@scroman {vii}}{section*.3}%
-\contentsline {chapter}{Introducci\'on}{\es@scroman {ix}}{chapter*.8}%
+\contentsline {chapter}{Resumen}{\es@scroman {viii}}{section*.3}%
+\contentsline {chapter}{Introducci\'on}{\es@scroman {xi}}{chapter*.8}%
 \contentsline {chapter}{\numberline {1}Fundamentos de la optimización sin restricciones}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Búsqueda de línea}{3}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Método de Newton}{4}{subsection.1.1.1}%
@@ -12,6 +12,10 @@
 \contentsline {section}{\numberline {3.1}Propiedades del método de Levenberg-Marquardt}{16}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Convergencia}{18}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Implementación}{21}{section.3.3}%
-\contentsline {chapter}{\numberline {I}Título del Anexo I}{23}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {II}Título del Anexo II}{25}{appendix.Alph2}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{27}{appendix*.9}%
+\contentsline {subsection}{\numberline {3.3.1}Resolución del problema lineal}{22}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Actualización del radio $\Delta _k$}{22}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}El parámetro Levenberg-Marquardt}{23}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Escalado}{24}{subsection.3.3.4}%
+\contentsline {chapter}{\numberline {I}Título del Anexo I}{25}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {II}Título del Anexo II}{27}{appendix.Alph2}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{29}{appendix*.9}%

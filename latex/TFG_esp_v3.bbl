@@ -7,6 +7,10 @@
 \providecommand{\href}[2]{#2}
 \begin{thebibliography}{1}
 
+\bibitem{Hebden1973AnAF}
+M.~D. Hebden, \emph{An algorithm for minimization using exact second
+  derivatives}, 1973.
+
 \bibitem{Levenberg1944-wb}
 Kenneth Levenberg, \emph{A method for the solution of certain non-linear
   problems in least squares}, Quart. Appl. Math. \textbf{2} (1944), no.~2,

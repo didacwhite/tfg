@@ -479,7 +479,7 @@ Minimizando $q^{(k)}(p)$ obtenemos la fórmula de Newton, denotando $G_k=\nabla^
 	generada converge a $x^*$ de forma cuadrática.
 \end{theorem}
 
-\section{Región de confianza}
+\section{Región de confianza}\label{sec:tr}
 
 Esta estrategia enfoca el problema de otro modo, primero se fija una distancia máxima $\Delta_k$ para definir una región, generalmente de la forma
 \begin{equation}
@@ -598,7 +598,7 @@ entonces la sucesión que genera cumplirá
 	\liminf_{k\to \infty} \norm{g_k} = 0.
 \end{equation}
 \end{theorem}
-\chapter{Mínimos Cuadrados}
+\chapter{Mínimos Cuadrados}\label{ch:lsqp}
 %campos en los que se utiliza??? 
 
 El problema de mínimos cuadrados surge de la necesidad de ajustar modelos que nos permitan predecir ciertos comportamientos en una amplia variedad de campos. Dados unos datos $(t_1,y_1),(t_2,y_2),\cdots,(t_m,y_m)$, queremos ajustar una función
@@ -664,7 +664,7 @@ y sustituyendo según (\ref{eq:lsp}), (\ref{eq:grad}) y (\ref{eq:hess}), obtenem
 	\label{eq:newtoniter}
 \end{equation}
 
-\section{El Problema Lineal}
+\section{El Problema Lineal}\label{sec:linealsqp}
 
 El primer caso más sencillo es si $\phi (t, x)$ es una función lineal, en cuyo caso los residuos
 $r_i(x)$ también serán lineales.
@@ -1069,7 +1069,7 @@ y $x^*$ es mínimo local de $f$.
 Probemos primero que $\alpha_k=1$ para $k$ suficientemente grande. 
 \end{proof}
 
-\begin{algorithm}[Levenberg-Marquardt (Región de confianza)] \leavevmode
+\begin{algorithm}[Región de confianza de Levenberg-Marquardt] \leavevmode
 	\label{al:tr-lm}
 	\begin{steps}
 		\item Fijamos $x_0$, $\bar{\Delta}$, $\Delta_0 \in (0, \bar{\Delta})$,
@@ -1111,12 +1111,181 @@ Como consecuencia del Teorema \ref{th:conv-tr} enunciamos el siguiente resultado
 \end{theorem}
 
 \section{Implementación}
-En esta sección elegimos la implementación propuesta por Jorge J. More en \cite{More1978-at},
+En esta sección elegimos la implementación propuesta por Jorge J. Moré en \cite{More1978-at},
 ya que otras implementaciones son poco robustas o su justificación teórica es débil. Por tanto,
 veremos sus fuertes propiedades de convergencia, robustez y eficiencia. Además veremos
-las principales propiedades de esta implementación y su implementación en MATLAB.
+las principales propiedades de esta implementación. Terminaremos mostrando resultados
+obtenidos en MATLAB.
 
+A partir de la transformación del problema no lineal de mínimos cuadrados a uno linealizado con
+restricciones
+\begin{equation}
+	\label{min:more}
+	\min \norm{r_k+J_kp} \quad \text{sujeto a} \quad \norm{D_kp} \leq \Delta_k,
+\end{equation}
+Moré propone un método para obtener $p$ resolviendo las ecuaciones correspondientes,
+\begin{equation}
+	\label{eq:more}
+	p(\lambda) = -\left(J_k^TJ_k + \lambda D_k^TD_k\right)^{-1}J_k^Tr_k.
+\end{equation}
+Si J no es de rango completo y $\lambda = 0$, entonces las ecuaciones previas se definen mediante
+\begin{equation}
+	D_kp(0) \equiv \lim_{\lambda \rightarrow 0^+} D_kp(\lambda) =
+	-\left(J_kD_k^{-1}\right)^*r_k.\footnote{$A^*:=Adj(A)$}
+\end{equation}
+Existen dos posibilidades, que $\lambda=0$ y $\norm{D_kp(0)}\leq\Delta_k$, en cuyo caso $p(0)$ es
+la solución de (\ref{min:more}), donde se alcanza el mínimo de $\norm{D_kp}$; o que $\lambda>0$
+y $\norm{D_kp(\lambda)}=\Delta_k$, entonces $p(\lambda)$ es la única solución de (\ref{min:more}).
+Llegamos así al siguiente algoritmo.
 
+\begin{algorithm}[Algoritmo de Levenberg-Marquardt]\leavevmode
+	\label{alg:lm-more}
+	\begin{steps}
+		\item Dado $\Delta_0$, encontrar $\lambda_k \geq 0$ tal que
+			\begin{equation*}
+				(J_k^TJ_k + \lambda_k D_k^TD_k)p = -J_k^Tr_k.
+			\end{equation*}
+			O bien $\lambda_k = 0$ y $\norm{D_kp_k}\leq \Delta_k$, o bien $\lambda_k > 0$ y
+			$\norm{D_kp_k}=\Delta_k$.
+		\item Si $\norm{r(x_k+p_k)}<\norm{r(x_k)}$, entonces $x_{k+1}:=x_k+p_k$ y
+			calcular $J_{k+1}$, en otro caso $x_{k+1}:=x_k$ y $J_{k+1}:=J_k$.
+		\item Elegir $\Delta_{k+1}$ y $D_{k+1}$. $\quad \Box$
+	\end{steps}
+\end{algorithm}
+
+Veamos ahora las propiedades que caracterizan la implementación de Moré, ya que para la resolución
+de los pasos del algoritmo previo existen varias posibilidades entre las que elegir.
+
+\subsection{Resolución del problema lineal}
+
+En la sección \ref{sec:linealsqp} mostramos 3 formas prácticas de solucionar el problema lineal
+(\ref{eq:more}). En este caso, Moré elige la factorización QR. Si bien es cierto que la resolución
+de las ecuaciones normales
+\begin{equation}\label{eq:normalmore}
+	\left(J_k^TJ_k + \lambda_k D_k^TD_k\right)p = -J_k^Tr_k
+\end{equation}
+mediante Cholesky puede ser más simple y eficiente, la factorización QR es más robusta, particularmente
+cuando $\lambda=0$ y $J_k$ no es de rango completo, además de que la evaluación de $J_k^TJ_k$ 
+y $D_k^TD_k$ puede no ser adecuada.
+
+\subsection{Actualización del radio $\Delta_k$}
+
+Como ya adelantamos en la sección \ref{sec:tr}, es muy útil utilizar la proporción entre la
+reducción obtenida y la que se predice para cada paso. En este caso particular el ratio viene
+dado por
+\begin{equation}\label{eq:rho1}
+	\rho = \frac{\norm{r(x_k)}^2-\norm{r(x_k+p_k)}^2}{\norm{r(x_k)}^2-\norm{r(x_k)+J(x_k)p_k}^2}.
+\end{equation}
+Como la predicción se hace por el modelo lineal, en el caso de que $r(x)$ sea lineal, $\rho=1$,
+y cuando $J(x_k)^Tr(x_k) \neq 0$, cuanto menor sea el paso $p_k$, mayor será el ratio $\rho$. Para
+evitar errores numéricos por desbordamiento, multiplicamos en ambos lados de las ecuaciones normales (\ref{normalmore})
+por $2p^T$, que resulta en
+\begin{equation}\label{eq:normnorm}
+	\norm{r_k}^2 - \norm{r_k + J_kp}^2 = \norm{J_kp}^2 + 2\lambda_k\norm{D_kp}^2.
+\end{equation}
+Sustituyendo en (\ref{eq:rho1}) obtenemos
+\begin{equation}
+	\rho = \frac{1-\left[\frac{\norm{r(x_k+p_k)}}{\norm{r(x_k)}}\right]^2}
+				{\left[\frac{\norm{J_kp}}{\norm{r(x_k)}}\right]^2
+				+ 2\left[\frac{\lambda^{1/2}\norm{D_kp}}{\norm{r(x_k)}}\right]^2}.
+\end{equation}
+Es fácil ver de (\ref{eq:normnorm}) que $\norm{J_kp} \leq \norm{r_k}$ y $\lambda^{1/2}\norm{D_kp} \leq \norm{r_k}$,
+por lo que esta vez la obtención de $\rho$ no llevará a errores numéricos y además el denominador es
+no negativo. Mencionar que si $\norm{r(x_k+p_k)} \gg \norm{r(x_k)}$ sí que hay desbordamiento, pero
+como estamos interesados en valores no negativos de $\rho$, basta con tomar $\rho=0$ y omitir el cálculo.
+Una vez calculado $\rho$, se actualiza el radio $\Delta_{k+1}$ según decidamos. Moré no especifica
+el factor utilizado para aumentar $\Delta_{k+1}$, pero sí recomienda mantener el factor en el intervalo
+$[\frac{1}{10}, \frac{1}{2}]$.
+
+\subsection{El parámetro Levenberg-Marquardt}
+En esta implementación, se acepta $\alpha>0$ como parámetro de Levenberg-Marquardt Si
+\begin{equation}\label{eq:phi}
+	|\phi(\alpha)| \leq \sigma\Delta,
+\end{equation}
+siendo
+\begin{equation}
+	\phi(\alpha) = \norm{D(J^TJ+\alpha D^TD)^{-1}J^Tr}-\Delta,
+\end{equation}
+y $\sigma \in (0,1)$ es un parámetro que controla la aceptación de $\alpha$. Si $\phi(\alpha) \leq 0$,
+el parámetro requerido es $\alpha=0$, así que de aquí en adelante asumimos que $\phi(\alpha) > 0$. Por
+tanto, $\phi$ es una función decreciente para $\alpha \in [0, \infty)$ y $\phi(\alpha)$ tiende a
+$-\Delta$ en el infinito y, en consecuencia, existe un único $\alpha^*>0$ tal que $\phi(\alpha^*)=0$.
+Para determinar el parámetro Levenberg-Marquardt comenzamos con un $\alpha_0>0$ y calculamos la
+sucesión $\sucesion{a_k}$ que converge a $\alpha^*$.
+
+Por ser $\phi$ convexa, parece conveniente utilizar el método de Newton para encontrar $\alpha^*$,
+pero resulta muy poco eficiente. En su lugar, podemos implementar el método de Hebden
+\cite{Hebden1973AnAF} dado a la estructura particular del problema. Para ello, notemos que
+\begin{equation}\label{eq:Hebden}
+	\phi(\alpha) = \norm{(J^TJ+\alpha I)^{-1}J^Tr}-\Delta, \quad \tilde{J} = JD^{-1},
+\end{equation}
+siendo $\tilde{J}=U\Sigma V^T$ la descomposición SVD de $J$. Por tanto,
+\begin{equation}
+	\phi(\alpha) = \sum_{i=1}^m \left[\frac{\sigma_i^2z_i^2}
+											{(\sigma_i^2+\alpha)^2}\right]^{-1/2}-\Delta.
+\end{equation}
+donde $z=U^Tr$ y $\sigma_i$ son los valores singulares de $J$. En consecuencia, asumimos que
+\begin{equation}
+\phi(\alpha) \doteq \frac{a}{a+b}-\Delta \equiv \tilde{\phi}(\alpha),
+\end{equation}
+y elegimos $a$ y $b$ de forma que $\tilde{\phi}(\alpha_k)=\phi(\alpha_k)$ y
+$\tilde{\phi}'(\alpha_k)=\phi'(\alpha_k)$. De esta forma, $\tilde{\phi}(\alpha_{k+1})=0$
+si
+\begin{equation}\label{eq:alpha}
+	\alpha_{k+1} = \alpha_k - \left[\frac{\phi(\alpha_k)+\Delta}{\Delta}\right]
+					\left[\frac{\phi(\alpha_k)}{\phi'(\alpha_k)}\right].
+\end{equation}
+Para que este método converja, es necesario controlar las iteraciones, Hebden propuso tomar cotas
+inferiores y superiores $l_k$ y $u_k$ y obligar a que la diferencia entre iteraciones
+no sea mayor a $(u_k-l_k)/10$. Sin embargo, esta restricción puede ser muy dañina, ya que
+en muchos casos $u_k\gg l_k$, por lo que Moré solo modifica (\ref{eq:alpha}) si se sale del intervalo
+$[l_k, u_k]$. Partiendo de (\ref{eq:Hebden}) podemos definir la cota superior
+\begin{equation}
+	u_0 = \frac{\norm{(JD^{-1})^Tr}}{\Delta}.
+\end{equation}
+Si J es de rango completo, $\phi'(0)$ está definido y por la convexidad de $\phi$
+definimos la cota inferior
+\begin{equation}
+	l_0 = -\frac{\phi(0)}{\phi'(0)}.
+\end{equation}
+En otro caso, $l_0=0$.
+
+\begin{algorithm}\leavevmode
+	\begin{steps}
+		\item Si $\alpha_k \notin (l_k, u_k)$, definir $\alpha_k = \max \{0.001u_k, (l_ku_k)^{1/2}\}$.	
+		\item Calcular $\phi(\alpha_k)$ y $\phi'(\alpha_k)$. Actualizar $l_k$ y $u_k$:
+			\begin{align*}
+				l_{k+1} &= \max \{l_k, \alpha_k-\frac{\phi(\alpha_k)}{\phi'(\alpha_k)}\}, \\
+				u_{k+1} &= \begin{cases}
+					\alpha_k, & \text{si } \phi(\alpha_k) < 0, \\
+					u_k, & \text{en otro caso}.
+				\end{cases}
+			\end{align*}
+		\item Calcular $\alpha_{k+1}$ según (\ref{eq:alpha}). $\quad \Box$
+	\end{steps}
+\end{algorithm}
+En el Paso 1, se elige $\alpha_k$ con tendencia a la cota inferior, se añade el factor $0.001u_k$ para
+contrarrestar los casos en los que $l_k$ es muy pequeño, o en particular $l_k=0$. No es dificil probar
+la convergencia de este algoritmo, y en la práctica se observa que converge en muy pocos pasos,
+de media en menos de 2 se cumple (\ref{eq:phi}) si $\sigma=0.1$.
+
+Por completitud, mostrar que
+\begin{equation}
+	\phi'(\alpha)=-\norm{q(\alpha)} \norm{R_{\alpha}^{-T}\left[
+		\frac{\pi^TD^Tq(\alpha)}{\norm{q(\alpha)}}
+	 \right] }^2,
+\end{equation}
+con $q(\alpha)=Dp(\alpha)$ y $p$ definido por (\ref{eq:more}) y $\pi$ permutación de la
+factorización QR.
+
+\subsection{Escalado}
+Ya que el propósito de la matriz $D_k$ en el algoritmo de Levenberg-Marquardt es tener en cuenta
+el escalado del problema, elegimos
+\begin{equation}
+	D_k = diag(d_1^{(k)}, \ldots, d_n^{(k)}),
+\end{equation}
+con $d_i^{(0)} = \norm{\partial_ir(x_0)}$, y
+$d_i^{(k)}=\max \{d_i^{(k-1)}, \norm{\partial_ir(x_k)}\}$, con $k \geq 1$.
 
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
