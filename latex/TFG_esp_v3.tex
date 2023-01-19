@@ -1280,12 +1280,28 @@ factorización QR.
 
 \subsection{Escalado}
 Ya que el propósito de la matriz $D_k$ en el algoritmo de Levenberg-Marquardt es tener en cuenta
-el escalado del problema, elegimos
+el escalado del problema, algunos autores eligen
 \begin{equation}
 	D_k = diag(d_1^{(k)}, \ldots, d_n^{(k)}),
 \end{equation}
-con $d_i^{(0)} = \norm{\partial_ir(x_0)}$, y
-$d_i^{(k)}=\max \{d_i^{(k-1)}, \norm{\partial_ir(x_k)}\}$, con $k \geq 1$.
+con
+\begin{equation}
+	d_i^{(k)}=\norm{\partial_ir(x_0)}, k\geq 0.
+\end{equation}
+Siempre que $\norm{\partial_ir(x_k)}$ no crezca respecto a k esta elección es adecuada, en caso contrario
+se ve afectada la efectividad del algoritmo y por esta razón se propone la elección
+\begin{align*}
+	d_i^{(0)} &= \norm{\partial_ir(x_0)}, \\
+	d_i^{(k)} &= \max \{d_i^{(k-1)}, \norm{\partial_ir(x_k)}\}, k\geq 1.
+\end{align*}
+
+Entre elecciones posibles,
+siempre que $D$ sea diagonal con elementos positivos, el algoritmo genera las mismas iteraciones tanto si aplicamos
+el algoritmo a $r(x)$ empezando en $x_0$ como si aplicamos el algoritmo a $r(D^{-1}x)$ empezando en $Dx_0$.
+Por esta razón se dice que el algoritmo es invariante al escalado. Para decir esto se asume que la elección
+de $\Delta$ se basa únicamente en (\ref{eq:rho1}), lo que mantiene la invarianza.
+
+
 
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
