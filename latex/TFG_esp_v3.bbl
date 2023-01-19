@@ -1,0 +1,37 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{1}
+
+\bibitem{Levenberg1944-wb}
+Kenneth Levenberg, \emph{A method for the solution of certain non-linear
+  problems in least squares}, Quart. Appl. Math. \textbf{2} (1944), no.~2,
+  164--168 (en).
+
+\bibitem{Marquardt1963-ds}
+Donald~W Marquardt, \emph{An algorithm for least-squares estimation of
+  nonlinear parameters}, J. Soc. Ind. Appl. Math. \textbf{11} (1963), no.~2,
+  431--441.
+
+\bibitem{More1978-at}
+Jorge~J Mor{\'e}, \emph{The {Levenberg-Marquardt} algorithm: Implementation and
+  theory}, Lecture Notes in Mathematics, Springer Berlin Heidelberg, Berlin,
+  Heidelberg, 1978, pp.~105--116.
+
+\bibitem{Nocedal2006-kh}
+Jorge Nocedal and Stephen Wright, \emph{Numerical optimization}, 2 ed.,
+  Springer, New York, NY, 2006 (en).
+
+\bibitem{Sun2006-au}
+Wenyu Sun and Ya-Xiang Yuan, \emph{Optimization theory and methods: Nonlinear
+  programming}, 2006 ed., Springer, New York, NY, 2006 (en).
+
+\bibitem{Trefethen1997-ek}
+Lloyd N (lloyd~Nicholas) Trefethen, \emph{Numerical linear algebra}, Society
+  for Industrial and Applied Mathematics, Philadelphia, MS, 1997 (en).
+
+\end{thebibliography}
