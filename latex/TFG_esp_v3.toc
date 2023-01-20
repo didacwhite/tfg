@@ -13,9 +13,9 @@
 \contentsline {section}{\numberline {3.2}Convergencia}{18}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Implementación}{21}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Resolución del problema lineal}{22}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Actualización del radio $\Delta _k$}{22}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}El parámetro Levenberg-Marquardt}{23}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Escalado}{24}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.2}Actualización del radio $\Delta _k$}{23}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}El parámetro Levenberg-Marquardt}{24}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Escalado}{25}{subsection.3.3.4}%
 \contentsline {chapter}{\numberline {I}Título del Anexo I}{27}{appendix.Alph1}%
 \contentsline {chapter}{\numberline {II}Título del Anexo II}{29}{appendix.Alph2}%
 \contentsline {chapter}{Bibliograf\'{\i }a}{31}{appendix*.9}%

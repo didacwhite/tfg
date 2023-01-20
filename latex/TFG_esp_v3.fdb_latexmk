@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex TFG_esp_v3"] 1674157960 "TFG_esp_v3.aux" "TFG_esp_v3.bbl" "TFG_esp_v3" 1674158179 0
+["bibtex TFG_esp_v3"] 1674207147 "TFG_esp_v3.aux" "TFG_esp_v3.bbl" "TFG_esp_v3" 1674207151 0
   "./tfg.bib" 1674151267 1771 22a41ef652ed867a8b52d304f830fea9 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/bibtex/bst/amscls/amsplain.bst" 1591020010 25798 9b3546f2f237ee0ce4724eed95f954f4 ""
-  "TFG_esp_v3.aux" 1674158178 7322 c80da9ed3d4950e7c4283058559ac45b "pdflatex"
+  "TFG_esp_v3.aux" 1674207150 7735 7e937d54ec43e1a900cfdbb0d41244ec "pdflatex"
   (generated)
   "TFG_esp_v3.bbl"
   "TFG_esp_v3.blg"
   (rewritten before read)
-["pdflatex"] 1674158176 "c:/Users/didac.blanco/Documents/USC/TFG/latex/TFG_esp_v3.tex" "TFG_esp_v3.pdf" "TFG_esp_v3" 1674158179 0
+["pdflatex"] 1674207148 "c:/Users/didac.blanco/Documents/USC/TFG/latex/TFG_esp_v3.tex" "TFG_esp_v3.pdf" "TFG_esp_v3" 1674207151 0
   "C:/Users/didac.blanco/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1673944047 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/didac.blanco/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1095.pk" 1669574038 28976 19320439013bb04d0bceba6b6844ec3c ""
   "C:/Users/didac.blanco/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1670748347 31952 81d263ac7f96f8c8daa7c097e9a23900 ""
@@ -29,6 +29,7 @@
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecbx2074.tfm" 993058364 3208 da5ec29ca7c2f5f55c296dd6713d4a74 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecbx2488.tfm" 993058366 3192 b0a07ba84fb3fb36d088c4f796e254b9 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/eccc1095.tfm" 993058382 2800 704ac1d706443507d1542715b89923fc ""
+  "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm0500.tfm" 993058514 3160 7643a152c0e9200a0a8161b2bb3a452d ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm0600.tfm" 993058516 3160 116e21835795bb29209ae8bb4682382f ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm0800.tfm" 993058518 3152 11ecf5aad6aacf00ff18f394ab23a8b5 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm0900.tfm" 993058520 3156 6d4f5755d77638125f6f89de4f3bb757 ""
@@ -185,6 +186,7 @@
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/base/inputenc.sty" 1657037832 5048 84b05796b49b69e2d4257d537721c960 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/base/latexsym.sty" 1657037832 2853 20079b4b35694992ccfaced080c81145 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/base/t1cmss.fd" 1657037832 2621 5a32b6e160be0adeb34d603122180ee8 ""
+  "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/base/textcomp.sty" 1657037832 2894 f2f8ee7d4fb94263f9f255fa22cab2d3 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/base/ulasy.fd" 1657037832 2233 d6b57110698f3bfccb4912aef8c8acb2 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/enumitem/enumitem.sty" 1561036220 51697 f8f08183cd2080d9d18a41432d651dfb ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1622999586 13886 d1306dcf79a944f6988e688c1785f9ce ""
@@ -208,6 +210,11 @@
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/kvoptions/kvoptions.sty" 1656232881 22555 6d8e155cfef6d82c3d5c742fea7c992e ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/kvsetkeys/kvsetkeys.sty" 1665062733 13815 760b0c02f691ea230f5359c4e1de23a7 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1664385028 30426 b4bd1ea7df6c51902df8edf551809fb7 ""
+  "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/l3kernel/expl3.sty" 1664385690 6107 fa5d25e84c05db068aed042b51a24d3b ""
+  "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/l3packages/l3keys2e/l3keys2e.sty" 1655909660 4674 893a007717279c6f468df9e98de9aa96 ""
+  "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/l3packages/xfrac/xfrac.sty" 1655909660 14672 7a0a75a6d1d1628ab71b9fb323814eec ""
+  "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/l3packages/xparse/xparse.sty" 1655909660 6812 d2f733947d73940b228845829d585700 ""
+  "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/l3packages/xtemplate/xtemplate.sty" 1655909660 49698 7c59f789d439ccaa8465349cb3f7e270 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/letltxmacro/letltxmacro.sty" 1575399536 5766 13a9e8766c47f30327caf893ece86ac8 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/pdfsync/pdfsync.sty" 1201427580 10768 173607d6fd65badaedd45e09a96c04be ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/pgf/basiclayer/pgf.sty" 1621069645 1090 bae35ef70b3168089ef166db3e66f5b2 ""
@@ -225,12 +232,12 @@
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/tocbibind/tocbibind.sty" 1286954396 8927 46f54e33fc9cef24f78ab3bc811cb63f ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656233290 56148 51a9a8571c07b9921892ae11063ae853 ""
-  "TFG_esp_v3.aux" 1674158178 7322 c80da9ed3d4950e7c4283058559ac45b "pdflatex"
-  "TFG_esp_v3.bbl" 1674157960 1585 ee723d49535068cbcd1bf48b753cfa1f "bibtex TFG_esp_v3"
-  "TFG_esp_v3.out" 1674158178 3347 4e67379bc40d6153014cf92045f8daa3 "pdflatex"
-  "TFG_esp_v3.tex" 1674158175 65867 3fde285c32e04a817d69c2b17c333783 ""
-  "TFG_esp_v3.toc" 1674158178 1722 db053a394b510870849abde2192ff659 "pdflatex"
-  "c:/Users/didac.blanco/Documents/USC/TFG/latex/TFG_esp_v3.tex" 1674158175 65867 3fde285c32e04a817d69c2b17c333783 ""
+  "TFG_esp_v3.aux" 1674207150 7735 7e937d54ec43e1a900cfdbb0d41244ec "pdflatex"
+  "TFG_esp_v3.bbl" 1674207147 1585 ee723d49535068cbcd1bf48b753cfa1f "bibtex TFG_esp_v3"
+  "TFG_esp_v3.out" 1674207150 3347 4e67379bc40d6153014cf92045f8daa3 "pdflatex"
+  "TFG_esp_v3.tex" 1674207142 69126 432eb198c0d49498ee8fe474b49e523e ""
+  "TFG_esp_v3.toc" 1674207150 1722 e633f8933a5cb56919058350ca37ba51 "pdflatex"
+  "c:/Users/didac.blanco/Documents/USC/TFG/latex/TFG_esp_v3.tex" 1674207142 69126 432eb198c0d49498ee8fe474b49e523e ""
   "logomath.pdf" 1669573257 60333 dc08dee303673bf205af867ee2b779de ""
   (generated)
   "TFG_esp_v3.aux"

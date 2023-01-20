@@ -29,6 +29,7 @@
 \newlist{steps}{enumerate}{1}
 \setlist[steps, 1]{label = Paso \arabic*., leftmargin=2.6cm, topsep=0pt}
 
+\usepackage{xfrac}
 
 
 % Cabeceira
@@ -1159,14 +1160,119 @@ de los pasos del algoritmo previo existen varias posibilidades entre las que ele
 \subsection{Resolución del problema lineal}
 
 En la sección \ref{sec:linealsqp} mostramos 3 formas prácticas de solucionar el problema lineal
-(\ref{eq:more}). En este caso, Moré elige la factorización QR. Si bien es cierto que la resolución
+(\ref{eq:more}). Veamos este caso particular, en el que
+Moré elige la factorización QR. Si bien es cierto que la resolución
 de las ecuaciones normales
 \begin{equation}\label{eq:normalmore}
 	\left(J_k^TJ_k + \lambda_k D_k^TD_k\right)p = -J_k^Tr_k
 \end{equation}
 mediante Cholesky puede ser más simple y eficiente, la factorización QR es más robusta, particularmente
 cuando $\lambda=0$ y $J_k$ no es de rango completo, además de que la evaluación de $J_k^TJ_k$ 
-y $D_k^TD_k$ puede no ser adecuada.
+y $D_k^TD_k$ puede no ser adecuada. Por esto, resolvemos el siguiente problema
+\begin{equation}
+	\label{eq:lsQR}
+	\left[ %matriz de una fila y dos columnas
+	\begin{array}{c}
+		J_k \\
+		\lambda_k^{\sfrac{1}{2}}D_k
+	\end{array}
+	\right]
+	p \cong -\left[
+	\begin{array}{c}
+		r_k \\
+		0
+	\end{array}
+	\right],
+\end{equation}
+por descomposición QR, problema que tiene por ecuaciones normales (\ref{eq:normalmore}).
+Se procede en dos etapas, la primera consiste en descomponer J produciendo una matriz
+ortogonal $Q$ y una permutación $\pi$ de las columnas de J,
+\begin{equation}
+	QJ_k\pi = \left[
+	\begin{array}{cc}
+		T & S\\
+		0 & 0
+	\end{array}
+	\right],
+\end{equation}
+donde $T$ es una matriz triangular superior no singular con el mismo rango que $J$. Si
+$\lambda_k=0$, el problema (\ref{eq:lsQR}) se reduce a resolver el sistema
+según lo visto en la sección \ref{sec:linealsqp},
+\begin{equation}
+	p=\pi
+	\left[
+	\begin{array}{cc}
+		T^{-1} & 0\\
+		0 & 0
+	\end{array}
+	\right]
+	Qr \equiv J^{-}r_k,
+\end{equation}
+donde $J^{-}$ es la pseudo-inversa de $J$, es decir $JJ^{-}$ es simétrica y $JJ^{-}J=J$.
+En el caso de que $\lambda_k>0$, notamos que
+\begin{equation}\label{eq:QR1}
+	\left[
+	\begin{array}{cc}
+		Q & 0\\
+		0 & \pi^T
+	\end{array}
+	\right]
+	\left[
+	\begin{array}{c}
+		J_k \\
+		\lambda_k^{\sfrac{1}{2}}D_k
+	\end{array}
+	\right]
+	\pi = \left[
+	\begin{array}{c}
+		R \\
+		0 \\
+		D_\lambda
+	\end{array}
+	\right],
+\end{equation}
+donde $R$ es una matriz triangular superior y $D_\lambda=\lambda^{\sfrac{1}{2}}\pi^TD_k\pi$
+es una matriz diagonal.
+
+El segundo paso es descomponer el lado derecho de (\ref{eq:QR1}) con el objetivo de eliminar
+la matriz $D_\lambda$. Se obtiene
+\begin{equation}\label{eq:QR2}
+	W\left[
+	\begin{array}{c}
+		R \\
+		0 \\
+		D_\lambda
+	\end{array}
+	\right]
+	=
+	\left[
+	\begin{array}{c}
+		R_\lambda \\
+		0
+	\end{array}
+	\right],
+\end{equation}
+donde $W$ es la rotación de Givens y $R_\lambda$ es una matriz triangular superior de orden $n$
+no singular. Entonces la solución a (\ref{eq:lsQR}) es
+\begin{equation}\label{eq:solQR}
+p=-\pi R_\lambda^{-1}u,
+\end{equation}
+con $u\in \mathbb{R}^n$ determinado por
+\begin{equation}\label{eq:QR3}
+	W\left[
+	\begin{array}{c}
+		Qr_k \\
+		0 
+	\end{array}
+	\right]
+	= \left[
+	\begin{array}{c}
+		u\\
+		v
+	\end{array}
+	\right].
+\end{equation}
+Destacar que un cambio en $\lambda$ solo afecta al segundo paso.
 
 \subsection{Actualización del radio $\Delta_k$}
 
@@ -1178,7 +1284,7 @@ dado por
 \end{equation}
 Como la predicción se hace por el modelo lineal, en el caso de que $r(x)$ sea lineal, $\rho=1$,
 y cuando $J(x_k)^Tr(x_k) \neq 0$, cuanto menor sea el paso $p_k$, mayor será el ratio $\rho$. Para
-evitar errores numéricos por desbordamiento, multiplicamos en ambos lados de las ecuaciones normales (\ref{normalmore})
+evitar errores numéricos por desbordamiento, multiplicamos en ambos lados de las ecuaciones normales (\ref{eq:normalmore})
 por $2p^T$, que resulta en
 \begin{equation}\label{eq:normnorm}
 	\norm{r_k}^2 - \norm{r_k + J_kp}^2 = \norm{J_kp}^2 + 2\lambda_k\norm{D_kp}^2.
