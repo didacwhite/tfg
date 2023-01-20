@@ -206,8 +206,14 @@ Aplicaciones a la estimación de parámetros de modelos matemáticos.}		%  escri
 	\bf Breve descrici\'on do contido\\ \hline
 	\begin{minipage}{11.5cm}
 		{\vspace*{.2cm}
-O problema non linear de mínimos cadrados zurde en moutas aplicacións da ciencia e da enxeñería: no axuste dun conxunto de datos a un modelo matemático, na estimación de parámetros, na aproximación de funcións, etc. O obxectivo do traballo fin de grao é o estudo de métodos numéricos para abordar o problema de minimización resultante. centrándose especialmente no algoritmo de Levenberg-Marquardt. O estudante estudará o método, no marco dos métodos de optimización con rexión de confianza e familiarizarase co seu uso mediante o comando Isqnonlin de Matlab. As metodoloxías estudadas aplicaranse a exemplos académicos e á estimación de parámetros de distintos modelos matemáticos a partir de datos experimentais.
-		
+O problema non linear de mínimos cadrados xurde en moitas aplicacións da ciencia e da enxeñería:
+no axuste dun conxunto de datos a un modelo matemático, na estimación de parámetros,
+na aproximación de funcións, etc. O obxectivo do traballo fin de grao é o estudo de métodos
+numéricos para abordar o problema de minimización resultante. centrándose especialmente no
+algoritmo de Levenberg-Marquardt. O estudante estudará o método, no marco dos métodos de
+optimización con rexión de confianza e familiarizarase co seu uso mediante o comando
+Isqnonlin de Matlab. As metodoloxías estudadas aplicaranse a exemplos académicos e á
+estimación de parámetros de distintos modelos matemáticos a partir de datos experimentais.
 		\vspace{.2cm}}
 	\end{minipage}\\ \hline
 	{\bf Recomendaci\'ons}\\ \hline
@@ -554,7 +560,8 @@ Normalmente se elige $\eta_1 = 0.25$ y $\eta_2 = 0.75$, mientras que $\gamma_1 =
 Además, la elección de $\Delta^{k+1}$ se puede obtener por interpolación polinómica dentro del intervalo,
 aunque es usual tomar el valor mayor del intervalo.
 
-Para que este algoritmo sea práctico, nos centramos en la resolución del subproblema (\ref{min:tr}). Tomemos una notación más limpia,
+Concluyamos con la caracterización de la solución del subproblema (\ref{min:tr}) en la que,
+por conveniencia, omitimos los subíndices para una notación más clara,
 \begin{equation}
 \label{min:tr_nk}
 \begin{aligned}
@@ -564,21 +571,19 @@ Para que este algoritmo sea práctico, nos centramos en la resolución del subpr
 \end{equation}
 
 \begin{theorem} \label{th:trustregion}
-	El vector $p^*$ es una solución global de (\ref{min:tr_nk}) si y solo si $p^*$ es factible y existe un escalar $\lambda \geq 0$ tal que se cumplen las siguientes condiciones:
+	El vector $p^*$ es una solución global de (\ref{min:tr_nk}) si y solo si $p^*$ es factible y existe un escalar $\lambda^* \geq 0$ tal que
 \begin{enumerate}
 %\vspace{-0.3cm}
-	\item $(B+\lambda I)p^*=-g,$
-	\item $\lambda (\Delta - \norm{p^*}) = 0,$
-	\item $(B+\lambda I)$ es semidefinida positiva.
+	\item $(B+\lambda^* I)p^*=-g,$
+	\item $\lambda^* (\Delta - \norm{p^*}) = 0,$
+	\item $(B+\lambda^* I)$ es semidefinida positiva.
 \end{enumerate}
 \end{theorem}
-\begin{proof}
-(página 90 Nocedal).
-\end{proof}
 
 Este teorema caracteriza la solución según el primer punto. El segundo punto es una condición complementaria que nos dice que al menos uno de los dos factores es 0.
 Esto es, si $\norm{p}<\Delta$, $\lambda$ tendrá que ser 0 y $Bp^*=-g$ con $B$ definida positiva (puntos 1 y 3).
 En el caso de que $\norm{p}$ se maximice, lo cual da a entender que la solución óptima no se encuentra dentro de la región de confianza, $\lambda$ podrá tomar valores positivos.
+Para la demostración referimos a \cite[Sección 4.3]{Nocedal2006-kh} o \cite[Teorema 6.1]{Sun2006-au}.
 
 Respecto a la convergencia de este algoritmo, veremos únicamente un resultado relevante para el estudio realizado en el
 tercer capítulo. Para ello, veamos primero una serie de condiciones que se suponen ciertas para los resultados
@@ -1356,7 +1361,7 @@ definimos la cota inferior
 \end{equation}
 En otro caso, $l_0=0$.
 
-\begin{algorithm}\leavevmode
+\begin{algorithm}[Parámetro Levenberg-Marquardt]\leavevmode
 	\begin{steps}
 		\item Si $\alpha_k \notin (l_k, u_k)$, definir $\alpha_k = \max \{0.001u_k, (l_ku_k)^{1/2}\}$.	
 		\item Calcular $\phi(\alpha_k)$ y $\phi'(\alpha_k)$. Actualizar $l_k$ y $u_k$:
