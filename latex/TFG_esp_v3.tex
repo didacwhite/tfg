@@ -829,7 +829,7 @@ Para concluir observamos que el método encaja dentro de los métodos de búsque
 
 \chapter{El método de Levenberg-Marquardt}
 
-El método de Levenberg-Marquardt soluciona la necesidad de que $J$ sea de rano completo cambiando el enfoque de búsqueda de línea por el de región de confianza.
+El método de Levenberg-Marquardt soluciona la necesidad de que $J$ sea de rango completo cambiando el enfoque de búsqueda de línea por el de región de confianza.
 Lo hace manteniendo la raíz del método de Gauss-Newton, la linealización del problema obviando el término cuadrático, esto es, usando la aproximación $\nabla^2 f(x_k) \approx J(x_k)^TJ(x_k)$.
 Este cambio de enfoque surge de que la linealización pierde efectividad según nos alejamos de $x_k$, por lo que conviene restringir el tamaño de $p=(x-x_k)$. Consideramos el problema:
 \begin{equation}
@@ -1387,7 +1387,7 @@ factorización QR.
 \subsection{Escalado}
 Ya que el propósito de la matriz $D_k$ en el algoritmo de Levenberg-Marquardt es tener en cuenta
 el escalado del problema, algunos autores eligen
-\begin{equation}
+\begin{equation}\label{eq:diag}
 	D_k = diag(d_1^{(k)}, \ldots, d_n^{(k)}),
 \end{equation}
 con
@@ -1396,10 +1396,12 @@ con
 \end{equation}
 Siempre que $\norm{\partial_ir(x_k)}$ no crezca respecto a k esta elección es adecuada, en caso contrario
 se ve afectada la efectividad del algoritmo y por esta razón se propone la elección
-\begin{align*}
+\begin{equation} \label{eq:di}
+	\begin{split}
 	d_i^{(0)} &= \norm{\partial_ir(x_0)}, \\
 	d_i^{(k)} &= \max \{d_i^{(k-1)}, \norm{\partial_ir(x_k)}\}, k\geq 1.
-\end{align*}
+	\end{split}
+\end{equation}
 
 Entre elecciones posibles,
 siempre que $D$ sea diagonal con elementos positivos, el algoritmo genera las mismas iteraciones tanto si aplicamos
@@ -1407,8 +1409,61 @@ el algoritmo a $r(x)$ empezando en $x_0$ como si aplicamos el algoritmo a $r(D^{
 Por esta razón se dice que el algoritmo es invariante al escalado. Para decir esto se asume que la elección
 de $\Delta$ se basa únicamente en (\ref{eq:rho1}), lo que mantiene la invarianza.
 
+Finalmente, Moré presenta la siguiente versión del algoritmo de Levenberg-Marquardt.
 
+\subsection{La versión de Moré}
 
+\begin{algorithm}[Versión de Moré]\label{alg:more}\leavevmode
+\begin{steps}
+	\item Sea $\sigma \in (0,1)$. Si $\norm{D_kJ_k^{-}r_k} \leq (1+\sigma) \Delta_k$,
+	asignar $\lambda_k = 0$ y $p_k = -J_k^{-}r_k$. En otro caso, encontar $\lambda_k$
+	tal que si
+	\begin{equation}
+		\left[
+			\begin{array}{c}
+				J_k \\
+				\lambda_k^{\sfrac{1}{2}}D_k
+			\end{array}
+		\right]p_k
+		\cong
+		-\left[
+			\begin{array}{c}
+				r_k \\
+				0
+			\end{array}
+		\right],
+	\end{equation}
+	entonces
+	\begin{equation}
+		(1-\sigma)\Delta_k \leq \norm{D_kp_k} \leq (1+\sigma)\Delta_k.
+	\end{equation}
+	\item Determinar la relación $\rho_k$ entre reducción real y la esperada.
+	\item Si $\rho_k \leq 0.0001$, asignar $x_{k+1} = x_k$ y $J_{k+1} = J_k$. \\
+	Si $\rho_k > 0.0001$, asignar $x_{k+1} = x_k + p_k$ y calcular $J_{k+1} = J(x_{k+1})$.
+	\item Si $\rho_k \leq 1/4$, asignar $\Delta_{k+1} \in \left[
+		\frac{1}{10}\Delta_k, \frac{1}{4}\Delta_k \right]$. \\
+		Si $\rho_k \in \left[ 1/4, 3/4 \right]$ y $\lambda_k = 0$,
+		asignar $\Delta_{k+1} = 2\norm{D_kp_k}$.
+	\item Actualizar $D_k$ por (\ref{eq:diag}) y (\ref{eq:di}).
+\end{steps}
+\end{algorithm}
+
+\begin{theorem}[Convergencia de la versión de Moré]\label{th:more}
+	Sea $r:\mathbb{R}^n \to \mathbb{R}^m$ una función continuamente diferenciable y
+	sea $\sucesionxk$ generada por el algoritmo \ref{alg:more}. Entonces,
+	\begin{equation}
+		\liminf_{k\to +\infty} \norm{(J_kD_k^{-1})^Tr_k} = 0.
+	\end{equation}
+	Lo que garantiza que el gradiente escalado será lo suficientemente pequeño.
+	Si además $\sucesion{J_k}$ es acotada, esto implica que
+	\begin{equation}
+		\liminf_{k\to +\infty} \norm{J_k^Tr_k} = 0.
+	\end{equation}
+	Por último, si $\nabla r(x)$ es uniformemente continua, entonces
+	\begin{equation}
+		\lim_{k\to +\infty} \norm{J_k^Tr_k} = 0.
+	\end{equation}
+\end{theorem}
 
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix

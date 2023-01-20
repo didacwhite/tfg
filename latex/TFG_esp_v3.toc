@@ -16,6 +16,7 @@
 \contentsline {subsection}{\numberline {3.3.2}Actualización del radio $\Delta _k$}{23}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}El parámetro Levenberg-Marquardt}{24}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Escalado}{25}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}La versión de Moré}{26}{subsection.3.3.5}%
 \contentsline {chapter}{\numberline {I}Título del Anexo I}{27}{appendix.Alph1}%
 \contentsline {chapter}{\numberline {II}Título del Anexo II}{29}{appendix.Alph2}%
 \contentsline {chapter}{Bibliograf\'{\i }a}{31}{appendix*.9}%
