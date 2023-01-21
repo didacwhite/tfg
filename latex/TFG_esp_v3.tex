@@ -22,7 +22,7 @@
 \usepackage{appendix}
 \usepackage{hyperref}
 
-
+\usepackage{pgfplots}
 
 \usepackage{algpseudocode}
 \usepackage{enumitem}
@@ -296,12 +296,17 @@ Un problema de optimización sin restricciones tiene la forma
 	\min_{x}f\left(x\right),
 	\label{eq:minf}
 \end{equation}
-donde $x\in\mathbb{R}^{n}$ y $f : \mathbb{R}^{n} \rightarrow \mathbb{R}$ es continuamente diferenciable, la llamamos \textbf{función objetivo}. 
-Notar que podemos usar esta formulación para referirnos tanto a los problemas de minimización como de maximización, basta sustituir $f$ por $-f$. 
+donde $x\in\mathbb{R}^{n}$ y $f : \mathbb{R}^{n} \rightarrow \mathbb{R}$ es continuamente
+diferenciable, a f se le llama \textbf{función objetivo}. 
+Notar que podemos usar esta formulación para referirnos tanto a los problemas de minimización
+como de maximización, basta sustituir $f$ por $-f$. 
 
-La dificultad de un problema como este viene de no conocer el comportamiento global de $f$, normalmente solo disponemos de la evaluación de f en algunos puntos, y a lo mejor de algunas de sus derivadas. El trabajo de los algoritmos de optimización es identificar la solución sin usar demasiado tiempo ni almacenamiento computacional.
-
-% W. Sun es más formal en este caso para definir ambos mínimos 
+La dificultad de un problema como este viene por no conocer el comportamiento
+global de $f$. Normalmente solo disponemos de la evaluación de f en algunos puntos y,
+a lo mejor, de algunas de sus derivadas. El trabajo de los algoritmos de
+optimización es identificar la solución sin usar demasiado tiempo ni almacenamiento computacional.
+Veamos una serie de definiciones y resultados necesarios.
+ 
 \begin{definition}
 	A una aplicación $\Vert \cdot \Vert$ se le llama \textit{norma} si y sólo si cumple:
 	\vspace{-0.4cm}
@@ -328,9 +333,14 @@ Un ejemplo muy común es la
 	Un punto $x^*$ se dice \textit{mínimo global estricto} si $f(x^*) < f(x)$ para todo $x \in \mathbb{R}^n$ con $x \neq x^*$.
 \end{definition}
 
-Como no se suele tener un conocimiento a gran escala de $f$ debido a su coste, la mayoría de algoritmos solo encuentran mínimos locales, lo cual es suficiente para muchos casos prácticos.
+Como no se suele tener un conocimiento a gran escala de $f$ debido a su coste computacional,
+la mayoría de algoritmos solo encuentran mínimos locales, lo cual es suficiente para muchos
+casos prácticos.
 
-Aún así, los algoritmos para encontrar mínimos globales se suelen construír a partir de una secuencia de otros algoritmos de optimización local. También podemos aprovechar características fáciles de detectar en la función objetivo, como la convexidad, que nos asegura que un mínimo local será también global.
+Aún así, los algoritmos para encontrar mínimos globales se suelen construír a partir de una
+secuencia de otros algoritmos de optimización local. También podemos aprovechar características
+fáciles de detectar en la función objetivo, como la convexidad, que nos asegura que un mínimo
+local será también global.
 
 %% REPASO DE ALGORITMOS
 
@@ -365,7 +375,8 @@ $x \in \mathbb{R}^n$ tal que $\langle \nabla f(x), d \rangle < 0$, entonces a $d
 
 
 \begin{proposition}
-Partiendo de la reformulación de (\ref{eq:thty}) y teniendo en cuenta que el último término es el error de aproximación $o(t)$
+Partiendo de la reformulación de (\ref{eq:thty}) y teniendo en cuenta que el último término
+es el error de aproximación $o(t)$
 \begin{equation}
 	f(x_k + td) = f(x_k) + t \nabla f(x_k)^Td + o(t),
 \end{equation}
@@ -381,26 +392,35 @@ si y solo si $d$ es una dirección descendiente de $f$ en $x_k$.
 Tratemos ahora las condiciones de optimalidad.
 
 \begin{theorem}[Condición Necesaria de Primer Orden]
-	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ continuamente diferenciable en un conjunto abierto $D$. Si $x^*$ es un mínimo local de (\ref{eq:minf}), entonces $\nabla f(x^*) = 0$.
+	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ continuamente diferenciable en un
+	conjunto abierto $D$. Si $x^*$ es un mínimo local de (\ref{eq:minf}), entonces
+	$\nabla f(x^*) = 0$.
 \end{theorem}
 
 \begin{theorem}
 	(Condición Necesaria de Segundo Orden)
-	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable en un conjunto abierto $D$. Si $x^*$ es un mínimo local de (\ref{eq:minf}), entonces $\nabla f(x^*) = 0$ y $\nabla^2 f(x^*)$ es definida positiva.
+	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable
+	en un conjunto abierto $D$. Si $x^*$ es un mínimo local de (\ref{eq:minf}), entonces
+	$\nabla f(x^*) = 0$ y $\nabla^2 f(x^*)$ es definida positiva.
 \end{theorem}
 
 \begin{theorem}[Condición Suficiente de Segundo Orden]
-	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable en un conjunto abierto $D$. Si $\nabla f(x^*) = 0$ y $\nabla^2 f(x^*)$ es definida positiva, entonces $x^* \in D$ es un mínimo local.
+	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable
+	en un conjunto abierto $D$. Si $\nabla f(x^*) = 0$ y $\nabla^2 f(x^*)$ es definida positiva,
+	entonces $x^* \in D$ es un mínimo local.
 \end{theorem}
 
-Para poder dar un último resultado para soluciones óptimas en minimización, veamos unas últimas definiciones.
+Para finalizar con los resultados previos, tratemos el concepto de convexidad, una propiedad
+que nos permitirá encontrar mínimos globales.
 
 \begin{definition}
 	Sea $S\subset \mathbb{R}^n$ y sean $x_1, x_2 \in S$ cualesquiera. Si
-	$\alpha x_1 + (1 - \alpha)x_2 \in S$ para todo $\alpha \in [0,1]$, entonces se dice que D es un \textit{conjunto convexo}.
+	$\alpha x_1 + (1 - \alpha)x_2 \in S$ para todo $\alpha \in [0,1]$, entonces se dice que D
+	es un \textit{conjunto convexo}.
 \end{definition}
 \begin{definition}
-	Sea $S \subset \mathbb{R}^n$ un conjunto convexo no vacío. Sea $f: S \subset \mathbb{R}^n \rightarrow R$. Si para cualquiera $x_1, x_2 \in S$ y
+	Sea $S \subset \mathbb{R}^n$ un conjunto convexo no vacío. Sea $f: S \subset \mathbb{R}^n
+	\rightarrow R$. Si para cualquiera $x_1, x_2 \in S$ y
 	$\alpha \in (0,1)$, se cumple que
 	\begin{equation}
 		f(\alpha x_1 + (1-\alpha)x_2) \leq \alpha f(x_1) + (1-\alpha)f(x_2),
@@ -410,26 +430,37 @@ Para poder dar un último resultado para soluciones óptimas en minimización, v
 
 \begin{theorem}
 	Sea $S \subset \mathbb{R}^n$ un conjunto convexo no vacío y
-	$f:S \subset \mathbb{R}^n \rightarrow \mathbb{R}$ una función convexa. Si $x^*$ es mínimo local de (\ref{eq:minf}), entonces también es mínimo global.
+	$f:S \subset \mathbb{R}^n \rightarrow \mathbb{R}$ una función convexa. Si $x^*$ es mínimo
+	local de (\ref{eq:minf}), entonces también es mínimo global.
 \end{theorem}
 
 \begin{theorem} \label{th:convx}
-	Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}$ convexa y diferenciable, entonces $x^*$ es un mínimo global si y solo si $\nabla f(x^*) = 0$.
+	Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}$ convexa y diferenciable, entonces $x^*$ es un
+	mínimo global si y solo si $\nabla f(x^*) = 0$.
 \end{theorem}
 
-Todo algoritmo de optimización sin restricciones comienza con un punto de partida, denotado normalmente como $x_{0}$. Aunque generalmente el usuario introduce una estimación razonable, el punto puede ser elegido por el algoritmo, tanto de forma sistemática como aleatoria. El algoritmo itera sobre $x_{0}$, creando una sucesión $\sucesionxk_{k=0}^n$ la cual termina cuando no pueda continuar o cuando ya se haya acercado razonablemente a la solución. Para decidir como se avanza de un $x_k$ al siguiente, los algoritmos utilizan información sobre $f(x_k)$ o incluso en los puntos anteriores $x_0,\, x_1,\, \ldots,\,x_{k-1}$ con el objetivo de que $f(x_{k+1})<f(x_{k})$. Hablaremos de las dos estrategias fundamentales que se utilizan para avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
+Todo algoritmo de optimización sin restricciones comienza con un punto de partida, denotado
+normalmente como $x_{0}$. Aunque generalmente el usuario introduce una estimación razonable,
+el punto puede ser elegido por el algoritmo, tanto de forma sistemática como aleatoria.
+El algoritmo itera sobre $x_{0}$, creando una sucesión $\sucesionxk_{k=0}^n$ la cual termina
+cuando no pueda continuar o cuando ya se haya acercado razonablemente a la solución. Para decidir
+como se avanza de un $x_k$ al siguiente, los algoritmos utilizan información sobre $f(x_k)$ o
+incluso en los puntos anteriores $x_0,\, x_1,\, \ldots,\,x_{k-1}$ con el objetivo de que
+$f(x_{k+1})<f(x_{k})$. Hablaremos de las dos estrategias fundamentales que se utilizan para
+avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
 
 \section{Búsqueda de línea}
 
-En este caso el algoritmo tiene dos tareas a partir de cada iteración, primero elige una \textit{dirección} $d_k$ y tomando el punto de partida busca en esa dirección el nuevo valor. Es decir, dado $x_k$
-\begin{equation}
-	\label{eq:linesearch}
-	x_{k+1} = x_k + \alpha_kd_k
+En este caso el algoritmo tiene dos tareas a partir de cada iteración, primero elige
+una \textit{dirección} $d_k$ y tomando el punto de partida busca en esa dirección el
+nuevo valor. Es decir, dado $x_k$, obtiene
+\begin{equation} \label{eq:linesearch}
+	x_{k+1} = x_k + \alpha_kd_k,
 \end{equation}
-para un $d_k$ elegido previamente, y un \textit{paso} $\alpha_k$ obtenido solucionando otro problema de minimización más simple por ser unidimensional:
-\begin{equation}
+para un $d_k$ elegido previamente y un \textit{paso} $\alpha_k$ obtenido solucionando
+otro problema de minimización más simple:
+\begin{equation} \label{min:alphak}
 	\min_{\alpha_k>0}f\left(x_k+\alpha_kd_k\right).
-	\label{min:alphak}
 \end{equation}
 
 Si se toma el $\alpha_k$ óptimo se le llama búsqueda de línea \textit{exacta} u \textit{óptima}. Para evitar el gran coste computacional que puede llegar a tomar, lo más común es tomar un $\alpha_k$ que aporte un descenso aceptable, en cuyo caso se le llama búsqueda de línea \textit{inexacta} o \textit{aproximada}. Desde el nuevo punto se busca otra dirección y paso para repetir el proceso.
@@ -493,8 +524,11 @@ Se suele utilizar el modelo cuadrático $q^{(k)}$ visto anteriormente (\ref{eq:N
 	m_k(p) := q^{(k)}(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TG_kp.
 \end{equation}
 
-Como hemos visto, este modelo se utiliza en los métodos de búsqueda de línea para determinar la dirección de búsqueda, mientras que en este caso lo usamos para tener una representación adecuada de la función objetivo y así elegir el mínimo dentro de esta región.
-Este método nos evita el problema de que la Hessiana no sea definida positiva.
+Como hemos visto, este modelo se utiliza en los métodos de búsqueda de línea para determinar
+la dirección de búsqueda, mientras que en este caso lo usamos para tener una representación
+adecuada de la función objetivo y así elegir el mínimo dentro de esta región.
+Para este método no es necesario que la Hessiana sea definida positiva,
+lo cual nos supone una ventaja.
 En cada iteración, una vez elegido $\Delta_k$ se resuelve el siguiente problema:
 \begin{equation}
 \label{min:tr}
@@ -504,15 +538,23 @@ En cada iteración, una vez elegido $\Delta_k$ se resuelve el siguiente problema
 \end{aligned}
 \end{equation}
 Notamos que en el modelo se escribe $B_k$ en lugar de $G_k$, pues no siempre se usa esta última.
-Debido al coste computacional, como vimos en la elección de la dirección de búsqueda, a veces se prefiere aproximar de alguna manera más o menos eficiente, e incluso puede ser aceptable tomar la matriz $0$.
+Debido al coste computacional, como vimos en la elección de la dirección de búsqueda, a veces se
+prefiere aproximar de alguna manera más o menos eficiente, e incluso puede ser aceptable tomar la
+matriz $0$. Como apunte, la elección de distintas normas puede ser conveniente según el caso,
+aunque generalmente se utiliza la bola definida por
+$\Vert p \Vert_2 \leq \Delta_k$.
 
-También se puede elegir qué norma define la región de confianza, cambiando así la forma de esta y ofreciendo distintos resultados, aunque generalmente se utiliza la bola definida por $\Vert p \Vert_2 \leq \Delta_k$.
+La efectividad de cada iteración depende de la elección del radio $\Delta_k$, es por ello que
+puede que la primera elección de este no sea la definitiva. Es decir, se toma un radio a raíz
+de la información que se tenga, esta puede incluír la de pasos anteriores, y luego se decide si
+este radio nos da un resultado aceptable. Un radio demasiado pequeño nos puede hacer perder la
+oportunidad de ser mucho más rápidos, pero para un paso demasiado grande, el mínimo de la función
+modelo $m_k$ puede estar lejos del mínimo de la función objetivo. Por esta razón, en cada paso
+se valora actualizar $\Delta_k$ para que el radio sea más grande o más pequeño.
 
-La efectividad de cada iteración depende de la elección del radio $\Delta_k$, es por ello que puede que la primera elección de este no sea la definitiva. Es decir, se toma un radio a raíz de la información que se tenga, esta puede incluír la de pasos anteriores, y luego se decide si este radio nos da un resultado aceptable. Un radio demasiado pequeño nos puede hacer perder la oportunidad de ser mucho más rápidos, pero un paso demasiado grande, el mínimo de la función modelo $m_k$ puede estar lejos del mínimo de la función objetivo. Este último caso es el que se comprueba y se decide si reducir la región de confianza.
-
-Una vez tomado el radio, encontrar el mínimo es directo en el caso de que $B_k$ sea definida positiva, basta tomar $p_k^B = -B_k^{-1}g_k$, conocido como \textit{paso completo}. En caso contrario tampoco supone una tarea muy costosa ya que sólo se necesita una solución aproximada para garantizar la convergencia.
-
-Veamos ahora de forma detallada como se elige el radio $\Delta_k$ en cada iteración. Esta elección se toma según el parecido entre la función $f$ y el modelo $m_k$ tomado en las iteraciones previas. Dado $p_k$, definimos el ratio
+Veamos ahora de forma detallada como se elige el radio $\Delta_k$ en cada iteración. Esta elección
+se toma según el parecido entre la función $f$ y el modelo $m_k$ tomado en las iteraciones previas.
+Dado $p_k$, definimos el ratio
 \begin{equation}
 \label{eq:rho_k}
 	\rho_k = \frac{f(x_k)-f(x_k+p_k)}{m_k(0)-m_k(p_k)},
@@ -522,7 +564,12 @@ La reducción prevista será positiva por definición, pues $p_k$ es elegido par
 Por tanto, si $\rho_k$ es negativo, el nuevo valor $f(x_k+p_k)$ no es menor que $f(x_k)$ y este paso ha de ser rechazado.
 Por otro lado, si $\rho_k$ es cercano a $1$, esto quiere decir que $f$ y $m_k$ se comportan de manera similar en la región tomada en la iteración actual, por tanto podemos agrandar el radio con seguridad.
 En resumen, nos quedamos con el radio elegido si $\rho_k$ no tiene un valor muy cercano a $0$ o a $1$.
-El proceso se describe en el siguiente algoritmo.
+
+Una vez tomado el radio, encontrar el mínimo es directo en el caso de que $B_k$ sea definida
+positiva, basta tomar $p_k^B = -B_k^{-1}g_k$, conocido como \textit{paso completo}. En caso
+contrario tampoco supone una tarea muy costosa ya que sólo se necesita una solución aproximada
+para garantizar la convergencia. El proceso se describe en el siguiente algoritmo.
+
 \begin{algorithm}[Región de confianza] \leavevmode
 	\label{alg:tr}
 	\begin{steps}
@@ -544,15 +591,14 @@ El proceso se describe en el siguiente algoritmo.
 		\item Calcular $B_{k+1}$, actualizar $m^{(k)}$ y $k:=k+1$. Ir al Paso 2.
 	\end{steps}
 \end{algorithm}
-En el paso 5, el primer caso se dice que resulta en una iteración no exitosa, mientras que el segundo caso marcará
-una iteración exitosa y el tercero una muy exitosa.
-Añadir que $\bar \Delta$ es el máximo radio de la región para toda iteración y que únicamente se aumenta el radio
-en el caso de que $\norm{p_k} = \Delta_k$,
-ya en caso contrario, se entiende que el $\Delta_k$ elegido no influye en la elección
-de forma negativa.
+Si nos fijamos, en el paso 5 se define la actualización de $\Delta_k$, la cual no siempre supone un cambio.
+El primer caso se dice que resulta en una \textit{iteración no exitosa}, mientras que el segundo caso marcará
+una \textit{iteración exitosa} y el tercero una \textit{iteración muy exitosa}.
+Añadir que $\bar \Delta$ es el máximo radio de la región para toda iteración.
 Normalmente se elige $\eta_1 = 0.25$ y $\eta_2 = 0.75$, mientras que $\gamma_1 = 0.25$ y $\gamma_2 = 2$.
-Además, la elección de $\Delta^{k+1}$ se puede obtener por interpolación polinómica dentro del intervalo,
-aunque es usual tomar el valor mayor del intervalo.
+Además, la elección de $\Delta^{k+1}$ se puede obtener por interpolación polinómica dentro del
+intervalo dado,
+aunque es común tomar el máximo del intervalo.
 
 Para que este algoritmo sea práctico, nos centramos en la resolución del subproblema (\ref{min:tr}). Tomemos una notación más limpia,
 \begin{equation}
