@@ -631,20 +631,22 @@ Esto es, si $\norm{p}<\Delta$, $\lambda$ tendrá que ser 0 y $Bp^*=-g$ con $B$ d
 En el caso de que $\norm{p}$ se maximice, lo cual da a entender que la solución óptima no se encuentra dentro de la región de confianza, $\lambda$ podrá tomar valores positivos.
 Para la demostración referimos a \cite[Sección 4.3]{Nocedal2006-kh} o \cite[Teorema 6.1]{Sun2006-au}.
 
-Respecto a la convergencia de este algoritmo, veremos únicamente un resultado relevante para el estudio realizado en el
-tercer capítulo. Para ello, veamos primero una serie de condiciones que se suponen ciertas para los resultados
-relativos a este algoritmo.
+Respecto a la convergencia de este algoritmo, veremos un resultado relevante para el estudio realizado en el
+tercer capítulo.
+Si fuera de interés, se puede consultar \cite[Sección 6.1.2]{Sun2006-au}.
 
-Suponemos que $\norm{B_k}$ es uniformemente acotada para cada $k$
-y que el conjunto de nivel $\{x\,|\,f(x)\leq f(x_0)\}$ es acotado, con $f: \mathbb{R}^n \to \mathbb{R}$ continuamente
-diferenciable. Además, para generalizar el subproblema (\ref{min:tr_nk}) y calcular cada $\norm{p_k}$, permitimos
+\begin{theorem} \label{th:conv-tr}
+Se supone $\norm{B_k}$ uniformemente acotada para cada $k$
+y que el conjunto de nivel $\{x\,|\,f(x)\leq f(x_0)\}$ es acotado, con $f: \mathbb{R}^n \to \mathbb{R}$
+continuamente
+diferenciable. Además, para generalizar el subproblema (\ref{min:tr_nk}) y calcular cada $\norm{p_k}$,
+se permite
 un exceso sobre la cota con un pequeño margen, esto es
 \begin{equation}
-	\norm{p_k} \leq \tilde{eta} \Delta_k,
+	\norm{p_k} \leq \tilde{\eta} \Delta_k,
 \end{equation}
 siendo $\tilde{\eta}$ constante positiva.
-\begin{theorem} \label{th:conv-tr}
-Bajo estas condiciones comunes, si el algoritmo (\ref{alg:tr}) tiene las suficientes iteraciones exitosas,
+Si el algoritmo (\ref{alg:tr}) tiene las suficientes iteraciones exitosas,
 entonces la sucesión que genera cumplirá
 \begin{equation}
 	\liminf_{k\to \infty} \norm{g_k} = 0.
@@ -654,12 +656,13 @@ entonces la sucesión que genera cumplirá
 %campos en los que se utiliza??? 
 
 El problema de mínimos cuadrados surge de la necesidad de ajustar modelos que nos permitan predecir ciertos comportamientos en una amplia variedad de campos. Dados unos datos $(t_1,y_1),(t_2,y_2),\cdots,(t_m,y_m)$, queremos ajustar una función
-$\phi(t,x)$ de forma que se minimicen los residuos $r_i(x) = \phi(t_i,x) - y_i$ para $i=1,\cdots,m$
+$\phi(t,x):\mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ de forma que se minimicen los residuos $r_i(x) = \phi(t_i,x) - y_i$ para $i=1,\cdots,m$
 \begin{equation}
 	\min_{x\in \mathbb{R}^{n}}f(x) = \frac{1}{2} r(x)^Tr(x) = \frac{1}{2}\sum_{i=1}^{m}r_i^2(x), \quad m\geq n,
 	\label{eq:lsp}
 \end{equation}
-donde $r(x) = (r_1(x), r_2(x), \ldots, r_m(x))^T$, con $r_i : \mathbb{R}^{n} \rightarrow \mathbb{R}$ funciones continuamente diferenciables. 
+donde $r(x) = (r_1(x), r_2(x), \ldots, r_m(x))^T$, con $r_i : \mathbb{R}^{n} \rightarrow \mathbb{R}$
+funciones continuamente diferenciables y $x$ es el parámetro de dimensión n a estimar.
 
 %Se asume que $m \geq n$ para este problema, de hecho en la práctica lo más común es que $m \gg n$. 
 
@@ -703,7 +706,10 @@ El gradiente y la Hessiana de $f$ se pueden expresar como sigue:
 	&= J(x)^TJ(x)+S(x). \label{eq:hess}
 \end{align}
 
-Si nos fijamos en la formulación de la matriz Hessiana, el cálculo del primer termino es directo gracias a que ya obtenemos $J(x)$ para calcular el gradiente (\ref{eq:grad}), así que el coste se reduce al segundo término, que hemos denotado $S(x)$.
+Si nos fijamos en la formulación de la matriz Hessiana, el cálculo del primer termino es directo
+gracias a que ya obtenemos $J(x)$ para calcular el gradiente (\ref{eq:grad}), así que el coste de obtener
+$G(x)$ se reduce
+al segundo término, que hemos denotado $S(x)$.
 Adaptando el modelo cuadrático (\ref{eq:NewtonQ})
 %Veamos la expresión del modelo cuadrático de $f(x)$ utilizando (\ref{eq:lsp}), (\ref{eq:grad}) y (\ref{eq:hess}):
 \begin{equation}
@@ -722,7 +728,8 @@ El primer caso más sencillo es si $\phi (t, x)$ es una función lineal, en cuyo
 $r_i(x)$ también serán lineales.
 Por ser $\phi$ lineal, se puede representar como $Jx$, con $J$ una matriz
 $m\times n$.
-Realizaremos un estudio del caso lineal para tener un conocimiento de como se enfocan estos problemas, que nos servirá para entender mejor el caso no lineal.
+Realizaremos un estudio del caso lineal para tener un conocimiento de como se enfocan estos problemas,
+que nos servirá para el caso no lineal.
 Si escribimos el vector residuo como $r(x) = Jx-y$, la función objetivo nos queda de la forma
 \begin{equation}
 	f(x) = \frac{1}{2} \Vert Jx-y \Vert^2.
@@ -734,7 +741,7 @@ En consecuencia, tomando como referencia (\ref{eq:grad}) y (\ref{eq:hess}) y ten
 \end{equation}
 
 Como $f$ es convexa, dado un punto $x^*$ tal que $\nabla f(x^*) = 0$, este será mínimo global (\ref{th:convx}). Por tanto, $x^*$ satisface el siguiente sistema lineal:
-\begin{equation}
+\begin{equation}\label{eq:linsis}
 	J^TJx^* = J^Ty.
 \end{equation}
 
@@ -767,7 +774,18 @@ Antes de ver como se resuelve numéricamente este sistema de ecuaciones, conocid
 	Si tomamos los sistemas de vectores de una una matriz $A_{m \times n}$, $\sucesion{u_i}_{i=1}^n$ y $\sucesion{v_i}_{i=1}^m$, al número máximo de vectores linealmente independientes se le llama \textit{rango}, tanto de los sistemas de vectores como de la matriz $A$. Si $n<m$, se dice que $A$ es de \textit{rango completo} si su rango es $n$, que es el máximo posible.
 \end{definition}
 
-Lo más común en este caso para resolver numéricamente es usar distintos tipos de factorización sobre la matriz $J^TJ$ o sobre $J$, para luego resolver con sustituciones triangulares.
+\begin{definition}
+	Sea $A$ una matriz cuadrada. Un vector $x$ se dice \textit{autovector} (vector propio o
+	eigenvector en inglés) de $A$ si existe un
+	escalar $\lambda$ tal que $Ax=\lambda x$. A este escalar se le llama \textit{autovalor} 
+	(valor propio o eigenvalue) de $A$. Dado un autovalor, el conjunto de autovectores asociados
+	a este forma un subespacio llamado \textit{subespacio propio}. Se le llama \textit{espectro de $A$}
+	al conjunto de todos los autovalores de $A$.
+\end{definition}
+
+Veamos ahora como se resuelve numéricamente el sistema de ecuaciones normales de (\ref{eq:linsis}), para más información sobre los algoritmos de factorización, ver por ejemplo \cite{Trefethen1997-ek} o \cite{Golub2013-li} para profundizar en el tema.
+
+Lo más común en este caso es usar distintos tipos de factorización sobre la matriz $J^TJ$ o sobre $J$, para luego resolver con sustituciones triangulares.
 El primer algoritmo que se plantea es a partir de la \textbf{factorización de Cholesky}, comenzando por computar la matriz de coeficientes $J^TJ$ y el lado derecho $J^Ty$. Después se computa la factorización de Cholesky
 \begin{equation}
 	J^TJ = \bar R^T\bar R.
@@ -788,9 +806,16 @@ siendo $Q$ una matriz ortogonal $m \times m$. Factorizando con una matriz pivote
 \end{equation}
 Donde $R$ es una matriz $n \times n$ triangular superior con elementos positivos en la diagonal y $Q_1$ son las primeras $n$ columnas de $Q$, ambos producto de la factorización QR.
 
-En este caso, el error relativo es proporcional al condicionamiento de $J$ y no de su cuadrado. Aún así, hay situaciones en las que necesitamos asegurar que la obtención sea de algún modo más robusta o en las que queremos más información acerca de la sensibilidad de la solución a perturbaciones en $J$ o en $y$. Esto es, queremos asegurarnos que pequeños cambios en $J$ o $y$ no afecten significativamente a la solución obtenida, lo cual pondría en duda nuestro método ya que estas perturbaciones se pueden dar durante la computación.
+En este caso, el error relativo es proporcional al condicionamiento de $J$ y no de su cuadrado.
+Aún así, hay situaciones en las que necesitamos asegurar que la obtención sea de algún modo más robusta
+o en las que queremos más información acerca de la sensibilidad de la solución a perturbaciones en $J$
+o en $y$, típicas durante la computación.
 
-Nos basaremos ahora en la \textbf{descomposición de valores singulares (DVS)}, cuya resolución una vez realizada la descomposición se enfoca de forma similar a la anterior. Primero se realiza el algoritmo (DVS) para obtener $J = USV^T$, con $U$ matriz $m \times m$, $V$ matriz $n \times n$, ambas ortogonales y $S$ matriz $n \times n$ de elementos diagonales $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n > 0$. Aprovechamos estas propiedades para obtener
+Nos basaremos ahora en la \textbf{descomposición de valores singulares (DVS)}, cuya resolución una vez
+realizada la descomposición se enfoca de forma similar a la anterior. Primero se realiza el algoritmo DVS
+para obtener $J = USV^T$, con $U$ matriz $m \times m$, $V$ matriz $n \times n$, ambas ortogonales y $S$
+matriz $n \times n$ de elementos diagonales $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n > 0$.
+Aprovechamos estas propiedades para obtener
 \begin{equation}
 	x^* = VS^{-1}U_1^Ty.
 \end{equation}
@@ -806,7 +831,7 @@ Por último, mencionar que existen métodos para problemas muy grandes, en los q
 
 \section{El método de Gauss-Newton}
 
-Comenzamos los métodos de minimización del problema no lineal (\ref{eq:lsp}) con el método de Gauss-Newton. La forma más sencilla de abordar el término de segundo orden $S(x)$ de $G_k$ en el modelo cuadrático (\ref{eq:q}) es obviarlo. Así, resulta
+Comenzamos los métodos de minimización del problema no lineal (\ref{eq:lsp}) con el método de Gauss-Newton. Se caracteriza por obviar el término de segundo orden $S(x)$ del término $G_k$ en el modelo cuadrático (\ref{eq:q}). Así, resulta
 \begin{equation}
 \begin{split}
 \bar q^{(k)}(x) =& \frac{1}{2}r(x_k)^Tr(x_k)+(J(x_k)^Tr(x_k))^T(x-x_k)+ \\
@@ -882,27 +907,23 @@ Para concluir observamos que el método encaja dentro de los métodos de búsque
 
 El método de Levenberg-Marquardt soluciona la necesidad de que $J$ sea de rango completo cambiando el enfoque de búsqueda de línea por el de región de confianza.
 Lo hace manteniendo la raíz del método de Gauss-Newton, la linealización del problema obviando el término cuadrático, esto es, usando la aproximación $\nabla^2 f(x_k) \approx J(x_k)^TJ(x_k)$.
-Este cambio de enfoque surge de que la linealización pierde efectividad según nos alejamos de $x_k$, por lo que conviene restringir el tamaño de $p=(x-x_k)$. Consideramos el problema:
+Este cambio de enfoque surge de que la linealización pierde efectividad según nos alejamos de $x_k$, por lo que conviene restringir el tamaño de $p=(x-x_k)$, resultando en el subproblema
 \begin{equation}
 \label{min:sublev}
 	\min_{p} \quad \frac{1}{2} \norm{J_kp+r_k}^2,\quad \text{s.a.} \norm{p} \leq \Delta_k,
 \end{equation}
-Donde $\Delta_k>0$ es el radio de la región de confianza.
-De hecho, se cree que esta solución característica de los métodos de región de confianza nace con este método en concreto. Otra forma de escribir el modelo es
+donde $\Delta_k>0$ es el radio de la región de confianza.
+Esta forma de afrontar el problema caracteriza los métodos de región de confianza (\ref{sec:tr}) y,
+de hecho, el método de Levenberg-Marquardt es, para muchos, el precursor de estos métodos. Otra forma de escribir el modelo es
 \begin{equation}
 	m_k(p)=\frac{1}{2}\norm{r_k}^2 + p^TJ_k^Tr_k + \frac{1}{2}p^TJ_k^TJ_kp,
 	\quad \text{s.a.} \norm{p} \leq \Delta_k.
 \end{equation}
-La solución de este subproblema queda caracterizada por el sistema
-\begin{equation}
-	\label{eq:lmsol}
-	(J^TJ+\lambda I)p=-J^Tr.
-\end{equation}
-%El siguiente lema nos da otra caracterización del problema.
+
 \begin{lemma}
 El vector $p$ es solución del subproblema (\ref{min:sublev}) si y solo si $p$ es factible y existe un $\lambda \geq 0$ tal que
 \begin{align}
-	(J^TJ+\lambda I)p&=-J^Tr, \\
+	(J^TJ+\lambda I)p&=-J^Tr, \label{eq:lmsol}\\
 	\lambda (\Delta-\norm{p})&=0.
 \end{align}
 \end{lemma}
@@ -948,7 +969,8 @@ Veamos una serie de propiedades del método de Levenberg-Marquardt y de $p$ en f
 		\frac{\mathrm{d}}{\mathrm{d}\lambda}\norm{p}=
 		-\frac{g^T(J^TJ+\lambda I)^{-3}g}{\norm{p}}.
 	\end{equation}
-	Cuando $\lambda \geq 0,\, J^TJ+\lambda I$ es definida positiva. Por tanto $\norm{p(\lambda)}$ de forma estrictamente monótona.
+	Cuando $\lambda \geq 0,\, J^TJ+\lambda I$ es definida positiva. Por tanto $\norm{p(\lambda)}$ 
+	decrece de forma estrictamente monótona.
 \end{proof}
 
 \begin{theorem}
@@ -1084,12 +1106,12 @@ De (\ref{item1}) y por la monotonía, sabemos que la sucesión $\sucesionxk$ se 
 
 Por (\ref{item3}) y (\ref{item4}) y por el teorema \ref{th:subsucLM}, cada punto de acumulación de $\sucesionxk$ es único. Como $\sucesion{f(x)}$ es una sucesión monótona decreciente, $f(x)$ tiene el mismo valor en los puntos de acumulación de $\sucesionxk$. Además, por (\ref{item2}) hay solo un número finito de puntos de acumulación.
 
-Para una subsucesión $\sucesion{x_{k_i}}$, se tiene que $x_{k_i} \rightarrow \hat x_k$ y $\lim_{k\rightarrow\infty}g(x_{k_i})=g(\hat x_k)=0$. Además,
+Para una subsucesión $\sucesion{x_{k_i}}$, se tiene que $x_{k_i} \to \hat x_k$ y $\lim_{k\to\infty}g(x_{k_i})=g(\hat x_k)=0$. Además,
 \begin{equation}
 	p(\lambda_{k_i})=
 	-(J(x_{k_i})^TJ(x_{k_i}) + \lambda_{k_i}D(x_{k_i}))^{-1}g(x_{k_i}).
 \end{equation}
-Se sigue entonces de (\ref{item3}) y (\ref{item4}) que $p(\lambda_{k_i})\rightarrow 0$, y por lo tanto para la sucesión $\sucesion{p(\lambda_k)}$, se cumple que $p(\lambda_k)\rightarrow 0$.
+Se sigue entonces de (\ref{item3}) y (\ref{item4}) que $p(\lambda_{k_i})\to 0$, y por lo tanto para la sucesión $\sucesion{p(\lambda_k)}$, se cumple que $p(\lambda_k)\rightarrow 0$.
 
 Supongamos que $\sucesionxk$ tiene más de un punto de acumulación. Sea $\epsilon^*$ la menor distancia entre dos puntos de acumulación, como $\sucesionxk$ es un conjunto compacto, existe un entero positivo $N$ tal que para todo $k \geq N$, $x_k$ está contenido en una bola cerrada con centro algún punto de acumulación y radio $\epsilon^*/4$.
 
@@ -1109,7 +1131,7 @@ Supongamos la sucesión $\sucesionxk$ generada por el método de Levenberg-Marqu
 0<\beta<\frac{1-\tau}{2} \text{ y}
 \end{equation*}
 \begin{equation*}
-\lambda_k \rightarrow 0,
+\lambda_k \to 0,
 \end{equation*}
 entonces, para $k$ suficientemente grande, la longitud de paso es $\alpha_k=1$,
 \begin{equation}
@@ -1158,7 +1180,7 @@ Como consecuencia del Teorema \ref{th:conv-tr} enunciamos el siguiente resultado
 	\end{align*}
 	Entonces,
 	\begin{equation}
-		\lim_{k\rightarrow \infty} \nabla f(x_k) = \lim_{k\rightarrow \infty} J_k^Tr_k = 0.
+		\lim_{k\to \infty} \nabla f(x_k) = \lim_{k\to \infty} J_k^Tr_k = 0.
 	\end{equation}
 \end{theorem}
 
@@ -1182,7 +1204,7 @@ Moré propone un método para obtener $p$ resolviendo las ecuaciones correspondi
 \end{equation}
 Si J no es de rango completo y $\lambda = 0$, entonces las ecuaciones previas se definen mediante
 \begin{equation}
-	D_kp(0) \equiv \lim_{\lambda \rightarrow 0^+} D_kp(\lambda) =
+	D_kp(0) \equiv \lim_{\lambda \to 0^+} D_kp(\lambda) =
 	-\left(J_kD_k^{-1}\right)^*r_k.\footnote{$A^*:=Adj(A)$}
 \end{equation}
 Existen dos posibilidades, que $\lambda=0$ y $\norm{D_kp(0)}\leq\Delta_k$, en cuyo caso $p(0)$ es
