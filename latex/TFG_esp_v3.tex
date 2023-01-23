@@ -1009,20 +1009,7 @@ con $g_k= J^Tr$.
 \begin{theorem}
 	En (\ref{eq:problemaDk}), el condicionamiento de $J^TJ+\lambda D$ decrece en función de $\lambda$.
 \end{theorem}
-\begin{proof}
-	Sean $\beta_1$ y $\beta_n$ el mayor y el menor autovalor respectivamente de la matriz $D$. Sean $\mu_1$ y $\mu_n$ el mayor y menor autovalor respectivamente de $J^TJ+\lambda D$. Si $\lambda_1 \geq \lambda_2 \geq 0$, \textsc{el rango de una matriz normal es la envoltura convexa de su espectro, tenemos que}
-\begin{equation}
-\begin{split}
-\frac{\mu_1(\lambda_1)}{\mu_n(\lambda_1)}\enspace
-	&\leq\enspace \frac{\mu_1(\lambda_2)+(\lambda_1-\lambda_2)\beta_1} 					{\mu_n(\lambda_2)+(\lambda_1-\lambda_2)\beta_n} \\
-	&\leq\enspace \frac{\mu_1(\lambda_2)+
-				(\lambda_1-\lambda_2)(1+\lambda_2)^{-1}\mu_1(\lambda_2)} 					{\mu_n(\lambda_2)+
-				(\lambda_1-\lambda_2)(1+\lambda_2)^{-1}\mu_n(\lambda_2)} \\
-	&=\enspace \frac{\mu_1(\lambda_2)}{\mu_n(\lambda_2)},
-\end{split}
-\end{equation}
-y obtenemos el resultado.
-\end{proof}
+
 Esta última propiedad nos indica que el condicionamiento de las ecuaciones iniciales a resolver se mejora con el método de Levenberg-Marquardt.
 
 \section{Convergencia}
@@ -1080,9 +1067,10 @@ Esta teorema afirma la convergencia de una subsucesión, la cual usaremos para d
 	Entonces el método de Levenberg-Marquardt es globalmente convergente, es decir, para cualquier punto inicial la sucesión obtenida converge a un punto estacionario de $f$.
 \end{theorem}
 \begin{proof}
-De (\ref{item1}) y por la monotonía, sabemos que la sucesión $\sucesionxk$ se encuentra en un conjunto compacto $L(\bar x)$ y, por tanto, tendrá puntos de acumulación. Basta comprobar que estos son únicos para concluír la demostración.
+La sucesión $\sucesionxk$ se encuentra en un conjunto compacto $L(\bar x)$ por
+(\ref{item1}) y por su monotonía y, por tanto, tendrá puntos de acumulación. Basta comprobar que estos son únicos para concluír la demostración.
 
-Por (\ref{item3}) y (\ref{item4}) y por el teorema \ref{th:subsucLM}, cada punto de acumulación de $\sucesionxk$ es único. Como $\sucesion{f(x)}$ es una sucesión monótona decreciente, $f(x)$ tiene el mismo valor en los puntos de acumulación de $\sucesionxk$. Además, por (\ref{item2}) hay solo un número finito de puntos de acumulación.
+Por (\ref{item3}), (\ref{item4}) y por el teorema \ref{th:subsucLM}, cada punto de acumulación de $\sucesionxk$ es único. Como $\sucesion{f(x)}$ es una sucesión monótona decreciente, $f(x)$ tiene el mismo valor en los puntos de acumulación de $\sucesionxk$. Además, por (\ref{item2}) hay solo un número finito de puntos de acumulación.
 
 Para una subsucesión $\sucesion{x_{k_i}}$, se tiene que $x_{k_i} \rightarrow \hat x_k$ y $\lim_{k\rightarrow\infty}g(x_{k_i})=g(\hat x_k)=0$. Además,
 \begin{equation}
@@ -1117,9 +1105,7 @@ entonces, para $k$ suficientemente grande, la longitud de paso es $\alpha_k=1$,
 \end{equation}
 y $x^*$ es mínimo local de $f$.
 \end{theorem}
-\begin{proof}
-Probemos primero que $\alpha_k=1$ para $k$ suficientemente grande. 
-\end{proof}
+Para la demostración remitimos al lector a \cite[Teorema 7.3.8]{Sun2006-au}
 
 \begin{algorithm}[Región de confianza de Levenberg-Marquardt] \leavevmode
 	\label{al:tr-lm}
@@ -1131,7 +1117,7 @@ Probemos primero que $\alpha_k=1$ para $k$ suficientemente grande.
 			con restricciones (\ref{min:sublev}) para obtener $p_k$.
 		\item Calcular
 			\begin{equation*}
-				\rho_k = \frac{f(x_k)-f(x_k+p_k)}{f(x_k)-m_k(p_k)}. STEPBOUND\;US
+				\rho_k = \frac{f(x_k)-f(x_k+p_k)}{f(x_k)-m_k(p_k)}.
 			\end{equation*}
 		\item Si $\rho_k < \eta_1$, $\Delta_{k} = \gamma_1\Delta_k$ e ir a Paso 3.
 		\item Definimos $x_{k+1} = x_k + p_k$,
@@ -1436,16 +1422,17 @@ con $q(\alpha)=Dp(\alpha)$ y $p$ definido por (\ref{eq:more}) y $\pi$ permutaci�
 factorización QR.
 
 \subsection{Escalado}
-Ya que el propósito de la matriz $D_k$ en el algoritmo de Levenberg-Marquardt es tener en cuenta
-el escalado del problema, algunos autores eligen
+En el algoritmo de Levenberg-Marquardt se utiliza una matriz diagonal $D_k$ para
+reducir los problemas de escalado.
+Algunos autores eligen
 \begin{equation}\label{eq:diag}
 	D_k = diag(d_1^{(k)}, \ldots, d_n^{(k)}),
 \end{equation}
 con
 \begin{equation}
-	d_i^{(k)}=\norm{\partial_ir(x_0)}, k\geq 0.
+	d_i^{(k)}=\norm{\partial_ir(x_k)}, k\geq 0.
 \end{equation}
-Siempre que $\norm{\partial_ir(x_k)}$ no crezca respecto a k esta elección es adecuada, en caso contrario
+Siempre que $\norm{\partial_ir(x_k)}$ no crezca respecto a k, esta elección es adecuada. En caso contrario,
 se ve afectada la efectividad del algoritmo y por esta razón se propone la elección
 \begin{equation} \label{eq:di}
 	\begin{split}
@@ -1460,10 +1447,8 @@ el algoritmo a $r(x)$ empezando en $x_0$ como si aplicamos el algoritmo a $r(D^{
 Por esta razón se dice que el algoritmo es invariante al escalado. Para decir esto se asume que la elección
 de $\Delta$ se basa únicamente en (\ref{eq:rho1}), lo que mantiene la invarianza.
 
-Finalmente, Moré presenta la siguiente versión del algoritmo de Levenberg-Marquardt.
-
 \subsection{La versión de Moré}
-
+Concluyamos este capítulo presentando la versión propuesta por Moré del algoritmo de Levenberg-Marquardt.
 \begin{algorithm}[Versión de Moré]\label{alg:more}\leavevmode
 \begin{steps}
 	\item Sea $\sigma \in (0,1)$. Si $\norm{D_kJ_k^{-}r_k} \leq (1+\sigma) \Delta_k$,
@@ -1491,9 +1476,10 @@ Finalmente, Moré presenta la siguiente versión del algoritmo de Levenberg-Marq
 	\item Determinar la relación $\rho_k$ entre reducción real y la esperada.
 	\item Si $\rho_k \leq 0.0001$, asignar $x_{k+1} = x_k$ y $J_{k+1} = J_k$. \\
 	Si $\rho_k > 0.0001$, asignar $x_{k+1} = x_k + p_k$ y calcular $J_{k+1} = J(x_{k+1})$.
-	\item Si $\rho_k \leq 1/4$, asignar $\Delta_{k+1} \in \left[
+	\item Si $\rho_k \leq \frac{1}{4}$, asignar $\Delta_{k+1} \in \left[
 		\frac{1}{10}\Delta_k, \frac{1}{4}\Delta_k \right]$. \\
-		Si $\rho_k \in \left[ 1/4, 3/4 \right]$ y $\lambda_k = 0$,
+		Si $\rho_k \in \left[ \frac{1}{4}, \frac{3}{4} \right]$ y $\lambda_k = 0$,
+		o si $\rho_k \geq \frac{3}{4}$,
 		asignar $\Delta_{k+1} = 2\norm{D_kp_k}$.
 	\item Actualizar $D_k$ por (\ref{eq:diag}) y (\ref{eq:di}).
 \end{steps}
