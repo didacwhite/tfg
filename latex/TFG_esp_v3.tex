@@ -778,9 +778,12 @@ Antes de ver como se resuelve numéricamente este sistema de ecuaciones, conocid
 	Sea $A$ una matriz cuadrada. Un vector $x$ se dice \textit{autovector} (vector propio o
 	eigenvector en inglés) de $A$ si existe un
 	escalar $\lambda$ tal que $Ax=\lambda x$. A este escalar se le llama \textit{autovalor} 
-	(valor propio o eigenvalue) de $A$. Dado un autovalor, el conjunto de autovectores asociados
-	a este forma un subespacio llamado \textit{subespacio propio}. Se le llama \textit{espectro de $A$}
-	al conjunto de todos los autovalores de $A$.
+	(valor propio o eigenvalue) de $A$.
+\end{definition}	
+\begin{definition}
+	Dado un autovalor, el conjunto de autovectores asociados
+	a este forma un subespacio llamado \textit{subespacio propio}.
+	Al conjunto de todos los autovalores de $A$ se le llama \textit{espectro de $A$}.
 \end{definition}
 
 Veamos ahora como se resuelve numéricamente el sistema de ecuaciones normales de (\ref{eq:linsis}), para más información sobre los algoritmos de factorización, ver por ejemplo \cite{Trefethen1997-ek} o \cite{Golub2013-li} para profundizar en el tema.
@@ -797,14 +800,40 @@ La principal desventaja de este método es que el condicionamiento de $J^TJ$ es 
 Además, si $J$ está mal condicionada, ni si quiera se puede llevar a cabo la factorización.
 
 Una segunda posibilidad es basarse en la \textbf{factorización QR}, que evita el problema de depender del cuadrado del condicionamiento de $J$, ya que aplicaremos la factorización directamente a $J$. Se aprovecha que la norma euclídea no se ve afectada por trasformaciones ortogonales para partir de la igualdad
-\begin{equation}
-	\Vert Jx- y \Vert = \Vert Q^T(Jx-y) \Vert, 
+\begin{equation}\label{eq:forQR}
+	\norm{Jx- y} = \norm{Q^T(Jx-y)}, 
 \end{equation}
-siendo $Q$ una matriz ortogonal $m \times m$. Factorizando con una matriz pivote $\Pi$, la solución es
+siendo $Q$ una matriz ortogonal $m \times m$. Realizando la factorización QR
+con una permutación $\Pi$, que
+para una matrix $A \in \mathbb{R}^{m \times n}$ tiene la forma
+\begin{equation}
+	A\Pi = QR,
+\end{equation}
+donde $\Pi$ es una matriz permutación $n \times n$, y por tanto ortogonal; $Q$ es una matriz
+ortogonal $m \times m$ y $R$ es una matriz $n \times n$ triangular superior con elementos positivos en la diagonal. Se tiene
+\begin{equation}\label{eq:QR}
+J\Pi = Q \left[ \begin{array}{c} R \\ 0 \end{array} \right] =
+\left[ \begin{array}{cc} Q_1 & Q_2 \end{array} \right] \left[ \begin{array}{c} R \\ 0 \end{array} \right] = Q_1 R,
+\end{equation}
+donde $Q_1$ son las primeras $n$ columnas de $Q$ y $Q_2$ las restantes. Por
+(\ref{eq:forQR}) y (\ref{eq:QR}) se llega a
+\begin{equation}
+\begin{split}
+	\norm{Jx- y} &= \norm{
+		\left[ \begin{array}{c} Q_1^T \\ Q_2^T \end{array} \right]
+		(J\Pi\,\Pi^Tx-y)
+		}^2 \\
+	&= \norm{
+		\left[ \begin{array}{c} R \\ 0 \end{array} \right]
+		(\Pi^Tx)-\left[ \begin{array}{c} Q_1^Ty \\ Q_2^Ty \end{array} \right]
+		}^2 \\
+	&= \norm{R(\Pi^Tx)-Q_1^Ty}^2 + \norm{Q_2^Ty}^2.
+\end{split}
+\end{equation}
+Notar que el segundo término no depende de x, por tanto para minimizar la expresión solo igualamos a 0 el primer término, lo que nos lleva a la solución
 \begin{equation}
 	x^* = \Pi R^{-1}Q_1^Ty.
 \end{equation}
-Donde $R$ es una matriz $n \times n$ triangular superior con elementos positivos en la diagonal y $Q_1$ son las primeras $n$ columnas de $Q$, ambos producto de la factorización QR.
 
 En este caso, el error relativo es proporcional al condicionamiento de $J$ y no de su cuadrado.
 Aún así, hay situaciones en las que necesitamos asegurar que la obtención sea de algún modo más robusta
@@ -813,7 +842,15 @@ o en $y$, típicas durante la computación.
 
 Nos basaremos ahora en la \textbf{descomposición de valores singulares (DVS)}, cuya resolución una vez
 realizada la descomposición se enfoca de forma similar a la anterior. Primero se realiza el algoritmo DVS
-para obtener $J = USV^T$, con $U$ matriz $m \times m$, $V$ matriz $n \times n$, ambas ortogonales y $S$
+para obtener 
+\begin{equation}
+	J = U \left[ \begin{array}{c} S \\ 0 \end{array} \right] V^T =
+	\left[ \begin{array}{cc} U_1 & U_2 \end{array} \right]
+	\left[ \begin{array}{c} S \\ 0 \end{array} \right] V^T =
+	U_1 S V^T,
+\end{equation}
+con $U$ matriz $m \times m$, $U_1$ las primeras $n$ columnas de $U$,
+$U_2$ las restantes, $V$ matriz $n \times n$, ambas ortogonales y $S$
 matriz $n \times n$ de elementos diagonales $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n > 0$.
 Aprovechamos estas propiedades para obtener
 \begin{equation}
