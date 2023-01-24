@@ -7,9 +7,19 @@
 \providecommand{\href}[2]{#2}
 \begin{thebibliography}{1}
 
+\bibitem{noauthor_undated-ap}
+\emph{Resolver problemas de m{\'\i}nimos cuadrados no lineales (ajuste de datos
+  no lineales) - {MATLAB} lsqnonlin - {MathWorks} espa{\~n}a},
+  \url{https://es.mathworks.com/help/optim/ug/lsqnonlin.html}, Accessed:
+  2023-1-23.
+
 \bibitem{Golub2013-li}
 Gene~H Golub and Charles~F Van~Loan, \emph{Matrix computations}, 4 ed., Johns
   Hopkins University Press, Baltimore, MD, 2013 (en).
+
+\bibitem{Hebden1973AnAF}
+M.~D. Hebden, \emph{An algorithm for minimization using exact second
+  derivatives}, 1973.
 
 \bibitem{Levenberg1944-wb}
 Kenneth Levenberg, \emph{A method for the solution of certain non-linear

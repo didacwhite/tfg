@@ -1175,9 +1175,16 @@ INPUT .\TFG_esp_v3.bbl
 INPUT TFG_esp_v3.bbl
 INPUT .\TFG_esp_v3.bbl
 INPUT TFG_esp_v3.bbl
+INPUT C:\Users\didac.blanco\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
+INPUT C:\Users\didac.blanco\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
+INPUT C:\Users\didac.blanco\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
+INPUT C:\Users\didac.blanco\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
+INPUT C:\Users\didac.blanco\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt1095.tfm
 INPUT TFG_esp_v3.aux
 INPUT .\TFG_esp_v3.out
 INPUT .\TFG_esp_v3.out
+INPUT C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1095.pk
+INPUT C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1095.pk
 INPUT C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0600.pk
 INPUT C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0600.pk
 INPUT C:\Users\didac.blanco\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0800.pk

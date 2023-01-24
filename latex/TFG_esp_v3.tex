@@ -1211,8 +1211,7 @@ Como consecuencia del Teorema \ref{th:conv-tr} enunciamos el siguiente resultado
 En esta sección elegimos la implementación propuesta por Jorge J. Moré en \cite{More1978-at},
 ya que otras implementaciones son poco robustas o su justificación teórica es débil. Por tanto,
 veremos sus fuertes propiedades de convergencia, robustez y eficiencia. Además veremos
-las principales propiedades de esta implementación. Terminaremos mostrando resultados
-obtenidos en MATLAB.
+las principales propiedades de esta implementación.
 
 A partir de la transformación del problema no lineal de mínimos cuadrados a uno linealizado con
 restricciones
@@ -1262,7 +1261,7 @@ de las ecuaciones normales
 \begin{equation}\label{eq:normalmore}
 	\left(J_k^TJ_k + \lambda_k D_k^TD_k\right)p = -J_k^Tr_k
 \end{equation}
-mediante Cholesky puede ser más simple y eficiente, la factorización QR es más robusta, particularmente
+mediante Cholesky puede ser más simple y rápida, la factorización QR es más robusta, particularmente
 cuando $\lambda=0$ y $J_k$ no es de rango completo, además de que la evaluación de $J_k^TJ_k$ 
 y $D_k^TD_k$ puede no ser adecuada. Por esto, resolvemos el siguiente problema
 \begin{equation}
@@ -1302,7 +1301,7 @@ según lo visto en la sección \ref{sec:linealsqp},
 		0 & 0
 	\end{array}
 	\right]
-	Qr \equiv J^{-}r_k,
+	Qr_k \equiv J^{-}r_k,
 \end{equation}
 donde $J^{-}$ es la pseudo-inversa de $J$, es decir $JJ^{-}$ es simétrica y $JJ^{-}J=J$.
 En el caso de que $\lambda_k>0$, notamos que
@@ -1578,7 +1577,7 @@ Concluyamos este capítulo presentando la versión propuesta por Moré del algor
 
 \bibliographystyle{amsplain}
 \nocite{*}
-\bibliography{tfg}
+\bibliography{tfg, other}
 
 %\end{thebibliography}
 
