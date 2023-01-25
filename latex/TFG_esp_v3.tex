@@ -33,6 +33,7 @@
 %\usepackage{listings}
 \usepackage{matlab-prettifier}
 
+
 % Cabeceira
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -1603,7 +1604,7 @@ y $x_0 = (-1,0,0)^T$.
 
 Como vemos en la figura, se muestra información para cada iteración, donde \code{Func-count} es el número de evaluaciones de la función, \code{Resiudal} es el valor de la función objetivo, \code{First-Order optimality} es una medida de optimalidad de primer orden, \code{lambda} hace referencia a los multiplicadores de Lagrange y \code{Norm of step} es la norma del paso. Además, en la salida se guardan \code{[x,resnorm,residual,exitflag,output]}, que en orden son el punto final, la norma del valor de la función objetivo en el punto final, el valor de la función objetivo en el punto final, el código de salida y la información de salida, para más información ver \cite{lsqnonlin}.
 
-Según la documentación esta configuración utiliza el algoritmo de Levenberg-Marquardt referenciando también a Moré, así que se puede decir que es una implementación del algoritmo de Moré. Pero con el objetivo de entender mejor el funcionamiento del algoritmo y ponerlo en práctica, se ha implementado una versión simplificada de la descrita en el capítulo anterior con el propósito de ponerla a prueba al lado del comando \code{lsqnonlin}. De aquí en adelante cuando mostremos el comando \code{myLevMar} nos referimos a la implementación mostrada en el Anexo \ref{chap:impl-simpl}.
+Con el objetivo de entender mejor el funcionamiento del algoritmo y ponerlo en práctica, se ha implementado una versión simplificada de la descrita en el capítulo anterior con el propósito de compararla con el comando \code{lsqnonlin}. De aquí en adelante, cuando mostremos el comando \code{myLevMar} nos referimos a esta función, proporcionada en el Anexo \ref{chap:impl-simpl} que toma como argumentos \code{fun} y \code{x0}.
 
 Para comenzar, veamos el ejemplo ya propuesto. El interés de este es la discontinuidad en el plano $x_1=0$, el cual se tiene que cruzar ya que definimos $x_0=(-1,0,0)$. En $x=(1,0,0)$ la suma de residuos vale $0$.
 
@@ -1612,7 +1613,8 @@ fun = @(x) [10*(x(3)-10*theta(x(1),x(2))),10*((x(1)^2+x(2)^2)^(1/2)-1),x(3)];
 myX = myLevMar(fun,x0);
 x = lsqnonlin(fun,x0,[],[],options);
 \end{lstlisting}
-La función \code{theta()} definida según (\ref{eq:theta}):
+La función \code{theta()} es la definida según (\ref{eq:theta}):
+\vspace{10pt}
 \begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
 function y = theta(x1,x2)
 if x1 > 0
@@ -1622,10 +1624,39 @@ else
 end
 \end{lstlisting}
 
+El resultado de la ejecución es el mismo para ambos, $x=(1,0,0)$. Para comprobar que la
+implementación es correcta, la probamos ahora con otros ejemplos. El siguiente código es un ejemplo de la documentación de \code{lsqnonlin}
+\cite{lsqnonlin} en el que se genera una muestra con un error aleatorio normalmente distribuído de media $0$. Este ejemplo es interesante porque la matriz jacobiana no es cuadrada como en el primer caso y nos sirve para ver que la implementación es funciona correctamente. El resultado se muestra en la figura \ref{out:exp}, también se muestran las curvas de $e^{-xt}$ con $x=2,3,4$ para ver mejor el efecto del ajuste.
+\vspace{10pt}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+rng default % para que sea reproducible
+d = linspace(0,3);
+y = exp(-1.3*d) + 0.05*randn(size(d));
+fun = @(r)exp(-d*r)-y;
+x0 = 4;
+x = myLevMar(fun,x0);
+plot(d,y,'ko',d,exp(-x*d),'b-',d,exp(-4*d),'r:',d,exp(-3*d),'r:',d,exp(-2*d),'r:')
+legend('Datos','Mejor ajuste','exp(-x*d) con x=2,3,4')
+xlabel('t')
+ylabel('exp(-tx)')
+\end{lstlisting}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{imgs/exp.png}
+	\caption{Resultado del ejemplo de ajuste exponencial.}
+	\label{out:exp}
+\end{figure}
+
+Este es un ejemplo de estimación de parámetros en un modelo de regresión.
+Se parte de unos datos muestrales y una función paramétrica que se cree que puede encajar con los datos, normalmente esta función se puede obtener por el contexto o, en su defecto, con alguna técnica de inferencia. En este caso se trata de la función $f(x)=e^{-xt}$, siendo $x$ el parámetro que queremos estimar. Para ello, definimos la función residuo $r(x)=e^{-xt}-y$, siendo $y$ los datos muestrales.
+
+
+
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
 \renewcommand{\thechapter}{\Roman{chapter}}
-\chapter{Implementación versión simplificada}\label{chap:impl-simpl}
+\chapter{Código de la versión simplificada}\label{chap:impl-simpl}
 Se muestra el código de Matlab\textsuperscript{®} para la implementación del algoritmo de Moré simplificado. Se presenta en forma de función \code{myLevMar} que toma como argumentos \code{fun} en forma de \textit{function handle} y \code{x0} el punto de partida. Se muestran las distintas funciones creadas para un código más limpio una tras otra. Para mayor comodidad, los archivos \code{.m} se pueden descargar desde el repositorio de Github \url{https://github.com/didacwhite/levenberg-marquardt} en la carpeta implementación.
 
 \lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/myLevMar.m}

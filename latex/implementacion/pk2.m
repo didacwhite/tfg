@@ -1,15 +1,13 @@
 function pk = pk2(funk, Q, Pi, R, Jk, Dk, lambdak, n, m)
 Qpi = zeros(n+m, n+m);
-Qpi(1:n,1:n)=Q';
-Qpi(n+1:end,n+1:end)=Pi';
+Qpi(1:m,1:m)=Q';
+Qpi(m+1:end,m+1:end)=Pi';
 Jizq = zeros(n+m,n);
-Jizq(1:n,1:m) = Jk;
-Jizq(n+1:end,1:m) = sqrt(lambdak)*Dk;
+Jizq(1:m,1:n) = Jk;
+Jizq(m+1:end,1:n) = sqrt(lambdak)*Dk;
 
 dcha = Qpi*Jizq*Pi;
-if dcha(size(R,1),:) ~= R
-    fprintf("error\n");
-end
+
 [W,Rlambda] = qr(dcha);
 W = W';
 Rlambda = Rlambda(1:n,1:n);
