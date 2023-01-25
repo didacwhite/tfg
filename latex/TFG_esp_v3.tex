@@ -30,7 +30,8 @@
 \setlist[steps, 1]{label = Paso \arabic*., leftmargin=2.6cm, topsep=0pt}
 
 \usepackage{xfrac}
-
+%\usepackage{listings}
+\usepackage{matlab-prettifier}
 
 % Cabeceira
 \usepackage{fancyhdr}
@@ -156,6 +157,7 @@
 \newcommand{\sucesionxk}{\left\{x_k\right\}}
 \newcommand{\sucesion}[1]{\left\{#1\right\}}
 
+\def\code#1{\texttt{#1}}
 
 \begin{document}
 \frontmatter
@@ -1472,7 +1474,7 @@ de media en menos de 2 se cumple (\ref{eq:phi}) si $\sigma=0.1$.
 
 Por completitud, mostrar que
 \begin{equation}
-	\phi'(\alpha)=-\norm{q(\alpha)} \norm{R_{\alpha}^{-T}\left[
+	\phi'(\alpha)=-\norm{q(\alpha)} \norm{(R_{\alpha}^{-1})^T\left[
 		\frac{\pi^TD^Tq(\alpha)}{\norm{q(\alpha)}}
 	 \right] }^2,
 \end{equation}
@@ -1560,13 +1562,83 @@ Concluyamos este capítulo presentando la versión propuesta por Moré del algor
 	\end{equation}
 \end{theorem}
 
+\chapter{Implementación}
+
+Después del análisis teórico, pasamos a la implementación del algoritmo en Matlab\textsuperscript{®}.
+Este programa cuenta con el comando \code{lsqnonlin} \cite{lsqnonlin} que permite ser
+configurado para que utilice el algoritmo de Levenberg-Marquardt:
+
+\begin{lstlisting}[style=Matlab-editor]
+opts = optimoptions(@lsqnonlin,'Algorithm','levenberg-marquardt');
+x = lsqnonlin(fun,x0,[],[],opts);
+\end{lstlisting}
+Donde \code{fun} es la función objetivo escrita como \textit{function handle}, \code{x0} es el punto inicial y \code{opts} son las opciones que hemos configurado para que se use el algoritmo de Levenberg-Marquardt. En este caso, no se ha configurado nada más, por lo que se usan los valores por defecto. Los argumentos vacíos \code{[]} indican que no hay restricciones en las variables, es decir, que no hay límites inferior ni superior a la hora de buscar parámetros. De aquí en adelante, se asume que se ha configurado el comando \code{lsqnonlin} para que utilice el algoritmo de Levenberg-Marquardt.
+
+Podemos realizar otras configuraciones para que se nos muestren más información, se muestra un ejemplo en la figura \ref{fig:lsqnonlin-iter}. En este ejemplo se prueba con la primera función residuo mostrada por Moré en \cite[Apartado 8]{More1978-at}:
+
+\begin{equation}
+f(x)=\left(
+\begin{array}{c}
+	10(x_3-10\,\theta(x_1,x_2)) \\
+	10((x_1^2+x_2^2)^{\sfrac{1}{2}}-1) \\
+	x_3
+\end{array}
+\right),
+\end{equation}
+donde
+\begin{equation}\label{eq:theta}
+\theta(x_1,x_2)=\begin{cases}
+	\frac{1}{2\pi}arctan\left(\frac{x_2}{x_1}\right), & \text{si } x_1 > 0 \\
+	\frac{1}{2\pi}arctan\left(\frac{x_2}{x_1}\right)+\frac{1}{2}, & \text{si } x_1 < 0,
+\end{cases}
+\end{equation}
+y $x_0 = (-1,0,0)^T$.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{imgs/lsqiter.png}
+	\caption{Ejemplo de ejecución del comando \code{lsqnonlin} mostrando información sobre las iteraciones.}
+	\label{fig:lsqnonlin-iter}
+\end{figure}
+
+Como vemos en la figura, se muestra información para cada iteración, donde \code{Func-count} es el número de evaluaciones de la función, \code{Resiudal} es el valor de la función objetivo, \code{First-Order optimality} es una medida de optimalidad de primer orden, \code{lambda} hace referencia a los multiplicadores de Lagrange y \code{Norm of step} es la norma del paso. Además, en la salida se guardan \code{[x,resnorm,residual,exitflag,output]}, que en orden son el punto final, la norma del valor de la función objetivo en el punto final, el valor de la función objetivo en el punto final, el código de salida y la información de salida, para más información ver \cite{lsqnonlin}.
+
+Según la documentación esta configuración utiliza el algoritmo de Levenberg-Marquardt referenciando también a Moré, así que se puede decir que es una implementación del algoritmo de Moré. Pero con el objetivo de entender mejor el funcionamiento del algoritmo y ponerlo en práctica, se ha implementado una versión simplificada de la descrita en el capítulo anterior con el propósito de ponerla a prueba al lado del comando \code{lsqnonlin}. De aquí en adelante cuando mostremos el comando \code{myLevMar} nos referimos a la implementación mostrada en el Anexo \ref{chap:impl-simpl}.
+
+Para comenzar, veamos el ejemplo ya propuesto. El interés de este es la discontinuidad en el plano $x_1=0$, el cual se tiene que cruzar ya que definimos $x_0=(-1,0,0)$. En $x=(1,0,0)$ la suma de residuos vale $0$.
+
+\begin{lstlisting}[style=Matlab-editor]
+fun = @(x) [10*(x(3)-10*theta(x(1),x(2))),10*((x(1)^2+x(2)^2)^(1/2)-1),x(3)];
+myX = myLevMar(fun,x0);
+x = lsqnonlin(fun,x0,[],[],options);
+\end{lstlisting}
+La función \code{theta()} definida según (\ref{eq:theta}):
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+function y = theta(x1,x2)
+if x1 > 0
+	y = 1/(2*pi)*atan(x2/x1);
+else
+	y = 1/(2*pi)*atan(x2/x1) + 0.5;
+end
+\end{lstlisting}
+
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
 \renewcommand{\thechapter}{\Roman{chapter}}
-\chapter{Título del Anexo I}
+\chapter{Implementación versión simplificada}\label{chap:impl-simpl}
+Se muestra el código de Matlab\textsuperscript{®} para la implementación del algoritmo de Moré simplificado. Se presenta en forma de función \code{myLevMar} que toma como argumentos \code{fun} en forma de \textit{function handle} y \code{x0} el punto de partida. Se muestran las distintas funciones creadas para un código más limpio una tras otra. Para mayor comodidad, los archivos \code{.m} se pueden descargar desde el repositorio de Github \url{https://github.com/didacwhite/levenberg-marquardt} en la carpeta implementación.
+
+\lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/myLevMar.m}
+\lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/myLevMarSetup.m}
+\lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/JDk.m}
+\lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/jacob.m}
+\lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/Jmfun.m}
+\lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/pkfun.m}
+\lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/hebden.m}
+\lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/pk2.m}
+\lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/rhofun.m}
 
 
-\chapter{Título del Anexo II}
 
 \backmatter
 
@@ -1576,7 +1648,7 @@ Concluyamos este capítulo presentando la versión propuesta por Moré del algor
 %
 
 \bibliographystyle{amsplain}
-\nocite{*}
+%\nocite{*}
 \bibliography{tfg, other}
 
 %\end{thebibliography}

@@ -17,6 +17,6 @@
 \contentsline {subsection}{\numberline {3.3.3}El parámetro Levenberg-Marquardt}{23}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Escalado}{25}{subsection.3.3.4}%
 \contentsline {subsection}{\numberline {3.3.5}La versión de Moré}{25}{subsection.3.3.5}%
-\contentsline {chapter}{\numberline {I}Título del Anexo I}{27}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {II}Título del Anexo II}{29}{appendix.Alph2}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{31}{appendix*.9}%
+\contentsline {chapter}{\numberline {4}Implementación}{27}{chapter.4}%
+\contentsline {chapter}{\numberline {I}Implementación versión simplificada}{31}{appendix.Alph1}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{37}{appendix*.9}%

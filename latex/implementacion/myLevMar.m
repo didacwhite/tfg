@@ -7,7 +7,7 @@ dkm1=zeros(length(xk));
 [Jk, Dk, dkm1] = JDk(fun,xk,dkm1);
 
 for i = 1:maxit
-    % solución problema lineal
+    % solucion problema lineal
     % descomposicion QR
     [Q,R,Pi] = qr(Jk); % calcula Jk*Pi = Q*R
     % ajuste de R
@@ -17,7 +17,7 @@ for i = 1:maxit
     % matriz $J^{-}$
     Jm = Jmfun(Pi,T,Q,n,m);
     
-    % parámetro levenberg-marquardt
+    % parametro levenberg-marquardt
     [pk, lambdak] = pkfun(Delta, Jk, Dk, funk, Jm, Q, Pi, R, n, m, lambdak, maxit2);
     
     % 2. calculo de rho
@@ -42,7 +42,7 @@ for i = 1:maxit
     elseif lambdak == 0
         Delta = 2*norm(Dk*pk');
     end
-    
 end
+xk = real(xk);
 
 
