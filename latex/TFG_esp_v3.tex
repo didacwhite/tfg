@@ -1575,8 +1575,7 @@ x = lsqnonlin(fun,x0,[],[],opts);
 \end{lstlisting}
 Donde \code{fun} es la función objetivo escrita como \textit{function handle}, \code{x0} es el punto inicial y \code{opts} son las opciones que hemos configurado para que se use el algoritmo de Levenberg-Marquardt. En este caso, no se ha configurado nada más, por lo que se usan los valores por defecto. Los argumentos vacíos \code{[]} indican que no hay restricciones en las variables, es decir, que no hay límites inferior ni superior a la hora de buscar parámetros. De aquí en adelante, se asume que se ha configurado el comando \code{lsqnonlin} para que utilice el algoritmo de Levenberg-Marquardt.
 
-Podemos realizar otras configuraciones para que se nos muestren más información, se muestra un ejemplo en la figura \ref{fig:lsqnonlin-iter}. En este ejemplo se prueba con la primera función residuo mostrada por Moré en \cite[Apartado 8]{More1978-at}:
-
+Podemos realizar otras configuraciones para que se nos muestren más información. Por ejemplo, la figura \ref{fig:lsqnonlin-iter} es la salida resultante de utilizar la función resiudo
 \begin{equation}
 f(x)=\left(
 \begin{array}{c}

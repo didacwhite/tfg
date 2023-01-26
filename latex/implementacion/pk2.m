@@ -1,4 +1,4 @@
-function pk = pk2(funk, Q, Pi, R, Jk, Dk, lambdak, n, m)
+function pk = pk2(funk, Q, Pi, Jk, Dk, lambdak, n, m)
 Qpi = zeros(n+m, n+m);
 Qpi(1:m,1:m)=Q';
 Qpi(m+1:end,m+1:end)=Pi';

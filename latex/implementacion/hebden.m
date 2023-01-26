@@ -1,4 +1,4 @@
-function lambdak = hebden(phi, Delta, Jk, Dk, funk, Q, Pi, R, n, m, lambdak, maxit)
+function lambdak = hebden(phi, Delta, Jk, Dk, funk, Q, Pi, n, m, lambdak, maxit)
 ak=lambdak;
 
 Qpi = zeros(n+m, n+m);

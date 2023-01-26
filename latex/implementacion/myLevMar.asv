@@ -9,6 +9,8 @@ dkm1=zeros(length(xk));
 test = norm((Jk*inv(Dk))'*funk);
 
 iter=0;
+nulls=0;
+info=[iter norm(funk) test nulls];
 while test > eps && iter < maxit
     % solucion problema lineal
     % descomposicion QR
@@ -28,6 +30,7 @@ while test > eps && iter < maxit
     
     % actualizacion de xk
     if rho <= 0.0001
+        intnulls = nulls+1;
         % xk+1 = xk y jk+1=jk
         % continue
     else
@@ -35,8 +38,12 @@ while test > eps && iter < maxit
         % calculo de Jk, Dk con el nuevo xk
         funk = fun(xk)';
         [Jk, Dk, dkm1] = JDk(fun,xk,dkm1);
-        iter=iter+1;
+        
+        int(iter)=iter+1;
         test = norm((Jk*inv(Dk))'*fun(xk)');
+
+        info = [info; iter norm(funk) test nulls];
+        nulls = 0;
     end
 
     % actualizacion de Delta
