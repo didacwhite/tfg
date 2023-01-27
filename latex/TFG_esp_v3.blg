@@ -1,50 +1,53 @@
-This is BibTeX, Version 0.99d (TeX Live 2022)
+This is BibTeX, Version 0.99d
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: TFG_esp_v3.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: amsplain.bst
+Reallocating 'name_of_file' (item size: 1) to 4 items.
+Reallocating 'name_of_file' (item size: 1) to 6 items.
 Database file #1: tfg.bib
 Database file #2: other.bib
 Warning--to sort, need author or key in lsqnonlin
 Warning--missing booktitle in Hebden1973AnAF
-You've used 9 entries,
+You've used 7 entries,
             2213 wiz_defined-function locations,
-            561 strings with 5246 characters,
-and the built_in function-call counts, 2422 in all, are:
-= -- 209
-> -- 75
+            546 strings with 4939 characters,
+and the built_in function-call counts, 1834 in all, are:
+= -- 151
+> -- 61
 < -- 0
-+ -- 35
-- -- 22
-* -- 177
-:= -- 380
-add.period$ -- 9
-call.type$ -- 9
-change.case$ -- 41
++ -- 27
+- -- 18
+* -- 121
+:= -- 288
+add.period$ -- 7
+call.type$ -- 7
+change.case$ -- 33
 chr.to.int$ -- 0
-cite$ -- 11
-duplicate$ -- 118
-empty$ -- 245
-format.name$ -- 22
-if$ -- 518
+cite$ -- 9
+duplicate$ -- 96
+empty$ -- 189
+format.name$ -- 18
+if$ -- 398
 int.to.chr$ -- 0
-int.to.str$ -- 9
-missing$ -- 21
-newline$ -- 37
-num.names$ -- 16
-pop$ -- 63
+int.to.str$ -- 7
+missing$ -- 17
+newline$ -- 31
+num.names$ -- 12
+pop$ -- 55
 preamble$ -- 1
-purify$ -- 29
+purify$ -- 23
 quote$ -- 0
-skip$ -- 72
+skip$ -- 62
 stack$ -- 0
-substring$ -- 131
-swap$ -- 18
+substring$ -- 69
+swap$ -- 16
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 28
+type$ -- 20
 warning$ -- 2
-while$ -- 23
-width$ -- 10
-write$ -- 91
+while$ -- 15
+width$ -- 8
+write$ -- 73
 (There were 2 warnings)
