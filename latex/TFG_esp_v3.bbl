@@ -21,6 +21,16 @@ Gene~H Golub and Charles~F Van~Loan, \emph{Matrix computations}, 4 ed., Johns
 M.~D. Hebden, \emph{An algorithm for minimization using exact second
   derivatives}, 1973.
 
+\bibitem{Levenberg1944-wb}
+Kenneth Levenberg, \emph{A method for the solution of certain non-linear
+  problems in least squares}, Quart. Appl. Math. \textbf{2} (1944), no.~2,
+  164--168 (en).
+
+\bibitem{Marquardt1963-ds}
+Donald~W Marquardt, \emph{An algorithm for least-squares estimation of
+  nonlinear parameters}, J. Soc. Ind. Appl. Math. \textbf{11} (1963), no.~2,
+  431--441.
+
 \bibitem{More1978-at}
 Jorge~J Mor{\'e}, \emph{The {Levenberg-Marquardt} algorithm: Implementation and
   theory}, Lecture Notes in Mathematics, Springer Berlin Heidelberg, Berlin,

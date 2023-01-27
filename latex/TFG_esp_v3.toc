@@ -2,9 +2,10 @@
 \contentsline {chapter}{Resumen}{\es@scroman {viii}}{section*.3}%
 \contentsline {chapter}{Introducci\'on}{\es@scroman {xi}}{chapter*.8}%
 \contentsline {chapter}{\numberline {1}Fundamentos de la optimización sin restricciones}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Búsqueda de línea}{3}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Método de Newton}{4}{subsection.1.1.1}%
-\contentsline {section}{\numberline {1.2}Región de confianza}{5}{section.1.2}%
+\contentsline {section}{\numberline {1.1}Generalidades de los algoritmos}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Búsqueda de línea}{4}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Método de Newton}{5}{subsection.1.2.1}%
+\contentsline {section}{\numberline {1.3}Región de confianza}{5}{section.1.3}%
 \contentsline {chapter}{\numberline {2}Mínimos Cuadrados}{9}{chapter.2}%
 \contentsline {section}{\numberline {2.1}El Problema Lineal}{10}{section.2.1}%
 \contentsline {section}{\numberline {2.2}El método de Gauss-Newton}{13}{section.2.2}%
