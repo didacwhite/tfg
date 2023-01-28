@@ -457,40 +457,7 @@ se para cuando se encuentre una estimación razonable. Para decidir
 como se avanza de un $x_k$ al siguiente, los algoritmos utilizan información sobre $f(x_k)$ o
 incluso en los puntos anteriores $x_0,\, x_1,\, \ldots,\,x_{k-1}$ con el objetivo de que
 $f(x_{k+1})<f(x_{k})$. Hablaremos de las dos estrategias fundamentales que se utilizan para
-avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}. Antes de ello, haremos un breve repaso a los llamados \textit{métodos de Newton}.
-
-\section{Métodos de Newton}
-Veamos brevemente la base de los métodos de Newton. La idea principal es usar la aproximación cuadrática $q^{(k)}$ de la función objetivo,
-\begin{equation}
-	q^{(k)}(p) = f(x_k)+\nabla f(x_k)^Tp + \frac{1}{2}p^T \nabla^2 f(x_k)p,
-	\label{eq:NewtonQ}
-\end{equation}
-si $f:\mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable, $x_k \in \mathbb{R}^n$ y la Hessiana $\nabla^2f(x_k)$ es definida positiva. En tal caso aproximamos $f(x_k + p) \approx q^{(k)}(p)$.
-
-Minimizando $q^{(k)}(p)$ obtenemos la fórmula de Newton, denotando $G_k=\nabla^2f(x_k)$ y $g_k = \nabla f(x_k)$:
-\begin{equation}
-	x_{k+1} = x_k - G_k^{-1} g_k.
-	\label{eq:NewtonIter}
-\end{equation}
-
-\begin{theorem}[Teorema de Convergencia del Método de Newton]
-	Sea
-	$f \in \mathcal{C}^2$ y $x_k$ lo suficientemente cerca a
-	la solución $x^*$ del problema de minimización con
-	$g(x^*)=0$. Si la Hessiana $G(x^*)$ es definida positiva y
-	$G(x)$ satisface la condición de Lipschitz
-	\begin{equation}
-		\vert G_{ij}(x) - G_{ij}(y) \vert \leq 
-		\beta \Vert x-y \Vert,
-		\text{ para algún } \beta,
-		\text{ y para todo } i,j,
-	\end{equation}
-	siendo $G_{ij}(x)$ el elemento en la posición $(i,j)$ de la matriz
-	$G(x)$, entonces para todo $k$, la iteración (\ref{eq:NewtonIter})
-	está bien definida y la sucesión $\left\{ x_k \right\}$
-	generada converge a $x^*$ de forma cuadrática.
-\end{theorem}
-
+avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
 
 
 \section{Búsqueda de línea}
@@ -522,6 +489,40 @@ En el caso de la elección de $\alpha_k$, el caso ideal sería encontrar el ópt
 Debido a ese coste, se suelen utilizar búsquedas inexactas probando una serie de puntos hasta que alguno cumpla unas condiciones preestablecidas con las que se acepta el paso dado.
 Estas condiciones son por ejemplo las condiciones \textit{Wolfe} o las condiciones \textit{Goldstein}.
 Esta elección se hace en dos fases, primero un proceso elige un intervalo conteniendo los pasos deseables y una segunda fase donde se va reduciendo el intervalo por técnicas de interpolación o bisección. % el mejor?
+
+\subsection{Método de Newton con búsqueda de línea}
+La idea principal de los métodos de Newton
+es usar la aproximación cuadrática $q^{(k)}$ de la función objetivo,
+\begin{equation}
+	q^{(k)}(p) = f(x_k)+\nabla f(x_k)^Tp + \frac{1}{2}p^T \nabla^2 f(x_k)p,
+	\label{eq:NewtonQ}
+\end{equation}
+si $f:\mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable, $x_k \in \mathbb{R}^n$ y la Hessiana $\nabla^2f(x_k)$ es definida positiva. En tal caso aproximamos $f(x_k + p) \approx q^{(k)}(p)$.
+
+Minimizando $q^{(k)}(p)$ obtenemos la fórmula de Newton, denotando $G_k=\nabla^2f(x_k)$ y $g_k = \nabla f(x_k)$:
+\begin{equation}
+	x_{k+1} = x_k - G_k^{-1} g_k.
+	\label{eq:NewtonIter}
+\end{equation}
+
+\begin{theorem}[Teorema de Convergencia del Método de Newton]
+	Sea
+	$f \in \mathcal{C}^2$ y $x_k$ lo suficientemente cerca a
+	la solución $x^*$ del problema de minimización con
+	$g(x^*)=0$. Si la Hessiana $G(x^*)$ es definida positiva y
+	$G(x)$ satisface la condición de Lipschitz
+	\begin{equation}
+		\vert G_{ij}(x) - G_{ij}(y) \vert \leq 
+		\beta \Vert x-y \Vert,
+		\text{ para algún } \beta,
+		\text{ y para todo } i,j,
+	\end{equation}
+	siendo $G_{ij}(x)$ el elemento en la posición $(i,j)$ de la matriz
+	$G(x)$, entonces para todo $k$, la iteración (\ref{eq:NewtonIter})
+	está bien definida y la sucesión $\left\{ x_k \right\}$
+	generada converge a $x^*$ de forma cuadrática.
+\end{theorem}
+
 
 \section{Región de confianza}\label{sec:tr}
 
