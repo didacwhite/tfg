@@ -218,20 +218,6 @@ Isqnonlin de Matlab. As metodoloxías estudadas aplicaranse a exemplos académic
 estimación de parámetros de distintos modelos matemáticos a partir de datos experimentais.
 		\vspace{.2cm}}
 	\end{minipage}\\ \hline
-	{\bf Recomendaci\'ons}\\ \hline
-	\begin{minipage}{11.5cm}
-		{\vspace*{.2cm}
-
-
-		\vspace{.2cm}}
-	\end{minipage}\\ \hline
-	{\bf Outras observaci\'ons}\\ \hline
-	\begin{minipage}{11.5cm}
-		{\vspace*{.2cm}
-
-
-			\vspace{.2cm}}
-	\end{minipage}\\ \hline
 \end{tabular}
 \endgroup
 
@@ -241,13 +227,17 @@ estimación de parámetros de distintos modelos matemáticos a partir de datos e
 
 \tableofcontents
 
-\clearpage
+\chapter*{}
+\begin{flushright}
+\textit{en record de la meva mare,\\
+Mercè}
+\end{flushright}
+\thispagestyle{empty}
 
+\clearpage
 \thispagestyle{empty}
 
 \mbox{}
-
-\clearpage
 
 %%%%%%%%%     RESUMO---RESUMEN---ABSTRACT     %%%%%%%%%%%%%
 
@@ -331,6 +321,11 @@ Un ejemplo muy común es la
 		\norm{x}_2 = \left( \sum_{i=1}^n \vert x_i \vert^2 \right)^{\frac{1}{2}}.
 \end{equation}
 
+%definición de punto estacionario
+\begin{definition}
+	Un punto $x$ se dice \textit{punto estacionario} de $f$ si $\nabla f(x) = 0$.
+\end{definition}
+
 \begin{definition}
 	Un punto $x^*$ se dice \textit{mínimo local} si existe $\delta > 0$ tal que $f(x^*) \leq f(x)$ para todo $x \in \mathbb{R}^n$ que satisface $\Vert x - x^* \Vert < \delta$.
 	Un punto $x^*$ se dice \textit{mínimo local estricto} si existe $\delta > 0$ tal que $f(x^*) < f(x)$ para todo $x \in \mathbb{R}^n$ que satisface $\Vert x - x^* \Vert < \delta$ con $x \neq x^*$.
@@ -375,8 +370,8 @@ $x \in \mathbb{R}^n$ tal que $\langle \nabla f(x), d \rangle < 0$, entonces a $d
 
 
 \begin{proposition}
-Partiendo de la reformulación de (\ref{eq:thty}) y teniendo en cuenta que el último término
-es el error de aproximación $o(t)$
+Partiendo de la reformulación (\ref{eq:thty}) y tomando el último término
+como el error de aproximación $o(t)$
 \begin{equation}
 	f(x_k + td) = f(x_k) + t \nabla f(x_k)^Td + o(t),
 \end{equation}
@@ -389,7 +384,8 @@ si y solo si $d$ es una dirección descendiente de $f$ en $x_k$.
 
 \end{proposition}
 
-Tratemos ahora las condiciones de optimalidad.
+Tratemos ahora las condiciones de optimalidad, es decir, las condiciones necesarias y suficientes para que un punto $x^*$ sea un mínimo local de $f$, necesarias para la
+construcción de un algoritmo de optimización.
 
 \begin{theorem}[Condición Necesaria de Primer Orden]
 	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ continuamente diferenciable en un
@@ -440,44 +436,82 @@ que nos permitirá encontrar mínimos globales.
 \end{theorem}
 
 
-\section{Generalidades de los algoritmos}
+\section{Generalidades y estructura de los algoritmos}
 
 Desde el punto de vista numérico o computacional, un problema de optimización se enfoca de otro
 modo. Seguimos necesitando resultados teóricos para poder obtener resultados, pero estos se obtienen
 a través de lo que llamamos \textit{algoritmos}, que son un conjunto de órdenes con unas normas y
 condiciones que les damos a un ordenador para realizar una tarea. En este conjunto de órdenes
 se tiene en cuenta el funcionamiento de los ordenadores, sus puntos fuertes y sus puntos débiles, con
-estructuras de bucles iterativos que van aproximando la solución, para ser lo más eficientes posibles en tiempo de computación. Por esta razón, no se malgastan recursos en tener conocimiento global del comportamiento de $f$ y la mayoría de algoritmos solo encuentran mínimos locales, lo cual es suficiente en muchos casos prácticos, ya que puede darnos una idea de la zona por donde empezar a buscar. Contamos con otros dos escenarios, para encontrar mínimos globales podemos usar una secuencia de otros algorítmos de optimización local, o en cambio aprovechar propiedades de algunas funciones para asegurar un mínimo global.
+estructuras de bucles iterativos que van aproximando la solución, para ser lo más eficientes posibles en tiempo de computación. Por esta razón, no se malgastan recursos en tener conocimiento global del comportamiento de $f$ y la mayoría de algoritmos solo encuentran mínimos locales, lo cual es suficiente en muchos casos prácticos, ya que puede darnos una idea de la zona por donde empezar a buscar. Para encontrar mínimos globales, podemos usar una secuencia de otros algorítmos de optimización local, o en cambio aprovechar propiedades de algunas funciones para asegurar un mínimo global.
 
 Todo algoritmo de optimización sin restricciones comienza con un punto de partida, denotado
 normalmente como $x_{0}$. Aunque generalmente el usuario introduce una estimación razonable,
 el punto puede ser elegido por el algoritmo, tanto de forma sistemática como aleatoria.
-El algoritmo itera sobre $x_{0}$, creando una sucesión $\sucesionxk_{k=0}^n$ la cual
-se para cuando se encuentre una estimación razonable. Para decidir
+El algoritmo itera sobre $x_{0}$, creando una sucesión $\sucesionxk_{k=0}^n$e. Para decidir
 como se avanza de un $x_k$ al siguiente, los algoritmos utilizan información sobre $f(x_k)$ o
 incluso en los puntos anteriores $x_0,\, x_1,\, \ldots,\,x_{k-1}$ con el objetivo de que
-$f(x_{k+1})<f(x_{k})$. Hablaremos de las dos estrategias fundamentales que se utilizan para
+$f(x_{k+1})<f(x_{k})$. Además, para que esta sucesión sea finita, se imponen unas condiciones
+de parada, que suelen ser cuando se cumple un error aceptable de la estimación o cuando se
+llega a un máximo de iteraciones, esta última condición es necesaria para evitar que el algoritmo se quede en un bucle infinito. Con estas premisas, podemos esquematizar la estructura de la siguiente forma:
+
+\begin{algorithm}[Esquema de algoritmo] \leavevmode
+	\label{alg:esquema}
+	\begin{steps}
+		\item Paso inicial. Se definen las condiciones iniciales, suelen ser el primer
+		punto de la sucesión $\sucesionxk$, valores para definir las condiciones de
+		parada como el número máximo de iteraciones o el error aceptable, y otros parámetros.
+		\item Test de parada. Se comprueba si se cumple alguna condición de parada.
+		\item Proceso principal. Se realizan los cálculos necesarios para avanzar de
+		$x_k$ a $x_{k+1}$.
+		\item Actualización y bucle. Se actualiza el valor de $x_k$ a $x_{k+1}$, así como otros parámetros necesarios. Se repite el proceso desde el \textit{paso 2.}
+	\end{steps}
+\end{algorithm}
+
+Por último, veamos una característica de los algoritmos, el tipo de convergencia es una medida
+de efectividad de un algoritmo, es decir, la velocidad con la que llega a una solución. Sea
+$\sucesionxk$ una sucesión generada por un algoritmo convergente en norma a $x^*$, esto es,
+\begin{equation}
+	\lim_{k \to \infty} \norm{x_k-x^*} = 0.
+\end{equation}
+Si existen $\alpha\geq 1$ y $\beta$ constante positiva, tales que
+\begin{equation}
+	\lim_{k \to \infty} \frac{\norm{x_{k+1}-x^*}}{\norm{x_k-x^*}^\alpha}=\beta,
+\end{equation}
+diremos que el algoritmo converge con orden $\alpha$. En particular, si $\alpha=1$
+y $\beta<1$, se dice que la convergencia es \textit{lineal} y, si $\alpha=2$,
+\textit{cuadrática.}
+
+Hablaremos de las dos estrategias fundamentales que se utilizan para
 avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
 
 
 \section{Búsqueda de línea}
 
-En este caso el algoritmo tiene dos tareas a partir de cada iteración, primero elige
-una \textit{dirección} $d_k$ y tomando el punto de partida busca en esa dirección el
+En este caso el algoritmo tiene dos puntos clave en cada iteración, primero elegir
+una \textit{dirección} $d_k$ y, tomando el punto de partida, buscar en esa dirección el
 nuevo valor. Es decir, dado $x_k$, obtiene
 \begin{equation} \label{eq:linesearch}
 	x_{k+1} = x_k + \alpha_kd_k,
 \end{equation}
-para un $d_k$ elegido previamente y un \textit{paso} $\alpha_k$ obtenido solucionando
-otro problema de minimización más simple:
-\begin{equation} \label{min:alphak}
-	\min_{\alpha_k>0}f\left(x_k+\alpha_kd_k\right).
+donde la clave está en encontrar el vector dirección $d_k$
+con la misma dimensión que $x_k$, y un paso $\alpha_k$ que nos indica
+cuánto avanzar en esa dirección. Si definimos
+\begin{equation}
+	\phi(\alpha) = f(x_k+\alpha_kd_k),
 \end{equation}
+el problema que parte de este $x_k$ y $d_k$ elegido previamente, y encuentra un $\alpha_k$ tal que
+\begin{equation}
+	\phi(\alpha_k) < \phi(0),
+\end{equation}
+se dice que realiza una búsqueda de línea. Si $alpha_k$ soluciona el problema
+\begin{equation} \label{min:alphak}
+	\min_{\alpha_k>0}f\left(x_k+\alpha_kd_k\right),
+\end{equation}
+se dice que realiza una búsqueda de línea \textit{exacta} u \textit{óptima}. Para evitar el gran coste computacional que puede llegar a tomar, lo más común es tomar un $\alpha_k$ que aporte un descenso aceptable, en cuyo caso se le llama búsqueda de línea \textit{inexacta} o \textit{aproximada}. Desde el nuevo punto se busca otra dirección y paso para repetir el proceso.
+Veamos brevemente cómo se elige $d_k$.
 
-Si se toma el $\alpha_k$ óptimo se le llama búsqueda de línea \textit{exacta} u \textit{óptima}. Para evitar el gran coste computacional que puede llegar a tomar, lo más común es tomar un $\alpha_k$ que aporte un descenso aceptable, en cuyo caso se le llama búsqueda de línea \textit{inexacta} o \textit{aproximada}. Desde el nuevo punto se busca otra dirección y paso para repetir el proceso.
-Veamos brevemente cómo se eligen $d_k$ y $\alpha_k$.
-
-La mayor parte de algoritmos de este tipo necesitan que $d_k$ sea una dirección descendente, esto es, $d_k^T \nabla f_k < 0$,
+La mayor parte de algoritmos de este tipo necesitan que $d_k$ sea una dirección de descenso, esto es, $d_k^T \nabla f_k < 0$,
 lo cual asegura que en esa dirección se podrá reducir el valor de $f$. Esta suele tener la forma
 \begin{equation}
 	d_k = -B_k^{-1} \nabla f_k
@@ -485,13 +519,13 @@ lo cual asegura que en esa dirección se podrá reducir el valor de $f$. Esta su
 con $B_k$ una aproximación de la matriz Hessiana $\nabla^2 f(x_k)$ simétrica y no singular. Según lo que acabamos de decir, necesitamos que $B_k$ sea definida positiva. En las tres corrientes principales se elige un $B_k$ distinto, en el \textit{método del descenso máximo} o \textit{descenso del gradiente}, se usa la matriz identidad $I$.
 En el \textit{método de Newton} se usa la matriz exacta, mientras que en los \textit{métodos Quasi-Newton} la matriz Hessiana es aproximada para cada $x_k$.
 
-En el caso de la elección de $\alpha_k$, el caso ideal sería encontrar el óptimo en \ref{min:alphak}, pero esto es en general demasiado costoso.
-Debido a ese coste, se suelen utilizar búsquedas inexactas probando una serie de puntos hasta que alguno cumpla unas condiciones preestablecidas con las que se acepta el paso dado.
-Estas condiciones son por ejemplo las condiciones \textit{Wolfe} o las condiciones \textit{Goldstein}.
-Esta elección se hace en dos fases, primero un proceso elige un intervalo conteniendo los pasos deseables y una segunda fase donde se va reduciendo el intervalo por técnicas de interpolación o bisección. % el mejor?
+% En el caso de la elección de $\alpha_k$, el caso ideal sería encontrar el óptimo en \ref{min:alphak}, pero esto es en general demasiado costoso.
+% Debido a ese coste, se suelen utilizar búsquedas inexactas probando una serie de puntos hasta que alguno cumpla unas condiciones preestablecidas con las que se acepta el paso dado.
+% Estas condiciones son por ejemplo las condiciones \textit{Wolfe} o las condiciones \textit{Goldstein}.
+% Esta elección se hace en dos fases, primero un proceso elige un intervalo conteniendo los pasos deseables y una segunda fase donde se va reduciendo el intervalo por técnicas de interpolación o bisección. % el mejor?
 
 \subsection{Método de Newton con búsqueda de línea}
-La idea principal de los métodos de Newton
+No se hablará en detalle de los métodos de Newton, pero sí es útil saber que la idea principal detras de estos
 es usar la aproximación cuadrática $q^{(k)}$ de la función objetivo,
 \begin{equation}
 	q^{(k)}(p) = f(x_k)+\nabla f(x_k)^Tp + \frac{1}{2}p^T \nabla^2 f(x_k)p,
@@ -526,20 +560,23 @@ Minimizando $q^{(k)}(p)$ obtenemos la fórmula de Newton, denotando $G_k=\nabla^
 
 \section{Región de confianza}\label{sec:tr}
 
-Veremos esta sección con un poco más de profundidad, ya que el método que estudiaremos en el tercer capítulo forma parte de este grupo. Esta estrategia enfoca el problema de otro modo, primero se fija una distancia máxima $\Delta_k$ para definir una región, generalmente de la forma
+Veremos esta sección con un poco más de profundidad, ya que el método que estudiaremos
+en el tercer capítulo forma parte de este grupo. Aunque no conozcamos el comportamiento
+de una función de manera global, podemos tomar una pequeña región donde la función se
+comporte de una manera predecible, y en esta región aplicar un método de optimización
+conocido. En esta idea se basan los métodos de región de confianza, primero se fija una distancia máxima $\Delta_k$ para definir una región,
+generalmente de la forma
 \begin{equation}
-	\Omega_k = \left\{x : \Vert x-x_k \Vert \leq \Delta_k \right\}
+	\Omega_k = \left\{x : \Vert x-x_k \Vert \leq \Delta_k \right\},
 \end{equation}
-y luego ya se busca la dirección y paso únicamente en esta región.
-A partir de la información conocida de $f$, para cada $x_k$ se modela una función $m_k$ que se comporte de manera similar a $f$ cerca de este punto.
-Se suele utilizar el modelo cuadrático $q^{(k)}$ de Newton, aprovechando la notación usada:
+y luego se busca el punto que minimice la función dentro de este.
+Para aproximar el comportamiento de la función en la región elegida, 
+se suele utilizar el modelo cuadrático $q^{(k)}$ de Newton, aprovechando la notación usada:
 \begin{equation}
 	m_k(p) := q^{(k)}(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TG_kp.
 \end{equation}
 
-Como hemos visto, este modelo se utiliza en los métodos de búsqueda de línea para determinar
-la dirección de búsqueda, mientras que en este caso lo usamos para tener una representación
-adecuada de la función objetivo y así elegir el mínimo dentro de esta región.
+La elección de $\Delta_k$ dependerá de si el $m_k$ es una buena aproximación o no, pues cuanto más grande sea la región de confianza, más complicado es que $m_k$ y $f$ se parezcan.
 Para este método no es necesario que la Hessiana sea definida positiva,
 lo cual nos supone una ventaja.
 En cada iteración, una vez elegido $\Delta_k$ se resuelve el siguiente problema:
@@ -550,71 +587,24 @@ En cada iteración, una vez elegido $\Delta_k$ se resuelve el siguiente problema
 	\text{s.a.} \quad & \Vert p \Vert \leq \Delta_k. \\
 \end{aligned}
 \end{equation}
-Notamos que en el modelo se escribe $B_k$ en lugar de $G_k$, pues no siempre se usa esta última.
-Debido al coste computacional, como vimos en la elección de la dirección de búsqueda, a veces se
-prefiere aproximar de alguna manera más o menos eficiente, e incluso puede ser aceptable tomar la
-matriz $0$. Como apunte, la elección de distintas normas puede ser conveniente según el caso,
-aunque generalmente se utiliza la bola definida por
+Donde se recupera la aproximación $B_k$, más usual que la Hessiana exacta $G_k$ debido a
+su coste computacional.
+\begin{definition}
+	Un punto $x_k$ se dice \textit{factible} si cumple las restricciones impuestas en el
+	problema de optimización. El conjunto de puntos factibles se llama \textit{conjunto factible}.
+\end{definition}
+Como este subproblema es de optimización con restricciones, las condiciones de optimalidad
+se ven un poco alteradas, para más exactitud referimos a \cite[Capítulo 12]{Nocedal2006-kh} o a
+\cite[Capítulo 8]{Sun2006-au}.
+
+La restricción impuesta puede variar según la necesidad de cada caso. Un cambio en
+la norma puede ser conveniente, ya que se cambia la forma de la región de confianza
+según el caso particular. Estudiaremos el caso más general, tomando como región de confianza
+la bola definida por 
 $\Vert p \Vert_2 \leq \Delta_k$.
 
-La efectividad de cada iteración depende de la elección del radio $\Delta_k$, es por ello que
-puede que la primera elección de este no sea la definitiva. Es decir, se toma un radio a raíz
-de la información que se tenga, esta puede incluír la de pasos anteriores, y luego se decide si
-este radio nos da un resultado aceptable. Un radio demasiado pequeño nos puede hacer perder la
-oportunidad de ser mucho más rápidos, pero para un paso demasiado grande, el mínimo de la función
-modelo $m_k$ puede estar lejos del mínimo de la función objetivo. Por esta razón, en cada paso
-se valora actualizar $\Delta_k$ para que el radio sea más grande o más pequeño.
-
-Veamos ahora de forma detallada como se elige el radio $\Delta_k$ en cada iteración. Esta elección
-se toma según el parecido entre la función $f$ y el modelo $m_k$ tomado en las iteraciones previas.
-Dado $p_k$, definimos el ratio
-\begin{equation}
-\label{eq:rho_k}
-	\rho_k = \frac{f(x_k)-f(x_k+p_k)}{m_k(0)-m_k(p_k)},
-\end{equation}
-donde el numerador es la \textit{reducción real}, mientras que el denominador es la \textit{reducción prevista}.
-La reducción prevista será positiva por definición, pues $p_k$ es elegido para tener el menor valor posible y el $0$ es una posibilidad.
-Por tanto, si $\rho_k$ es negativo, el nuevo valor $f(x_k+p_k)$ no es menor que $f(x_k)$ y este paso ha de ser rechazado.
-Por otro lado, si $\rho_k$ es cercano a $1$, esto quiere decir que $f$ y $m_k$ se comportan de manera similar en la región tomada en la iteración actual, por tanto podemos agrandar el radio con seguridad.
-En resumen, nos quedamos con el radio elegido si $\rho_k$ no tiene un valor muy cercano a $0$ o a $1$.
-
-Una vez tomado el radio, encontrar el mínimo es directo en el caso de que $B_k$ sea definida
-positiva, basta tomar $p_k^B = -B_k^{-1}g_k$, conocido como \textit{paso completo}. En caso
-contrario tampoco supone una tarea muy costosa ya que sólo se necesita una solución aproximada
-para garantizar la convergencia. El proceso se describe en el siguiente algoritmo.
-
-\begin{algorithm}[Región de confianza] \leavevmode
-	\label{alg:tr}
-	\begin{steps}
-		\item Dados $x_0, \bar{\Delta}, \Delta_0 \in (0, \bar{\Delta}), \epsilon \geq
-			0, 0<\eta_1\leq\eta_2<1$ y $0<\gamma_1<1<\gamma_2, k:=0$.
-		\item Si $\norm{g_k} \leq \epsilon$ terminar.
-		\item Aproximar $p_k$ resolviendo (\ref{min:tr}).
-		\item Calcular $f(x_k+p_k)$ y $\rho_k$. Definir
-			\begin{equation*}
-				x_{k+1} = \begin{cases}
-					x_k + p_k, & \text{si } \rho_k \geq \eta_1, \\
-					x_k, & \text{en otro caso.}
-				\end{cases}
-			\end{equation*}
-		\item Si $\rho_k < \eta_1$ entonces $\Delta_{k+1} \in (0,\gamma_1 \Delta_k]$. \\
-			Si $\rho_k \in [\eta_1, \eta_2)$ entonces $\Delta_{k+1} \in [\gamma_1 \Delta_k,\Delta_k]$. \\
-			Si $\rho_k \geq \eta_2$ y $\norm{p_k}=\Delta_k$ entonces
-			$\Delta_{k+1} \in [\Delta_k, \min \{\gamma_2 \Delta_k,\bar{\Delta}\}]$.
-		\item Calcular $B_{k+1}$, actualizar $m^{(k)}$ y $k:=k+1$. Ir al Paso 2.
-	\end{steps}
-\end{algorithm}
-Si nos fijamos, en el paso 5 se define la actualización de $\Delta_k$, la cual no siempre supone un cambio.
-El primer caso se dice que resulta en una \textit{iteración no exitosa}, mientras que el segundo caso marcará
-una \textit{iteración exitosa} y el tercero una \textit{iteración muy exitosa}.
-Añadir que $\bar \Delta$ es el máximo radio de la región para toda iteración.
-Normalmente se elige $\eta_1 = 0.25$ y $\eta_2 = 0.75$, mientras que $\gamma_1 = 0.25$ y $\gamma_2 = 2$.
-Además, la elección de $\Delta^{k+1}$ se puede obtener por interpolación polinómica dentro del
-intervalo dado,
-aunque es común tomar el máximo del intervalo.
-
-Concluyamos con la caracterización de la solución del subproblema (\ref{min:tr}) en la que,
-por conveniencia, omitimos los subíndices para una notación más clara,
+Caractericemos la solución del subproblema (\ref{min:tr}) en el siguiente teorema.
+Por conveniencia, omitimos los subíndices para una notación más clara,
 \begin{equation}
 \label{min:tr_nk}
 \begin{aligned}
@@ -645,6 +635,68 @@ Para la demostración referimos a \cite[Sección 4.3]{Nocedal2006-kh} o \cite[Te
 Respecto a la convergencia de este algoritmo, veremos un resultado relevante para el estudio realizado en el
 tercer capítulo.
 Si fuera de interés, se puede consultar \cite[Sección 6.1.2]{Sun2006-au}.
+
+%----------------- CAMBIO DE PROBLEMA TEORICO A NUMÉRICO -----------%
+
+La efectividad de cada iteración depende de la elección del radio $\Delta_k$, es por ello que
+puede que la primera elección de este no sea la definitiva. Es decir, se toma un radio a raíz
+de la información que se tenga, esta puede incluír la de pasos anteriores, y luego se decide si
+este radio nos da un resultado aceptable. Un radio demasiado pequeño nos puede hacer perder la
+oportunidad de ser mucho más rápidos, pero para un paso demasiado grande, el mínimo de la función
+modelo $m_k$ puede estar lejos del mínimo de la función objetivo. Por esta razón, en cada paso
+se valora actualizar $\Delta_k$ para que el radio sea más grande o más pequeño.
+
+Veamos ahora de forma detallada como se elige el radio $\Delta_k$ en cada iteración. Esta elección
+se toma según el parecido entre la función $f$ y el modelo $m_k$ tomado en las iteraciones previas.
+Dado $p_k$, definimos el ratio
+\begin{equation}
+\label{eq:rho_k}
+	\rho_k = \frac{f(x_k)-f(x_k+p_k)}{m_k(0)-m_k(p_k)},
+\end{equation}
+donde el numerador es la \textit{reducción real}, mientras que el denominador es la \textit{reducción prevista}.
+La reducción prevista será positiva por definición, pues $p_k$ es elegido para tener el menor valor posible y el $0$ es una posibilidad.
+Por tanto, si $\rho_k$ es negativo, el nuevo valor $f(x_k+p_k)$ no es menor que $f(x_k)$ y este paso ha de ser rechazado.
+Por otro lado, si $\rho_k$ es cercano a $1$, esto quiere decir que $f$ y $m_k$ se comportan de manera similar en la región tomada en la iteración actual, por tanto podemos agrandar el radio con seguridad.
+En resumen, nos quedamos con el radio elegido si $\rho_k$ no tiene un valor muy cercano a $0$ o a $1$.
+
+Una vez tomado el radio, encontrar el mínimo es directo en el caso de que $B_k$ sea definida
+positiva, basta tomar $p_k^B = -B_k^{-1}g_k$, conocido como \textit{paso completo}. En caso
+contrario tampoco supone una tarea muy costosa ya que sólo se necesita una solución aproximada
+para garantizar la convergencia. El proceso se describe en el siguiente algoritmo.
+Aclarar que tomaremos $\eta_1$ y $\eta_2$ como parámetros de control,
+los cuales servirán para decidir si hace falta modificar el radio $\Delta_k$. Los parámetros
+$\gamma_1$ y $\gamma_2$ se usarán para modificar el radio $\Delta_k$ en caso de que sea necesario,
+$\epsilon$ es la tolerancia para el criterio de parada y $\bar{\Delta}$ es el radio máximo.
+
+\begin{algorithm}[Región de confianza] \leavevmode
+	\label{alg:tr}
+	\begin{steps}
+		\item Dados $x_0, \bar{\Delta}, \Delta_0 \in (0, \bar{\Delta}), \epsilon \geq
+			0, 0<\eta_1\leq\eta_2<1$ y $0<\gamma_1<1<\gamma_2, k:=0$.
+		\item Si $\norm{g_k} \leq \epsilon$ terminar.
+		\item Aproximar $p_k$ resolviendo (\ref{min:tr}).
+		\item Calcular $f(x_k+p_k)$ y $\rho_k$. Definir
+			\begin{equation*}
+				x_{k+1} = \begin{cases}
+					x_k + p_k, & \text{si } \rho_k \geq \eta_1, \\
+					x_k, & \text{en otro caso.}
+				\end{cases}
+			\end{equation*}
+		\item Si $\rho_k < \eta_1$ entonces $\Delta_{k+1} \in (0,\gamma_1 \Delta_k]$. \\
+			Si $\rho_k \in [\eta_1, \eta_2)$ entonces $\Delta_{k+1} \in [\gamma_1 \Delta_k,\Delta_k]$. \\
+			Si $\rho_k \geq \eta_2$ y $\norm{p_k}=\Delta_k$ entonces
+			$\Delta_{k+1} \in [\Delta_k, \min \{\gamma_2 \Delta_k,\bar{\Delta}\}]$.
+		\item Calcular $B_{k+1}$, actualizar $m^{(k)}$ y $k:=k+1$. Ir al Paso 2.
+	\end{steps}
+\end{algorithm}
+Si nos fijamos, en el paso 5 se define la actualización de $\Delta_k$, la cual no siempre supone un cambio.
+El primer caso se dice que resulta en una \textit{iteración no exitosa}, mientras que el segundo caso marcará
+una \textit{iteración exitosa} y el tercero una \textit{iteración muy exitosa}.
+Añadir que $\bar \Delta$ es el máximo radio de la región para toda iteración.
+Normalmente se elige $\eta_1 = 0.25$ y $\eta_2 = 0.75$, mientras que $\gamma_1 = 0.25$ y $\gamma_2 = 2$.
+Además, la elección de $\Delta^{k+1}$ se puede obtener por interpolación polinómica dentro del
+intervalo dado,
+aunque es común tomar el máximo del intervalo.
 
 \begin{theorem} \label{th:conv-tr}
 Se supone $\norm{B_k}$ uniformemente acotada para cada $k$
@@ -879,10 +931,10 @@ Por último, mencionar que existen métodos para problemas muy grandes, en los q
 
 \section{El método de Gauss-Newton}
 
-Comenzamos los métodos de minimización del problema no lineal (\ref{eq:lsp}) con el método de Gauss-Newton. Se caracteriza por obviar el término de segundo orden $S(x)$ del término $G_k$ en el modelo cuadrático (\ref{eq:q}). Así, resulta
+Comenzamos los métodos de minimización del problema no lineal (\ref{eq:lsp}) con el método de Gauss-Newton. Se caracteriza por despreciar el término de segundo orden $S(x)$ del término $G_k$ en el modelo cuadrático (\ref{eq:q}). Así, resulta
 \begin{equation}
 \begin{split}
-\bar q^{(k)}(x) =& \frac{1}{2}r(x_k)^Tr(x_k)+(J(x_k)^Tr(x_k))^T(x-x_k)+ \\
+q^{(k)}(x) =& \frac{1}{2}r(x_k)^Tr(x_k)+(J(x_k)^Tr(x_k))^T(x-x_k)+ \\
 	& +\frac{1}{2}(x-x_k)^T(J(x_k)^TJ(x_k))(x-x_k),
 \end{split}
 \end{equation}
@@ -897,7 +949,7 @@ Notar que para que esté bien definido, la matriz Jacobiana $J(x)$ tiene que ser
 \label{al:g-n}
 \begin{steps}
 	\item $x_0$ y $\epsilon > 0$ dados, $k:=0$
-	\item Si $\norm{g_k} \leq \epsilon$, STOP.   
+	\item Si $\norm{g_k} \leq \epsilon$, parar.
 	\item Obtener el paso $p_k$ resolviendo
 		\begin{equation}
 			J(x_k)^TJ(x_k)p_k = -J(x_k)^Tr(x_k)
@@ -1663,7 +1715,7 @@ Se parte de unos datos muestrales y una función paramétrica que se cree que pu
 %%%%%%%%     Póñense a bibliografía, Apéndices e o índice alfabético     %%%%%%%%
 \appendix
 \renewcommand{\thechapter}{\Roman{chapter}}
-\chapter{Código de la versión simplificada}\label{chap:impl-simpl}
+\chapter{Anexo: Código de la versión simplificada}\label{chap:impl-simpl}
 Se muestra el código de Matlab\textsuperscript{®} para la implementación del algoritmo de Moré simplificado. Se presenta en forma de función \code{myLevMar} que toma como argumentos \code{fun} en forma de \textit{function handle} y \code{x0} el punto de partida. Se muestran las distintas funciones creadas para un código más limpio una tras otra. Para mayor comodidad, los archivos \code{.m} se pueden descargar desde el repositorio de Github \url{https://github.com/didacwhite/levenberg-marquardt} en la carpeta implementación.
 
 \lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/myLevMar.m}
