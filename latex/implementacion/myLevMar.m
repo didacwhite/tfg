@@ -6,8 +6,11 @@ function [xk, info] = myLevMar(fun, x0)
 dkm1=zeros(length(xk));
 [Jk, Dk, dkm1] = JDk(fun,xk,dkm1);
 
-test = norm((Jk*inv(Dk))'*funk);
-
+try
+    test = norm((Jk*inv(Dk))'*funk);
+catch
+    test = norm((Jk*inv(Dk))'*funk');
+end
 iter=0;
 while test > eps && iter < maxit
     % solucion problema lineal
