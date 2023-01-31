@@ -248,7 +248,8 @@ Mercè}
 \section*{Resumen}
 
 % escribir aquí resumo en español
-
+En este trabajo se estudia la resolución numérica del problema no lineal de los mínimos cuadrados, el cual se utiliza principalmente
+para la estimación de parámetros en distintos campos científicos. Para ello se comienza con una introducción teórica de la optimización sin restricciones y del problema de mínimos cuadrados. Posteriormente el estudio se enfoca en el método de Levenberg-Marquardt, considerado precursor de los métodos de tipo región de confianza. Este método afronta el problema tomando una aproximación lineal para resolverla de forma más sencilla, y para que la aproximación se mantenga acorde, se limita el radio de acción en el que se busca un mínimo. Finalmente se implementa el algoritmo en Matlab\textsuperscript{®} para comprobar su funcionamiento y compararlo con la alternativa propia del programa.
 
 
 
@@ -257,7 +258,7 @@ Mercè}
 \section*{Abstract}
 
 
-
+This work studies the numerical resolution of the nonlinear least squares problem, which is mainly used for parameter estimation in various scientific fields. To do this, it begins with a theoretical introduction to unconstrained optimization and the least squares problem. Subsequently, the study focuses on the Levenberg-Marquardt method, considered a precursor of trust region type methods. This method faces the problem by taking a linear approximation to solve it more simply, and to maintain the approximation, the action radius in which a minimum is sought is limited. Finally, the algorithm is implemented in Matlab\textsuperscript{®} to verify its operation and compare it with the program's own alternative.
 % escribir aquí resumo en inglés
 
 
@@ -271,6 +272,19 @@ Mercè}
 
 \phantomsection
 \chapter*{Introducci\'on}\addcontentsline{toc}{chapter}{Introducci\'on}
+
+El problema de los mínimos cuadrados es un problema de optimización utilizado para la estimación de parámetros en una amplia variedad de campos científicos. En este trabajo enfocamos la resolución del problema desde un punto de vista numérico después de una revisión previa a los conceptos necesarios para llegar al método de Levenberg-Marquardt, el cual se estudiará en profundidad. 
+
+La computación numérica ha ido evolucionando muy rápido desde sus inicios. Con la llegada de los primeros ordenadores, era extremadamente importante que los algoritmos fueran los más eficientes posibles, pues los recursos eran muy limitados y costosos. A lo largo de los años, las nuevas tecnologías han permitido que los ordenadores sean cada vez más potentes y se podría argumentar que la eficiencia de los algoritmos de resolución numérica ha dejado de ser un problema y no siempre es necesaria.
+Hoy en día la estimación de parámetros forma parte de los nuevos paradigmas tecnológicos. En concreto, es necesaria para lo que hoy en día se conoce como \textit{Inteligencia Artificial}, basada en redes neuronales que cuentan con una enorme cantidad de parámetros que deben ser estimados a partir de datos experimentales. Por esta razón, en este caso en particular se mantiene la necesidad de eficiencia.
+La necesidad de la computación numérica es evidente, pues nos permite obtener aproximaciones muy precisas de soluciones a problemas que serían imposibles de resolver analíticamente.
+
+El método de Levenberg-Marquardt es un método numérico que se utiliza para resolver problemas de mínimos cuadrados. Este método fue desarrollado por los estadísticos estadounidenses Kenneth Levenberg \cite{Levenberg1944-wb} y Donald Marquardt \cite{Marquardt1963-ds} en la década de 1950, ambos descubrieron este algoritmo por separado. En 1978, el autor J.J. Moré implementa su propia versión numérica a partir de las ideas de estos, y será objeto de nuestro estudio.
+
+El método de Levenberg-Marquardt se considera el precursor de los llamados métodos de región de confianza para resolver problemas de minimización sin restricciones, y nace de querer solucionar el problema de mínimos cuadrados. Problema muy utilizado en estadística para ajustar parámetros a partir de datos experimentales.
+
+Desde entonces, se ha convertido en uno de los métodos más utilizados para resolver problemas de optimización no lineal y ha sido aplicado en una amplia gama de campos, incluyendo la ingeniería, la economía, la física y la biología. En este trabajo, en el capítulo 3 se describirá en detalle el método de Levenberg-Marquardt después de echar un vistazo general a los métodos de optimización sin restricciones en el capítulo 1 y de presentar el problema de mencionado en el capítulo 2. Los dos primeros capítulos se basan en el trabajo de \cite{Nocedal2006-kh} y \cite{Sun2006-au}, por lo que se recomienda su lectura para profundizar en la teoría de la optimización.
+En el capítulo 4 implementaremos este algoritmo en Matlab\textsuperscript{®} una versión propia y simplificada de la versión de Moré, lo aplicaremos a una serie de ejemplos y lo comparamos con el comando \code{lsqnonlin} de Matlab\textsuperscript{®}.
 
 \markboth{INTRODUCCI\'ON}{INTRODUCCI\'ON}
 
@@ -387,6 +401,16 @@ si y solo si $d$ es una dirección descendiente de $f$ en $x_k$.
 Tratemos ahora las condiciones de optimalidad, es decir, las condiciones necesarias y suficientes para que un punto $x^*$ sea un mínimo local de $f$, necesarias para la
 construcción de un algoritmo de optimización.
 
+\begin{definition}
+	%definir definida positiva
+	Una matriz $H$ es \textit{definida positiva} si $x^THx > 0$ para todo $x \neq 0$.
+\end{definition}
+
+\begin{definition}
+	%definir semidefinida positiva
+	Una matriz $H$ es \textit{semidefinida positiva} si $x^THx \geq 0$ para todo $x \neq 0$.
+\end{definition}
+
 \begin{theorem}[Condición Necesaria de Primer Orden]
 	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ continuamente diferenciable en un
 	conjunto abierto $D$. Si $x^*$ es un mínimo local de (\ref{eq:minf}), entonces
@@ -468,12 +492,14 @@ llega a un máximo de iteraciones, esta última condición es necesaria para evi
 	\end{steps}
 \end{algorithm}
 
-Por último, veamos una característica de los algoritmos, el tipo de convergencia es una medida
-de efectividad de un algoritmo, es decir, la velocidad con la que llega a una solución. Sea
+En este contexto de optimización numérica, el estudio de la convergencia tiene un especial interés. Es necesario que un algoritmo converga para asegurarnos que estas iteraciones lleven a un resultado en algún momento, además de que la velocidad de convergencia también resulta un factor importante a la hora de elegir un algoritmo.
+Es por esto que mantenemos la terminología de convergencia local y global. El tipo de convergencia es una medida
+de efectividad, es decir, nos dará una idea de la velocidad con la que llega a una solución y como se comporta en los distintos casos. Sea
 $\sucesionxk$ una sucesión generada por un algoritmo convergente en norma a $x^*$, esto es,
 \begin{equation}
 	\lim_{k \to \infty} \norm{x_k-x^*} = 0.
 \end{equation}
+\begin{definition}
 Si existen $\alpha\geq 1$ y $\beta$ constante positiva, tales que
 \begin{equation}
 	\lim_{k \to \infty} \frac{\norm{x_{k+1}-x^*}}{\norm{x_k-x^*}^\alpha}=\beta,
@@ -481,6 +507,7 @@ Si existen $\alpha\geq 1$ y $\beta$ constante positiva, tales que
 diremos que el algoritmo converge con orden $\alpha$. En particular, si $\alpha=1$
 y $\beta<1$, se dice que la convergencia es \textit{lineal} y, si $\alpha=2$,
 \textit{cuadrática.}
+\end{definition}
 
 Hablaremos de las dos estrategias fundamentales que se utilizan para
 avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
@@ -624,6 +651,45 @@ Por conveniencia, omitimos los subíndices para una notación más clara,
 \end{theorem}
 
 \begin{proof}
+Dejemos el tercer punto para el final. Supongamos que $p^*$ es solución del subproblema (\ref{min:tr_nk}). 
+De las condiciones de optimalidad con restricciones (véase \cite{Nocedal2006-kh} o \cite{Sun2006-au}), se tiene
+que existe un multiplicador de Lagrange $\lambda^* \geq 0$ tal que se cumplen las condiciones 1 y 2. Problemos ahora
+el punto 3, que nos dice que $(B+\lambda^* I)$ es semidefinida positiva.
+
+Si $\norm{p^*}<\Delta$, entonces $\lambda^*=0$ y $p^*$ es una solución sin restricciones y, además, $(B+\lambda^* I)$ es semidefinida positiva por serlo $B$.
+Si $\norm{p^*}=\Delta$, por la condición necesaria de segundo orden (véase \cite[8.3]{Sun2006-au}), se tiene que $p^T(B+\lambda^* I)p \geq 0$ para todo $p$ tal que $p^Tp^*=0$. En el caso contrario de que $p^Tp^*\neq 0$, tomamos
+$t=-\frac{2p^Tp^*}{\norm{p}^2}$, entonces $\norm{p^* +tp}=\Delta$. Por definición de $p^*$, se tiene que
+\begin{equation}
+m(p^*+tp)+\frac{1}{2}\lambda^* \norm{p^*+tp}^2 \geq m(p^*)+\frac{1}{2}\lambda^* \norm{p^*}^2.
+\end{equation}
+Desarrollando y reordenando términos, se tiene que
+\begin{equation}
+	\frac{1}{2}t^2p^T(B+\lambda^* I)p \geq -t(p^T(g+(B+\lambda^* I)p^*)).
+\end{equation}
+Teniendo en cuenta el primer punto, $(B+\lambda^* I)p^*=-g$, se tiene que el lado derecho de la anterior ecuación es $0$, lo que resulta en
+\begin{equation}
+	p^T(B+\lambda^* I)p \geq 0,
+\end{equation}
+para todo p tal que $p^Tp^*\neq 0$. Por lo tanto, $(B+\lambda^* I)$ es semidefinida positiva.
+
+Veamos ahora la implicación contraria. Asumimos que existe $\lambda^* \geq 0$ tal que $p^*$ cumple los 3 puntos del teorema, además de ser factible. Por lo tanto, para todo $p$ factible, se tiene que
+\begin{equation}
+	\begin{split}
+		m(p) & = f + g^Tp + \frac{1}{2}p^T(B+\lambda^* I)p - \frac{1}{2}\lambda^* \norm{p}^2 \\
+		& \geq f + g^Tp + \frac{1}{2}(p^*)^T(B+\lambda^* I)p - \frac{1}{2}\lambda^* \norm{p^*}^2 \\
+		& = m(p^*) + \frac{1}{2} \lambda^* \left(\norm{p^*}^2-\norm{p}^2 \right).
+	\end{split}
+\end{equation}
+A partir del punto 2, se tiene que $\lambda^* (\Delta^2 - (p^*)^Tp^*) = 0$, así que la desigualdad anterior se puede
+escribir como
+\begin{equation}
+	\begin{split}
+		m(p) & \geq m(p^*) + \frac{1}{2} \lambda^*
+		\left[ \left(\norm{p^*}^2-\Delta^2 \right) + \left(\Delta^2 - \norm{p}^2 \right) \right]\\
+		& = m(p^*) + \frac{1}{2} \lambda^* \left(\Delta^2 - \norm{p}^2 \right).
+	\end{split}
+\end{equation}
+Por lo tanto, como $\lambda^* \geq 0$ y $\norm{p} \leq \Delta$, se tiene que $m(p) \geq m(p^*)$ para todo $p$ factible y, finalmente, que $p^*$ es una solución de (\ref{min:tr_nk}).
 
 \end{proof}
 
@@ -674,7 +740,7 @@ $\epsilon$ es la tolerancia para el criterio de parada y $\bar{\Delta}$ es el ra
 		\item Dados $x_0, \bar{\Delta}, \Delta_0 \in (0, \bar{\Delta}), \epsilon \geq
 			0, 0<\eta_1\leq\eta_2<1$ y $0<\gamma_1<1<\gamma_2, k:=0$.
 		\item Si $\norm{g_k} \leq \epsilon$ terminar.
-		\item Aproximar $p_k$ resolviendo (\ref{min:tr}).
+		\item Aproximar $p_k$ resolviendo (\ref{min:tr})-(\ref{min:tr_nk}) según la caracterización del teorema \ref{th:trustregion}.
 		\item Calcular $f(x_k+p_k)$ y $\rho_k$. Definir
 			\begin{equation*}
 				x_{k+1} = \begin{cases}
@@ -726,6 +792,21 @@ $\phi(t,x):\mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ de forma que se minimicen 
 \end{equation}
 donde $r(x) = (r_1(x), r_2(x), \ldots, r_m(x))^T$, con $r_i : \mathbb{R}^{n} \rightarrow \mathbb{R}$
 funciones continuamente diferenciables y $x$ es el parámetro de dimensión n a estimar.
+
+\begin{ejemplo}[Problema lineal]
+Partimos de una muestra
+	aleatoria de $20$ puntos en el intervalo $t\in [0,5]$ e $y\in [0,7]$. En un contexto estadístico, a $t$ se le llama \textit{variable explicativa} y a $y$ la \textit{variable respuesta}. Las cruces azules en la figura \ref{fig:lsqlin} representan los puntos de la muestra. El objetivo del problema es ajustar una recta a los datos, es decir, encontrar los parámetros $a$ y $b$ que minimicen la diferencia entre los puntos de la muestra y su valor esperado, representado por la recta roja definida por $y=at+b$. Recordar que en un contexto estadístico se tienen en cuenta una serie de hipótesis sobre la distribución de los datos, por lo que el ajuste de una recta es un modelo muy simple. En la práctica, se suelen utilizar modelos más complejos, como por ejemplo, polinomios de grado $n$.
+
+	En la figura, marcamos con una línea verde la diferencia que se intenta minimizar en el problema de mínimos cuadrados para un solo dato en particular, el problema obtiene esta diferencia para el resto de puntos de la muestra y trata de minimizarlo.
+\end{ejemplo}
+\newpage
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{imgs/examplelsqlin.png}
+	\caption{Ejemplo de ajuste de una recta a una muestra de puntos}
+	\label{fig:lsqlin}
+\end{figure}
+
 
 %Se asume que $m \geq n$ para este problema, de hecho en la práctica lo más común es que $m \gg n$. 
 
@@ -938,7 +1019,7 @@ q^{(k)}(x) =& \frac{1}{2}r(x_k)^Tr(x_k)+(J(x_k)^Tr(x_k))^T(x-x_k)+ \\
 	& +\frac{1}{2}(x-x_k)^T(J(x_k)^TJ(x_k))(x-x_k),
 \end{split}
 \end{equation}
-y por tanto,
+y por tanto, aplicando búsqueda de línea y despreciando el término de segundo orden, obtenemos
 \begin{equation}
 	x_{k+1} = x_k + p_k = x_k -(J(x_k)^TJ(x_k))^{-1}J(x_k)^Tr(x_k).
 \end{equation}
@@ -949,7 +1030,7 @@ Notar que para que esté bien definido, la matriz Jacobiana $J(x)$ tiene que ser
 \label{al:g-n}
 \begin{steps}
 	\item $x_0$ y $\epsilon > 0$ dados, $k:=0$
-	\item Si $\norm{g_k} \leq \epsilon$, parar.
+	\item Si $\norm{g_k} \leq \epsilon$, terminar.
 	\item Obtener el paso $p_k$ resolviendo
 		\begin{equation}
 			J(x_k)^TJ(x_k)p_k = -J(x_k)^Tr(x_k)
@@ -1512,12 +1593,15 @@ definimos la cota inferior
 \begin{equation}
 	l_0 = -\frac{\phi(0)}{\phi'(0)}.
 \end{equation}
-En otro caso, $l_0=0$.
+En otro caso, $l_0=0$. Escribamos un esquema algoritmo con los parámetros que hemos
+explicado. Normalmente se toma un valor no muy pequeño de $\sigma$, por ejemplo $0.1$.
 
 \begin{algorithm}[Parámetro Levenberg-Marquardt]\leavevmode
 	\begin{steps}
+		\item Definir valores iniciales $\alpha_0$, $l_0$ y $u_0$. Definir coeficiente de parada $\sigma$.
 		\item Si $\alpha_k \notin (l_k, u_k)$, definir $\alpha_k = \max \{0.001u_k, (l_ku_k)^{1/2}\}$.	
-		\item Calcular $\phi(\alpha_k)$ y $\phi'(\alpha_k)$. Actualizar $l_k$ y $u_k$:
+		\item Calcular $\phi(\alpha_k)$ y $\phi'(\alpha_k)$. Si $|\phi(\alpha)|<\sigma\Delta$, terminar.
+		\item Actualizar $l_k$ y $u_k$:
 			\begin{align*}
 				l_{k+1} &= \max \{l_k, \alpha_k-\frac{\phi(\alpha_k)}{\phi'(\alpha_k)}\}, \\
 				u_{k+1} &= \begin{cases}
@@ -1525,7 +1609,7 @@ En otro caso, $l_0=0$.
 					u_k, & \text{en otro caso}.
 				\end{cases}
 			\end{align*}
-		\item Calcular $\alpha_{k+1}$ según (\ref{eq:alpha}). $\quad \Box$
+		\item Actualizar $\alpha_{k+1}$ según (\ref{eq:alpha}). Volver al Paso 2 $\quad \Box$
 	\end{steps}
 \end{algorithm}
 En el Paso 1, se elige $\alpha_k$ con tendencia a la cota inferior, se añade el factor $0.001u_k$ para
@@ -1572,6 +1656,8 @@ de $\Delta$ se basa únicamente en (\ref{eq:rho1}), lo que mantiene la invarianz
 Concluyamos este capítulo presentando la versión propuesta por Moré del algoritmo de Levenberg-Marquardt.
 \begin{algorithm}[Versión de Moré]\label{alg:more}\leavevmode
 \begin{steps}
+	\item Definir valores iniciales $x_0$, $\Delta_0$ y $\epsilon$ y determinar $J_k$, $D_k$, y $f(x_0)$ a partir de la función $f$ determinada.
+	\item Si $\norm{J_k(D_k)^{-1}f(x_k)} < \epsilon$, terminar.
 	\item Sea $\sigma \in (0,1)$. Si $\norm{D_kJ_k^{-}r_k} \leq (1+\sigma) \Delta_k$,
 	asignar $\lambda_k = 0$ y $p_k = -J_k^{-}r_k$. En otro caso, encontar $\lambda_k$
 	tal que si
@@ -1602,7 +1688,7 @@ Concluyamos este capítulo presentando la versión propuesta por Moré del algor
 		Si $\rho_k \in \left[ \frac{1}{4}, \frac{3}{4} \right]$ y $\lambda_k = 0$,
 		o si $\rho_k \geq \frac{3}{4}$,
 		asignar $\Delta_{k+1} = 2\norm{D_kp_k}$.
-	\item Actualizar $D_k$ por (\ref{eq:diag}) y (\ref{eq:di}).
+	\item Actualizar $D_k$ por (\ref{eq:diag}) y (\ref{eq:di}) y volver al Paso 2.
 \end{steps}
 \end{algorithm}
 
@@ -1623,7 +1709,9 @@ Concluyamos este capítulo presentando la versión propuesta por Moré del algor
 	\end{equation}
 \end{theorem}
 
-\chapter{Implementación}
+\chapter{Implementación en Matlab\textsuperscript{®}}
+
+\section{Tests de funcionamiento}
 
 Después del análisis teórico, pasamos a la implementación del algoritmo en Matlab\textsuperscript{®}.
 Este programa cuenta con el comando \code{lsqnonlin} \cite{lsqnonlin} que permite ser
@@ -1709,6 +1797,55 @@ ylabel('exp(-tx)')
 
 Este es un ejemplo de estimación de parámetros en un modelo de regresión.
 Se parte de unos datos muestrales y una función paramétrica que se cree que puede encajar con los datos, normalmente esta función se puede obtener por el contexto o, en su defecto, con alguna técnica de inferencia. En este caso se trata de la función $f(x)=e^{-xt}$, siendo $x$ el parámetro que queremos estimar. Para ello, definimos la función residuo $r(x)=e^{-xt}-y$, siendo $y$ los datos muestrales.
+
+\section{Análisis de eficiencia}
+
+Una vez comprobado que funciona correctamente, veamos ahora el tiempo de ejecución necesario. Para poder
+analizar con criterio, lo pondremos frente al propio algoritmo de matlab \code{lsqnonlin}. Aprovecharemos los mismos ejemplos que hemos visto en la sección anterior. Para cada ejecución del siguiente código la salida cambia, seguramente debido a cache almacenado u otras herramientas del programa
+
+\vspace{10pt}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+clear all
+rng default % para que sea reproducible
+d = linspace(0,3);
+y = exp(-1.3*d) + 0.05*randn(size(d));
+fun = @(r)exp(-d*r)-y;
+x0 = 4;
+tic
+x = myLevMar(fun,x0);
+toc
+opts = optimoptions(@lsqnonlin,'Algorithm','levenberg-marquardt');
+tic
+x = lsqnonlin(fun,x0,[],[],opts);
+toc
+\end{lstlisting}
+
+En este caso se ha probado con la prueba aleatoriezada, la salida después del comando \code{myLevMar} ha sido "\textit{Elapsed time is 0.104180 seconds}", mientras que para el comando \code{lsqnonlin} ha sido "\textit{Elapsed time is 0.107986 seconds}". Aunque en esta ejecución la diferencia de tiempo es poco notable, siempre era más rápida la implementación \code{myLevMar}. El motivo es que se trata de una implementación más sencilla, y seguramente no sea tan robusta como la de \code{lsqnonlin} en casos más críticos que se escapan del estudio. Veamos los tiempos de ejecución del primer ejemplo mostrado.
+
+\vspace{10pt}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+d = linspace(-2,2);
+fun = @(x) [10*(x(3)-10*theta(x(1),x(2))),10*((x(1)^2+x(2)^2)^(1/2)-1),x(3)];
+x0 = [-1,0,0];
+tic
+x = myLevMar(fun,x0);
+toc
+opts = optimoptions(@lsqnonlin,'Algorithm','levenberg-marquardt');
+tic
+x = lsqnonlin(fun,x0,[],[],opts);
+toc
+\end{lstlisting}
+
+En la primera ejecución de este caso, los resultados son contrarios a los anteriores, siendo la implementación de \code{lsqnonlin} más rápida que la de \code{myLevMar}. Mostrando tiempos de
+\code{0.095620} y \code{0.143244} respectivamente. En la segunda ejecución los resultados ya se ven más cercanos pero sigue siendo más rápido el primero. Para nuestros objetivos y seguramente la mayoría de los casos prácticos en los que se utilice, esta diferencia no supone ningún coste. Por el contrario, se puede requerir la máxima eficiencia posible en casos de ajuste de grandes cantidades de parámetros como puede ser el caso de las redes neuronales.
+
+Las debilidades principales de esta implemetación son el cálculo explícito de la matriz jacobiana, el cálculo directo de cada matriz inversa necesaria en el algoritmo, como no eran el objetivo principal de estudio, estas se calcularon directamente eligiendo la sencillez a la eficiencia en este caso. Sin embargo, los resultados no son muy distantes al comando principal de Matlab\textsuperscript{®}, por lo retocando pequeños detalles se podría conseguir un algoritmo muy eficiente, ya que en terminos teóricos ya lo es. Con todo, se puede considerar una implementación válida para casos de uso prácticos.
+
+Comparemos ahora iteraciones, \code{lsqnonlin} itera 8 veces en el caso anterior, con 38
+evaluaciones de $f$, mientras que \code{myLevMar} itera 17, la diferencia es que estas iteraciones son
+más reales pues cada iteración evalúa una vez, pero no se cuentan las veces en las que no se actualiza
+$x_k$.
+
 
 
 

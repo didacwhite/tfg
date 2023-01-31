@@ -1,4 +1,4 @@
-function [xk, info] = myLevMar(fun, x0)
+function [xk, iter] = myLevMar(fun, x0)
 % setup
 [n,m,xk,Delta,funk,lambdak, maxit, maxit2, eps]= myLevMarSetup(fun,x0);
 

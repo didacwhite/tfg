@@ -1,0 +1,42 @@
+Español:
+
+Resolución numérica
+Problem no lineal
+Mínimos cuadrados
+Estimación de parámetros
+Campos científicos
+Introducción teórica
+Optimización sin restricciones
+Método de Levenberg-Marquardt
+Región de confianza
+Aproximación lineal
+Algoritmo
+Matlab\textsuperscript{®}
+Inglés:
+
+Numerical resolution
+Nonlinear problem
+Least squares
+Parameter estimation
+Scientific fields
+Theoretical introduction
+Unrestricted optimization
+Levenberg-Marquardt method
+Trust region
+Linear approximation
+Algorithm
+Matlab\textsuperscript{®}
+Gallego:
+
+Resolución numérica
+Problema non lineal
+Mínimos cadrados
+Estimación de parámetros
+Campos científicos
+Introdución teórica
+Optimización sen restricións
+Método de Levenberg-Marquardt
+Rexión de confianza
+Aproximación lineal
+Algoritmo
+Matlab\textsuperscript{®}
