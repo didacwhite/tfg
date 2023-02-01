@@ -214,7 +214,7 @@ na aproximación de funcións, etc. O obxectivo do traballo fin de grao é o est
 numéricos para abordar o problema de minimización resultante. centrándose especialmente no
 algoritmo de Levenberg-Marquardt. O estudante estudará o método, no marco dos métodos de
 optimización con rexión de confianza e familiarizarase co seu uso mediante o comando
-Isqnonlin de Matlab. As metodoloxías estudadas aplicaranse a exemplos académicos e á
+Isqnonlin de Matlab\textsuperscript{®}. As metodoloxías estudadas aplicaranse a exemplos académicos e á
 estimación de parámetros de distintos modelos matemáticos a partir de datos experimentais.
 		\vspace{.2cm}}
 	\end{minipage}\\ \hline
@@ -258,7 +258,7 @@ para la estimación de parámetros en distintos campos científicos. Para ello s
 \section*{Abstract}
 
 
-This work studies the numerical resolution of the nonlinear least squares problem, which is mainly used for parameter estimation in various scientific fields. To do this, it begins with a theoretical introduction to unconstrained optimization and the least squares problem. Subsequently, the study focuses on the Levenberg-Marquardt method, considered a precursor of trust region type methods. This method faces the problem by taking a linear approximation to solve it more simply, and to maintain the approximation, the action radius in which a minimum is sought is limited. Finally, the algorithm is implemented in Matlab\textsuperscript{®} to verify its operation and compare it with the program's own alternative.
+This work studies the numerical resolution of the nonlinear least squares problem, which is mainly used for parameter estimation in various scientific fields. To do this, it begins with a theoretical introduction to unconstrained optimization and the least squares problem. Subsequently, the study focuses on the Levenberg-Marquardt method, considered a precursor of trust region type methods. This method faces the problem by taking a linear approximation to solve it in a simpler way, and to maintain the approximation, the action radius in which a minimum is sought is limited. Finally, the algorithm is implemented in Matlab\textsuperscript{®} to verify its operation and compare it with the program's own alternative.
 % escribir aquí resumo en inglés
 
 
@@ -1853,7 +1853,8 @@ $x_k$.
 \appendix
 \renewcommand{\thechapter}{\Roman{chapter}}
 \chapter{Anexo: Código de la versión simplificada}\label{chap:impl-simpl}
-Se muestra el código de Matlab\textsuperscript{®} para la implementación del algoritmo de Moré simplificado. Se presenta en forma de función \code{myLevMar} que toma como argumentos \code{fun} en forma de \textit{function handle} y \code{x0} el punto de partida. Se muestran las distintas funciones creadas para un código más limpio una tras otra. Para mayor comodidad, los archivos \code{.m} se pueden descargar desde el repositorio de Github \url{https://github.com/didacwhite/levenberg-marquardt} en la carpeta implementación.
+Se muestra el código de Matlab\textsuperscript{®} para la implementación del algoritmo de Moré simplificado. Se presenta en forma de función \code{myLevMar} que toma como argumentos \code{fun} en forma de \textit{function handle} y \code{x0} el punto de partida. Se muestran las distintas funciones creadas para un código más limpio una tras otra. Para mayor comodidad, los archivos \code{.m} se pueden descargar desde el repositorio de Github \url{https://github.com/didacwhite/tfg} en la carpeta implementación.
+\vspace{10pt}
 
 \lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/myLevMar.m}
 \lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/myLevMarSetup.m}
