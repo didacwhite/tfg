@@ -23,28 +23,28 @@ coa alternativa propia do programa.
 
 ### Palabras clave
 
-Resolución numérica
-Problema no lineal
-Mínimos cuadrados
-Estimación de parámetros
-Optimización sin restricciones
-Método de Levenberg-Marquardt
-Región de confianza
-Matlab
-Numerical resolution
-Nonlinear problem
-Least squares
-Parameter estimation
-Unrestricted optimization
-Levenberg-Marquardt method
-Trust region
-Matlab
-Resolución numérica
-Problema non lineal
-Mínimos cadrados
-Estimación de parámetros
-Optimización sen restricións
-Método de Levenberg-Marquardt
-Rexión de confianza
-Aproximación lineal
-Matlab
+Resolución numérica,
+Problema no lineal,
+Mínimos cuadrados,
+Estimación de parámetros,
+Optimización sin restricciones,
+Método de Levenberg-Marquardt,
+Región de confianza,
+Matlab,
+Numerical resolution,
+Nonlinear problem,
+Least squares,
+Parameter estimation,
+Unrestricted optimization,
+Levenberg-Marquardt method,
+Trust region,
+Matlab,
+Resolución numérica,
+Problema non lineal,
+Mínimos cadrados,
+Estimación de parámetros,
+Optimización sen restricións,
+Método de Levenberg-Marquardt,
+Rexión de confianza,
+Aproximación lineal,
+Matlab.
