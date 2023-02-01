@@ -4,7 +4,7 @@
 \contentsline {chapter}{\numberline {1}Fundamentos de la optimización sin restricciones}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Generalidades y estructura de los algoritmos}{3}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Búsqueda de línea}{5}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Método de Newton con búsqueda de línea}{5}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.1}Método de Newton con búsqueda de línea}{6}{subsection.1.2.1}%
 \contentsline {section}{\numberline {1.3}Región de confianza}{6}{section.1.3}%
 \contentsline {chapter}{\numberline {2}Mínimos Cuadrados}{11}{chapter.2}%
 \contentsline {section}{\numberline {2.1}El Problema Lineal}{13}{section.2.1}%
@@ -13,11 +13,11 @@
 \contentsline {section}{\numberline {3.1}Propiedades del método de Levenberg-Marquardt}{20}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Convergencia}{22}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Implementación}{25}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Resolución del problema lineal}{25}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.1}Resolución del problema lineal}{26}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Actualización del radio $\Delta _k$}{27}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}El parámetro Levenberg-Marquardt}{27}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Escalado}{29}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5}La versión de Moré}{29}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.5}La versión de Moré}{30}{subsection.3.3.5}%
 \contentsline {chapter}{\numberline {4}Implementación en Matlab\textsuperscript {®}}{31}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Tests de funcionamiento}{31}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Análisis de eficiencia}{34}{section.4.2}%

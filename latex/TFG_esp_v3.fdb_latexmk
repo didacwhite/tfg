@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex TFG_esp_v3"] 1675242055 "TFG_esp_v3.aux" "TFG_esp_v3.bbl" "TFG_esp_v3" 1675243385 0
+["bibtex TFG_esp_v3"] 1675263375 "TFG_esp_v3.aux" "TFG_esp_v3.bbl" "TFG_esp_v3" 1675263646 0
   "./other.bib" 1674497642 149 861eb59960ee713bfddb252f768900b5 ""
   "./tfg.bib" 1674654311 2263 b9f77983f80bd7d82a67b79b96e492a8 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/bibtex/bst/amscls/amsplain.bst" 1591020010 25798 9b3546f2f237ee0ce4724eed95f954f4 ""
-  "TFG_esp_v3.aux" 1675243383 11520 ce49738d8892401e85a431b581bd9846 "pdflatex"
+  "TFG_esp_v3.aux" 1675263644 11689 24535288115422b9f3776e0878399b8d "pdflatex"
   (generated)
   "TFG_esp_v3.bbl"
   "TFG_esp_v3.blg"
   (rewritten before read)
-["pdflatex"] 1675243380 "c:/Users/didac.blanco/Documents/USC/TFG/latex/TFG_esp_v3.tex" "TFG_esp_v3.pdf" "TFG_esp_v3" 1675243385 0
+["pdflatex"] 1675263642 "c:/Users/didac.blanco/Documents/USC/TFG/latex/TFG_esp_v3.tex" "TFG_esp_v3.pdf" "TFG_esp_v3" 1675263646 0
   "C:/Users/didac.blanco/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1674676636 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/didac.blanco/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1095.pk" 1669574038 28976 19320439013bb04d0bceba6b6844ec3c ""
   "C:/Users/didac.blanco/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1670748347 31952 81d263ac7f96f8c8daa7c097e9a23900 ""
@@ -294,12 +294,12 @@
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/tocbibind/tocbibind.sty" 1286954396 8927 46f54e33fc9cef24f78ab3bc811cb63f ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/didac.blanco/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656233290 56148 51a9a8571c07b9921892ae11063ae853 ""
-  "TFG_esp_v3.aux" 1675243383 11520 ce49738d8892401e85a431b581bd9846 "pdflatex"
-  "TFG_esp_v3.bbl" 1675242055 2001 8202b5c03693d3b831ac3bc580189771 "bibtex TFG_esp_v3"
-  "TFG_esp_v3.out" 1675243383 4427 50079553b17a1c57b5fbb4436acd93d6 "pdflatex"
-  "TFG_esp_v3.tex" 1675243379 96999 8d93bbabb3081dbd576416404cce7ec2 ""
-  "TFG_esp_v3.toc" 1675243383 2154 8abc9ceaebf8e148879c0958ff90fa31 "pdflatex"
-  "c:/Users/didac.blanco/Documents/USC/TFG/latex/TFG_esp_v3.tex" 1675243379 96999 8d93bbabb3081dbd576416404cce7ec2 ""
+  "TFG_esp_v3.aux" 1675263644 11689 24535288115422b9f3776e0878399b8d "pdflatex"
+  "TFG_esp_v3.bbl" 1675263375 2001 8202b5c03693d3b831ac3bc580189771 "bibtex TFG_esp_v3"
+  "TFG_esp_v3.out" 1675263644 4427 50079553b17a1c57b5fbb4436acd93d6 "pdflatex"
+  "TFG_esp_v3.tex" 1675263641 99498 d71cdb27acc4bce8e89aa8bce9fcde26 ""
+  "TFG_esp_v3.toc" 1675263644 2154 9a6df846df4a79f5abafd28deb3e9a96 "pdflatex"
+  "c:/Users/didac.blanco/Documents/USC/TFG/latex/TFG_esp_v3.tex" 1675263641 99498 d71cdb27acc4bce8e89aa8bce9fcde26 ""
   "imgs/examplelsqlin.png" 1675238938 11009 d74a3ae42e370ccb05860d1f8127844b ""
   "imgs/exp.png" 1674678334 31214 31b747dab1714493a3214bb424a2abf5 ""
   "imgs/lsqiter.png" 1674656159 29858 8d97aaf6650c40fec97050b2cc920ff7 ""

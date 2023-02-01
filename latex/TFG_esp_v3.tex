@@ -249,7 +249,9 @@ Mercè}
 
 % escribir aquí resumo en español
 En este trabajo se estudia la resolución numérica del problema no lineal de los mínimos cuadrados, el cual se utiliza principalmente
-para la estimación de parámetros en distintos campos científicos. Para ello se comienza con una introducción teórica de la optimización sin restricciones y del problema de mínimos cuadrados. Posteriormente el estudio se enfoca en el método de Levenberg-Marquardt, considerado precursor de los métodos de tipo región de confianza. Este método afronta el problema tomando una aproximación lineal para resolverla de forma más sencilla, y para que la aproximación se mantenga acorde, se limita el radio de acción en el que se busca un mínimo. Finalmente se implementa el algoritmo en Matlab\textsuperscript{®} para comprobar su funcionamiento y compararlo con la alternativa propia del programa.
+para la estimación de parámetros en distintos campos científicos. Para ello se comienza con una introducción teórica de la optimización sin restricciones y del problema de mínimos cuadrados. Posteriormente el estudio se enfoca en el método de Levenberg-Marquardt, considerado precursor de los métodos de tipo región de confianza. Este método afronta el problema tomando una aproximación lineal para resolverlo de forma más sencilla, y para que la aproximación se mantenga acorde, se limita el radio de acción en el que se busca un mínimo. Por último, se implementa una versión simplificada del algoritmo en Matlab\textsuperscript{®} y se compara su rendimiento y funcionalidad con el comando \code{lsqnonlin} proporcionado por el programa.
+
+%Finalmente se implementa el algoritmo en Matlab\textsuperscript{®} para comprobar su funcionamiento y compararlo con la alternativa propia del programa \code{lsqnonlin}.
 
 
 
@@ -258,7 +260,7 @@ para la estimación de parámetros en distintos campos científicos. Para ello s
 \section*{Abstract}
 
 
-This work studies the numerical resolution of the nonlinear least squares problem, which is mainly used for parameter estimation in various scientific fields. To do this, it begins with a theoretical introduction to unconstrained optimization and the least squares problem. Subsequently, the study focuses on the Levenberg-Marquardt method, considered a precursor of trust region type methods. This method faces the problem by taking a linear approximation to solve it in a simpler way, and to maintain the approximation, the action radius in which a minimum is sought is limited. Finally, the algorithm is implemented in Matlab\textsuperscript{®} to verify its operation and compare it with the program's own alternative.
+This work studies the numerical resolution of the nonlinear least squares problem, which is mainly used for parameter estimation in various scientific fields. To do this, it begins with a theoretical introduction to unconstrained optimization and the least squares problem. Subsequently, the study focuses on the Levenberg-Marquardt method, considered a precursor of trust region type methods. This method faces the problem by taking a linear approximation to solve it in a simpler way, and to maintain the approximation, the action radius in which a minimum is sought is limited. Finally, the algorithm is implemented in Matlab\textsuperscript{®} to verify its operation and compare it with the program's own alternative, \code{lsqnonlin}.
 % escribir aquí resumo en inglés
 
 
@@ -273,18 +275,18 @@ This work studies the numerical resolution of the nonlinear least squares proble
 \phantomsection
 \chapter*{Introducci\'on}\addcontentsline{toc}{chapter}{Introducci\'on}
 
-El problema de los mínimos cuadrados es un problema de optimización utilizado para la estimación de parámetros en una amplia variedad de campos científicos. En este trabajo enfocamos la resolución del problema desde un punto de vista numérico después de una revisión previa a los conceptos necesarios para llegar al método de Levenberg-Marquardt, el cual se estudiará en profundidad. 
+El problema de mínimos cuadrados es un problema de optimización utilizado para la estimación de parámetros en una amplia variedad de campos científicos. En este trabajo enfocamos la resolución del problema desde un punto de vista numérico después de una revisión previa a los conceptos necesarios para llegar al método de Levenberg-Marquardt, el cual se estudiará en profundidad. 
 
-La computación numérica ha ido evolucionando muy rápido desde sus inicios. Con la llegada de los primeros ordenadores, era extremadamente importante que los algoritmos fueran los más eficientes posibles, pues los recursos eran muy limitados y costosos. A lo largo de los años, las nuevas tecnologías han permitido que los ordenadores sean cada vez más potentes y se podría argumentar que la eficiencia de los algoritmos de resolución numérica ha dejado de ser un problema y no siempre es necesaria.
+La computación numérica ha ido evolucionando muy rápido desde sus inicios. Con la llegada de los primeros ordenadores, era extremadamente importante que los algoritmos fueran los más eficientes posibles, pues los recursos eran muy limitados y costosos. A lo largo de los años, las nuevas tecnologías han permitido que los ordenadores sean cada vez más potentes y se puede decir que la eficiencia de los algoritmos de resolución numérica ha dejado de ser un problema en algunos campos de aplicación.
 Hoy en día la estimación de parámetros forma parte de los nuevos paradigmas tecnológicos. En concreto, es necesaria para lo que hoy en día se conoce como \textit{Inteligencia Artificial}, basada en redes neuronales que cuentan con una enorme cantidad de parámetros que deben ser estimados a partir de datos experimentales. Por esta razón, en este caso en particular se mantiene la necesidad de eficiencia.
 La necesidad de la computación numérica es evidente, pues nos permite obtener aproximaciones muy precisas de soluciones a problemas que serían imposibles de resolver analíticamente.
 
-El método de Levenberg-Marquardt es un método numérico que se utiliza para resolver problemas de mínimos cuadrados. Este método fue desarrollado por los estadísticos estadounidenses Kenneth Levenberg \cite{Levenberg1944-wb} y Donald Marquardt \cite{Marquardt1963-ds} en la década de 1950, ambos descubrieron este algoritmo por separado. En 1978, el autor J.J. Moré implementa su propia versión numérica a partir de las ideas de estos, y será objeto de nuestro estudio.
+El método de Levenberg-Marquardt es un método numérico que se utiliza para resolver problemas de mínimos cuadrados. Este método fue desarrollado por los estadísticos estadounidenses Kenneth Levenberg \cite{Levenberg1944-wb} y Donald Marquardt \cite{Marquardt1963-ds} en la década de 1950, ambos descubrieron este algoritmo por separado. En 1978, el autor J.J. Moré \cite{More1978-at} implementa su propia versión numérica a partir de las ideas de estos, y será objeto de nuestro estudio.
 
-El método de Levenberg-Marquardt se considera el precursor de los llamados métodos de región de confianza para resolver problemas de minimización sin restricciones, y nace de querer solucionar el problema de mínimos cuadrados. Problema muy utilizado en estadística para ajustar parámetros a partir de datos experimentales.
+El método de Levenberg-Marquardt se considera el precursor de los llamados métodos de región de confianza para resolver problemas de minimización sin restricciones, y nace de la búsqueda de solución del problema de mínimos cuadrados. Este problema es muy utilizado, por ejemplo, en estadística para ajustar parámetros a partir de datos experimentales.
 
-Desde entonces, se ha convertido en uno de los métodos más utilizados para resolver problemas de optimización no lineal y ha sido aplicado en una amplia gama de campos, incluyendo la ingeniería, la economía, la física y la biología. En este trabajo, en el capítulo 3 se describirá en detalle el método de Levenberg-Marquardt después de echar un vistazo general a los métodos de optimización sin restricciones en el capítulo 1 y de presentar el problema de mencionado en el capítulo 2. Los dos primeros capítulos se basan en el trabajo de \cite{Nocedal2006-kh} y \cite{Sun2006-au}, por lo que se recomienda su lectura para profundizar en la teoría de la optimización.
-En el capítulo 4 implementaremos este algoritmo en Matlab\textsuperscript{®} una versión propia y simplificada de la versión de Moré, lo aplicaremos a una serie de ejemplos y lo comparamos con el comando \code{lsqnonlin} de Matlab\textsuperscript{®}.
+Desde entonces, se ha convertido en uno de los métodos más utilizados para resolver problemas de optimización no lineal y ha sido aplicado en una amplia gama de campos, incluyendo la ingeniería, la economía, la física y la biología. En este trabajo, en el capítulo 3 se describirá en detalle el método de Levenberg-Marquardt después de echar un vistazo general a los métodos de optimización sin restricciones en el capítulo 1 y de presentar el problema de mínimos cuadrados, al que se le dedica el capítulo 2. Los dos primeros capítulos se basan en los trabajos \cite{Nocedal2006-kh} y \cite{Sun2006-au}, por lo que se recomienda su lectura para profundizar en la teoría de la optimización.
+En el capítulo 4 implementaremos en Matlab\textsuperscript{®} una versión propia y simplificada del algoritmo propuesto por Moré, lo aplicaremos a una serie de ejemplos y lo comparamos con el comando \code{lsqnonlin} de Matlab\textsuperscript{®}.
 
 \markboth{INTRODUCCI\'ON}{INTRODUCCI\'ON}
 
@@ -309,7 +311,7 @@ Un problema de optimización sin restricciones tiene la forma
 	\label{eq:minf}
 \end{equation}
 donde $x\in\mathbb{R}^{n}$ y $f : \mathbb{R}^{n} \rightarrow \mathbb{R}$ es continuamente
-diferenciable, a f se le llama \textbf{función objetivo}. 
+diferenciable, a $f$ se le llama \textbf{función objetivo}. 
 Notar que podemos usar esta formulación para referirnos tanto a los problemas de minimización
 como de maximización, basta sustituir $f$ por $-f$. 
 
@@ -320,17 +322,17 @@ optimización es identificar la solución sin usar demasiado tiempo ni almacenam
 Veamos una serie de definiciones y resultados necesarios.
  
 \begin{definition}
-	A una aplicación $\Vert \cdot \Vert$ se le llama \textit{norma} si y sólo si cumple:
+	A una aplicación $\Vert \cdot \Vert : \mathbb{R}^n \to \mathbb{R}$ se le llama \textit{norma} si y sólo si cumple:
 	\vspace{-0.4cm}
 	\begin{enumerate}
-		\item $\norm{x} \geq 0, \: \forall \mathbb{R}^n$ y $\norm{x}=0$ si y solo si $x=0$.
+		\item $\norm{x} \geq 0, \: \forall x \in \mathbb{R}^n$ y $\norm{x}=0$ si y solo si $x=0$.
 		\item $\norm{\alpha x} = \vert \alpha \vert \norm{x},\: \forall \alpha \in \mathbb{R},\: x\in \mathbb{R}^n.$
 		\item $\norm{x+y} \leq \norm{x} + \norm{y}, \forall x,y \in \mathbb{R}^n$.
 	\end{enumerate}
 \end{definition}
 
 Un ejemplo muy común es la
-\textit{norma} $l_2$, también llamada \textit{norma euclídea}, a la cual nos referiremos cuando no se especifique lo contrario, se define
+\textit{norma} $l_2$, también llamada \textit{norma euclídea}, a la cual nos referiremos cuando no se especifique lo contrario, se define como
 \begin{equation}
 		\norm{x}_2 = \left( \sum_{i=1}^n \vert x_i \vert^2 \right)^{\frac{1}{2}}.
 \end{equation}
@@ -351,12 +353,12 @@ Un ejemplo muy común es la
 \end{definition}
 
 
-%% REPASO DE ALGORITMOS
-
-%% \section{Generalidades de los algoritmos}
-
-%% histórico??
-% referencia 	NOCEDAL 2.2
+\begin{definition}
+	Sea $x,y \in \mathbb{R}^n$, el \textit{producto escalar} de $x$ y $y$ se define como
+	\begin{equation}
+		\langle x,y \rangle = \sum_{i=1}^n x_i y_i.
+	\end{equation}
+\end{definition}
 
 \begin{definition}
 	Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}$ diferenciable en
@@ -377,7 +379,7 @@ $x \in \mathbb{R}^n$ tal que $\langle \nabla f(x), d \rangle < 0$, entonces a $d
 	y
 	\begin{equation}
 		f(x+p) = f(x) + \nabla f(x)^Tp
-		+ \frac{1}{2}p^T \nabla^2 f(x+tp)p, \; t\in (0,1).
+		+ \frac{1}{2}p^T \nabla^2 f(x+tp)p, \quad t\in (0,1).
 		\label{eq:thty}
 	\end{equation}
 \end{theorem}
@@ -385,11 +387,11 @@ $x \in \mathbb{R}^n$ tal que $\langle \nabla f(x), d \rangle < 0$, entonces a $d
 
 \begin{proposition}
 Partiendo de la reformulación (\ref{eq:thty}) y tomando el último término
-como el error de aproximación $o(t)$
+como el error de aproximación $o(t)$, tenemos que
 \begin{equation}
 	f(x_k + td) = f(x_k) + t \nabla f(x_k)^Td + o(t),
 \end{equation}
-se cumple que
+y se cumple que
 \begin{equation}
 	\exists \delta > 0 \text{ tal que } f(x_k + td) < f(x_k)
 	\quad \forall t \in (0, \delta)
@@ -401,16 +403,6 @@ si y solo si $d$ es una dirección descendiente de $f$ en $x_k$.
 Tratemos ahora las condiciones de optimalidad, es decir, las condiciones necesarias y suficientes para que un punto $x^*$ sea un mínimo local de $f$, necesarias para la
 construcción de un algoritmo de optimización.
 
-\begin{definition}
-	%definir definida positiva
-	Una matriz $H$ es \textit{definida positiva} si $x^THx > 0$ para todo $x \neq 0$.
-\end{definition}
-
-\begin{definition}
-	%definir semidefinida positiva
-	Una matriz $H$ es \textit{semidefinida positiva} si $x^THx \geq 0$ para todo $x \neq 0$.
-\end{definition}
-
 \begin{theorem}[Condición Necesaria de Primer Orden]
 	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ continuamente diferenciable en un
 	conjunto abierto $D$. Si $x^*$ es un mínimo local de (\ref{eq:minf}), entonces
@@ -418,7 +410,7 @@ construcción de un algoritmo de optimización.
 \end{theorem}
 
 \begin{theorem}
-	(Condición Necesaria de Segundo Orden)
+	[Condición Necesaria de Segundo Orden]
 	Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable
 	en un conjunto abierto $D$. Si $x^*$ es un mínimo local de (\ref{eq:minf}), entonces
 	$\nabla f(x^*) = 0$ y $\nabla^2 f(x^*)$ es definida positiva.
@@ -439,13 +431,12 @@ que nos permitirá encontrar mínimos globales.
 	es un \textit{conjunto convexo}.
 \end{definition}
 \begin{definition}
-	Sea $S \subset \mathbb{R}^n$ un conjunto convexo no vacío. Sea $f: S \subset \mathbb{R}^n
-	\rightarrow R$. Si para cualquiera $x_1, x_2 \in S$ y
+	Sea $S \subset \mathbb{R}^n$ un conjunto convexo no vacío y $f$ una función de $S$ en $\mathbb{R}$. Si para cualquiera $x_1, x_2 \in S$ y
 	$\alpha \in (0,1)$, se cumple que
 	\begin{equation}
 		f(\alpha x_1 + (1-\alpha)x_2) \leq \alpha f(x_1) + (1-\alpha)f(x_2),
 	\end{equation}
-	se dice que $f$ es una función convexa en $S$.
+	se dice que $f$ es una \textit{función convexa} en $S$.
 \end{definition}
 
 \begin{theorem}
@@ -472,7 +463,7 @@ estructuras de bucles iterativos que van aproximando la solución, para ser lo m
 Todo algoritmo de optimización sin restricciones comienza con un punto de partida, denotado
 normalmente como $x_{0}$. Aunque generalmente el usuario introduce una estimación razonable,
 el punto puede ser elegido por el algoritmo, tanto de forma sistemática como aleatoria.
-El algoritmo itera sobre $x_{0}$, creando una sucesión $\sucesionxk_{k=0}^n$e. Para decidir
+El algoritmo itera sobre $x_{0}$, creando una sucesión $\sucesionxk_{k=0}^n$. Para decidir
 como se avanza de un $x_k$ al siguiente, los algoritmos utilizan información sobre $f(x_k)$ o
 incluso en los puntos anteriores $x_0,\, x_1,\, \ldots,\,x_{k-1}$ con el objetivo de que
 $f(x_{k+1})<f(x_{k})$. Además, para que esta sucesión sea finita, se imponen unas condiciones
@@ -495,12 +486,12 @@ llega a un máximo de iteraciones, esta última condición es necesaria para evi
 En este contexto de optimización numérica, el estudio de la convergencia tiene un especial interés. Es necesario que un algoritmo converga para asegurarnos que estas iteraciones lleven a un resultado en algún momento, además de que la velocidad de convergencia también resulta un factor importante a la hora de elegir un algoritmo.
 Es por esto que mantenemos la terminología de convergencia local y global. El tipo de convergencia es una medida
 de efectividad, es decir, nos dará una idea de la velocidad con la que llega a una solución y como se comporta en los distintos casos. Sea
-$\sucesionxk$ una sucesión generada por un algoritmo convergente en norma a $x^*$, esto es,
+$\sucesionxk$ una sucesión generada por un algoritmo convergente en norma a $x^*$, esto es, tal que
 \begin{equation}
 	\lim_{k \to \infty} \norm{x_k-x^*} = 0.
 \end{equation}
 \begin{definition}
-Si existen $\alpha\geq 1$ y $\beta$ constante positiva, tales que
+Suponiendo $\sucesionxk$ generada por un algoritmo, si existen $\alpha\geq 1$ y $\beta$ constante positiva, tales que
 \begin{equation}
 	\lim_{k \to \infty} \frac{\norm{x_{k+1}-x^*}}{\norm{x_k-x^*}^\alpha}=\beta,
 \end{equation}
@@ -509,8 +500,24 @@ y $\beta<1$, se dice que la convergencia es \textit{lineal} y, si $\alpha=2$,
 \textit{cuadrática.}
 \end{definition}
 
-Hablaremos de las dos estrategias fundamentales que se utilizan para
-avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}.
+En este trabajo no abordamos la optimización con restricciones ya que, aunque se utilicen sus resultados en algún caso, se escapa de los objetivos de este. Por ello, nos centraremos en la optimización sin restricciones, que no deja de ser el problema principal objeto de estudio. Si fuera necesario, se puede consultar \cite[Capítulo 8]{Sun2006-au} o \cite[Capítulo 12]{Nocedal2006-kh}. Veamos antes de terminar una definición necesaria en este contexto.
+
+\begin{definition}
+	Un punto $x_k$ se dice \textit{factible} si cumple las restricciones impuestas en el
+	problema de optimización. El conjunto de puntos factibles se llama \textit{conjunto factible}.
+\end{definition}
+
+%definir error o pequeña
+\begin{definition}
+	Sean $f(x), g(x)$ dos funciones definidas para $x>x_0$ y sea $g(x)\neq 0$ para todo $x>x_0$. Se denota por
+	\begin{equation}
+		f=o(g), \quad f = O(g),
+	\end{equation}
+	respectivamente, si $\frac{f(x)}{g(x)} \to 0$ cuando $x \to x_0$ y que $\frac{f(x)}{g(x)}$ está acotado para x suficientemente grande.
+\end{definition}
+
+A continuación, hablaremos de las dos estrategias fundamentales que se utilizan para
+avanzar de $x_k$ a $x_{k+1}$, \textit{búsqueda de línea} y \textit{región de confianza}. Veremos también brevemente el método de Newton.
 
 
 \section{Búsqueda de línea}
@@ -531,20 +538,19 @@ el problema que parte de este $x_k$ y $d_k$ elegido previamente, y encuentra un 
 \begin{equation}
 	\phi(\alpha_k) < \phi(0),
 \end{equation}
-se dice que realiza una búsqueda de línea. Si $alpha_k$ soluciona el problema
+se dice que realiza una búsqueda de línea. Si $\alpha_k$ soluciona el problema
 \begin{equation} \label{min:alphak}
 	\min_{\alpha_k>0}f\left(x_k+\alpha_kd_k\right),
 \end{equation}
-se dice que realiza una búsqueda de línea \textit{exacta} u \textit{óptima}. Para evitar el gran coste computacional que puede llegar a tomar, lo más común es tomar un $\alpha_k$ que aporte un descenso aceptable, en cuyo caso se le llama búsqueda de línea \textit{inexacta} o \textit{aproximada}. Desde el nuevo punto se busca otra dirección y paso para repetir el proceso.
+se dice que realiza una búsqueda de línea \textit{exacta} u \textit{óptima}. Para evitar el gran coste computacional que puede llegar a tomar, lo más común es elegir un $\alpha_k$ que aporte un descenso aceptable, en cuyo caso se le llama búsqueda de línea \textit{inexacta} o \textit{aproximada}. Desde el nuevo punto se busca otra dirección y paso para repetir el proceso.
 Veamos brevemente cómo se elige $d_k$.
 
 La mayor parte de algoritmos de este tipo necesitan que $d_k$ sea una dirección de descenso, esto es, $d_k^T \nabla f_k < 0$,
 lo cual asegura que en esa dirección se podrá reducir el valor de $f$. Esta suele tener la forma
 \begin{equation}
-	d_k = -B_k^{-1} \nabla f_k
+	d_k = -B_k^{-1} \nabla f_k,
 \end{equation}
-con $B_k$ una aproximación de la matriz Hessiana $\nabla^2 f(x_k)$ simétrica y no singular. Según lo que acabamos de decir, necesitamos que $B_k$ sea definida positiva. En las tres corrientes principales se elige un $B_k$ distinto, en el \textit{método del descenso máximo} o \textit{descenso del gradiente}, se usa la matriz identidad $I$.
-En el \textit{método de Newton} se usa la matriz exacta, mientras que en los \textit{métodos Quasi-Newton} la matriz Hessiana es aproximada para cada $x_k$.
+con $B_k$ una aproximación de la matriz Hessiana $\nabla^2 f(x_k)$ simétrica y no singular. Según lo que acabamos de decir, necesitamos que $B_k$ sea definida positiva. En las tres corrientes principales se elige un $B_k$ distinto. En el \textit{método del descenso máximo} o \textit{descenso del gradiente}, se usa la matriz identidad $I$, en el \textit{método de Newton} se usa la matriz exacta, mientras que en los \textit{métodos Quasi-Newton} la matriz Hessiana es aproximada para cada $x_k$.
 
 % En el caso de la elección de $\alpha_k$, el caso ideal sería encontrar el óptimo en \ref{min:alphak}, pero esto es en general demasiado costoso.
 % Debido a ese coste, se suelen utilizar búsquedas inexactas probando una serie de puntos hasta que alguno cumpla unas condiciones preestablecidas con las que se acepta el paso dado.
@@ -558,7 +564,7 @@ es usar la aproximación cuadrática $q^{(k)}$ de la función objetivo,
 	q^{(k)}(p) = f(x_k)+\nabla f(x_k)^Tp + \frac{1}{2}p^T \nabla^2 f(x_k)p,
 	\label{eq:NewtonQ}
 \end{equation}
-si $f:\mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable, $x_k \in \mathbb{R}^n$ y la Hessiana $\nabla^2f(x_k)$ es definida positiva. En tal caso aproximamos $f(x_k + p) \approx q^{(k)}(p)$.
+si $f:\mathbb{R}^n \rightarrow \mathbb{R}$ es dos veces continuamente diferenciable, $x_k \in \mathbb{R}^n$ y la Hessiana $\nabla^2f(x_k)$ es definida positiva. En tal caso tomamos la aproximación $f(x_k + p) \approx q^{(k)}(p)$.
 
 Minimizando $q^{(k)}(p)$ obtenemos la fórmula de Newton, denotando $G_k=\nabla^2f(x_k)$ y $g_k = \nabla f(x_k)$:
 \begin{equation}
@@ -611,15 +617,12 @@ En cada iteración, una vez elegido $\Delta_k$ se resuelve el siguiente problema
 \label{min:tr}
 \begin{aligned}
 	\min_{p} \quad & m_k(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TB_kp \\
-	\text{s.a.} \quad & \Vert p \Vert \leq \Delta_k. \\
+	\text{s.a.} \quad & \Vert p \Vert \leq \Delta_k,
 \end{aligned}
 \end{equation}
-Donde se recupera la aproximación $B_k$, más usual que la Hessiana exacta $G_k$ debido a
+donde se recupera la aproximación $B_k$, más usual que la Hessiana exacta $G_k$ debido a
 su coste computacional.
-\begin{definition}
-	Un punto $x_k$ se dice \textit{factible} si cumple las restricciones impuestas en el
-	problema de optimización. El conjunto de puntos factibles se llama \textit{conjunto factible}.
-\end{definition}
+
 Como este subproblema es de optimización con restricciones, las condiciones de optimalidad
 se ven un poco alteradas, para más exactitud referimos a \cite[Capítulo 12]{Nocedal2006-kh} o a
 \cite[Capítulo 8]{Sun2006-au}.
@@ -635,13 +638,13 @@ Por conveniencia, omitimos los subíndices para una notación más clara,
 \begin{equation}
 \label{min:tr_nk}
 \begin{aligned}
-	\min_{p} \quad & m(p) = f + g^Tp + \frac{1}{2}p^TBp, \\
-	\text{s.a.} \quad & \Vert p \Vert \leq \Delta. \\
+	\min_{p} &\quad  m(p) = f + g^Tp + \frac{1}{2}p^TBp, \\
+	\text{s.a.} &\quad  \Vert p \Vert \leq \Delta. 
 \end{aligned}
 \end{equation}
 
 \begin{theorem} \label{th:trustregion}
-	El vector $p^*$ es una solución global de (\ref{min:tr_nk}) si y solo si $p^*$ es factible y existe un escalar $\lambda^* \geq 0$ tal que
+	El vector $p^*$ es una solución global de (\ref{min:tr_nk}) si y solo si $p^*$ es factible y existe un escalar $\lambda^* \geq 0$ tal que:
 \begin{enumerate}
 %\vspace{-0.3cm}
 	\item $(B+\lambda^* I)p^*=-g,$
@@ -651,28 +654,28 @@ Por conveniencia, omitimos los subíndices para una notación más clara,
 \end{theorem}
 
 \begin{proof}
-Dejemos el tercer punto para el final. Supongamos que $p^*$ es solución del subproblema (\ref{min:tr_nk}). 
+Supongamos que $p^*$ es solución del subproblema (\ref{min:tr_nk}). 
 De las condiciones de optimalidad con restricciones (véase \cite{Nocedal2006-kh} o \cite{Sun2006-au}), se tiene
-que existe un multiplicador de Lagrange $\lambda^* \geq 0$ tal que se cumplen las condiciones 1 y 2. Problemos ahora
+que existe un multiplicador de Lagrange $\lambda^* \geq 0$ tal que se cumplen las condiciones 1 y 2. Probemos ahora
 el punto 3, que nos dice que $(B+\lambda^* I)$ es semidefinida positiva.
 
-Si $\norm{p^*}<\Delta$, entonces $\lambda^*=0$ y $p^*$ es una solución sin restricciones y, además, $(B+\lambda^* I)$ es semidefinida positiva por serlo $B$.
+Si $\norm{p^*}<\Delta$, entonces $\lambda^*=0$ y $p^*$ es una solución del problema sin restricciones y, además, $(B+\lambda^* I)$ es semidefinida positiva por serlo $B$.
 Si $\norm{p^*}=\Delta$, por la condición necesaria de segundo orden (véase \cite[8.3]{Sun2006-au}), se tiene que $p^T(B+\lambda^* I)p \geq 0$ para todo $p$ tal que $p^Tp^*=0$. En el caso contrario de que $p^Tp^*\neq 0$, tomamos
 $t=-\frac{2p^Tp^*}{\norm{p}^2}$, entonces $\norm{p^* +tp}=\Delta$. Por definición de $p^*$, se tiene que
 \begin{equation}
 m(p^*+tp)+\frac{1}{2}\lambda^* \norm{p^*+tp}^2 \geq m(p^*)+\frac{1}{2}\lambda^* \norm{p^*}^2.
 \end{equation}
 Desarrollando y reordenando términos, se tiene que
-\begin{equation}
+\begin{equation}\label{eq:tr1}
 	\frac{1}{2}t^2p^T(B+\lambda^* I)p \geq -t(p^T(g+(B+\lambda^* I)p^*)).
 \end{equation}
-Teniendo en cuenta el primer punto, $(B+\lambda^* I)p^*=-g$, se tiene que el lado derecho de la anterior ecuación es $0$, lo que resulta en
+Por el punto 1 se tiene que el lado derecho de (\ref{eq:tr1}) es $0$, lo que resulta en
 \begin{equation}
 	p^T(B+\lambda^* I)p \geq 0,
 \end{equation}
-para todo p tal que $p^Tp^*\neq 0$. Por lo tanto, $(B+\lambda^* I)$ es semidefinida positiva.
+para todo $p$ tal que $p^Tp^*\neq 0$. Por lo tanto, $(B+\lambda^* I)$ es semidefinida positiva.
 
-Veamos ahora la implicación contraria. Asumimos que existe $\lambda^* \geq 0$ tal que $p^*$ cumple los 3 puntos del teorema, además de ser factible. Por lo tanto, para todo $p$ factible, se tiene que
+Veamos ahora la implicación contraria. Asumimos que existe $\lambda^* \geq 0$ tal que $p^*$ cumple los tres puntos del teorema, además de ser factible. Por lo tanto, para todo $p$ factible, se tiene que
 \begin{equation}
 	\begin{split}
 		m(p) & = f + g^Tp + \frac{1}{2}p^T(B+\lambda^* I)p - \frac{1}{2}\lambda^* \norm{p}^2 \\
@@ -758,15 +761,14 @@ $\epsilon$ es la tolerancia para el criterio de parada y $\bar{\Delta}$ es el ra
 Si nos fijamos, en el paso 5 se define la actualización de $\Delta_k$, la cual no siempre supone un cambio.
 El primer caso se dice que resulta en una \textit{iteración no exitosa}, mientras que el segundo caso marcará
 una \textit{iteración exitosa} y el tercero una \textit{iteración muy exitosa}.
-Añadir que $\bar \Delta$ es el máximo radio de la región para toda iteración.
 Normalmente se elige $\eta_1 = 0.25$ y $\eta_2 = 0.75$, mientras que $\gamma_1 = 0.25$ y $\gamma_2 = 2$.
 Además, la elección de $\Delta^{k+1}$ se puede obtener por interpolación polinómica dentro del
 intervalo dado,
 aunque es común tomar el máximo del intervalo.
 
 \begin{theorem} \label{th:conv-tr}
-Se supone $\norm{B_k}$ uniformemente acotada para cada $k$
-y que el conjunto de nivel $\{x\,|\,f(x)\leq f(x_0)\}$ es acotado, con $f: \mathbb{R}^n \to \mathbb{R}$
+Se supone que $\norm{B_k}$ es uniformemente acotada para cada $k$
+y que el conjunto de nivel $\{x:f(x)\leq f(x_0)\}$ es acotado, con $f: \mathbb{R}^n \to \mathbb{R}$
 continuamente
 diferenciable. Además, para generalizar el subproblema (\ref{min:tr_nk}) y calcular cada $\norm{p_k}$,
 se permite
@@ -775,7 +777,7 @@ un exceso sobre la cota con un pequeño margen, esto es
 	\norm{p_k} \leq \tilde{\eta} \Delta_k,
 \end{equation}
 siendo $\tilde{\eta}$ constante positiva.
-Si el algoritmo (\ref{alg:tr}) tiene las suficientes iteraciones exitosas,
+Si el algoritmo \ref{alg:tr} tiene las suficientes iteraciones exitosas,
 entonces la sucesión que genera cumplirá
 \begin{equation}
 	\liminf_{k\to \infty} \norm{g_k} = 0.
@@ -785,13 +787,12 @@ entonces la sucesión que genera cumplirá
 %campos en los que se utiliza??? 
 
 El problema de mínimos cuadrados surge de la necesidad de ajustar modelos que nos permitan predecir ciertos comportamientos en una amplia variedad de campos. Dados unos datos $(t_1,y_1),(t_2,y_2),\cdots,(t_m,y_m)$, queremos ajustar una función
-$\phi(t,x):\mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ de forma que se minimicen los residuos $r_i(x) = \phi(t_i,x) - y_i$ para $i=1,\cdots,m$
+$\phi_x(t):\mathbb{R} \rightarrow \mathbb{R}$ de forma que se minimicen los residuos $r_i(x) = \phi_x(t_i) - y_i$ para $i=1,\cdots,m$. Es decir, resolver el problema
 \begin{equation}
 	\min_{x\in \mathbb{R}^{n}}f(x) = \frac{1}{2} r(x)^Tr(x) = \frac{1}{2}\sum_{i=1}^{m}r_i^2(x), \quad m\geq n,
 	\label{eq:lsp}
 \end{equation}
-donde $r(x) = (r_1(x), r_2(x), \ldots, r_m(x))^T$, con $r_i : \mathbb{R}^{n} \rightarrow \mathbb{R}$
-funciones continuamente diferenciables y $x$ es el parámetro de dimensión n a estimar.
+donde $r(x) = (r_1(x), r_2(x), \ldots, r_m(x))^T$, con $r_i : \mathbb{R}^{n} \rightarrow \mathbb{R}$ continuamente diferenciable con $i = 1,\cdots,m$ y $x$ es el parámetro de dimensión $n$ a estimar.
 
 \begin{ejemplo}[Problema lineal]
 Partimos de una muestra
@@ -850,8 +851,8 @@ El gradiente y la Hessiana de $f$ se pueden expresar como sigue:
 	&= J(x)^TJ(x)+S(x). \label{eq:hess}
 \end{align}
 
-Si nos fijamos en la formulación de la matriz Hessiana, el cálculo del primer termino es directo
-gracias a que ya obtenemos $J(x)$ para calcular el gradiente (\ref{eq:grad}), así que el coste de obtener
+Si nos fijamos en la formulación de la matriz Hessiana, el cálculo del primer término es directo
+gracias a que ya obtenemos $J(x)$ para calcular el gradiente (\ref{eq:grad}), así que el coste numérico de obtener
 $G(x)$ se reduce
 al segundo término, que hemos denotado $S(x)$.
 Adaptando el modelo cuadrático (\ref{eq:NewtonQ})
@@ -870,7 +871,7 @@ y sustituyendo según (\ref{eq:lsp}), (\ref{eq:grad}) y (\ref{eq:hess}), obtenem
 
 El primer caso más sencillo es si $\phi (t, x)$ es una función lineal, en cuyo caso los residuos
 $r_i(x)$ también serán lineales.
-Por ser $\phi$ lineal, se puede representar como $Jx$, con $J$ una matriz
+Por ser $\phi$ lineal, se puede representar como $Jx$, siendo $J$ una matriz
 $m\times n$.
 Realizaremos un estudio del caso lineal para tener un conocimiento de como se enfocan estos problemas,
 que nos servirá para el caso no lineal.
@@ -896,18 +897,27 @@ Antes de ver como se resuelve numéricamente este sistema de ecuaciones, conocid
 \end{definition}
 
 \begin{definition}
-	Una matriz cuadrada $A$ se dice \textit{definida positiva} si existe un $\alpha \in \mathbb{R}^+$ tal que
-	\begin{equation}
-		x^TAx \geq \alpha x^T x, \quad \text{para todo } x \in \mathbb{R}^n.
-	\end{equation}
-	Esta es \textit{semidefinida postiva} si
-	\begin{equation}
-		x^TAx \geq 0, \quad \text{para todo } x \in \mathbb{R}^n.
-	\end{equation}
+	%definir definida positiva
+	Una matriz $H$ es \textit{definida positiva} si $x^THx > 0$ para todo $x \neq 0$.
 \end{definition}
 
 \begin{definition}
-	Una matriz $n \times n$ cuadrada A se dice \textit{no singular} si para cada $b \in \mathbb{R}^n$, existe $x\in\mathbb{R}^n$ tal que $Ax=b$.
+	%definir semidefinida positiva
+	Una matriz $H$ es \textit{semidefinida positiva} si $x^THx \geq 0$ para todo $x \neq 0$.
+\end{definition}
+
+\begin{definition}
+	%definir matriz no singular
+	Una matriz $A$ se dice \textit{no singular} o \textit{invertible} si existe una matriz denominada \textit{inversa} $A^{-1}$, tal que
+	$A^{-1}A = I$.
+\end{definition}
+
+%definir matriz adjunta
+\begin{definition}
+	Sea $A$ una matriz cuadrada, la \textit{matriz adjunta} de $A$ se define como
+	\begin{equation}
+		Adj(A) \equiv A^* := \det(A)A^{-1}.
+	\end{equation}
 \end{definition}
 
 \begin{definition}
@@ -915,7 +925,7 @@ Antes de ver como se resuelve numéricamente este sistema de ecuaciones, conocid
 \end{definition}
 
 \begin{definition}
-	Si tomamos los sistemas de vectores de una una matriz $A_{m \times n}$, $\sucesion{u_i}_{i=1}^n$ y $\sucesion{v_i}_{i=1}^m$, al número máximo de vectores linealmente independientes se le llama \textit{rango}, tanto de los sistemas de vectores como de la matriz $A$. Si $n<m$, se dice que $A$ es de \textit{rango completo} si su rango es $n$, que es el máximo posible.
+	Si tomamos los sistemas de vectores de una matriz $A_{m \times n}$, $\sucesion{u_i}_{i=1}^n$ y $\sucesion{v_i}_{i=1}^m$, al número máximo de vectores linealmente independientes se le llama \textit{rango}, tanto de los sistemas de vectores como de la matriz $A$. En el caso de que $n<m$, se dice que $A$ es de \textit{rango completo} si su rango es $n$, que es el máximo posible.
 \end{definition}
 
 \begin{definition}
@@ -930,14 +940,14 @@ Antes de ver como se resuelve numéricamente este sistema de ecuaciones, conocid
 	Al conjunto de todos los autovalores de $A$ se le llama \textit{espectro de $A$}.
 \end{definition}
 
-Veamos ahora como se resuelve numéricamente el sistema de ecuaciones normales de (\ref{eq:linsis}), para más información sobre los algoritmos de factorización, ver por ejemplo \cite{Trefethen1997-ek} o \cite{Golub2013-li} para profundizar en el tema.
+Veamos ahora como se resuelve numéricamente el sistema de ecuaciones normales de (\ref{eq:linsis}), para más información sobre los algoritmos de factorización, ver \cite{Trefethen1997-ek} o \cite{Golub2013-li}.
 
 Lo más común en este caso es usar distintos tipos de factorización sobre la matriz $J^TJ$ o sobre $J$, para luego resolver con sustituciones triangulares.
 El primer algoritmo que se plantea es a partir de la \textbf{factorización de Cholesky}, comenzando por computar la matriz de coeficientes $J^TJ$ y el lado derecho $J^Ty$. Después se computa la factorización de Cholesky
 \begin{equation}
-	J^TJ = \bar R^T\bar R.
+	J^TJ = \bar R^T\bar R,
 \end{equation}
-Para que esta exista, necesitamos que $m \geq n$ y que $J$ sea de rango $n$,
+con $\bar R$ una matriz cuadrada $n \times n$ triangular superior con elementos positivos en la diagonal. Para que esta exista, necesitamos que $m \geq n$ y que $J$ sea de rango $n$,
 lo que permite que $J^TJ$ sea simétrica y definida positiva.
 Se termina realizando las dos sustituciones triangulares con los factores de Cholesky para encontrar $x^*$.
 La principal desventaja de este método es que el condicionamiento de $J^TJ$ es el cuadrado del condicionamiento de $J$, y esto puede llevar a errores de aproximación.
@@ -954,13 +964,13 @@ para una matrix $A \in \mathbb{R}^{m \times n}$ tiene la forma
 	A\Pi = QR,
 \end{equation}
 donde $\Pi$ es una matriz permutación $n \times n$, y por tanto ortogonal; $Q$ es una matriz
-ortogonal $m \times m$ y $R$ es una matriz $n \times n$ triangular superior con elementos positivos en la diagonal. Se tiene
+ortogonal $m \times m$ y $R$ es una matriz $n \times n$ triangular superior con elementos positivos en la diagonal. Se tiene que
 \begin{equation}\label{eq:QR}
 J\Pi = Q \left[ \begin{array}{c} R \\ 0 \end{array} \right] =
 \left[ \begin{array}{cc} Q_1 & Q_2 \end{array} \right] \left[ \begin{array}{c} R \\ 0 \end{array} \right] = Q_1 R,
 \end{equation}
 donde $Q_1$ son las primeras $n$ columnas de $Q$ y $Q_2$ las restantes. Por
-(\ref{eq:forQR}) y (\ref{eq:QR}) se llega a
+(\ref{eq:forQR}) y (\ref{eq:QR}) se llega a que
 \begin{equation}
 \begin{split}
 	\norm{Jx- y} &= \norm{
@@ -974,7 +984,7 @@ donde $Q_1$ son las primeras $n$ columnas de $Q$ y $Q_2$ las restantes. Por
 	&= \norm{R(\Pi^Tx)-Q_1^Ty}^2 + \norm{Q_2^Ty}^2.
 \end{split}
 \end{equation}
-Notar que el segundo término no depende de x, por tanto para minimizar la expresión solo igualamos a 0 el primer término, lo que nos lleva a la solución
+Notar que el segundo término no depende de $x$, por tanto para minimizar la expresión solo igualamos a 0 el primer término, lo que nos lleva a la solución
 \begin{equation}
 	x^* = \Pi R^{-1}Q_1^Ty.
 \end{equation}
@@ -993,7 +1003,7 @@ para obtener
 	\left[ \begin{array}{c} S \\ 0 \end{array} \right] V^T =
 	U_1 S V^T,
 \end{equation}
-con $U$ matriz $m \times m$, $U_1$ las primeras $n$ columnas de $U$,
+con $U$ una matriz cuadrada $m \times m$, $U_1$ las primeras $n$ columnas de $U$,
 $U_2$ las restantes, $V$ matriz $n \times n$, ambas ortogonales y $S$
 matriz $n \times n$ de elementos diagonales $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n > 0$.
 Aprovechamos estas propiedades para obtener
@@ -1002,11 +1012,11 @@ Aprovechamos estas propiedades para obtener
 \end{equation}
 Denotando por $u_i \in \mathbb{R}^m$ y $v_i \in \mathbb{R}^n$ las columnas de $U$ y $V$ respectivamente, escribimos
 \begin{equation}
-	x^* = \sum_{i=1}^n \frac{i_i^Ty}{\sigma_i}v_i.
+	x^* = \sum_{i=1}^n \frac{i_i^Ty}{\sigma_i}v_i,
 \end{equation}
-Fórmula de donde obtenemos información útil como la sensibilidad al aproximar $x^*$.
+fórmula de donde obtenemos información útil como la sensibilidad al aproximar $x^*$.
 
-Las 3 opciones son buenas según las condiciones en las que nos encontremos. La resolución basada en Cholesky es útil cuando $m\gg n$ y es práctico trabajar almacenando $J^TJ$ en lugar de $J$, siempre y cuando $J$ sea de rango completo y bien condicionada. Si esto último no se cumple, la factorización QR es un enfoque más equilibrado, mientras que DVS es el más costoso a cambio de ser el más fiable.
+Las tres opciones son buenas según las condiciones en las que nos encontremos. La resolución basada en Cholesky es útil cuando $m\gg n$ y es práctico trabajar almacenando $J^TJ$ en lugar de $J$, siempre y cuando $J$ sea de rango completo y bien condicionada. Si esto último no se cumple, la factorización QR es un enfoque más equilibrado, mientras que DVS es el más costoso a cambio de ser el más fiable. Para ver en más detalle, se puede consultar \cite[Sección 10.2]{Nocedal2006-kh}.
 
 Por último, mencionar que existen métodos para problemas muy grandes, en los que se usan técnicas iterativas como el método de gradientes conjugados para resolver el sistema.
 
@@ -1024,16 +1034,16 @@ y por tanto, aplicando búsqueda de línea y despreciando el término de segundo
 	x_{k+1} = x_k + p_k = x_k -(J(x_k)^TJ(x_k))^{-1}J(x_k)^Tr(x_k).
 \end{equation}
 
-Notar que para que esté bien definido, la matriz Jacobiana $J(x)$ tiene que ser de rango completo. Gracias a la aproximación $\nabla^2 f(x_k) \approx J(x_k)^TJ(x_k)$, hacemos que la única dificultad del algoritmo sea resolver un sistema lineal, ya que evitamos computar $\nabla^2 r_j,\,j=1,2,\ldots ,m$. En algunas situaciones, cuando nos vamos acercando a la solución $x^*$, esta aproximación suele ser más precisa, ya sea porque los residuos $r_i$ o $\norm{\nabla^2 r_i}$ es cercano a cero. La eficacia del método dependerá por tanto de lo buena que sea esta aproximación.
+Notar que para que esté bien definido, la matriz Jacobiana $J(x)$ tiene que ser de rango completo. Gracias a la aproximación $\nabla^2 f(x_k) \approx J(x_k)^TJ(x_k)$, hacemos que la única dificultad del algoritmo sea resolver un sistema lineal, ya que evitamos computar $\nabla^2 r_j,\,j=1,2,\ldots ,m$. En algunas situaciones, cuando nos vamos acercando a la solución $x^*$, esta aproximación suele ser más precisa, ya sea porque los residuos $r_i$ o $\norm{\nabla^2 r_i}$ son cercanos a cero. La eficacia del método dependerá por tanto de lo buena que sea esta aproximación.
 
 \begin{algorithm}[Método de Gauss-Newton] \leavevmode
 \label{al:g-n}
 \begin{steps}
-	\item $x_0$ y $\epsilon > 0$ dados, $k:=0$
+	\item $x_0$ y $\epsilon > 0$ dados, $k:=0$.
 	\item Si $\norm{g_k} \leq \epsilon$, terminar.
 	\item Obtener el paso $p_k$ resolviendo
 		\begin{equation}
-			J(x_k)^TJ(x_k)p_k = -J(x_k)^Tr(x_k)
+			J(x_k)^TJ(x_k)p_k = -J(x_k)^Tr(x_k).
 		\end{equation}
 	\item Definimos $x_{k+1} = x_k + p_k$ y actualizamos $k=k+1$. Ir a Paso 2. \quad \qedsymbol
 \end{steps}
@@ -1060,12 +1070,12 @@ Este teorema nos dice esencialmente que la convergencia del método depende de $
 
 \begin{theorem}
 	\label{th:gn2}
-	Sea $f:D \subset \mathbb{R}^n \rightarrow \mathbb{R}$ y $f \in \mathcal{C}^2(D)$, con $D$ conjunto abierto convexo. Sea $J(x)$ lipschitziana en $D$ y $\norm{J(x)} \leq \alpha, \, \forall x \in D$. Supongamos que existe $x^* \in D$ y $\lambda, \sigma \geq 0$ tal que $J(x^*)^Tr(x^*)=0$,
+	Sea $f:D \subset \mathbb{R}^n \rightarrow \mathbb{R}$ y $f \in \mathcal{C}^2(D)$, con $D$ conjunto abierto convexo. Sea $J(x)$ lipschitziana en $D$ y $\norm{J(x)} \leq \alpha, \, \forall x \in D$. Supongamos que existe $x^* \in D$ y $\lambda, \sigma \geq 0$ tales que $J(x^*)^Tr(x^*)=0$,
 $\lambda$ es el autovalor más pequeño de $J(x^*)^TJ(x^*)$, y
 	\begin{equation}
 		\norm{(J(x)-J(x^*))^Tr(x^*)} \leq \sigma \norm{x-x_k},\,\forall x \in D.
 	\end{equation}
-	Si $\sigma < \lambda$, para cualquier $c\in (1,\lambda / \sigma)$, existe $\epsilon > 0$ tal que para todo $x_0 \in N(x^*, \epsilon)$, la sucesión resultante $\sucesionxk$ del algoritmo \ref{al:g-n} está bien definida, converge a $x^*$ y satisface
+	Si $\sigma < \lambda$, para cualquier $c\in (1,\lambda / \sigma)$, existe $\epsilon > 0$ tal que para todo $x_0 \in N(x^*, \epsilon)$, la sucesión resultante $\sucesionxk$ del algoritmo \ref{al:g-n} está bien definida, converge a $x^*$ y satisface las desigualdades
 	\begin{equation}
 	\norm{x_{k+1}-x^*} \leq \frac{c\sigma}{\lambda} \norm{x_k-x^*}+\frac{c\alpha\sigma}{2\lambda}\norm{x_k-x^*}^2
 	\end{equation}
@@ -1076,7 +1086,7 @@ $\lambda$ es el autovalor más pequeño de $J(x^*)^TJ(x^*)$, y
 \end{theorem}
 
 \begin{theorem}
-	Manteniendo las suposiciones de los dos teoremas \ref{th:gn1} y \ref{th:gn2}, si $r(x^*)=0$, entonces existe $\epsilon>0$ tal que para cualquier $x_0 \in N(x^*,\epsilon)$, la sucesión $\sucesionxk$ obtenida del método de Gauss-Newton converge a $x^*$ con orden cuadrático.
+	Manteniendo las hipótesis de los dos teoremas \ref{th:gn1} y \ref{th:gn2}, si $r(x^*)=0$, entonces existe $\epsilon>0$ tal que para cualquier $x_0 \in N(x^*,\epsilon)$, la sucesión $\sucesionxk$ obtenida por el método de Gauss-Newton converge a $x^*$ con orden cuadrático.
 \end{theorem}
 
 Para concluir observamos que el método encaja dentro de los métodos de búsqueda de línea, tomando $d_k=p_k$ en  (\ref{eq:linesearch}) y calculando una longitud de paso $\alpha_k$,
@@ -1087,18 +1097,23 @@ Para concluir observamos que el método encaja dentro de los métodos de búsque
 \chapter{El método de Levenberg-Marquardt}
 
 El método de Levenberg-Marquardt soluciona la necesidad de que $J$ sea de rango completo cambiando el enfoque de búsqueda de línea por el de región de confianza.
-Lo hace manteniendo la raíz del método de Gauss-Newton, la linealización del problema obviando el término cuadrático, esto es, usando la aproximación $\nabla^2 f(x_k) \approx J(x_k)^TJ(x_k)$.
-Este cambio de enfoque surge de que la linealización pierde efectividad según nos alejamos de $x_k$, por lo que conviene restringir el tamaño de $p=(x-x_k)$, resultando en el subproblema
+Lo hace manteniendo la raíz del método de Gauss-Newton, que es la linealización del problema obviando el término cuadrático, esto es, usando la aproximación $\nabla^2 f(x_k) \approx J(x_k)^TJ(x_k)$.
+Este cambio de enfoque surge de la pérdida de efectividad de la linealización según nos alejamos de $x_k$, por lo que conviene restringir el tamaño de $p=(x-x_k)$, resultando en el subproblema
 \begin{equation}
 \label{min:sublev}
-	\min_{p} \quad \frac{1}{2} \norm{J_kp+r_k}^2,\quad \text{s.a.} \norm{p} \leq \Delta_k,
+\begin{aligned}
+	\min_{p} &\quad \frac{1}{2} \norm{J_kp+r_k}^2,\\
+	\text{s.a.} &\quad \norm{p} \leq \Delta_k,
+\end{aligned}
 \end{equation}
 donde $\Delta_k>0$ es el radio de la región de confianza.
 Esta forma de afrontar el problema caracteriza los métodos de región de confianza (\ref{sec:tr}) y,
 de hecho, el método de Levenberg-Marquardt es, para muchos, el precursor de estos métodos. Otra forma de escribir el modelo es
 \begin{equation}
-	m_k(p)=\frac{1}{2}\norm{r_k}^2 + p^TJ_k^Tr_k + \frac{1}{2}p^TJ_k^TJ_kp,
-	\quad \text{s.a.} \norm{p} \leq \Delta_k.
+	\begin{aligned}
+		\min_{p} &\quad m_k(p)=\frac{1}{2}\norm{r_k}^2 + p^TJ_k^Tr_k + \frac{1}{2}p^TJ_k^TJ_kp, \\
+	 \text{s.a.} &\quad \norm{p} \leq \Delta_k.
+	\end{aligned}
 \end{equation}
 
 \begin{lemma}
@@ -1121,6 +1136,7 @@ Además, podemos intercambiar la matriz identidad $I$ por una matriz diagonal $D
 	(J_k^TJ_k+\lambda D_k)p = -J_k^Tr_k.
 \end{equation}
 Lo que resulta en una dirección $p$ combinación del método Gauss-Newton y la dirección de máximo descenso respecto a la métrica definida por la matriz $D_k$.
+Esta matriz sirve para solventar los problemas de escalado, por ejemplo cuando uno de los parámetros varía mucho más que los demás, y por tanto, la matriz $J_k^TJ_k$ es mal condicionada. También es usual que, por ejemplo, un parámetro que varía entre $0$ y $1$ necesite más precisión que otro que varía entre $0$ y $1000$.
 Veamos una serie de propiedades del método de Levenberg-Marquardt y de $p$ en función de $\lambda$. 
 
 \section{Propiedades del método de Levenberg-Marquardt}
@@ -1158,7 +1174,10 @@ Veamos una serie de propiedades del método de Levenberg-Marquardt y de $p$ en f
 	Sea $\lambda_k>0$, si $p_k$ es solución de (\ref{eq:lmsol}), entonces $p_k$ es solución global de el subproblema
 \begin{equation}
 \label{eq:theoremlm}
-\min_{p} \quad m_k(p)=\frac{1}{2} \norm{J_kp+r_k}^2,\quad \text{s.a.} \norm{p} \leq \norm{p_k},
+\begin{aligned}
+\min_{p} &\quad m_k(p)=\frac{1}{2} \norm{J_kp+r_k}^2,\\
+ \text{s.a.} &\quad \norm{p} \leq \norm{p_k},
+\end{aligned}
 \end{equation}
 \end{theorem}
 \begin{proof}
@@ -1361,7 +1380,10 @@ A partir de la transformación del problema no lineal de mínimos cuadrados a un
 restricciones
 \begin{equation}
 	\label{min:more}
-	\min \norm{r_k+J_kp} \quad \text{sujeto a} \quad \norm{D_kp} \leq \Delta_k,
+	\begin{aligned}
+	\min_p &\quad \norm{r_k+J_kp}, \\
+	\text{s.a.} &\quad \norm{D_kp} \leq \Delta_k.
+	\end{aligned}
 \end{equation}
 Moré propone un método para obtener $p$ resolviendo las ecuaciones correspondientes,
 \begin{equation}
@@ -1723,7 +1745,7 @@ x = lsqnonlin(fun,x0,[],[],opts);
 \end{lstlisting}
 Donde \code{fun} es la función objetivo escrita como \textit{function handle}, \code{x0} es el punto inicial y \code{opts} son las opciones que hemos configurado para que se use el algoritmo de Levenberg-Marquardt. En este caso, no se ha configurado nada más, por lo que se usan los valores por defecto. Los argumentos vacíos \code{[]} indican que no hay restricciones en las variables, es decir, que no hay límites inferior ni superior a la hora de buscar parámetros. De aquí en adelante, se asume que se ha configurado el comando \code{lsqnonlin} para que utilice el algoritmo de Levenberg-Marquardt.
 
-Podemos realizar otras configuraciones para que se nos muestren más información. Por ejemplo, la figura \ref{fig:lsqnonlin-iter} es la salida resultante de utilizar la función resiudo
+Podemos realizar otras configuraciones para que se nos muestre más información. Por ejemplo, la figura \ref{fig:lsqnonlin-iter} es la salida resultante de utilizar la función resiudo
 \begin{equation}
 f(x)=\left(
 \begin{array}{c}
@@ -1733,14 +1755,13 @@ f(x)=\left(
 \end{array}
 \right),
 \end{equation}
-donde
+donde $x_0 = (-1,0,0)^T$ y
 \begin{equation}\label{eq:theta}
 \theta(x_1,x_2)=\begin{cases}
 	\frac{1}{2\pi}arctan\left(\frac{x_2}{x_1}\right), & \text{si } x_1 > 0 \\
-	\frac{1}{2\pi}arctan\left(\frac{x_2}{x_1}\right)+\frac{1}{2}, & \text{si } x_1 < 0,
+	\frac{1}{2\pi}arctan\left(\frac{x_2}{x_1}\right)+\frac{1}{2}, & \text{si } x_1 < 0.
 \end{cases}
 \end{equation}
-y $x_0 = (-1,0,0)^T$.
 
 \begin{figure}[ht]
 	\centering
@@ -1846,6 +1867,9 @@ evaluaciones de $f$, mientras que \code{myLevMar} itera 17, la diferencia es que
 más reales pues cada iteración evalúa una vez, pero no se cuentan las veces en las que no se actualiza
 $x_k$.
 
+Como conclusión, obtenemos que los resultados son realmente parecidos, lo que nos indica que la propuesta de Moré es buena, y que aún siendo una implementación sencilla, es válida para casos de uso prácticos. En el caso de que se necesite una implementación más eficiente, se puede retocar la implementación, pero no se puede esperar que sea más eficiente que la implementación de Matlab\textsuperscript{®}.
+Por lo tanto, el algoritmo de Levenberg-Marquardt sigue siendo relevante a día de hoy.
+
 
 
 
@@ -1853,7 +1877,7 @@ $x_k$.
 \appendix
 \renewcommand{\thechapter}{\Roman{chapter}}
 \chapter{Anexo: Código de la versión simplificada}\label{chap:impl-simpl}
-Se muestra el código de Matlab\textsuperscript{®} para la implementación del algoritmo de Moré simplificado. Se presenta en forma de función \code{myLevMar} que toma como argumentos \code{fun} en forma de \textit{function handle} y \code{x0} el punto de partida. Se muestran las distintas funciones creadas para un código más limpio una tras otra. Para mayor comodidad, los archivos \code{.m} se pueden descargar desde el repositorio de Github \url{https://github.com/didacwhite/tfg} en la carpeta implementación.
+Se muestra el código de Matlab\textsuperscript{®} para la implementación del algoritmo de Moré simplificado. Se presenta en forma de función \code{myLevMar} que toma como argumentos \code{fun} en forma de \textit{function handle} y \code{x0} el punto de partida. Se muestran las distintas funciones creadas para un código más limpio una tras otra. Para mayor comodidad, los archivos \code{.m} se pueden descargar desde el \href{https://github.com/didacwhite/tfg}{repositorio de Github} \url{https://github.com/didacwhite/tfg} en la carpeta implementación.
 \vspace{10pt}
 
 \lstinputlisting[frame=single, numbers=left, style=Matlab-editor]{implementacion/myLevMar.m}
