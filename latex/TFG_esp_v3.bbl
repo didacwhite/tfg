@@ -15,16 +15,16 @@
 
 \bibitem{Golub2013-li}
 Gene~H Golub and Charles~F Van~Loan, \emph{Matrix computations}, 4 ed., Johns
-  Hopkins University Press, Baltimore, MD, 2013 (en).
+  Hopkins University Press, Baltimore, MD, 2013.
 
 \bibitem{Hebden1973AnAF}
-M.~D. Hebden, \emph{An algorithm for minimization using exact second
+M~D Hebden, \emph{An algorithm for minimization using exact second
   derivatives}, 1973.
 
 \bibitem{Levenberg1944-wb}
 Kenneth Levenberg, \emph{A method for the solution of certain non-linear
   problems in least squares}, Quart. Appl. Math. \textbf{2} (1944), no.~2,
-  164--168 (en).
+  164--168.
 
 \bibitem{Marquardt1963-ds}
 Donald~W Marquardt, \emph{An algorithm for least-squares estimation of
@@ -38,14 +38,14 @@ Jorge~J Mor{\'e}, \emph{The {Levenberg-Marquardt} algorithm: Implementation and
 
 \bibitem{Nocedal2006-kh}
 Jorge Nocedal and Stephen Wright, \emph{Numerical optimization}, 2 ed.,
-  Springer, New York, NY, 2006 (en).
+  Springer, New York, NY, 2006.
 
 \bibitem{Sun2006-au}
 Wenyu Sun and Ya-Xiang Yuan, \emph{Optimization theory and methods: Nonlinear
-  programming}, 2006 ed., Springer, New York, NY, 2006 (en).
+  programming}, 2006 ed., Springer, New York, NY, 2006.
 
 \bibitem{Trefethen1997-ek}
-Lloyd N (lloyd~Nicholas) Trefethen, \emph{Numerical linear algebra}, Society
-  for Industrial and Applied Mathematics, Philadelphia, MS, 1997 (en).
+Lloyd~N Trefethen, \emph{Numerical linear algebra}, Society for Industrial and
+  Applied Mathematics, Philadelphia, MS, 1997.
 
 \end{thebibliography}
