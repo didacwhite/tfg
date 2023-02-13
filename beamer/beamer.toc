@@ -1,4 +1,4 @@
 \beamer@sectionintoc {1}{Fundamentos de la optimización sin restricciones}{3}{0}{1}
-\beamer@sectionintoc {2}{Mínimos Cuadrados}{5}{0}{2}
-\beamer@sectionintoc {3}{El método de Levenberg-Marquardt}{6}{0}{3}
-\beamer@sectionintoc {4}{Implementación en Matlab\textsuperscript {®}}{7}{0}{4}
+\beamer@sectionintoc {2}{Mínimos Cuadrados}{10}{0}{2}
+\beamer@sectionintoc {3}{El método de Levenberg-Marquardt}{11}{0}{3}
+\beamer@sectionintoc {4}{Implementación en Matlab\textsuperscript {®}}{12}{0}{4}

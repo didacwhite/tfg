@@ -21,6 +21,15 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
   \end{frame}
 }
 
+
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\sucesionxk}{\left\{x_k\right\}}
+\newcommand{\sucesion}[1]{\left\{#1\right\}}
+
+\def\code#1{\texttt{#1}}
+
+%%% FIN DO PREAMBULO
 \begin{document}
 \frame{\titlepage}
 
@@ -32,15 +41,62 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \section{Fundamentos de la optimización sin restricciones}
 \begin{frame}
     \frametitle{Conceptos previos}
+    \begin{block}{}
+        Un \alert{problema de optimización sin restricciones} tiene la forma
+        \begin{equation*}
+            \min_x f(x)
+        \end{equation*}
+        \end{block}
     \begin{itemize}
-        \item Función objetivo
-        \item Función de error
-        \item Función de costo
-        \item Función de pérdida
-        \item Función de riesgo
+        \item $x\in \mathbb{R}^n$ y $f:\mathbb{R}^n \to \mathbb{R}$ es continuamente diferenciable.
+        \item A $f$ se le llama función objetivo.
     \end{itemize}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Conceptos previos}
+    \begin{itemize}
+    \item Norma euclídea: $
+            \norm{x}_2 = \left( \sum_{i=1}^n \vert x_i \vert^2 \right)^{1/2}.
+        $
+    \item Punto estacionario de $f$: $\nabla f(x) = 0$.
+    \item Mínimo $x^*$: existe $\delta > 0$ tal que $f(x^*) \leq f(x)$.
+    \item Mínimo estricto $x^*$: existe $\delta > 0$ tal que $f(x^*) < f(x)$ con $x \neq x^*$.
+    \begin{itemize}
+        \item Local: para todo $x \in \mathbb{R}^n$ que satisface $\Vert x - x^* \Vert < \delta$. 
+        \item Global: para todo $x \in \mathbb{R}^n$
+    \end{itemize}
+    \item Producto escalar de $x$ e $y$ en $\mathbb{R}^n$: $\langle x,y \rangle = \sum_{i=1}^n x_i y_i$.
+    \item Dirección descendente de $f$ en $x$: $d \in \mathbb{R}^n$ tal que $\langle \nabla f(x), d \rangle < 0$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Condiciones de optimalidad}
+    Consideremos el problema inicial
+    \begin{equation*}
+        \min_x f(x)
+    \end{equation*}\pause
+    \vspace{-0.5cm}
+    \begin{block}{Teorema: Condición Necesaria de Primer Orden}
+        Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ continuamente diferenciable en un
+        conjunto abierto $D$. Si $x^*$ es un mínimo local, entonces
+        $\nabla f(x^*) = 0$.
+    \end{block}\pause
+
+    \begin{block}
+        {Teorema: Condición Necesaria de Segundo Orden}
+        Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable
+        en un conjunto abierto $D$. Si $x^*$ es un mínimo local, entonces
+        $\nabla f(x^*) = 0$ y $\nabla^2 f(x^*)$ es definida positiva.
+    \end{block}\pause
+    
+    \begin{block}{Teorema: Condición Suficiente de Segundo Orden}
+        Sea $f:D\subset \mathbb{R}^n \rightarrow \mathbb{R}$ dos veces continuamente diferenciable
+        en un conjunto abierto $D$. Si $\nabla f(x^*) = 0$ y $\nabla^2 f(x^*)$ es definida positiva,
+        entonces $x^* \in D$ es un mínimo local.
+    \end{block}
+\end{frame}
 \section{Mínimos Cuadrados}
 
 
