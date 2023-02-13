@@ -10,22 +10,38 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \date
 {14 de febrero de 2023}
 
-\titlegraphic{\vspace{0.7cm}\hspace{1.5cm}\includegraphics[height=1cm]{logomath.pdf}}
+\titlegraphic{\vspace{0.7cm}\hspace{1.5cm}\includegraphics[height=1.6cm]{logomath.pdf}}
 %\logo{\includegraphics[height=1cm]{overleaf-logo}}
 
 \AtBeginSection[]
 {
   \begin{frame}
-    \frametitle{Table of Contents}
+    \frametitle{Índice.}
     \tableofcontents[currentsection]
   \end{frame}
 }
 
+%%% PREAMBULO
+\usepackage[spanish]{babel}	
 
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{tikz}
+\newlist{steps}{enumerate}{1}
+\setlist[steps, 1]{label = Paso \arabic*., leftmargin=1cm, topsep=0pt}
 
+\usepackage{biblatex}
+\addbibresource{tfg.bib}
+
+\definecolor{azulUSC}{RGB}{13,38,120}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\sucesionxk}{\left\{x_k\right\}}
 \newcommand{\sucesion}[1]{\left\{#1\right\}}
+\newcommand{\citeline}{
+    \begin{tikzpicture}
+        \draw[thick, azulUSC] (0,0) -- (10,0);
+    \end{tikzpicture}
+}
 
 \def\code#1{\texttt{#1}}
 
@@ -34,7 +50,7 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \frame{\titlepage}
 
 \begin{frame}
-\frametitle{Table of Contents} % Table of contents title
+\frametitle{Índice.} % Table of contents title
 \tableofcontents
 \end{frame}
 
@@ -55,14 +71,14 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 
 \begin{frame}
     \frametitle{Conceptos previos}
-    \begin{itemize}
+    \begin{itemize}[label=\textbullet]
     \item Norma euclídea: $
             \norm{x}_2 = \left( \sum_{i=1}^n \vert x_i \vert^2 \right)^{1/2}.
         $
     \item Punto estacionario de $f$: $\nabla f(x) = 0$.
     \item Mínimo $x^*$: existe $\delta > 0$ tal que $f(x^*) \leq f(x)$.
     \item Mínimo estricto $x^*$: existe $\delta > 0$ tal que $f(x^*) < f(x)$ con $x \neq x^*$.
-    \begin{itemize}
+    \begin{itemize}[label=-]
         \item Local: para todo $x \in \mathbb{R}^n$ que satisface $\Vert x - x^* \Vert < \delta$. 
         \item Global: para todo $x \in \mathbb{R}^n$
     \end{itemize}
@@ -97,11 +113,346 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
         entonces $x^* \in D$ es un mínimo local.
     \end{block}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Convexidad}
+    \begin{block}
+        {Conjunto convexo D} Sea $S\subset \mathbb{R}^n$ y sean $x_1, x_2 \in S$ cualesquiera. Si
+        $\alpha x_1 + (1 - \alpha)x_2 \in S$ para todo $\alpha \in [0,1]$
+    \end{block}
+    \begin{block}
+        {Función convexa $f$ en $S$} 
+        Sean $S \subset \mathbb{R}^n$ un conjunto convexo no vacío y $f$ una función de $S$ en $\mathbb{R}$.
+        Si para cualquiera $x_1, x_2 \in S$ y
+        $\alpha \in (0,1)$, se cumple que
+        \begin{equation*}
+            f(\alpha x_1 + (1-\alpha)x_2) \leq \alpha f(x_1) + (1-\alpha)f(x_2),
+        \end{equation*}
+    \end{block}
+\end{frame}
+\begin{frame}
+    \frametitle{Convexidad}
+    \begin{block}{Teorema}
+        Sea $S \subset \mathbb{R}^n$ un conjunto convexo no vacío y
+        $f:S \subset \mathbb{R}^n \rightarrow \mathbb{R}$ una función convexa. Si $x^*$ es mínimo
+        local, entonces también es mínimo global.
+    \end{block}
+    \begin{block}{Teorema}
+        Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}$ convexa y diferenciable, entonces $x^*$ es un
+        mínimo global si y solo si $\nabla f(x^*) = 0$.
+    \end{block}
+\end{frame}
+\begin{frame}
+    \frametitle{Algoritmos. ¿Qué son?}
+    \begin{itemize}[label=\textbullet]
+        \item Conjunto de órdenes con normas y condiciones. \pause
+        \item Estructura de bucles iterativos. \pause
+        \item Eficiencia computacional. \pause
+        \item Mínimos locales y globales.
+    \end{itemize}
+\end{frame}
+\begin{frame}
+    \frametitle{Algoritmos. Esquema.}
+    \begin{steps}
+		\item Paso inicial. Se definen las condiciones iniciales, suelen ser el primer
+		punto de la sucesión $\sucesionxk$, valores para definir las condiciones de
+		parada como el número máximo de iteraciones o el error aceptable, y otros parámetros.
+        \pause
+		\item Test de parada. Se comprueba si se cumple alguna condición de parada.
+        \pause
+		\item Proceso principal. Se realizan los cálculos necesarios para avanzar de
+		$x_k$ a $x_{k+1}$.
+        \pause
+		\item Actualización y bucle. Se actualiza el valor de $x_k$ a $x_{k+1}$, así como otros parámetros necesarios. Se repite el proceso desde el \textit{paso 2.}
+	\end{steps}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Búsqueda de línea.}
+    \begin{itemize}[label=\textbullet]
+        \item Se toma el punto inicial $x_k$ (para cada iteración).
+        \item Elige una dirección $d_k$ con la misma dimensión que $x_k$.
+        \begin{itemize}[label=-]
+            \item La mayoría eligen una dirección de descenso, esto es, $d_k^T \nabla f_k < 0$.
+            \item Suele tener la forma $d_k = -B_k^{-1}\nabla f_k$.
+        \end{itemize}
+        \item Se elige una longitud de paso $\alpha_k\in \mathbb{R}$.
+        \item Se obtiene $x_{k+1} = x_k + \alpha_k d_k$.
+        \begin{itemize}[label=-]
+            \item El objetivo es que $f(x_{k+1}) < f(x_k)$.
+            \item Si se se soluciona el problema $\min_{\alpha_k} f(x_k + \alpha_k d_k)$, búsqueda de línea exacta.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Región de confianza.}
+    \begin{itemize}[label=\textbullet]
+        \item Se toma una pequeña región donde es más fácil predecir como se comporta la función.
+        \item Primero se fija una distancia máxima $\Delta_k$ para definir una región
+        \begin{equation*}
+            \Omega_k = \left\{x : \Vert x-x_k \Vert \leq \Delta_k \right\}.
+        \end{equation*}
+        \item Para predecir el comportamiento en esta región, se utilizan aproximaciones como la siguiente:
+        \begin{equation*}
+            m_k(p) := q^{(k)}(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TG_kp.
+        \end{equation*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Región de confianza.}
+    \begin{block}{Subproblema de optimización con restricciones}
+        \begin{equation*}
+            \begin{aligned}
+                \min_{p} \quad & m_k(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TB_kp \\
+                \text{s.a.} \quad & \Vert p \Vert \leq \Delta_k,
+            \end{aligned}
+        \end{equation*}
+    \end{block} \pause 
+    \vspace{1cm}
+    \citeline\\
+    \vspace{0.4cm}
+    \fullcite{Nocedal2006-kh} \\
+    \vspace{0.4cm}
+    \fullcite{Sun2006-au}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Región de confianza.}
+    \begin{block}{Teorema: Caracterización de la solución del subproblema}
+        El vector $p^*$ es una solución global si y solo si $p^*$ es factible y existe un escalar $\lambda^* \geq 0$ tal que:
+        \begin{itemize}[label=\textbullet]
+            \item $(B+\lambda^* I)p^*=-g,$
+	        \item $\lambda^* (\Delta - \norm{p^*}) = 0,$
+	        \item $(B+\lambda^* I)$ es semidefinida positiva.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Región de confianza.}
+    \begin{block}{Ratio de aceptación}
+        Para tener en cuenta la semejanza entre la aproximación y la función real, se define el ratio de aceptación:
+        \begin{equation*}
+            \rho_k = \frac{f(x_k) - f(x_k + p_k)}{m_k(0) - m(p_k)},
+        \end{equation*}
+        el cual será más grande cuanto más parecida sea la aproximación a la función real. Se tiene en cuenta para la elección de $\Delta_k$.
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Región de confianza. Esquema.}
+    \begin{steps}
+		\item Dados $x_0, \bar{\Delta}, \Delta_0 \in (0, \bar{\Delta}), \epsilon \geq
+			0, 0<\eta_1\leq\eta_2<1$ y $0<\gamma_1<1<\gamma_2, k:=0$.
+		\item Si $\norm{g_k} \leq \epsilon$ terminar.
+		\item Aproximar $p_k$ resolviendo según la caracterización.
+		\item Calcular $f(x_k+p_k)$ y $\rho_k$. Definir
+			\begin{equation*}
+				x_{k+1} = \begin{cases}
+					x_k + p_k, & \text{si } \rho_k \geq \eta_1, \\
+					x_k, & \text{en otro caso.}
+				\end{cases}
+			\end{equation*}
+		\item Si $\rho_k < \eta_1$ entonces $\Delta_{k+1} \in (0,\gamma_1 \Delta_k]$. \\
+			Si $\rho_k \in [\eta_1, \eta_2)$ entonces $\Delta_{k+1} \in [\gamma_1 \Delta_k,\Delta_k]$. \\
+			Si $\rho_k \geq \eta_2$ y $\norm{p_k}=\Delta_k$ entonces
+			$\Delta_{k+1} \in [\Delta_k, \min \{\gamma_2 \Delta_k,\bar{\Delta}\}]$.
+		\item Calcular $B_{k+1}$, actualizar $m^{(k)}$ y $k:=k+1$. Ir al Paso 2.
+	\end{steps}
+\end{frame}
+
 \section{Mínimos Cuadrados}
+
+\begin{frame}
+    \frametitle{El problema.}
+    \begin{equation*}
+        \min_{x\in \mathbb{R}^{n}}f(x) = \frac{1}{2}\sum_{i=1}^{m}r_i^2(x), \quad m\geq n,
+    \end{equation*}
+    \pause
+\begin{columns}
+    \begin{column}{0.4\textwidth}
+        \begin{itemize}[label=\textbullet]
+            \item Residuos: $r_i(x) = \phi_x(t_i) - y_i$, para $i=1,\dots,m$. \pause
+            \item $x$ es el parámetro a estimar de dimensión $n$. \pause 
+            \item $\phi_x(t)$ es la función a ajustar. \pause 
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.6\textwidth}  %%<--- here
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\textwidth]{imgs/examplelsqlin.png}
+            \caption{Ejemplo de ajuste de una recta a una muestra de puntos}
+        \end{figure}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Ejemplo de ajuste de una recta a una muestra de puntos.}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=1\textwidth]{imgs/examplelsqlin.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Ejemplo de ajuste de una exponencial a una muestra de puntos.}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\textwidth]{imgs/exp.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{El método de Gauss-Newton.}
+    \begin{itemize}[label=\textbullet]
+        \item Se trata de una linealización del problema de mínimos cuadrados. \pause
+        \item Para linealizar, se desprecia el término cuadrático de $r_i(x)$ y se obtiene el caso lineal:
+        \begin{equation*}
+            f(x) = \frac{1}{2} \Vert Jx-y \Vert^2.
+        \end{equation*}
+        \begin{equation*}
+            \nabla f(x) = J^T(Jx-y), \qquad \nabla^2 f(x) =  J^TJ.
+        \end{equation*}
+        \pause
+        \item Se resuelve el sistema lineal $J^TJx = J^Ty$. \pause
+        \item Convergencia local y cuadrática.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{El método de Gauss-Newton.}
+    \begin{steps}
+        \item Dados $x_0$ y $\epsilon > 0$, $k:=0$.
+        \item Si $\norm{g_k} \leq \epsilon$, terminar.
+        \item Obtener el paso $p_k$ resolviendo
+            \begin{equation}
+                J(x_k)^TJ(x_k)p_k = -J(x_k)^Tr(x_k).
+            \end{equation}
+        \item Definimos $x_{k+1} = x_k + p_k$ y actualizamos $k=k+1$. Ir a Paso 2.
+    \end{steps}
+
+\end{frame}
 
 
 \section{El método de Levenberg-Marquardt}
 
+\begin{frame}
+    \frametitle{El método de Levenberg-Marquardt.}
+    \begin{itemize}[label=\textbullet]
+        \item Se mantiene la idea de la linealización de Gauss-Newton. \pause
+        \item Se cambia de enfoque a región de confianza. \pause
+        \begin{equation*} \hspace{-1cm}
+            \begin{aligned}
+                \min_{p} &\quad m_k(p)=\frac{1}{2}\norm{r_k}^2 + p^TJ_k^Tr_k + \frac{1}{2}p^TJ_k^TJ_kp, \\
+             \text{s.a.} &\quad \norm{p} \leq \Delta_k.
+            \end{aligned}
+        \end{equation*} \pause
+    \end{itemize}
+    \begin{block}{Lema: Caracterización de la solución.}
+        El vector $p$ es solución del subproblema si y solo si $p$ es factible y existe un $\lambda \geq 0$ tal que
+        \begin{align*}
+	        (J^TJ+\lambda I)p&=-J^Tr, \label{eq:lmsol}\\
+	        \lambda (\Delta-\norm{p})&=0.
+        \end{align*}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Propiedades del método de Levenberg-Marquardt.}
+    \begin{itemize}[label=\textbullet]
+        \item Convergencia global bajo ciertas condiciones.
+        \item El ratio de convergencia es variable (ver Teorema 3.7).
+    \end{itemize}
+    \vspace{2cm}
+    \citeline\\
+    \vspace{0.3cm}
+    \fullcite{Sun2006-au}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implementación del método de Levenberg-Marquardt.}
+    \begin{block}{Versión de Moré}
+        Disponemos de la implementación de este método propuesta por Jorge J. Moré,
+        con un estudio detallado del mismo en su artículo\footfullcite{More1978-at}.
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implementación del método de Levenberg-Marquardt.}
+    \begin{block}{Actualización del radio $\Delta_k$}
+        En este caso particular el ratio viene dado por
+        \begin{equation*}
+	        \rho = \frac{\norm{r(x_k)}^2-\norm{r(x_k+p_k)}^2}{\norm{r(x_k)}^2-\norm{r(x_k)+J(x_k)p_k}^2},
+        \end{equation*}
+        y obtenemos la siguiente expresión explícita:
+        \begin{equation*}
+            \rho = \frac{1-\left[\frac{\norm{r(x_k+p_k)}}{\norm{r(x_k)}}\right]^2}
+                        {\left[\frac{\norm{J_kp}}{\norm{r(x_k)}}\right]^2
+                        + 2\left[\frac{\lambda^{1/2}\norm{D_kp}}{\norm{r(x_k)}}\right]^2}.
+        \end{equation*}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implementación del método de Levenberg-Marquardt.}
+    \begin{block}{El parámetro Levenberg-Marquardt}
+        En esta implementación, se acepta $\alpha>0$ como parámetro de Levenberg-Marquardt Si
+        \begin{equation*}
+            |\phi(\alpha)| \leq \sigma\Delta,
+        \end{equation*}
+        siendo
+        \begin{equation*}
+            \phi(\alpha) = \norm{D(J^TJ+\alpha D^TD)^{-1}J^Tr}-\Delta,
+        \end{equation*}
+        y $\sigma \in (0,1)$ es un parámetro que controla la aceptación de $\alpha$. 
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implementación del método de Levenberg-Marquardt.}
+    \begin{steps}
+        \item Definir valores iniciales $\alpha_0$, $l_0$ y $u_0$. Definir coeficiente de parada $\sigma$.
+        \item Si $\alpha_k \notin (l_k, u_k)$, definir $\alpha_k = \max \{0.001u_k, (l_ku_k)^{1/2}\}$.	
+        \item Calcular $\phi(\alpha_k)$ y $\phi'(\alpha_k)$. Si $|\phi(\alpha)|<\sigma\Delta$, terminar.
+        \item Actualizar $l_k$ y $u_k$:
+            \begin{align*}
+                l_{k+1} &= \max \{l_k, \alpha_k-\frac{\phi(\alpha_k)}{\phi'(\alpha_k)}\}, \\
+                u_{k+1} &= \begin{cases}
+                    \alpha_k, & \text{si } \phi(\alpha_k) < 0, \\
+                    u_k, & \text{en otro caso}.
+                \end{cases}
+            \end{align*}
+        \item Actualizar $\alpha_{k+1}$ según
+        \begin{equation*}
+            \alpha_{k+1} = \alpha_k - \left[\frac{\phi(\alpha_k)+\Delta}{\Delta}\right]
+                            \left[\frac{\phi(\alpha_k)}{\phi'(\alpha_k)}\right].
+        \end{equation*}
+        Volver al Paso 2.
+    \end{steps}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implementación del método de Levenberg-Marquardt.}
+    \begin{block}{Escalado}
+        Para reducir posibles problemas de escalado, se utiliza una matriz diagonal $D_k$ definido de la siguiente forma:
+        \begin{equation*}
+            D_k = diag(d_1^{(k)}, \ldots, d_n^{(k)}),
+        \end{equation*}
+        con
+        \begin{equation*}
+            d_i^{(k)}=\norm{\partial_ir(x_k)}, k\geq 0.
+        \end{equation*}
+        En cada paso, se actualiza cada $d_i^{(k)}$ si este aumenta, es decir,
+        \begin{equation*}
+            d_i^{(k)} = \max \{d_i^{(k-1)}, \norm{\partial_ir(x_k)}\}, k\geq 1.
+        \end{equation*}
+    \end{block}
+\end{frame}
 
 \section{Implementación en Matlab\textsuperscript{®}}
+
 \end{document}
+
