@@ -1,14 +1,14 @@
 [0] Config.pm:306> INFO - This is Biber 2.18
 [0] Config.pm:309> INFO - Logfile is 'beamer.blg'
-[172] biber-MSWIN64:340> INFO - === 
-[252] Biber.pm:418> INFO - Reading 'beamer.bcf'
-[374] Biber.pm:978> INFO - Found 3 citekeys in bib section 0
-[392] Biber.pm:4401> INFO - Processing section 0
-[413] Biber.pm:4592> INFO - Looking for bibtex file 'tfg.bib' for section 0
-[509] bibtex.pm:1713> INFO - LaTeX decoding ...
-[522] bibtex.pm:1518> INFO - Found BibTeX data source 'tfg.bib'
-[573] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
-[573] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[573] Biber.pm:4221> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'es-ES'
-[577] bbl.pm:654> INFO - Writing 'beamer.bbl' with encoding 'UTF-8'
-[579] bbl.pm:757> INFO - Output to beamer.bbl
+[112] biber-MSWIN32:340> INFO - === 
+[149] Biber.pm:418> INFO - Reading 'beamer.bcf'
+[271] Biber.pm:978> INFO - Found 3 citekeys in bib section 0
+[284] Biber.pm:4401> INFO - Processing section 0
+[296] Biber.pm:4592> INFO - Looking for bibtex file 'tfg.bib' for section 0
+[351] bibtex.pm:1713> INFO - LaTeX decoding ...
+[361] bibtex.pm:1518> INFO - Found BibTeX data source 'tfg.bib'
+[402] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[403] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[403] Biber.pm:4221> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'es-ES'
+[405] bbl.pm:654> INFO - Writing 'beamer.bbl' with encoding 'UTF-8'
+[407] bbl.pm:757> INFO - Output to beamer.bbl

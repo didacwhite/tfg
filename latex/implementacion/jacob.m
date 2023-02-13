@@ -6,7 +6,5 @@ J = zeros(m,n);
 for j = 1:n
     hj = zeros(1,n);
     hj(j) = h;
-    %fun(xk+hj)
-    %fun(xk)
     J(:,j) = (fun(xk+hj)-fun(xk))./h;
 end

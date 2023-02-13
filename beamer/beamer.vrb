@@ -1,0 +1,9 @@
+\frametitle{Bucle.}
+\begin{steps}[start=7]
+    \item Actualizar $D_k$ y volver al Paso 2.
+\end{steps}\pause
+\vspace{0.5cm}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+    end
+xk = real(xk);
+\end{lstlisting}

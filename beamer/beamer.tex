@@ -33,6 +33,9 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \usepackage{biblatex}
 \addbibresource{tfg.bib}
 
+\usepackage{listings}
+\usepackage{matlab-prettifier}
+
 \definecolor{azulUSC}{RGB}{13,38,120}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\sucesionxk}{\left\{x_k\right\}}
@@ -274,9 +277,9 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \begin{columns}
     \begin{column}{0.4\textwidth}
         \begin{itemize}[label=\textbullet]
-            \item Residuos: $r_i(x) = \phi_x(t_i) - y_i$, para $i=1,\dots,m$. \pause
-            \item $x$ es el parámetro a estimar de dimensión $n$. \pause 
+            \item $x$ es el parámetro a estimar de dimensión $n$. \pause
             \item $\phi_x(t)$ es la función a ajustar. \pause 
+            \item $r_i(x) = \phi_x(t_i) - y_i$, para $i=1,\dots,m$ son los residuos. \pause
         \end{itemize}
     \end{column}
     \begin{column}{0.6\textwidth}  %%<--- here
@@ -377,6 +380,13 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
     \begin{block}{Versión de Moré}
         Disponemos de la implementación de este método propuesta por Jorge J. Moré,
         con un estudio detallado del mismo en su artículo\footfullcite{More1978-at}.
+    \end{block} \pause
+    \begin{block}{Veremos a continuación en detalle:}
+        \begin{itemize}[label=\textbullet]
+            \item Actualización del radio $\Delta_k$. \pause
+            \item El parámetro Levenberg-Marquardt. \pause
+            \item Matriz de escalado $D_k$.
+        \end{itemize}
     \end{block}
 \end{frame}
 
@@ -452,7 +462,298 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
     \end{block}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Esquema del algoritmo. I.}
+    \begin{steps}
+        \item Definir valores iniciales $x_0$, $\Delta_0$ y $\epsilon$ y determinar $J_k$, $D_k$, y $f(x_0)$ a partir de la función $f$ determinada.
+        \item Si $\norm{J_k(D_k)^{-1}f(x_k)} < \epsilon$, terminar.
+        \item Sea $\sigma \in (0,1)$. Si $\norm{D_kJ_k^{-}r_k} \leq (1+\sigma) \Delta_k$,
+        asignar $\lambda_k = 0$ y $p_k = -J_k^{-}r_k$. En otro caso, encontar $\lambda_k$
+        tal que si
+        \begin{equation*}
+            \left[
+                \begin{array}{c}
+                    J_k \\
+                    \lambda_k^{\frac{1}{2}}D_k
+                \end{array}
+            \right]p_k
+            \cong
+            -\left[
+                \begin{array}{c}
+                    r_k \\
+                    0
+                \end{array}
+            \right],
+        \end{equation*}
+        entonces
+        \begin{equation*}
+            (1-\sigma)\Delta_k \leq \norm{D_kp_k} \leq (1+\sigma)\Delta_k.
+        \end{equation*}
+        \item Determinar la relación $\rho_k$ entre reducción real y la esperada.
+    \end{steps}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Esquema del algoritmo. II.}
+    \begin{steps}[start=5]
+    \item Si $\rho_k \leq 0.0001$, asignar $x_{k+1} = x_k$ y $J_{k+1} = J_k$. \\
+    Si $\rho_k > 0.0001$, asignar $x_{k+1} = x_k + p_k$ y calcular $J_{k+1} = J(x_{k+1})$.
+    \item Si $\rho_k \leq \frac{1}{4}$, asignar $\Delta_{k+1} \in \left[
+        \frac{1}{10}\Delta_k, \frac{1}{4}\Delta_k \right]$. \\
+        Si $\rho_k \in \left[ \frac{1}{4}, \frac{3}{4} \right]$ y $\lambda_k = 0$,
+        o si $\rho_k \geq \frac{3}{4}$,
+        asignar $\Delta_{k+1} = 2\norm{D_kp_k}$.
+    \item Actualizar $D_k$ y volver al Paso 2.
+\end{steps}
+\end{frame}
+
 \section{Implementación en Matlab\textsuperscript{®}}
 
+
+\begin{frame}[fragile]
+    \frametitle{Inicialización.}
+    \begin{steps}
+        \item Definir valores iniciales $x_0$, $\Delta_0$ y $\epsilon$ y determinar $J_k$, $D_k$, y $f(x_0)$ a partir de la función $f$ determinada.
+    \end{steps} \pause
+    \vspace{0.5cm}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+function [xk, iter] = myLevMar(fun, x0)
+% setup
+[n,m,xk,Delta,funk,lambdak, maxit, maxit2, eps]= myLevMarSetup(fun,x0);
+
+% calculo inicial de Jk y Dk
+dkm1=zeros(length(xk));
+[Jk, Dk, dkm1] = JDk(fun,xk,dkm1);
+\end{lstlisting}
+        
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Inicialización.}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+function [n,m,xk,Delta,funk,lambdak, maxit, maxit2, eps] = myLevMarSetup(fun,x0)
+% editable
+Delta = 3;
+lambdak = 1; 
+maxit = 50;
+maxit2 = 10; % miteraciones maximas en hebden.m
+eps = 0.001;
+
+% no editable
+n = length(x0);
+m = length(fun(x0));
+xk = x0;
+funk = fun(xk)';
+\end{lstlisting}
+        
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Inicialización.}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+function [Jk,Dk,v] = JDk(fun,xk,dkm1)
+
+Jk = jacob(fun,xk);
+
+% Compute diagonal of Dk
+di = @(i) max(dkm1(i),norm(Jk(:,i)));
+
+v = arrayfun(di, 1:length(xk));
+Dk = diag(v);
+\end{lstlisting}
+        
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Inicialización.}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+function J = jacob(fun,xk)
+h = 1e-5;
+n = length(xk);
+m = length(fun(xk));
+J = zeros(m,n);
+for j = 1:n
+    hj = zeros(1,n);
+    hj(j) = h;
+    J(:,j) = (fun(xk+hj)-fun(xk))./h;
+end
+\end{lstlisting}
+        
+\end{frame}
+
+
+\begin{frame}[fragile]
+    \frametitle{Test de parada.}
+\begin{steps}[start=2]
+    \item Si $\norm{J_k(D_k)^{-1}f(x_k)} < \epsilon$, terminar.\pause
+\end{steps}
+\vspace{0.5cm}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+try
+    test = norm((Jk*inv(Dk))'*funk);
+catch
+    test = norm((Jk*inv(Dk))'*funk');
+end
+iter=0;
+while test > eps && iter < maxit
+\end{lstlisting}
+        
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Bucle.}
+    \begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+% solucion problema lineal
+% descomposicion QR
+[Q,R,Pi] = qr(Jk); % calcula Jk*Pi = Q*R
+% ajuste de R
+T = R(1:n,1:n);
+S = R(1:n,n+1:end);
+
+% matriz $J^{-}$
+Jm = Jmfun(Pi,T,Q,n,m);
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Bucle.}
+\begin{steps}[start=3]
+    \item Sea $\sigma \in (0,1)$. Si $\norm{D_kJ_k^{-}r_k} \leq (1+\sigma) \Delta_k$,
+        asignar $\lambda_k = 0$ y $p_k = -J_k^{-}r_k$. En otro caso, encontar $\lambda_k$
+        tal que si
+        \begin{equation*}
+            \left[
+                \begin{array}{c}
+                    J_k \\
+                    \lambda_k^{\frac{1}{2}}D_k
+                \end{array}
+            \right]p_k
+            \cong
+            -\left[
+                \begin{array}{c}
+                    r_k \\
+                    0
+                \end{array}
+            \right],
+        \end{equation*}
+        entonces $(1-\sigma)\Delta_k \leq \norm{D_kp_k} \leq (1+\sigma)\Delta_k$.
+\end{steps}\pause
+\vspace{0.5cm}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+% parametro levenberg-marquardt
+[pk, lambdak] = pkfun(Delta, Jk, Dk, funk, Jm, Q, Pi, n, m, lambdak, maxit2);
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+    \frametitle{Bucle.}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+function [pk, lambdak] = pkfun(Delta, Jk, Dk, funk, Jm, Q, Pi, n, m, lambdak, maxit)
+
+phi = @(a) norm(Dk*inv(Jk'*Jk+a.*(Dk'*Dk))*Jk'*funk) - Delta;
+if phi(0) == 0
+    lambdak = 0;
+    pk = -Jm*funk;
+    pk = pk';
+else
+    lambdak = hebden(phi, Delta, Jk, Dk, funk, Q, Pi, n, m, lambdak, maxit);
+    pk = pk2(funk, Q, Pi, Jk, Dk, lambdak, n, m);
+end
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Bucle.}
+\begin{steps}[start=4]
+    \item Determinar la relación $\rho_k$ entre reducción real y la esperada.
+\end{steps}\pause
+\vspace{0.3cm}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+rho = rhofun(funk,pk,lambdak,Dk,Jk,fun, xk);
+\end{lstlisting}\pause
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+function rho = rhofun(funk,pk,lambdak,Dk,Jk,fun,xk)
+funplus = fun(xk+pk);
+
+rhonum=1-(norm(funplus)/norm(funk))^2;
+rhoden=(norm(Jk*pk')/norm(funk))^2+2*(sqrt(lambdak)*norm(Dk*pk')/norm(funk))^2;
+rho = rhonum/rhoden;
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Bucle.}
+\begin{steps}[start=5]
+    \item Si $\rho_k \leq 0.0001$, asignar $x_{k+1} = x_k$ y $J_{k+1} = J_k$. \\
+        Si $\rho_k > 0.0001$, asignar $x_{k+1} = x_k + p_k$ y calcular $J_{k+1} = J(x_{k+1})$.
+\end{steps}\pause
+\vspace{0.1cm}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+if rho <= 0.0001
+    % xk+1 = xk y jk+1=jk
+else
+    xk = xk+pk;
+    % calculo de Jk, Dk con el nuevo xk
+    funk = fun(xk)';
+    [Jk, Dk, dkm1] = JDk(fun,xk,dkm1);
+    iter=iter+1;
+    test = norm((Jk*inv(Dk))'*fun(xk)');
+end
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Bucle.}
+\begin{steps}[start=6]
+    \item Si $\rho_k \leq \frac{1}{4}$, asignar $\Delta_{k+1} \in \left[
+            \frac{1}{10}\Delta_k, \frac{1}{4}\Delta_k \right]$. \\
+            Si $\rho_k \in \left[ \frac{1}{4}, \frac{3}{4} \right]$ y $\lambda_k = 0$,
+            o si $\rho_k \geq \frac{3}{4}$,
+            asignar $\Delta_{k+1} = 2\norm{D_kp_k}$.
+\end{steps}\pause
+\vspace{0.5cm}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+% actualizacion de Delta
+if rho <= 0.25
+    Delta = Delta/2;
+elseif rho >= 0.75
+    Delta = 2*norm(Dk*pk');
+elseif lambdak == 0
+    Delta = 2*norm(Dk*pk');
+end
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Bucle.}
+\begin{steps}[start=7]
+    \item Actualizar $D_k$ y volver al Paso 2.
+\end{steps}\pause
+\vspace{0.5cm}
+\begin{lstlisting}[frame=single, numbers=left, style=Matlab-editor]
+    end
+xk = real(xk);
+\end{lstlisting}
+\end{frame}
+%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Fin.}
+    \vspace{1cm}
+    \begin{center}
+        Resolución numérica del problema no lineal de mínimos cuadrados.
+Aplicaciones a las estimación de parámetros de modelos matemáticos. \\
+
+        \vspace{1cm}
+        Dídac Blanco Morros.
+        \vspace{2cm}
+    \end{center}
+    \begin{center}
+        \hspace{1cm}
+        \includegraphics[width=0.5\textwidth]{logomath.pdf}
+    \end{center}
+\end{frame}
+%%%%%%%%%%%%
 \end{document}
 
