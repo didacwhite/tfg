@@ -61,7 +61,7 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \begin{frame}
     \frametitle{Conceptos previos}
     \begin{block}{}
-        Un \alert{problema de optimización sin restricciones} tiene la forma
+        Un problema de optimización sin restricciones tiene la forma
         \begin{equation*}
             \min_x f(x)
         \end{equation*}
@@ -77,15 +77,15 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
     \begin{itemize}[label=\textbullet]
     \item Norma euclídea: $
             \norm{x}_2 = \left( \sum_{i=1}^n \vert x_i \vert^2 \right)^{1/2}.
-        $
-    \item Punto estacionario de $f$: $\nabla f(x) = 0$.
-    \item Mínimo $x^*$: existe $\delta > 0$ tal que $f(x^*) \leq f(x)$.
-    \item Mínimo estricto $x^*$: existe $\delta > 0$ tal que $f(x^*) < f(x)$ con $x \neq x^*$.
+        $\pause
+    \item Punto estacionario de $f$: $\nabla f(x) = 0$.\pause 
+    \item Mínimo $x^*$: existe $\delta > 0$ tal que $f(x^*) \leq f(x)$.\pause 
+    \item Mínimo estricto $x^*$: existe $\delta > 0$ tal que $f(x^*) < f(x)$ con $x \neq x^*$.\pause 
     \begin{itemize}[label=-]
         \item Local: para todo $x \in \mathbb{R}^n$ que satisface $\Vert x - x^* \Vert < \delta$. 
         \item Global: para todo $x \in \mathbb{R}^n$
-    \end{itemize}
-    \item Producto escalar de $x$ e $y$ en $\mathbb{R}^n$: $\langle x,y \rangle = \sum_{i=1}^n x_i y_i$.
+    \end{itemize}\pause 
+    \item Producto escalar de $x$ e $y$ en $\mathbb{R}^n$: $\langle x,y \rangle = \sum_{i=1}^n x_i y_i$.\pause 
     \item Dirección descendente de $f$ en $x$: $d \in \mathbb{R}^n$ tal que $\langle \nabla f(x), d \rangle < 0$.
     \end{itemize}
 \end{frame}
@@ -359,6 +359,10 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
             \item El parámetro Levenberg-Marquardt. \pause
             \item Matriz de escalado $D_k$.
         \end{itemize}
+        La matriz $D_k$ se sustituye en la siguiente expresión por la matriz identidad:
+        \begin{equation*}
+            (J^TJ+\lambda I)p=-J^Tr.
+        \end{equation*}
     \end{block}
 \end{frame}
 
@@ -438,8 +442,9 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
     \frametitle{Esquema del algoritmo. I.}
     \begin{steps}
         \item Definir valores iniciales $x_0$, $\Delta_0$ y $\epsilon$ y determinar $J_k$, $D_k$, y $f(x_0)$ a partir de la función $f$ determinada.
-        \item Si $\norm{J_k(D_k)^{-1}f(x_k)} < \epsilon$, terminar.
-        \item Sea $\sigma \in (0,1)$. Si $\norm{D_kJ_k^{-}r_k} \leq (1+\sigma) \Delta_k$,
+        \pause 
+        \item Si $\norm{J_k(D_k)^{-1}f(x_k)} < \epsilon$, terminar. \pause 
+        \item Sea $\sigma \in (0,1)$. Si $\norm{D_kJ_k^{-}r_k} \leq (1+\sigma) \Delta_k$, 
         asignar $\lambda_k = 0$ y $p_k = -J_k^{-}r_k$. En otro caso, encontar $\lambda_k$
         tal que si
         \begin{equation*}
@@ -460,8 +465,8 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
         entonces
         \begin{equation*}
             (1-\sigma)\Delta_k \leq \norm{D_kp_k} \leq (1+\sigma)\Delta_k.
-        \end{equation*}
-        \item Determinar la relación $\rho_k$ entre reducción real y la esperada.
+        \end{equation*} \pause 
+        \item Determinar la relación $\rho_k$ entre reducción real y la esperada. 
     \end{steps}
 \end{frame}
 
@@ -469,12 +474,12 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
     \frametitle{Esquema del algoritmo. II.}
     \begin{steps}[start=5]
     \item Si $\rho_k \leq 0.0001$, asignar $x_{k+1} = x_k$ y $J_{k+1} = J_k$. \\
-    Si $\rho_k > 0.0001$, asignar $x_{k+1} = x_k + p_k$ y calcular $J_{k+1} = J(x_{k+1})$.
+    Si $\rho_k > 0.0001$, asignar $x_{k+1} = x_k + p_k$ y calcular $J_{k+1} = J(x_{k+1})$. \pause 
     \item Si $\rho_k \leq \frac{1}{4}$, asignar $\Delta_{k+1} \in \left[
         \frac{1}{10}\Delta_k, \frac{1}{4}\Delta_k \right]$. \\
         Si $\rho_k \in \left[ \frac{1}{4}, \frac{3}{4} \right]$ y $\lambda_k = 0$,
         o si $\rho_k \geq \frac{3}{4}$,
-        asignar $\Delta_{k+1} = 2\norm{D_kp_k}$.
+        asignar $\Delta_{k+1} = 2\norm{D_kp_k}$. \pause 
     \item Actualizar $D_k$ y volver al Paso 2.
 \end{steps}
 \end{frame}

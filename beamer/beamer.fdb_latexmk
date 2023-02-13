@@ -1,21 +1,21 @@
 # Fdb version 4
-["biber beamer"] 1676302515 "beamer.bcf" "beamer.bbl" "beamer" 1676303024 0
-  "beamer.bcf" 1676303023 107429 543d561aa0a6698067df41e6ee5c0ea0 "pdflatex"
+["biber beamer"] 1676303984 "beamer.bcf" "beamer.bbl" "beamer" 1676304184 0
+  "beamer.bcf" 1676304184 107429 543d561aa0a6698067df41e6ee5c0ea0 "pdflatex"
   "tfg.bib" 1676297970 2198 f9d7595c0563101a06f253295445e767 ""
   (generated)
   "beamer.bbl"
   "beamer.blg"
   (rewritten before read)
-["pdflatex"] 1676303020 "c:/Users/didac/OneDrive/Documentos/tfg/beamer/beamer.tex" "beamer.pdf" "beamer" 1676303024 0
-  "beamer.aux" 1676303023 8796 7f6d4d0dca6d19e39736b18ab295f2db "pdflatex"
-  "beamer.bbl" 1676302517 4316 cebc0b66c6952b90bafa9deeddd1b874 "biber beamer"
-  "beamer.nav" 1676303023 5092 911d3dfb768aa296cca91908950fe112 "pdflatex"
-  "beamer.out" 1676303023 1254 3498c7b8c46ed08adc2311506d9b2403 "pdflatex"
-  "beamer.run.xml" 1676303023 2312 9f24c0a03fd02d7c686ceccea500cf98 "pdflatex"
-  "beamer.tex" 1676303016 25606 5791020316fa63d5eb72d1d035017d39 ""
-  "beamer.toc" 1676303023 323 968a61e0ab9927f52c8436aa49ce2292 "pdflatex"
-  "beamer.vrb" 1676303023 231 31e23708189d185e473873b67b1de817 "pdflatex"
-  "c:/Users/didac/OneDrive/Documentos/tfg/beamer/beamer.tex" 1676303016 25606 5791020316fa63d5eb72d1d035017d39 ""
+["pdflatex"] 1676304180 "c:/Users/didac/OneDrive/Documentos/tfg/beamer/beamer.tex" "beamer.pdf" "beamer" 1676304184 0
+  "beamer.aux" 1676304184 8802 a1e0a1c908c4017e14d2e46b852c712d "pdflatex"
+  "beamer.bbl" 1676303985 4316 cebc0b66c6952b90bafa9deeddd1b874 "biber beamer"
+  "beamer.nav" 1676304184 5098 5da438c6adffc8351605378590632318 "pdflatex"
+  "beamer.out" 1676304184 1254 3498c7b8c46ed08adc2311506d9b2403 "pdflatex"
+  "beamer.run.xml" 1676304184 2312 9f24c0a03fd02d7c686ceccea500cf98 "pdflatex"
+  "beamer.tex" 1676304176 25870 e8ab423a8da09f55fa36181bfb3db75e ""
+  "beamer.toc" 1676304184 323 0c421b24602582d917c3991fb11b543c "pdflatex"
+  "beamer.vrb" 1676304184 231 31e23708189d185e473873b67b1de817 "pdflatex"
+  "c:/Users/didac/OneDrive/Documentos/tfg/beamer/beamer.tex" 1676304176 25870 e8ab423a8da09f55fa36181bfb3db75e ""
   "c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1673016645 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1673006114 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcss0800.tfm" 1673005354 1536 16418351df4369b7cef8f784ccb87a85 ""

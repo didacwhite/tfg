@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.6)  13 FEB 2023 16:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.6)  13 FEB 2023 17:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1148,80 +1148,76 @@ LaTeX Info: Redefining \% on input line 1.
 
 ] [24
 
+] [25
+
+] [26
+
+] [27
+
+] [28
+
+] [29
+
+] [30
+
 ] (./beamer.toc
 LaTeX Info: Redefining \sptext on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-) [25
+) [31
 
 ]
-<imgs/examplelsqlin.png, id=710, 564.60938pt x 316.18124pt>
+<imgs/examplelsqlin.png, id=862, 564.60938pt x 316.18124pt>
 File: imgs/examplelsqlin.png Graphic file (type png)
 <use imgs/examplelsqlin.png>
 Package pdftex.def Info: imgs/examplelsqlin.png  used on input line 265.
 (pdftex.def)             Requested size: 184.3758pt x 103.24979pt.
- [26
+ [32
 
  <./imgs/examplelsqlin.png (PNG copy)>]
 File: imgs/examplelsqlin.png Graphic file (type png)
 <use imgs/examplelsqlin.png>
 Package pdftex.def Info: imgs/examplelsqlin.png  used on input line 265.
 (pdftex.def)             Requested size: 184.3758pt x 103.24979pt.
- [27
+ [33
 
 ]
 File: imgs/examplelsqlin.png Graphic file (type png)
 <use imgs/examplelsqlin.png>
 Package pdftex.def Info: imgs/examplelsqlin.png  used on input line 265.
 (pdftex.def)             Requested size: 184.3758pt x 103.24979pt.
- [28
+ [34
 
 ]
 File: imgs/examplelsqlin.png Graphic file (type png)
 <use imgs/examplelsqlin.png>
 Package pdftex.def Info: imgs/examplelsqlin.png  used on input line 265.
 (pdftex.def)             Requested size: 184.3758pt x 103.24979pt.
- [29
+ [35
 
 ]
 File: imgs/examplelsqlin.png Graphic file (type png)
 <use imgs/examplelsqlin.png>
 Package pdftex.def Info: imgs/examplelsqlin.png  used on input line 265.
 (pdftex.def)             Requested size: 184.3758pt x 103.24979pt.
- [30
+ [36
 
 ]
 File: imgs/examplelsqlin.png Graphic file (type png)
 <use imgs/examplelsqlin.png>
 Package pdftex.def Info: imgs/examplelsqlin.png  used on input line 273.
 (pdftex.def)             Requested size: 307.28987pt x 172.0862pt.
- [31
+ [37
 
 ]
-<imgs/exp.png, id=863, 526.96875pt x 395.22656pt>
+<imgs/exp.png, id=1016, 526.96875pt x 395.22656pt>
 File: imgs/exp.png Graphic file (type png)
 <use imgs/exp.png>
 Package pdftex.def Info: imgs/exp.png  used on input line 281.
 (pdftex.def)             Requested size: 276.559pt x 207.43071pt.
- [32
+ [38
 
- <./imgs/exp.png (PNG copy)>] [33
-
-] [34
-
-] [35
-
-] [36
-
-] [37
-
-] [38
-
-] (./beamer.toc
-LaTeX Info: Redefining \sptext on input line 1.
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-) [39
+ <./imgs/exp.png (PNG copy)>] [39
 
 ] [40
 
@@ -1233,7 +1229,11 @@ LaTeX Info: Redefining \% on input line 1.
 
 ] [44
 
-] [45
+] (./beamer.toc
+LaTeX Info: Redefining \sptext on input line 1.
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+) [45
 
 ] [46
 
@@ -1253,106 +1253,78 @@ LaTeX Info: Redefining \% on input line 1.
 
 ] [54
 
+] [55
+
+] [56
+
+] [57
+
+] [58
+
+] [59
+
+] [60
+
+] [61
+
+] [62
+
+] [63
+
+] [64
+
+] [65
+
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\everymath' on input line 482.
+(hyperref)                removing `\everymath' on input line 487.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\everymath' on input line 482.
+(hyperref)                removing `\everymath' on input line 487.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 482.
+(hyperref)                removing `\new@ifnextchar' on input line 487.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\ifbeamercolorempty' on input line 482.
+(hyperref)                removing `\ifbeamercolorempty' on input line 487.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\color' on input line 482.
+(hyperref)                removing `\color' on input line 487.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 482.
+(hyperref)                removing `\new@ifnextchar' on input line 487.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\ifbeamercolorempty' on input line 482.
+(hyperref)                removing `\ifbeamercolorempty' on input line 487.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\color' on input line 482.
+(hyperref)                removing `\color' on input line 487.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 482.
+(hyperref)                removing `\mathsurround' on input line 487.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 482.
+(hyperref)                removing `\z@' on input line 487.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 482.
+(hyperref)                removing `superscript' on input line 487.
 
 (./beamer.toc
 LaTeX Info: Redefining \sptext on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-) [55
-
-]
-\openout4 = `beamer.vrb'.
-
- (./beamer.vrb) [56
-
-] (./beamer.vrb) [57
-
-]
-\openout4 = `beamer.vrb'.
-
- (./beamer.vrb
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 15.
- (c:/texlive/2022/texmf-dist/tex/latex/base/ts1cmtt.fd
-File: ts1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
-)) [58
-
-]
-\openout4 = `beamer.vrb'.
-
- (./beamer.vrb) [59
-
-]
-\openout4 = `beamer.vrb'.
-
- (./beamer.vrb) [60
-
-]
-\openout4 = `beamer.vrb'.
-
- (./beamer.vrb) [61
-
-] (./beamer.vrb) [62
-
-]
-\openout4 = `beamer.vrb'.
-
- (./beamer.vrb) [63
-
-]
-\openout4 = `beamer.vrb'.
-
- (./beamer.vrb) [64
-
-] (./beamer.vrb) [65
-
-]
-\openout4 = `beamer.vrb'.
-
- (./beamer.vrb) [66
+) [66
 
 ]
 \openout4 = `beamer.vrb'.
@@ -1361,14 +1333,24 @@ File: ts1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 
 ] (./beamer.vrb) [68
 
-] (./beamer.vrb) [69
+]
+\openout4 = `beamer.vrb'.
+
+ (./beamer.vrb
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 15.
+ (c:/texlive/2022/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
+)) [69
 
 ]
 \openout4 = `beamer.vrb'.
 
  (./beamer.vrb) [70
 
-] (./beamer.vrb) [71
+]
+\openout4 = `beamer.vrb'.
+
+ (./beamer.vrb) [71
 
 ]
 \openout4 = `beamer.vrb'.
@@ -1382,14 +1364,54 @@ File: ts1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 
  (./beamer.vrb) [74
 
-] (./beamer.vrb) [75
+]
+\openout4 = `beamer.vrb'.
+
+ (./beamer.vrb) [75
+
+] (./beamer.vrb) [76
+
+]
+\openout4 = `beamer.vrb'.
+
+ (./beamer.vrb) [77
+
+]
+\openout4 = `beamer.vrb'.
+
+ (./beamer.vrb) [78
+
+] (./beamer.vrb) [79
+
+] (./beamer.vrb) [80
+
+]
+\openout4 = `beamer.vrb'.
+
+ (./beamer.vrb) [81
+
+] (./beamer.vrb) [82
+
+]
+\openout4 = `beamer.vrb'.
+
+ (./beamer.vrb) [83
+
+] (./beamer.vrb) [84
+
+]
+\openout4 = `beamer.vrb'.
+
+ (./beamer.vrb) [85
+
+] (./beamer.vrb) [86
 
 ]
 File: logomath.pdf Graphic file (type pdf)
 <use logomath.pdf>
-Package pdftex.def Info: logomath.pdf  used on input line 728.
+Package pdftex.def Info: logomath.pdf  used on input line 733.
 (pdftex.def)             Requested size: 153.64493pt x 30.72942pt.
- [76
+ [87
 
 ]
 \tf@nav=\write7
@@ -1413,18 +1435,18 @@ Package logreq Info: Writing requests to 'beamer.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36289 strings out of 476093
- 703812 string characters out of 5795584
+ 36304 strings out of 476093
+ 703826 string characters out of 5795584
  2033787 words of memory out of 5000000
- 55848 multiletter control sequences out of 15000+600000
+ 55841 multiletter control sequences out of 15000+600000
  526456 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,18n,122p,725b,2107s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on beamer.pdf (76 pages, 435805 bytes).
+Output written on beamer.pdf (87 pages, 463574 bytes).
 PDF statistics:
- 2133 PDF objects out of 2487 (max. 8388607)
- 1985 compressed objects within 20 object streams
- 158 named destinations out of 1000 (max. 500000)
+ 2416 PDF objects out of 2487 (max. 8388607)
+ 2254 compressed objects within 23 object streams
+ 180 named destinations out of 1000 (max. 500000)
  90 words of extra memory for PDF output out of 10000 (max. 10000000)
 
