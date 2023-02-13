@@ -118,34 +118,6 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Convexidad}
-    \begin{block}
-        {Conjunto convexo D} Sea $S\subset \mathbb{R}^n$ y sean $x_1, x_2 \in S$ cualesquiera. Si
-        $\alpha x_1 + (1 - \alpha)x_2 \in S$ para todo $\alpha \in [0,1]$
-    \end{block}
-    \begin{block}
-        {Función convexa $f$ en $S$} 
-        Sean $S \subset \mathbb{R}^n$ un conjunto convexo no vacío y $f$ una función de $S$ en $\mathbb{R}$.
-        Si para cualquiera $x_1, x_2 \in S$ y
-        $\alpha \in (0,1)$, se cumple que
-        \begin{equation*}
-            f(\alpha x_1 + (1-\alpha)x_2) \leq \alpha f(x_1) + (1-\alpha)f(x_2),
-        \end{equation*}
-    \end{block}
-\end{frame}
-\begin{frame}
-    \frametitle{Convexidad}
-    \begin{block}{Teorema}
-        Sea $S \subset \mathbb{R}^n$ un conjunto convexo no vacío y
-        $f:S \subset \mathbb{R}^n \rightarrow \mathbb{R}$ una función convexa. Si $x^*$ es mínimo
-        local, entonces también es mínimo global.
-    \end{block}
-    \begin{block}{Teorema}
-        Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}$ convexa y diferenciable, entonces $x^*$ es un
-        mínimo global si y solo si $\nabla f(x^*) = 0$.
-    \end{block}
-\end{frame}
-\begin{frame}
     \frametitle{Algoritmos. ¿Qué son?}
     \begin{itemize}[label=\textbullet]
         \item Conjunto de órdenes con normas y condiciones. \pause
@@ -309,7 +281,7 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \end{frame}
 
 \begin{frame}
-    \frametitle{El método de Gauss-Newton.}
+    \frametitle{El método de Gauss-Newton.}\pause
     \begin{itemize}[label=\textbullet]
         \item Se trata de una linealización del problema de mínimos cuadrados. \pause
         \item Para linealizar, se desprecia el término cuadrático de $r_i(x)$ y se obtiene el caso lineal:
