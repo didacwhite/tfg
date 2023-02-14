@@ -1,5 +1,5 @@
 \babel@toc {spanish}{}\relax 
 \beamer@sectionintoc {1}{Fundamentos de la optimización sin restricciones}{3}{0}{1}
-\beamer@sectionintoc {2}{Mínimos Cuadrados}{31}{0}{2}
-\beamer@sectionintoc {3}{El método de Levenberg-Marquardt}{45}{0}{3}
-\beamer@sectionintoc {4}{Implementación en Matlab\textsuperscript {®}}{66}{0}{4}
+\beamer@sectionintoc {2}{Mínimos Cuadrados}{33}{0}{2}
+\beamer@sectionintoc {3}{El método de Levenberg-Marquardt}{51}{0}{3}
+\beamer@sectionintoc {4}{Implementación en Matlab\textsuperscript {®}}{74}{0}{4}

@@ -74,13 +74,14 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 
 \begin{frame}
     \frametitle{Conceptos previos}
+    \pause
     \begin{itemize}[label=\textbullet]
     \item Norma euclídea: $
             \norm{x}_2 = \left( \sum_{i=1}^n \vert x_i \vert^2 \right)^{1/2}.
         $\pause
     \item Punto estacionario de $f$: $\nabla f(x) = 0$.\pause 
-    \item Mínimo $x^*$: existe $\delta > 0$ tal que $f(x^*) \leq f(x)$.\pause 
-    \item Mínimo estricto $x^*$: existe $\delta > 0$ tal que $f(x^*) < f(x)$ con $x \neq x^*$.\pause 
+    \item Mínimo $x^*$: existe $\delta > 0$ tal que $f(x^*) \leq f(x)$.
+    \item Mínimo estricto $x^*$: existe $\delta > 0$ tal que $f(x^*) < f(x)$ con $x \neq x^*$.
     \begin{itemize}[label=-]
         \item Local: para todo $x \in \mathbb{R}^n$ que satisface $\Vert x - x^* \Vert < \delta$. 
         \item Global: para todo $x \in \mathbb{R}^n$
@@ -118,7 +119,7 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Algoritmos. ¿Qué son?}
+    \frametitle{Algoritmos. ¿Qué son?} \pause
     \begin{itemize}[label=\textbullet]
         \item Conjunto de órdenes con normas y condiciones. \pause
         \item Estructura de bucles iterativos. \pause
@@ -127,7 +128,7 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
     \end{itemize}
 \end{frame}
 \begin{frame}
-    \frametitle{Algoritmos. Esquema.}
+    \frametitle{Algoritmos. Esquema.} \pause 
     \begin{steps}
 		\item Paso inicial. Se definen las condiciones iniciales, suelen ser el primer
 		punto de la sucesión $\sucesionxk$, valores para definir las condiciones de
@@ -180,8 +181,8 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
     \begin{block}{Subproblema de optimización con restricciones}
         \begin{equation*}
             \begin{aligned}
-                \min_{p} \quad & m_k(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TB_kp \\
-                \text{s.a.} \quad & \Vert p \Vert \leq \Delta_k,
+                \min_{p} \quad & m_k(p) = f(x_k) + g^T_kp + \frac{1}{2}p^TB_kp, \\
+                \text{s.a.} \quad & \Vert p \Vert \leq \Delta_k.
             \end{aligned}
         \end{equation*}
     \end{block} \pause 
@@ -199,6 +200,18 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
         El vector $p^*$ es una solución global si y solo si $p^*$ es factible y existe un escalar $\lambda^* \geq 0$ tal que:
         \begin{itemize}[label=\textbullet]
             \item $(B+\lambda^* I)p^*=-g,$
+	        \item $\lambda^* (\Delta - \norm{p^*}) = 0,$
+	        \item $(B+\lambda^* I)$ es semidefinida positiva.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Región de confianza.}
+    \begin{block}{Teorema: Caracterización de la solución del subproblema}
+        El vector $p^*$ es una solución global si y solo si $p^*$ es factible y existe un escalar $\lambda^* \geq 0$ tal que:
+        \begin{itemize}[label=\textbullet]
+            \alert{\item $(B+\lambda^* I)p^*=-g,$}
 	        \item $\lambda^* (\Delta - \norm{p^*}) = 0,$
 	        \item $(B+\lambda^* I)$ es semidefinida positiva.
         \end{itemize}
@@ -249,9 +262,9 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \begin{columns}
     \begin{column}{0.4\textwidth}
         \begin{itemize}[label=\textbullet]
+            \item $r_i(x) = \phi_x(t_i) - y_i$, para $i=1,\dots,m$ son los residuos. \pause
             \item $x$ es el parámetro a estimar de dimensión $n$. \pause
             \item $\phi_x(t)$ es la función a ajustar. \pause 
-            \item $r_i(x) = \phi_x(t_i) - y_i$, para $i=1,\dots,m$ son los residuos. \pause
         \end{itemize}
     \end{column}
     \begin{column}{0.6\textwidth}  %%<--- here
@@ -298,14 +311,14 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \end{frame}
 
 \begin{frame}
-    \frametitle{El método de Gauss-Newton.}
+    \frametitle{El método de Gauss-Newton. Esquema.} \pause
     \begin{steps}
-        \item Dados $x_0$ y $\epsilon > 0$, $k:=0$.
-        \item Si $\norm{g_k} \leq \epsilon$, terminar.
+        \item Dados $x_0$ y $\epsilon > 0$, $k:=0$. \pause 
+        \item Si $\norm{g_k} \leq \epsilon$, terminar. \pause
         \item Obtener el paso $p_k$ resolviendo
-            \begin{equation}
+            \begin{equation*}
                 J(x_k)^TJ(x_k)p_k = -J(x_k)^Tr(x_k).
-            \end{equation}
+            \end{equation*} \pause 
         \item Definimos $x_{k+1} = x_k + p_k$ y actualizamos $k=k+1$. Ir a Paso 2.
     \end{steps}
 
@@ -357,7 +370,7 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
         \begin{itemize}[label=\textbullet]
             \item Actualización del radio $\Delta_k$. \pause
             \item El parámetro Levenberg-Marquardt. \pause
-            \item Matriz de escalado $D_k$.
+            \item Matriz de escalado $D_k$. \pause
         \end{itemize}
         La matriz $D_k$ se sustituye en la siguiente expresión por la matriz identidad:
         \begin{equation*}
@@ -398,7 +411,7 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Implementación del método de Levenberg-Marquardt.}
+    \frametitle{Esquema obtención del parámetro Levenberg-Marquardt.}
     \begin{steps}
         \item Definir valores iniciales $\alpha_0$, $l_0$ y $u_0$. Definir coeficiente de parada $\sigma$.
         \item Si $\alpha_k \notin (l_k, u_k)$, definir $\alpha_k = \max \{0.001u_k, (l_ku_k)^{1/2}\}$.	
@@ -439,7 +452,7 @@ Aplicaciones a las estimación de parámetros de modelos matemáticos.}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Esquema del algoritmo. I.}
+    \frametitle{Esquema del algoritmo. I.} \pause
     \begin{steps}
         \item Definir valores iniciales $x_0$, $\Delta_0$ y $\epsilon$ y determinar $J_k$, $D_k$, y $f(x_0)$ a partir de la función $f$ determinada.
         \pause 
